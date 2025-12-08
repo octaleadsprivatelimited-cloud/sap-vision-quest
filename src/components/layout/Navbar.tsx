@@ -1,19 +1,27 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Search, User, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Products", hasDropdown: true },
-  { label: "Solutions", hasDropdown: true },
-  { label: "Industries", hasDropdown: true },
-  { label: "Resources", hasDropdown: true },
-  { label: "Partners", hasDropdown: false },
-  { label: "About", hasDropdown: false },
+  { label: "Products", href: "/products", hasDropdown: false },
+  { label: "Solutions", href: "/solutions", hasDropdown: false },
+  { label: "Industries", href: "/solutions", hasDropdown: false },
+  { label: "Resources", href: "#", hasDropdown: true },
+  { label: "Partners", href: "#", hasDropdown: false },
+  { label: "About", href: "/about", hasDropdown: false },
 ];
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (href: string) => {
+    if (href === "#") return false;
+    return location.pathname === href;
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -24,23 +32,28 @@ export const Navbar = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <a href="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <div className="w-12 h-8 gradient-hero rounded flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-sm">SAP</span>
               </div>
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => (
-                <Button
+                <Link
                   key={item.label}
-                  variant="nav"
-                  className="flex items-center gap-1"
+                  to={item.href}
+                  className={cn(
+                    "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                    isActive(item.href)
+                      ? "text-primary bg-primary/5"
+                      : "text-foreground hover:text-primary hover:bg-primary/5"
+                  )}
                 >
                   {item.label}
                   {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
-                </Button>
+                </Link>
               ))}
             </div>
 
@@ -52,9 +65,11 @@ export const Navbar = () => {
               <Button variant="ghost" size="icon">
                 <User className="w-5 h-5" />
               </Button>
-              <Button variant="cta" size="sm">
-                Explore SAP
-              </Button>
+              <Link to="/contact">
+                <Button variant="cta" size="sm">
+                  Contact Us
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -80,18 +95,26 @@ export const Navbar = () => {
             >
               <div className="container mx-auto px-4 py-4 space-y-2">
                 {navItems.map((item) => (
-                  <Button
+                  <Link
                     key={item.label}
-                    variant="ghost"
-                    className="w-full justify-start"
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "block w-full px-4 py-3 text-left rounded-md transition-colors",
+                      isActive(item.href)
+                        ? "text-primary bg-primary/5 font-medium"
+                        : "text-foreground hover:bg-primary/5"
+                    )}
                   >
                     {item.label}
-                  </Button>
+                  </Link>
                 ))}
                 <div className="pt-4 border-t border-border">
-                  <Button variant="cta" className="w-full">
-                    Explore SAP
-                  </Button>
+                  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button variant="cta" className="w-full">
+                      Contact Us
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </motion.div>
