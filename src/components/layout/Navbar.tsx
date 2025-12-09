@@ -46,7 +46,7 @@ export const Navbar = () => {
       {/* Top accent bar */}
       <div className="h-1 gradient-hero" />
       
-      <nav className="bg-background/95 backdrop-blur-md border-b border-border">
+      <nav className="bg-background/95 backdrop-blur-md">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
