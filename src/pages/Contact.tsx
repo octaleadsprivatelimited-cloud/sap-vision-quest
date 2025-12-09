@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,46 +13,46 @@ import { useToast } from "@/hooks/use-toast";
 
 const contactMethods = [
   {
-    icon: Phone,
-    title: "Sales",
-    description: "Talk to our sales team about enterprise solutions",
-    contact: "+1 (800) 872-1727",
-    action: "Call Sales",
+    icon: Mail,
+    title: "Email",
+    description: "Send us an email for inquiries and support",
+    contact: "info@sangronyx.com",
+    action: "Send Email",
+  },
+  {
+    icon: MessageSquare,
+    title: "Contact Form",
+    description: "Fill out our contact form below",
+    contact: "Get in touch",
+    action: "Fill Form",
   },
   {
     icon: Headphones,
     title: "Support",
-    description: "Get help with your existing SAP products",
-    contact: "support.sap.com",
-    action: "Open Support",
-  },
-  {
-    icon: MessageSquare,
-    title: "Chat",
-    description: "Chat with us in real-time",
-    contact: "Available 24/7",
-    action: "Start Chat",
+    description: "We're here to help with your IT and SAP needs",
+    contact: "Expert assistance",
+    action: "Get Support",
   },
 ];
 
 const offices = [
   {
-    city: "Walldorf",
-    country: "Germany",
-    address: "Dietmar-Hopp-Allee 16",
-    type: "Global Headquarters",
+    city: "Email",
+    country: "Contact",
+    address: "info@sangronyx.com",
+    type: "Primary Contact",
   },
   {
-    city: "New York",
-    country: "United States",
-    address: "10 Hudson Yards",
-    type: "Americas Headquarters",
+    city: "Phone",
+    country: "Contact",
+    address: "+91-XXXXXXXXXX",
+    type: "Phone Support",
   },
   {
-    city: "Singapore",
-    country: "Singapore",
-    address: "30 Pasir Panjang Road",
-    type: "Asia Pacific Headquarters",
+    city: "Location",
+    country: "India",
+    address: "Global services available",
+    type: "Service Location",
   },
 ];
 
@@ -91,22 +92,10 @@ const Contact = () => {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-24 pb-16 gradient-hero">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl mx-auto text-center text-primary-foreground"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Contact Us
-            </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90">
-              We're here to help. Reach out to our team and let's start a conversation.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero 
+        title="Get a Free SAP Consultation"
+        description="Our SAP experts will help you choose the right software, modules and implementation approach for your business."
+      />
 
       {/* Contact Methods */}
       <section className="py-16 bg-background">
@@ -148,7 +137,7 @@ const Contact = () => {
             >
               <h2 className="text-3xl font-bold text-foreground mb-2">Get in Touch</h2>
               <p className="text-muted-foreground mb-8">
-                Fill out the form below and we'll get back to you within 24 hours.
+                Fill out the form below or email us at info@sangronyx.com. We'll get back to you within 24 hours.
               </p>
               
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -214,11 +203,14 @@ const Contact = () => {
                       <SelectValue placeholder="Select an option" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="erp">Cloud ERP</SelectItem>
-                      <SelectItem value="analytics">Analytics</SelectItem>
-                      <SelectItem value="hcm">Human Capital Management</SelectItem>
-                      <SelectItem value="cx">Customer Experience</SelectItem>
-                      <SelectItem value="scm">Supply Chain</SelectItem>
+                      <SelectItem value="sap-implementation">SAP S/4HANA Implementation</SelectItem>
+                      <SelectItem value="sap-migration">SAP ECC to S/4HANA Migration</SelectItem>
+                      <SelectItem value="sap-licensing">SAP Licensing & Software</SelectItem>
+                      <SelectItem value="sap-modules">SAP Module Implementations</SelectItem>
+                      <SelectItem value="sap-development">SAP Custom Development</SelectItem>
+                      <SelectItem value="sap-training">SAP Corporate Training</SelectItem>
+                      <SelectItem value="sap-support">SAP Support & Maintenance</SelectItem>
+                      <SelectItem value="sap-integration">SAP Integration Services</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
@@ -240,7 +232,7 @@ const Contact = () => {
                 </Button>
                 
                 <p className="text-xs text-muted-foreground">
-                  By submitting this form, you agree to our Privacy Policy and consent to receive communications from SAP.
+                  By submitting this form, you agree to our Privacy Policy and consent to receive communications from Sangronyx.
                 </p>
               </form>
             </motion.div>
@@ -253,20 +245,29 @@ const Contact = () => {
               className="space-y-8"
             >
               <div>
-                <h3 className="text-xl font-semibold text-foreground mb-4">Global Offices</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-4">Contact Information</h3>
                 <div className="space-y-4">
-                  {offices.map((office) => (
+                  {offices.map((office, index) => (
                     <div
                       key={office.city}
                       className="bg-card rounded-xl p-4 border border-border"
                     >
                       <div className="flex items-start gap-3">
-                        <MapPin className="w-5 h-5 text-primary mt-1" />
+                        {index === 0 ? (
+                          <Mail className="w-5 h-5 text-primary mt-1" />
+                        ) : index === 1 ? (
+                          <Phone className="w-5 h-5 text-primary mt-1" />
+                        ) : (
+                          <MapPin className="w-5 h-5 text-primary mt-1" />
+                        )}
                         <div>
                           <p className="font-medium text-foreground">
-                            {office.city}, {office.country}
+                            {office.city}
                           </p>
                           <p className="text-sm text-muted-foreground">{office.address}</p>
+                          {office.country && (
+                            <p className="text-sm text-muted-foreground">{office.country}</p>
+                          )}
                           <p className="text-xs text-primary mt-1">{office.type}</p>
                         </div>
                       </div>
@@ -289,12 +290,12 @@ const Contact = () => {
 
               <div className="gradient-hero rounded-xl p-6 text-primary-foreground">
                 <Building2 className="w-10 h-10 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Enterprise Solutions</h3>
+                <h3 className="text-xl font-semibold mb-2">SAP Solutions</h3>
                 <p className="text-primary-foreground/90 mb-4">
-                  For large enterprise inquiries, our dedicated team is ready to help you find the perfect solution.
+                  Complete SAP solutions including implementation, migration, training, support, and custom development. Let our SAP experts help transform your business.
                 </p>
                 <Button variant="hero" size="sm">
-                  Contact Enterprise Sales
+                  Explore SAP Services
                 </Button>
               </div>
             </motion.div>

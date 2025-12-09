@@ -1,22 +1,40 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Search, User, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   { label: "Products", href: "/products", hasDropdown: false },
   { label: "Solutions", href: "/solutions", hasDropdown: false },
-  { label: "Industries", href: "/solutions", hasDropdown: false },
-  { label: "Resources", href: "#", hasDropdown: true },
-  { label: "Partners", href: "#", hasDropdown: false },
-  { label: "About", href: "/about", hasDropdown: false },
+  { label: "Industries", href: "/industries", hasDropdown: false },
+  { label: "Resources", href: "/resources", hasDropdown: true },
+  { label: "Partners", href: "/partners", hasDropdown: false },
+  { label: "Who We Are", href: "/about", hasDropdown: false },
+];
+
+const resourcesMenuItems = [
+  { label: "All Resources", href: "/resources" },
+  { label: "Documentation", href: "/resources/documentation" },
+  { label: "Video Tutorials", href: "/resources/video-tutorials" },
+  { label: "Whitepapers", href: "/resources/whitepapers" },
+  { label: "Downloads", href: "/resources/downloads" },
+  { label: "FAQ", href: "/resources/faq" },
+  { label: "Developer Resources", href: "/resources/developer-resources" },
+  { label: "Training Materials", href: "/resources/training-materials" },
 ];
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (href: string) => {
     if (href === "#") return false;
@@ -34,27 +52,60 @@ export const Navbar = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
               <div className="w-12 h-8 gradient-hero rounded flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">SAP</span>
+                <span className="text-primary-foreground font-bold text-sm">SX</span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className={cn(
-                    "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                    isActive(item.href)
-                      ? "text-primary bg-primary/5"
-                      : "text-foreground hover:text-primary hover:bg-primary/5"
-                  )}
-                >
-                  {item.label}
-                  {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                if (item.hasDropdown) {
+                  return (
+                    <DropdownMenu key={item.label}>
+                      <DropdownMenuTrigger asChild>
+                        <button
+                          className={cn(
+                            "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                            isActive(item.href)
+                              ? "text-primary bg-primary/5"
+                              : "text-foreground hover:text-primary hover:bg-primary/5"
+                          )}
+                        >
+                          {item.label}
+                          <ChevronDown className="w-4 h-4" />
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="start" className="w-56">
+                        {resourcesMenuItems.map((menuItem) => (
+                          <DropdownMenuItem
+                            key={menuItem.label}
+                            onClick={() => {
+                              navigate(menuItem.href);
+                            }}
+                            className="cursor-pointer"
+                          >
+                            {menuItem.label}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  );
+                }
+                return (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className={cn(
+                      "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                      isActive(item.href)
+                        ? "text-primary bg-primary/5"
+                        : "text-foreground hover:text-primary hover:bg-primary/5"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Desktop Actions */}
@@ -94,21 +145,47 @@ export const Navbar = () => {
               className="lg:hidden bg-background border-t border-border"
             >
               <div className="container mx-auto px-4 py-4 space-y-2">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={cn(
-                      "block w-full px-4 py-3 text-left rounded-md transition-colors",
-                      isActive(item.href)
-                        ? "text-primary bg-primary/5 font-medium"
-                        : "text-foreground hover:bg-primary/5"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {navItems.map((item) => {
+                  if (item.hasDropdown) {
+                    return (
+                      <div key={item.label} className="space-y-2">
+                        <div className="px-4 py-2 text-sm font-semibold text-foreground">
+                          {item.label}
+                        </div>
+                        {resourcesMenuItems.map((menuItem) => (
+                          <Link
+                            key={menuItem.label}
+                            to={menuItem.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className={cn(
+                              "block w-full px-6 py-2 text-left rounded-md transition-colors text-sm",
+                              isActive(menuItem.href)
+                                ? "text-primary bg-primary/5 font-medium"
+                                : "text-muted-foreground hover:bg-primary/5"
+                            )}
+                          >
+                            {menuItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    );
+                  }
+                  return (
+                    <Link
+                      key={item.label}
+                      to={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={cn(
+                        "block w-full px-4 py-3 text-left rounded-md transition-colors",
+                        isActive(item.href)
+                          ? "text-primary bg-primary/5 font-medium"
+                          : "text-foreground hover:bg-primary/5"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
                 <div className="pt-4 border-t border-border">
                   <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button variant="cta" className="w-full">

@@ -1,40 +1,37 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Globe, Users, Award, Leaf, Heart, Lightbulb } from "lucide-react";
 
 const values = [
   {
-    icon: Heart,
-    title: "Customer Success",
-    description: "We are committed to making every customer successful. Your success is our success.",
+    icon: Award,
+    title: "Certified SAP Consultants",
+    description: "Our team of certified SAP consultants brings extensive expertise and industry knowledge.",
   },
   {
     icon: Lightbulb,
-    title: "Innovation",
-    description: "We continuously innovate to help our customers stay ahead of change.",
+    title: "Cost-Effective Solutions",
+    description: "We provide cost-effective SAP implementation and optimization to maximize your ROI.",
   },
   {
     icon: Users,
-    title: "Collaboration",
-    description: "We believe in the power of collaboration and partnership.",
+    title: "Industry Experience",
+    description: "Deep industry-specific experience across manufacturing, retail, pharma, and more.",
   },
   {
-    icon: Leaf,
-    title: "Sustainability",
-    description: "We are committed to running sustainable operations and helping our customers do the same.",
+    icon: Heart,
+    title: "24/7 Support",
+    description: "Round-the-clock support availability to ensure your SAP systems run smoothly.",
   },
 ];
 
 const milestones = [
-  { year: "1972", event: "SAP founded in Mannheim, Germany" },
-  { year: "1979", event: "SAP R/2 mainframe software released" },
-  { year: "1992", event: "SAP R/3 client-server architecture launched" },
-  { year: "2004", event: "SAP NetWeaver platform introduced" },
-  { year: "2015", event: "SAP S/4HANA next-gen ERP released" },
-  { year: "2020", event: "Rise with SAP transformation program launched" },
-  { year: "2024", event: "SAP Business AI embedded across portfolio" },
+  { year: "SAP S/4HANA", event: "Complete SAP S/4HANA implementation and migration services" },
+  { year: "SAP Training", event: "Corporate SAP training for all major modules with certification assistance" },
+  { year: "SAP Support", event: "24/7 SAP support and maintenance (AMC) services" },
 ];
 
 const About = () => {
@@ -43,22 +40,10 @@ const About = () => {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-24 pb-16 gradient-hero">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl mx-auto text-center text-primary-foreground"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              About SAP
-            </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90">
-              For over 50 years, we've been helping the world run better and improving people's lives.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero 
+        title="Who We Are"
+        description="Sangronyx is a modern IT and SAP service company providing end-to-end digital solutions."
+      />
 
       {/* Mission */}
       <section className="py-24 bg-background">
@@ -70,31 +55,53 @@ const About = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Our Purpose
+                Why Choose Sangronyx for SAP?
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                We help the world run better and improve people's lives. Our technology transforms businesses, 
-                creates economic opportunity, and helps solve the world's biggest challenges.
+                Sangronyx provides end-to-end SAP software, implementation, training and support services 
+                designed to transform your business with automation, integration and powerful enterprise capabilities.
               </p>
-              <p className="text-lg text-muted-foreground mb-8">
-                With more than 400,000 customers in over 180 countries, SAP is at the center of today's 
-                business and technology revolution. Our solutions touch 87% of total global commerce.
-              </p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-3">
+                  <Award className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">Certified SAP consultants</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Award className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">Cost-effective implementation</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Award className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">Industry-specific experience</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Award className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">24/7 support availability</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Award className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">Custom development & integrations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Award className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
+                  <span className="text-lg text-muted-foreground">Corporate SAP training included</span>
+                </li>
+              </ul>
               <div className="grid grid-cols-3 gap-6">
                 <div className="text-center">
                   <Globe className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-foreground">180+</div>
-                  <div className="text-sm text-muted-foreground">Countries</div>
+                  <div className="text-2xl font-bold text-foreground">IT & SAP</div>
+                  <div className="text-sm text-muted-foreground">Services</div>
                 </div>
                 <div className="text-center">
                   <Users className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-foreground">105K+</div>
-                  <div className="text-sm text-muted-foreground">Employees</div>
+                  <div className="text-2xl font-bold text-foreground">Expert</div>
+                  <div className="text-sm text-muted-foreground">Team</div>
                 </div>
                 <div className="text-center">
                   <Award className="w-8 h-8 text-primary mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-foreground">50+</div>
-                  <div className="text-sm text-muted-foreground">Years</div>
+                  <div className="text-2xl font-bold text-foreground">Quality</div>
+                  <div className="text-sm text-muted-foreground">Solutions</div>
                 </div>
               </div>
             </motion.div>
@@ -107,8 +114,8 @@ const About = () => {
             >
               <div className="aspect-square rounded-2xl gradient-hero p-8 flex items-center justify-center">
                 <div className="text-center text-primary-foreground">
-                  <div className="text-8xl font-bold mb-4">SAP</div>
-                  <div className="text-xl">Since 1972</div>
+                  <div className="text-6xl font-bold mb-4">Sangronyx</div>
+                  <div className="text-xl">Modern IT & SAP Services</div>
                 </div>
               </div>
             </motion.div>
@@ -164,10 +171,10 @@ const About = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Our Journey
+              Our SAP Services
             </h2>
             <p className="text-lg text-muted-foreground">
-              50+ years of innovation and transformation
+              Complete SAP solutions for business transformation
             </p>
           </motion.div>
 
@@ -210,13 +217,13 @@ const About = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-              Join Us on Our Journey
+              Ready to Transform Your Business?
             </h2>
             <p className="text-lg text-primary-foreground/90 mb-8 max-w-xl mx-auto">
-              Explore careers at SAP and help us shape the future of business technology.
+              Contact us today to learn how Sangronyx can help your business succeed with our IT and SAP services.
             </p>
             <Button variant="hero" size="lg" className="group">
-              View Careers
+              Contact Us
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>

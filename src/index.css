@@ -163,4 +163,60 @@
   .animation-delay-450 {
     animation-delay: 450ms;
   }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes grid-move {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 60px 60px;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-20px) translateX(10px) rotate(5deg);
+    }
+    66% {
+      transform: translateY(10px) translateX(-15px) rotate(-5deg);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      opacity: 0.2;
+      transform: translateX(-100%);
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0.2;
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-float {
+    animation: float 10s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
 }

@@ -1,63 +1,103 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Factory, ShoppingCart, Building2, Heart, Plane, Truck, Leaf, Banknote, GraduationCap } from "lucide-react";
+import { ArrowRight, Cloud, Database, Settings, Code, GraduationCap, Wrench, Link2, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const industries = [
+const sapOfferings = [
   {
-    icon: Factory,
-    title: "Manufacturing",
-    description: "Optimize production, quality, and supply chain operations with intelligent manufacturing solutions.",
-    stats: "85% faster time-to-market",
+    icon: Cloud,
+    title: "SAP S/4HANA Implementation",
+    description: "Complete implementation services for SAP S/4HANA",
+    features: [
+      "Cloud / On-prem / Hybrid setup",
+      "Business process mapping",
+      "Module configuration",
+      "UAT & go-live support",
+      "Real-time reporting setup",
+      "Post-go-live AMC",
+    ],
   },
   {
-    icon: ShoppingCart,
-    title: "Retail",
-    description: "Deliver seamless omnichannel experiences and optimize inventory across all touchpoints.",
-    stats: "40% increase in customer retention",
+    icon: Database,
+    title: "SAP ECC to S/4HANA Migration",
+    description: "Seamless migration from ECC to S/4HANA",
+    features: [
+      "Readiness check",
+      "Database migration",
+      "Custom code adaptation",
+      "Master data cleansing",
+      "End-user training",
+    ],
   },
   {
-    icon: Building2,
-    title: "Professional Services",
-    description: "Streamline project delivery, resource management, and client engagement.",
-    stats: "30% improved project margins",
+    icon: Settings,
+    title: "SAP Licensing & Software",
+    description: "Comprehensive SAP licensing solutions",
+    features: [
+      "SAP S/4HANA subscription",
+      "Module-based licensing",
+      "Cost optimisation guidance",
+      "Implementation-ready setup",
+    ],
   },
   {
-    icon: Heart,
-    title: "Healthcare",
-    description: "Transform patient care with connected health solutions and data-driven insights.",
-    stats: "50% reduction in administrative costs",
+    icon: Settings,
+    title: "SAP Module Implementations",
+    description: "Complete module implementation services",
+    features: [
+      "Functional Modules: PP, MM, SD, FI, CO, QM, PM, WM, HR, EWM, APO",
+      "Technical Modules: ABAP, BASIS, HANA, Fiori, CPI, PI/PO",
+    ],
   },
   {
-    icon: Plane,
-    title: "Travel & Transportation",
-    description: "Enhance traveler experiences and optimize operations across your network.",
-    stats: "25% operational efficiency gains",
-  },
-  {
-    icon: Truck,
-    title: "Logistics",
-    description: "Build resilient supply chains with end-to-end visibility and intelligent planning.",
-    stats: "35% improved delivery performance",
-  },
-  {
-    icon: Leaf,
-    title: "Utilities & Energy",
-    description: "Drive sustainability and efficiency in energy production and distribution.",
-    stats: "20% reduction in carbon footprint",
-  },
-  {
-    icon: Banknote,
-    title: "Banking & Finance",
-    description: "Modernize financial operations with real-time insights and regulatory compliance.",
-    stats: "60% faster financial close",
+    icon: Code,
+    title: "SAP Custom Development",
+    description: "Custom SAP development and enhancements",
+    features: [
+      "ABAP reports & enhancements",
+      "SmartForms / Adobe Forms",
+      "Fiori UI apps",
+      "Custom workflows",
+      "Z-programs & dashboards",
+    ],
   },
   {
     icon: GraduationCap,
-    title: "Higher Education",
-    description: "Transform student experiences and institutional operations with modern solutions.",
-    stats: "45% improved student outcomes",
+    title: "SAP Corporate Training",
+    description: "Comprehensive SAP training programs",
+    features: [
+      "Functional + Technical training",
+      "Online / Offline / Corporate batches",
+      "Hands-on project experience",
+      "Certification assistance",
+    ],
+  },
+  {
+    icon: Wrench,
+    title: "SAP Support & Maintenance (AMC)",
+    description: "Ongoing SAP support and maintenance",
+    features: [
+      "Functional & technical support",
+      "Performance tuning",
+      "Bug fixes & enhancements",
+      "Backup & recovery",
+      "Monitoring & monthly health checks",
+    ],
+  },
+  {
+    icon: Link2,
+    title: "SAP Integration Services",
+    description: "Seamless SAP integration solutions",
+    features: [
+      "SAP ↔ ERP",
+      "SAP ↔ CRM / HRMS",
+      "SAP ↔ Web portals",
+      "SAP ↔ Third-party apps",
+      "API / Middleware integrations",
+    ],
   },
 ];
 
@@ -67,102 +107,45 @@ const Solutions = () => {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-24 pb-16 gradient-hero">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl mx-auto text-center text-primary-foreground"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Industry Solutions
-            </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90">
-              Purpose-built solutions designed for your industry's unique challenges and opportunities.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero 
+        title="Our SAP Offerings"
+        description="Complete SAP solutions for your business transformation"
+      />
 
-      {/* Industries Grid */}
+      {/* SAP Offerings Grid */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {industries.map((industry, index) => (
+          <div className="grid md:grid-cols-2 gap-8">
+            {sapOfferings.map((offering, index) => (
               <motion.div
-                key={industry.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="group bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-card-hover transition-all duration-300 cursor-pointer"
-              >
-                <div className="w-14 h-14 rounded-xl bg-sap-light-purple flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                  <industry.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
-                </div>
-                
-                <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {industry.title}
-                </h3>
-                
-                <p className="text-muted-foreground mb-4">
-                  {industry.description}
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-primary">
-                    {industry.stats}
-                  </span>
-                  <ArrowRight className="w-5 h-5 text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Business Processes */}
-      <section className="py-24 bg-secondary">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              End-to-End Business Processes
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Transform your entire value chain with integrated solutions that connect every process.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Lead to Cash", desc: "Streamline your entire sales cycle" },
-              { title: "Source to Pay", desc: "Optimize procurement and payments" },
-              { title: "Design to Operate", desc: "Accelerate product lifecycle" },
-              { title: "Recruit to Retire", desc: "Transform the employee journey" },
-            ].map((process, index) => (
-              <motion.div
-                key={process.title}
+                key={offering.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-card rounded-xl p-6 border border-border text-center hover:shadow-card-hover transition-all"
+                className="group bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-card-hover transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-full gradient-hero mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold">{index + 1}</span>
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-sap-light-purple flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <offering.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {offering.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-4">
+                      {offering.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{process.title}</h3>
-                <p className="text-sm text-muted-foreground">{process.desc}</p>
+                <ul className="space-y-2">
+                  {offering.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
@@ -178,15 +161,17 @@ const Solutions = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-              Ready to transform your industry?
+              Get a Free SAP Consultation
             </h2>
             <p className="text-lg text-primary-foreground/90 mb-8 max-w-xl mx-auto">
-              Connect with our industry experts to discover tailored solutions for your business.
+              Our SAP experts will help you choose the right software, modules and implementation approach for your business.
             </p>
-            <Button variant="hero" size="lg" className="group">
-              Get Started
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <Link to="/contact">
+              <Button variant="hero" size="lg" className="group">
+                Contact SAP Experts
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </section>

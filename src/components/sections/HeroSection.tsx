@@ -4,14 +4,25 @@ import { ArrowRight, Sparkles, BarChart3, CheckCircle2, Share2 } from "lucide-re
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[90vh] gradient-hero overflow-hidden pt-20">
+    <section className="relative min-h-[90vh] overflow-hidden pt-20">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/hero-background.jpg" 
+          alt="SAP Solutions Background" 
+          className="w-full h-full object-cover"
+        />
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/70 to-sap-blue/80" />
+      </div>
+      
       {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden z-0">
         <div className="absolute top-20 right-10 w-72 h-72 bg-primary-foreground/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary-foreground/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 lg:px-8 relative z-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(90vh-5rem)]">
           {/* Left Content */}
           <motion.div
@@ -27,7 +38,7 @@ export const HeroSection = () => {
               className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
             >
               <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">SAP Business AI</span>
+              <span className="text-sm font-medium">SAP Solutions – Sangronyx</span>
             </motion.div>
 
             <motion.h1
@@ -36,9 +47,9 @@ export const HeroSection = () => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
             >
-              Go beyond
+              Complete SAP Solutions
               <br />
-              bolted-on AI
+              for Your Business
             </motion.h1>
 
             <motion.p
@@ -47,7 +58,7 @@ export const HeroSection = () => {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-lg"
             >
-              Discover AI that's woven into every SAP process—so your whole business can grow, adapt, and scale together.
+              Sangronyx provides end-to-end SAP software, implementation, training and support services designed to transform your business with automation, integration and powerful enterprise capabilities.
             </motion.p>
 
             <motion.div
@@ -57,11 +68,11 @@ export const HeroSection = () => {
               className="flex flex-wrap gap-4"
             >
               <Button variant="hero" size="lg" className="group">
-                Explore SAP Business AI
+                Get Free SAP Consultation
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button variant="hero-outline" size="lg">
-                Watch Demo
+                Explore SAP Services
               </Button>
             </motion.div>
           </motion.div>

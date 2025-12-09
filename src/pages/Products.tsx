@@ -1,63 +1,40 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Cloud, Database, Brain, Shield, Zap, BarChart3, Users, Layers, CheckCircle } from "lucide-react";
 
 const products = [
   {
-    id: "erp",
+    id: "sap-implementation",
     icon: Cloud,
-    title: "SAP S/4HANA Cloud",
-    subtitle: "Cloud ERP",
-    description: "The intelligent ERP suite designed for in-memory computing. Transform your business with real-time analytics and AI-driven insights.",
-    features: ["Real-time Analytics", "AI-Powered Automation", "Industry Best Practices", "Seamless Integration"],
+    title: "SAP S/4HANA Implementation",
+    subtitle: "Complete Implementation",
+    description: "Complete SAP S/4HANA implementation with cloud, on-prem, or hybrid setup. Business process mapping, module configuration, UAT & go-live support, and post-go-live AMC.",
+    features: ["Cloud / On-prem / Hybrid", "Business Process Mapping", "Module Configuration", "UAT & Go-live Support", "Real-time Reporting", "Post-go-live AMC"],
     gradient: "from-primary to-sap-blue",
+    image: "/sap-s4hana-implementation.webp",
   },
   {
-    id: "btp",
-    icon: Layers,
-    title: "SAP Business Technology Platform",
-    subtitle: "Integration & Extension",
-    description: "Unify your data, analytics, AI, and application development on one platform. Build, extend, and integrate like never before.",
-    features: ["Low-Code Development", "Data Management", "AI & Machine Learning", "Integration Suite"],
+    id: "sap-migration",
+    icon: Database,
+    title: "SAP ECC to S/4HANA Migration",
+    subtitle: "Seamless Migration",
+    description: "Seamless migration from ECC to S/4HANA with readiness check, database migration, custom code adaptation, master data cleansing, and end-user training.",
+    features: ["Readiness Check", "Database Migration", "Custom Code Adaptation", "Master Data Cleansing", "End-user Training"],
     gradient: "from-sap-blue to-accent",
+    image: "/sap-ecc-to-s4hana-migration.avif",
   },
   {
-    id: "analytics",
-    icon: BarChart3,
-    title: "SAP Analytics Cloud",
-    subtitle: "Business Intelligence",
-    description: "One solution for all your analytics needs. Planning, predictive, and business intelligence in the cloud.",
-    features: ["Predictive Analytics", "Smart Discovery", "Augmented Analytics", "Collaborative Planning"],
-    gradient: "from-accent to-primary",
-  },
-  {
-    id: "hcm",
+    id: "sap-training",
     icon: Users,
-    title: "SAP SuccessFactors",
-    subtitle: "Human Capital Management",
-    description: "Complete cloud HR solutions to transform employee experiences and drive workforce success.",
-    features: ["Core HR & Payroll", "Talent Management", "Employee Experience", "Workforce Analytics"],
-    gradient: "from-primary to-accent",
-  },
-  {
-    id: "cx",
-    icon: Zap,
-    title: "SAP Customer Experience",
-    subtitle: "CRM & Commerce",
-    description: "Deliver personalized customer experiences across marketing, commerce, sales, and service.",
-    features: ["Commerce Cloud", "Marketing Cloud", "Sales Cloud", "Service Cloud"],
-    gradient: "from-sap-blue to-primary",
-  },
-  {
-    id: "security",
-    icon: Shield,
-    title: "SAP Security Solutions",
-    subtitle: "Enterprise Security",
-    description: "Protect your business with comprehensive security, identity management, and compliance solutions.",
-    features: ["Identity Access", "Data Protection", "Threat Detection", "Compliance Management"],
-    gradient: "from-accent to-sap-blue",
+    title: "SAP Corporate Training",
+    subtitle: "Comprehensive Training",
+    description: "Functional and technical SAP training for all major modules. Online, offline, and corporate batches with hands-on project experience and certification assistance.",
+    features: ["Functional + Technical", "Online / Offline / Corporate", "Hands-on Experience", "Certification Assistance"],
+    gradient: "from-accent to-primary",
+    image: "/sap-corporate-training.avif",
   },
 ];
 
@@ -80,31 +57,10 @@ const Products = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 gradient-hero">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto text-center text-primary-foreground"
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Products That Power Your Business
-            </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90 mb-8">
-              Discover our comprehensive suite of enterprise solutions designed to transform every aspect of your business.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button variant="hero" size="lg">
-                View All Products
-              </Button>
-              <Button variant="hero-outline" size="lg">
-                Compare Solutions
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero 
+        title="Our SAP Services"
+        description="Complete SAP solutions for implementation, migration, training, support, and custom development."
+      />
 
       {/* Products Grid */}
       <section className="py-24 bg-background">
@@ -150,11 +106,27 @@ const Products = () => {
                 </div>
                 
                 <div className={`relative ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <div className={`aspect-video rounded-2xl bg-gradient-to-br ${product.gradient} p-8 flex items-center justify-center`}>
-                    <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-8 w-full h-full flex items-center justify-center">
-                      <product.icon className="w-24 h-24 text-primary-foreground/80" />
+                  {product.image ? (
+                    <div className="aspect-video rounded-2xl overflow-hidden relative group">
+                      <img 
+                        src={product.image} 
+                        alt={product.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      {/* Gradient overlay */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
+                      {/* Icon badge */}
+                      <div className={`absolute bottom-4 right-4 w-14 h-14 rounded-xl bg-gradient-to-br ${product.gradient} flex items-center justify-center shadow-lg opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500`}>
+                        <product.icon className="w-7 h-7 text-primary-foreground" />
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className={`aspect-video rounded-2xl bg-gradient-to-br ${product.gradient} p-8 flex items-center justify-center`}>
+                      <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-8 w-full h-full flex items-center justify-center">
+                        <product.icon className="w-24 h-24 text-primary-foreground/80" />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -173,13 +145,13 @@ const Products = () => {
           >
             <Brain className="w-16 h-16 text-primary mx-auto mb-6" />
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Not sure which product is right for you?
+              Get a Free SAP Consultation
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Our experts can help you find the perfect solution for your business needs.
+              Our SAP experts will help you choose the right software, modules and implementation approach for your business. Contact us at info@sangronyx.com or +91-XXXXXXXXXX.
             </p>
             <Button variant="cta" size="lg" className="group">
-              Talk to an Expert
+              Contact SAP Experts
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
