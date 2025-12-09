@@ -4,6 +4,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Cloud, Database, Brain, Shield, Zap, BarChart3, Users, Layers, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -99,10 +100,12 @@ const Products = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button variant="default" className="group">
-                    Learn More
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to="/solutions">
+                    <Button variant="default" className="group">
+                      Learn More
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </div>
                 
                 <div className={`relative ${index % 2 === 1 ? "lg:order-1" : ""}`}>

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Cloud, Database, Users, Zap, LineChart, Shield, Link2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 const solutions = [
   {
@@ -147,7 +148,7 @@ export const SolutionsSection = () => {
               className="group relative"
             >
               {/* Card with enhanced design */}
-              <div className="relative h-full bg-card/80 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 border border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 cursor-pointer">
+              <Link to={solution.link} className="relative h-full bg-card/80 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 border border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 cursor-pointer block">
                 {/* Animated gradient border on hover */}
                 <div className={`absolute inset-0 rounded-xl md:rounded-2xl bg-gradient-to-r ${solution.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 -z-10 blur-xl`} />
                 
@@ -198,14 +199,14 @@ export const SolutionsSection = () => {
                 </p>
                 
                 {/* Learn more link */}
-                <div className="flex items-center gap-2 text-primary font-medium opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <Link to={solution.link} className="flex items-center gap-2 text-primary font-medium opacity-0 group-hover:opacity-100 transition-all duration-300">
                   <span className="text-sm md:text-base">Learn more</span>
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-                </div>
+                </Link>
 
                 {/* Bottom accent line */}
                 <div className={`absolute bottom-0 left-4 right-4 md:left-6 md:right-6 lg:left-8 lg:right-8 h-0.5 bg-gradient-to-r ${solution.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full`} />
-              </div>
+              </Link>
             </motion.div>
           ))}
         </motion.div>

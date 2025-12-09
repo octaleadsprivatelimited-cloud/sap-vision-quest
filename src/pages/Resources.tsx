@@ -4,49 +4,50 @@ import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Book, FileText, Video, Download, HelpCircle, Code, GraduationCap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const resources = [
   {
     icon: Book,
     title: "Documentation",
     description: "Comprehensive guides and documentation for our services and solutions.",
-    link: "#",
+    link: "/resources/documentation",
   },
   {
     icon: Video,
     title: "Video Tutorials",
     description: "Step-by-step video tutorials to help you get started with our services.",
-    link: "#",
+    link: "/resources/video-tutorials",
   },
   {
     icon: FileText,
     title: "Whitepapers",
     description: "In-depth whitepapers on IT best practices and SAP implementation strategies.",
-    link: "#",
+    link: "/resources/whitepapers",
   },
   {
     icon: Download,
     title: "Downloads",
     description: "Download resources, templates, and tools to support your projects.",
-    link: "#",
+    link: "/resources/downloads",
   },
   {
     icon: HelpCircle,
     title: "FAQ",
     description: "Frequently asked questions about our services and how we can help you.",
-    link: "#",
+    link: "/resources/faq",
   },
   {
     icon: Code,
     title: "Developer Resources",
     description: "Resources for developers including APIs, SDKs, and integration guides.",
-    link: "#",
+    link: "/resources/developer-resources",
   },
   {
     icon: GraduationCap,
     title: "Training Materials",
     description: "Training materials and resources for SAP modules and IT services.",
-    link: "#",
+    link: "/resources/training-materials",
   },
 ];
 
@@ -71,31 +72,32 @@ const Resources = () => {
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {resources.map((resource, index) => (
-              <motion.div
-                key={resource.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-card-hover transition-all duration-300 cursor-pointer"
-              >
-                <div className="w-14 h-14 rounded-xl bg-sap-light-purple flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                  <resource.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
-                </div>
-                
-                <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {resource.title}
-                </h3>
-                
-                <p className="text-muted-foreground mb-4">
-                  {resource.description}
-                </p>
-                
-                <div className="flex items-center gap-2 text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                  Learn more
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </motion.div>
+              <Link key={resource.title} to={resource.link}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-card-hover transition-all duration-300 cursor-pointer"
+                >
+                  <div className="w-14 h-14 rounded-xl bg-sap-light-purple flex items-center justify-center mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                    <resource.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
+                  </div>
+                  
+                  <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {resource.title}
+                  </h3>
+                  
+                  <p className="text-muted-foreground mb-4">
+                    {resource.description}
+                  </p>
+                  
+                  <div className="flex items-center gap-2 text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                    Learn more
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
         </div>
