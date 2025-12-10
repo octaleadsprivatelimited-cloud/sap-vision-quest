@@ -3,7 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Book, FileText, Video, Download, HelpCircle, Code, GraduationCap } from "lucide-react";
+import { ArrowRight, Book, FileText, Video, Download, HelpCircle, Code, GraduationCap, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const resources = [
@@ -48,6 +48,12 @@ const resources = [
     title: "Training Materials",
     description: "Training materials and resources for SAP modules and IT services.",
     link: "/resources/training-materials",
+  },
+  {
+    icon: Users,
+    title: "Training Classes",
+    description: "Join our comprehensive SAP training classes led by industry experts. Online, in-person, or hybrid formats.",
+    link: "/resources/training-classes",
   },
 ];
 

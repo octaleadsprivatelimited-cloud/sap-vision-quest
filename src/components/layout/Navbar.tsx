@@ -29,6 +29,7 @@ const resourcesMenuItems = [
   { label: "FAQ", href: "/resources/faq" },
   { label: "Developer Resources", href: "/resources/developer-resources" },
   { label: "Training Materials", href: "/resources/training-materials" },
+  { label: "Training Classes", href: "/resources/training-classes" },
 ];
 
 export const Navbar = () => {

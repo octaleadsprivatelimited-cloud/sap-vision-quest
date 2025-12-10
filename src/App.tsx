@@ -15,6 +15,7 @@ import Downloads from "./pages/resources/Downloads";
 import FAQ from "./pages/resources/FAQ";
 import DeveloperResources from "./pages/resources/DeveloperResources";
 import TrainingMaterials from "./pages/resources/TrainingMaterials";
+import TrainingClasses from "./pages/resources/TrainingClasses";
 import Partners from "./pages/Partners";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/resources/faq" element={<FAQ />} />
           <Route path="/resources/developer-resources" element={<DeveloperResources />} />
           <Route path="/resources/training-materials" element={<TrainingMaterials />} />
+          <Route path="/resources/training-classes" element={<TrainingClasses />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
