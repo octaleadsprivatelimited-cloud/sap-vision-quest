@@ -52,9 +52,11 @@ export const Navbar = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-12 h-8 gradient-hero rounded flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">SX</span>
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="Sangronyx Logo" 
+                className="h-14 w-auto border-0 outline-none"
+              />
             </Link>
 
             {/* Desktop Navigation */}

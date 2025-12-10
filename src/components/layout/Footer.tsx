@@ -60,9 +60,11 @@ export const Footer = () => {
           {/* Logo and description */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-8 lg:mb-0">
             <Link to="/" className="inline-block">
-              <div className="w-16 h-10 gradient-hero rounded flex items-center justify-center mb-4">
-                <span className="text-primary-foreground font-bold">SX</span>
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="Sangronyx Logo" 
+                className="h-20 w-auto mb-4 border-0 outline-none"
+              />
             </Link>
             <p className="text-primary-foreground/70 text-sm mb-6">
               Sangronyx - Modern IT and SAP service company providing end-to-end digital solutions.
@@ -105,7 +107,15 @@ export const Footer = () => {
         <div className="border-t border-primary-foreground/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/60 text-sm">
-              © 2024 Sangronyx. All rights reserved.
+              © 2024 Sangronyx. All rights reserved.{" "}
+              <a 
+                href="https://octaleads.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary-foreground/60 hover:text-primary-foreground transition-colors underline"
+              >
+                Developed by Octaleads Private Limited
+              </a>
             </p>
             <div className="flex gap-6">
               <a href="#" className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors">
