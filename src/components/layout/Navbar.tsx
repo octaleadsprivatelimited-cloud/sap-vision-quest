@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const navItems = [
+  { label: "Home", href: "/", hasDropdown: false },
   { label: "Products", href: "/products", hasDropdown: false },
   { label: "Solutions", href: "/solutions", hasDropdown: false },
   { label: "Industries", href: "/industries", hasDropdown: false },
