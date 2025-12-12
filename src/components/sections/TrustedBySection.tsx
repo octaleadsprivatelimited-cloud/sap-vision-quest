@@ -16,6 +16,28 @@ const companies = [
 export const TrustedBySection = () => {
   return (
     <section className="py-8 md:py-12 relative overflow-hidden bg-gradient-to-b from-background via-secondary/30 to-background">
+      {/* Top gradient border effect */}
+      <div className="absolute top-0 left-0 right-0 z-20">
+        {/* Main gradient line */}
+        <div className="h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
+        {/* Glow effect */}
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent blur-[2px]" />
+        {/* Soft gradient fade below the line */}
+        <div className="h-16 bg-gradient-to-b from-primary/10 via-accent/5 to-transparent" />
+        {/* Animated shimmer */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary-foreground/40 to-transparent"
+          initial={{ x: "-100%" }}
+          animate={{ x: "100%" }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            repeatDelay: 2,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-soft" />
