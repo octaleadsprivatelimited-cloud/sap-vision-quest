@@ -188,27 +188,14 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Bottom gradient border effect */}
+      {/* Bottom wave */}
       <div className="absolute bottom-0 left-0 right-0">
-        {/* Gradient glow line */}
-        <div className="relative h-1">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent to-transparent opacity-80" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-foreground/50 to-transparent blur-sm" />
-        </div>
-        {/* Gradient fade effect */}
-        <div className="h-24 bg-gradient-to-b from-transparent via-accent/10 to-background" />
-        {/* Animated shimmer overlay */}
-        <motion.div
-          className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary-foreground/60 to-transparent"
-          initial={{ x: "-100%" }}
-          animate={{ x: "100%" }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            repeatDelay: 2,
-            ease: "easeInOut"
-          }}
-        />
+        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+          <path
+            d="M0 100V50C240 83 480 100 720 100C960 100 1200 83 1440 50V100H0Z"
+            fill="hsl(var(--background))"
+          />
+        </svg>
       </div>
     </section>
   );
