@@ -54,8 +54,8 @@ export default {
           gold: "hsl(var(--sap-gold))",
           navy: "hsl(var(--sap-navy))",
           blue: "hsl(var(--sap-blue))",
-          purple: "hsl(var(--sap-purple))",
-          "light-purple": "hsl(var(--sap-light-purple))",
+          "light-blue": "hsl(var(--sap-light-blue))",
+          sky: "hsl(var(--sap-sky))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
