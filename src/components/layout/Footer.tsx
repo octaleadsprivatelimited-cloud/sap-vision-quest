@@ -107,14 +107,14 @@ export const Footer = () => {
         <div className="border-t border-primary-foreground/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/60 text-sm">
-              © 2024 Sangronyx. All rights reserved.{" "}
+              © 2025 Sangronyx. All rights reserved.{" "}
               <a 
                 href="https://octaleads.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-primary-foreground/60 hover:text-primary-foreground transition-colors underline"
               >
-                Developed by Octaleads Private Limited
+                Developed by Octaleads Pvt Ltd.
               </a>
             </p>
             <div className="flex gap-6">
