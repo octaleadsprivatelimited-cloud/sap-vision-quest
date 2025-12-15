@@ -6,6 +6,7 @@ import { StatsSection } from "@/components/sections/StatsSection";
 import { TrustedBySection } from "@/components/sections/TrustedBySection";
 import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/layout/Footer";
+import { PageBackground } from "@/components/ui/page-background";
 
 const Index = () => {
   return (
@@ -13,9 +14,11 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <TrustedBySection />
-        <FeaturesSection />
-        <SolutionsSection />
+        <PageBackground>
+          <TrustedBySection />
+          <FeaturesSection />
+          <SolutionsSection />
+        </PageBackground>
         <StatsSection />
         <CTASection />
       </main>
