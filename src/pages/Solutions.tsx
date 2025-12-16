@@ -3,153 +3,85 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Cloud, Database, Settings, Code, GraduationCap, Wrench, Link2, CheckCircle2, Sparkles, Star, Users, Headphones } from "lucide-react";
+import { ArrowRight, Cloud, Database, Settings, Code, GraduationCap, Wrench, Link2, CheckCircle2, Users, Star, Headphones } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Badge } from "@/components/ui/badge";
 
 const sapOfferings = [
   {
     icon: Cloud,
     title: "SAP S/4HANA Implementation",
     description: "Complete implementation services for SAP S/4HANA with cloud, on-premises, or hybrid deployment options.",
-    features: [
-      "Cloud / On-prem / Hybrid setup",
-      "Business process mapping",
-      "Module configuration",
-      "UAT & go-live support",
-      "Real-time reporting setup",
-      "Post-go-live AMC",
-    ],
-    gradient: "from-primary to-sap-blue",
+    features: ["Cloud / On-prem / Hybrid setup", "Business process mapping", "Module configuration", "UAT & go-live support"],
+    color: "bg-accent",
     image: "/sap-s4hana-implementation.webp",
-    popular: true,
   },
   {
     icon: Database,
     title: "SAP ECC to S/4HANA Migration",
     description: "Seamless migration from ECC to S/4HANA with minimal downtime and comprehensive data integrity.",
-    features: [
-      "Readiness check & assessment",
-      "Database migration",
-      "Custom code adaptation",
-      "Master data cleansing",
-      "End-user training",
-    ],
-    gradient: "from-sap-blue to-sap-purple",
+    features: ["Readiness check & assessment", "Database migration", "Custom code adaptation", "End-user training"],
+    color: "bg-sprinklr-green",
     image: "/sap-ecc-to-s4hana-migration.avif",
   },
   {
     icon: Settings,
     title: "SAP Licensing & Software",
     description: "Comprehensive SAP licensing solutions optimized for your business needs and budget.",
-    features: [
-      "SAP S/4HANA subscription",
-      "Module-based licensing",
-      "Cost optimisation guidance",
-      "Implementation-ready setup",
-    ],
-    gradient: "from-sap-purple to-accent",
+    features: ["SAP S/4HANA subscription", "Module-based licensing", "Cost optimisation guidance"],
+    color: "bg-sprinklr-purple",
   },
   {
     icon: Settings,
     title: "SAP Module Implementations",
     description: "Expert implementation of all major SAP functional and technical modules.",
-    features: [
-      "Functional: PP, MM, SD, FI, CO, QM, PM, WM, HR, EWM, APO",
-      "Technical: ABAP, BASIS, HANA, Fiori, CPI, PI/PO",
-    ],
-    gradient: "from-accent to-primary",
+    features: ["Functional: PP, MM, SD, FI, CO, QM, PM", "Technical: ABAP, BASIS, HANA, Fiori"],
+    color: "bg-accent",
   },
   {
     icon: Code,
     title: "SAP Custom Development",
     description: "Tailored SAP development and enhancements to meet your unique business requirements.",
-    features: [
-      "ABAP reports & enhancements",
-      "SmartForms / Adobe Forms",
-      "Fiori UI apps",
-      "Custom workflows",
-      "Z-programs & dashboards",
-    ],
-    gradient: "from-primary to-accent",
+    features: ["ABAP reports & enhancements", "SmartForms / Adobe Forms", "Fiori UI apps"],
+    color: "bg-sprinklr-green",
   },
   {
     icon: GraduationCap,
     title: "SAP Corporate Training",
     description: "Comprehensive SAP training programs for teams of all skill levels.",
-    features: [
-      "Functional + Technical training",
-      "Online / Offline / Corporate batches",
-      "Hands-on project experience",
-      "Certification assistance",
-    ],
-    gradient: "from-sap-blue to-primary",
+    features: ["Functional + Technical training", "Online / Offline / Corporate batches", "Certification assistance"],
+    color: "bg-sprinklr-purple",
     image: "/sap-corporate-training.avif",
   },
   {
     icon: Wrench,
-    title: "SAP Support & Maintenance (AMC)",
+    title: "SAP Support & Maintenance",
     description: "24/7 ongoing SAP support and maintenance for uninterrupted business operations.",
-    features: [
-      "Functional & technical support",
-      "Performance tuning",
-      "Bug fixes & enhancements",
-      "Backup & recovery",
-      "Monitoring & monthly health checks",
-    ],
-    gradient: "from-sap-purple to-sap-blue",
+    features: ["Functional & technical support", "Performance tuning", "Monthly health checks"],
+    color: "bg-accent",
   },
   {
     icon: Link2,
     title: "SAP Integration Services",
     description: "Seamless SAP integration with your existing enterprise systems and applications.",
-    features: [
-      "SAP ↔ ERP integration",
-      "SAP ↔ CRM / HRMS",
-      "SAP ↔ Web portals",
-      "SAP ↔ Third-party apps",
-      "API / Middleware integrations",
-    ],
-    gradient: "from-accent to-sap-purple",
+    features: ["SAP ↔ ERP integration", "API / Middleware integrations", "Third-party app connections"],
+    color: "bg-sprinklr-green",
   },
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-};
 
 const Solutions = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero */}
       <PageHero 
         title="Our SAP Offerings"
         description="Complete SAP solutions for your business transformation"
       />
 
       {/* Stats Banner */}
-      <section className="py-8 bg-gradient-to-r from-primary via-sap-blue to-sap-purple relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <section className="py-12 bg-secondary/50">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { value: "500+", label: "SAP Projects" },
               { value: "15+", label: "Years Experience" },
@@ -162,10 +94,9 @@ const Solutions = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-primary-foreground"
               >
-                <div className="text-3xl md:text-4xl font-bold mb-1">{stat.value}</div>
-                <div className="text-sm md:text-base text-primary-foreground/80">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">{stat.value}</div>
+                <div className="text-sm md:text-base text-muted-foreground">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -173,144 +104,93 @@ const Solutions = () => {
       </section>
 
       {/* SAP Offerings Grid */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-40 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-40 left-0 w-[400px] h-[400px] bg-sap-blue/5 rounded-full blur-3xl" />
-        </div>
-
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          {/* Section Header */}
+      <section className="py-16 md:py-24 lg:py-32 bg-background">
+        <div className="container mx-auto px-4 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 mb-6">
-              <Sparkles className="w-3.5 h-3.5 mr-2" />
-              End-to-End SAP Services
-            </Badge>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Comprehensive{" "}
-              <span className="bg-gradient-to-r from-primary via-sap-blue to-accent bg-clip-text text-transparent">
-                SAP Solutions
-              </span>
+              Comprehensive <span className="text-accent">SAP Solutions</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              From implementation to support, we provide complete SAP services to drive your digital transformation journey.
+              From implementation to support, we provide complete SAP services to drive your digital transformation.
             </p>
           </motion.div>
 
-          {/* Offerings Grid */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-          >
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {sapOfferings.map((offering, index) => (
               <motion.div
                 key={offering.title}
-                variants={itemVariants}
-                className="group relative"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05, duration: 0.5 }}
+                className="group"
               >
-                <div className="relative h-full bg-card/80 backdrop-blur-sm rounded-2xl border border-border/50 hover:border-primary/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 overflow-hidden">
-                  {/* Popular badge */}
-                  {offering.popular && (
-                    <div className="absolute top-4 right-4 z-20">
-                      <Badge className="bg-gradient-to-r from-primary to-sap-blue text-primary-foreground border-0 shadow-lg">
-                        <Star className="w-3 h-3 mr-1 fill-current" />
-                        Popular
-                      </Badge>
-                    </div>
-                  )}
-
-                  {/* Top gradient accent */}
-                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${offering.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-
-                  {/* Image section (if available) */}
+                <div className="h-full bg-card rounded-2xl border border-border hover:border-accent/50 hover:shadow-xl transition-all duration-300 overflow-hidden">
                   {offering.image && (
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-40 overflow-hidden">
                       <img 
                         src={offering.image} 
                         alt={offering.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className={`absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent`} />
-                      <div className={`absolute bottom-4 left-4 w-12 h-12 rounded-xl bg-gradient-to-br ${offering.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-                        <offering.icon className="w-6 h-6 text-primary-foreground" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                      <div className={`absolute bottom-3 left-3 w-10 h-10 rounded-lg ${offering.color} flex items-center justify-center`}>
+                        <offering.icon className="w-5 h-5 text-white" />
                       </div>
                     </div>
                   )}
-
-                  {/* Content section */}
+                  
                   <div className="p-6">
-                    {/* Icon for cards without images */}
                     {!offering.image && (
-                      <div className="mb-5">
-                        <div className={`relative w-14 h-14 rounded-xl bg-gradient-to-br ${offering.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
-                          <offering.icon className="w-7 h-7 text-primary-foreground" />
-                        </div>
+                      <div className={`w-12 h-12 rounded-xl ${offering.color} flex items-center justify-center mb-4`}>
+                        <offering.icon className="w-6 h-6 text-white" />
                       </div>
                     )}
-
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                    
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
                       {offering.title}
                     </h3>
-                    <p className="text-muted-foreground mb-5 text-sm leading-relaxed">
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                       {offering.description}
                     </p>
 
-                    {/* Features list */}
-                    <ul className="space-y-2.5 mb-6">
-                      {offering.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                          <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 text-primary`} />
+                    <ul className="space-y-2 mb-4">
+                      {offering.features.slice(0, 3).map((feature, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent" />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
 
-                    {/* Learn more link */}
-                    <Link 
-                      to="/contact" 
-                      className="inline-flex items-center gap-2 text-primary font-medium text-sm group/link"
-                    >
+                    <Link to="/contact" className="inline-flex items-center gap-2 text-accent font-medium text-sm group/link">
                       <span>Get Started</span>
                       <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                     </Link>
                   </div>
-
-                  {/* Bottom accent line */}
-                  <div className={`absolute bottom-0 left-6 right-6 h-0.5 bg-gradient-to-r ${offering.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full`} />
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-secondary/30 relative overflow-hidden">
+      {/* Why Choose Us */}
+      <section className="py-16 md:py-24 bg-secondary/30">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
             >
-              <Badge className="px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary border-primary/20 mb-6">
-                Why Sangronyx
-              </Badge>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Your Trusted{" "}
-                <span className="bg-gradient-to-r from-primary to-sap-blue bg-clip-text text-transparent">
-                  SAP Partner
-                </span>
+                Your Trusted <span className="text-accent">SAP Partner</span>
               </h2>
               <p className="text-muted-foreground mb-8 leading-relaxed">
                 With over 15 years of SAP expertise, we deliver end-to-end solutions that transform businesses and drive growth.
@@ -331,8 +211,8 @@ const Solutions = () => {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-start gap-4"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-5 h-5 text-accent" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
@@ -347,20 +227,17 @@ const Solutions = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
               className="relative"
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
                   src="/why-choose-sangronyx-for-sap.avif" 
-                  alt="Why Choose Sangronyx for SAP"
+                  alt="Why Choose Sangronyx"
                   className="w-full h-auto object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
               </div>
-              {/* Floating stats card */}
-              <div className="absolute -bottom-6 -left-6 bg-card rounded-xl p-5 shadow-xl border border-border/50">
-                <div className="text-3xl font-bold text-primary mb-1">15+</div>
+              <div className="absolute -bottom-6 -left-6 bg-card rounded-xl p-5 shadow-xl border border-border">
+                <div className="text-3xl font-bold text-accent mb-1">15+</div>
                 <div className="text-sm text-muted-foreground">Years of Excellence</div>
               </div>
             </motion.div>
@@ -369,24 +246,23 @@ const Solutions = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
-        <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
+      <section className="py-16 md:py-24 bg-primary">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
               Get a Free SAP Consultation
             </h2>
-            <p className="text-lg text-primary-foreground/90 mb-8 max-w-xl mx-auto">
-              Our SAP experts will help you choose the right software, modules and implementation approach for your business.
+            <p className="text-lg md:text-xl text-primary-foreground/70 mb-8 max-w-2xl mx-auto">
+              Our SAP experts will help you choose the right solution for your business.
             </p>
             <Link to="/contact">
-              <Button variant="hero" size="lg" className="group">
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90 px-8 py-6 h-auto text-base font-semibold group">
                 Contact SAP Experts
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </motion.div>
