@@ -210,6 +210,8 @@ const TrainingClasses = () => {
       <PageHero 
         title="SAP Training Classes"
         description="Join our comprehensive SAP training classes led by industry experts. Choose from online, in-person, or hybrid formats."
+        label="CERTIFICATION PROGRAMS"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Training Classes" }]}
       />
 
       {/* Search and Filters */}

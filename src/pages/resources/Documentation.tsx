@@ -58,6 +58,8 @@ const Documentation = () => {
       <PageHero 
         title="Documentation"
         description="Comprehensive guides and documentation for our services and solutions."
+        label="KNOWLEDGE BASE"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Documentation" }]}
       />
 
       {/* Search Bar */}

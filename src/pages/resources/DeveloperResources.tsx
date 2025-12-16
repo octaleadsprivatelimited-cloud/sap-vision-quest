@@ -62,6 +62,8 @@ const DeveloperResources = () => {
       <PageHero 
         title="Developer Resources"
         description="Resources for developers including APIs, SDKs, and integration guides."
+        label="DEVELOPER PORTAL"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Developer Resources" }]}
       />
 
       {/* Developer Resources */}

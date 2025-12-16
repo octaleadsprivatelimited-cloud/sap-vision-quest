@@ -76,6 +76,8 @@ const Solutions = () => {
       <PageHero 
         title="Our SAP Offerings"
         description="Complete SAP solutions for your business transformation"
+        label="SAP SOLUTIONS"
+        breadcrumbs={[{ label: "Solutions" }]}
       />
 
       {/* Stats Banner */}

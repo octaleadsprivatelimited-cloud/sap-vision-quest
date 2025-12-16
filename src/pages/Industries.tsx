@@ -59,6 +59,8 @@ const Industries = () => {
       <PageHero 
         title="Industries We Serve"
         description="SAP solutions tailored for your industry's unique challenges and opportunities."
+        label="INDUSTRY SOLUTIONS"
+        breadcrumbs={[{ label: "Industries" }]}
       />
 
       {/* Industries Grid */}

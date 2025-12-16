@@ -29,6 +29,8 @@ const About = () => {
       <PageHero 
         title="Who We Are"
         description="Sangronyx is a leading provider of IT services and SAP solutions, helping businesses transform and grow."
+        label="ABOUT US"
+        breadcrumbs={[{ label: "Company" }]}
       />
 
       {/* Mission */}

@@ -51,6 +51,8 @@ const VideoTutorials = () => {
       <PageHero 
         title="Video Tutorials"
         description="Step-by-step video tutorials to help you get started with our services."
+        label="LEARNING CENTER"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Video Tutorials" }]}
       />
 
       {/* Video Categories */}

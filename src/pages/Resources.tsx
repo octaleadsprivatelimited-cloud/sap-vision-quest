@@ -73,6 +73,10 @@ const Resources = () => {
       <PageHero 
         title="Resources"
         description="Access helpful resources, documentation, and materials to support your business journey."
+        label="RESOURCE CENTER"
+        breadcrumbs={[{ label: "Resources" }]}
+        ctaText="Explore Resources"
+        ctaHref="#resources"
       />
 
       {/* Resources Grid */}

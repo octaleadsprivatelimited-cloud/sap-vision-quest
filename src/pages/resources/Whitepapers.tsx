@@ -66,6 +66,8 @@ const Whitepapers = () => {
       <PageHero 
         title="Whitepapers"
         description="In-depth whitepapers on IT best practices and SAP implementation strategies."
+        label="INSIGHTS & RESEARCH"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Whitepapers" }]}
       />
 
       {/* Whitepapers List */}

@@ -79,6 +79,10 @@ const Contact = () => {
       <PageHero 
         title="Contact Us"
         description="Get in touch with our team to discuss how we can help transform your business."
+        label="GET IN TOUCH"
+        breadcrumbs={[{ label: "Contact" }]}
+        ctaText="Send us a message"
+        ctaHref="#contact-form"
       />
 
       {/* Contact Methods */}

@@ -47,6 +47,8 @@ const Products = () => {
       <PageHero 
         title="Our SAP Services"
         description="Complete SAP solutions for implementation, migration, training, support, and custom development."
+        label="SAP SERVICES"
+        breadcrumbs={[{ label: "Products" }]}
       />
 
       {/* Products Grid */}
