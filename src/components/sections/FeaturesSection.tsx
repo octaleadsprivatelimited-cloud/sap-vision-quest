@@ -1,39 +1,90 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Award, Shield, BarChart3, Headphones } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Users, Cpu, TrendingUp } from "lucide-react";
 
 const features = [
   {
-    icon: Award,
-    title: "SAP Expertise",
-    description: "Leverage our certified SAP consultants with extensive industry knowledge to build great solutions, drive efficiency, and deliver extraordinary business outcomes.",
-    link: "/solutions",
-    linkText: "Explore Expertise",
-    underlineColor: "bg-sprinklr-blue",
+    icon: Users,
+    title: "Unified Platform",
+    description: "Empower your enterprise teams with a unified SAP platform to deliver frictionless, omnichannel business experiences — while staying efficient every time, everywhere.",
+    illustration: (
+      <div className="mt-6 p-4 bg-gradient-to-br from-sprinklr-blue/5 to-sprinklr-green/5 rounded-xl">
+        <div className="bg-primary text-primary-foreground text-xs font-medium px-3 py-1.5 rounded-full inline-block mb-3">Global Teams</div>
+        <div className="flex items-center gap-2 mb-3">
+          <div className="flex -space-x-2">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-sprinklr-purple border-2 border-background flex items-center justify-center text-xs text-white font-bold">
+                {String.fromCharCode(64 + i)}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="bg-primary text-primary-foreground text-xs font-medium px-3 py-1.5 rounded-full inline-block mb-2">Channels</div>
+        <div className="flex flex-wrap gap-2">
+          {['SAP', 'ERP', 'CRM', 'HR', 'FI'].map((channel) => (
+            <div key={channel} className="w-7 h-7 rounded-lg bg-secondary flex items-center justify-center text-xs font-bold text-muted-foreground">
+              {channel.charAt(0)}
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
   },
   {
-    icon: BarChart3,
-    title: "SAP Implementation",
-    description: "Orchestrate end-to-end SAP implementation across your enterprise systems, optimize processes, and boost operational ROI.",
-    link: "/solutions",
-    linkText: "Explore Implementation",
-    underlineColor: "bg-sprinklr-green",
+    icon: Cpu,
+    title: "AI-Native Foundation",
+    description: "AI is seamlessly infused across our SAP platform, enabling you to scale effortlessly while powering continuous innovation for your enterprise teams.",
+    illustration: (
+      <div className="mt-6 p-4 bg-gradient-to-br from-sprinklr-green/5 to-accent/5 rounded-xl">
+        <div className="bg-secondary rounded-lg p-3 mb-3 text-sm text-muted-foreground">
+          Need help with SAP implementation urgently!
+        </div>
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <div className="bg-sprinklr-green/10 text-sprinklr-green text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1">
+            <Cpu className="w-3 h-3" /> SAP AI
+          </div>
+        </div>
+        <div className="space-y-2 text-xs">
+          <div className="flex justify-between items-center bg-secondary/50 rounded px-2 py-1">
+            <span className="text-accent font-medium">Intent:</span>
+            <span className="text-muted-foreground">Support</span>
+          </div>
+          <div className="flex justify-between items-center bg-secondary/50 rounded px-2 py-1">
+            <span className="text-sprinklr-purple font-medium">Priority:</span>
+            <span className="text-muted-foreground">High</span>
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
-    icon: Shield,
-    title: "SAP Security",
-    description: "Protect your enterprise data across all SAP modules and systems to maximize security, build trust and ensure compliance.",
-    link: "/solutions",
-    linkText: "Explore Security",
-    underlineColor: "bg-sprinklr-purple",
-  },
-  {
-    icon: Headphones,
-    title: "SAP Support",
-    description: "Give your teams the 24/7 support they need to connect with context, resolve issues quickly, and deliver delightful experiences consistently.",
-    link: "/solutions",
-    linkText: "Explore Support",
-    underlineColor: "bg-accent",
+    icon: TrendingUp,
+    title: "Enterprise-Grade Scale",
+    description: "Equip your global teams with extensive customizability and seamless integration with your existing tech stack. Built for enterprises, our platform scales effortlessly as your needs evolve.",
+    illustration: (
+      <div className="mt-6 p-4 bg-gradient-to-br from-accent/5 to-sprinklr-blue/5 rounded-xl">
+        <div className="flex gap-2 mb-3">
+          {[TrendingUp, Cpu, Users].map((Icon, i) => (
+            <div key={i} className="w-8 h-8 rounded-lg bg-sprinklr-green/10 flex items-center justify-center">
+              <Icon className="w-4 h-4 text-sprinklr-green" />
+            </div>
+          ))}
+        </div>
+        <div className="bg-secondary rounded-lg p-3">
+          <div className="text-xs text-muted-foreground mb-2">Analytics</div>
+          <div className="text-xl font-bold text-foreground mb-2">62.1K</div>
+          <div className="space-y-1.5">
+            <div className="flex justify-between text-xs">
+              <span className="text-muted-foreground">Conversions</span>
+              <span className="text-sprinklr-green font-medium">12.50%</span>
+            </div>
+            <div className="flex justify-between text-xs">
+              <span className="text-muted-foreground">Efficiency</span>
+              <span className="text-sprinklr-green font-medium">40%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
   },
 ];
 
@@ -50,12 +101,12 @@ export const FeaturesSection = () => {
           className="text-center mb-12 md:mb-16 lg:mb-20"
         >
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight">
-            Four SAP-native service suites. One Unified Enterprise platform.
+            Get the Sangronyx Advantage
           </h2>
         </motion.div>
 
-        {/* Features Grid - Sprinklr 4-column style */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+        {/* Features Grid - Sprinklr 3-card style */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -65,32 +116,20 @@ export const FeaturesSection = () => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group"
             >
-              {/* Icon */}
-              <div className="mb-5">
-                <feature.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground" strokeWidth={1.5} />
+              <div className="h-full p-6 md:p-8 rounded-2xl border border-border bg-card hover:shadow-lg transition-shadow duration-300">
+                {/* Title */}
+                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-4">
+                  {feature.title}
+                </h3>
+                
+                {/* Description */}
+                <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                  {feature.description}
+                </p>
+                
+                {/* Illustration */}
+                {feature.illustration}
               </div>
-              
-              {/* Title with underline */}
-              <h3 className="text-lg md:text-xl font-bold text-foreground mb-2">
-                {feature.title}
-              </h3>
-              
-              {/* Colored underline */}
-              <div className={`w-10 h-1 ${feature.underlineColor} mb-5`}></div>
-              
-              {/* Description */}
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
-                {feature.description}
-              </p>
-              
-              {/* Explore link */}
-              <Link 
-                to={feature.link}
-                className="inline-flex items-center text-foreground font-semibold text-sm md:text-base hover:text-accent transition-colors group/link"
-              >
-                <ArrowRight className="w-4 h-4 mr-2 text-sprinklr-green group-hover/link:translate-x-1 transition-transform" />
-                {feature.linkText}
-              </Link>
             </motion.div>
           ))}
         </div>
