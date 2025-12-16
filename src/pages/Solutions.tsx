@@ -124,8 +124,9 @@ const Solutions = () => {
 
           <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {sapOfferings.map((offering, index) => {
-              // Alternate border colors: cyan for even, yellow for odd
-              const borderColor = index % 2 === 0 ? "border-l-accent" : "border-l-yellow-400";
+              // Match Sprinklr pattern: yellow for bottom-left cards in each 2x2 block (indices 2, 6, 10...)
+              const isYellowBorder = index % 4 === 2;
+              const borderColor = isYellowBorder ? "border-l-[#FFD700]" : "border-l-[#00CED1]";
               
               return (
                 <motion.div
@@ -136,19 +137,19 @@ const Solutions = () => {
                   transition={{ delay: index * 0.05, duration: 0.5 }}
                   className="group"
                 >
-                  <div className={`h-full bg-card rounded-lg border border-border ${borderColor} border-l-4 p-6 md:p-8 hover:shadow-lg transition-all duration-300`}>
+                  <div className={`h-full bg-card rounded-lg border border-border/50 ${borderColor} border-l-4 p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300`}>
                     {/* Large Icon */}
-                    <div className="mb-6">
+                    <div className="mb-5">
                       <offering.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground" strokeWidth={1.5} />
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-lg md:text-xl font-bold text-foreground mb-3">
+                    <h3 className="text-base md:text-lg font-bold text-foreground mb-2">
                       {offering.title}
                     </h3>
                     
                     {/* Description */}
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       {offering.description}
                     </p>
                   </div>
