@@ -16,13 +16,6 @@ const footerLinks = {
       { label: "Migration", href: "/solutions" },
       { label: "Custom Development", href: "/solutions" },
     ],
-    Industries: [
-      { label: "Manufacturing", href: "/industries" },
-      { label: "Healthcare", href: "/industries" },
-      { label: "Finance", href: "/industries" },
-      { label: "Retail", href: "/industries" },
-      { label: "Technology", href: "/industries" },
-    ],
     Services: [
       { label: "Training", href: "/solutions" },
       { label: "Support", href: "/solutions" },
@@ -142,19 +135,6 @@ export const Footer = () => {
               ))}
             </ul>
             
-            <h5 className="font-semibold mb-3 text-[#00a3c4] text-sm uppercase tracking-wide">Industries</h5>
-            <ul className="space-y-2.5 mb-5">
-              {footerLinks.Solutions.Industries.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-white/60 text-sm hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
             
             <h5 className="font-semibold mb-3 text-[#00a3c4] text-sm uppercase tracking-wide">Services</h5>
             <ul className="space-y-2.5">
