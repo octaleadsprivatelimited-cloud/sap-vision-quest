@@ -57,7 +57,7 @@ export const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50">
       <nav className={cn(
         "transition-all duration-300",
-        isScrolled || !isHomePage
+        isScrolled
           ? "bg-background/95 backdrop-blur-md shadow-sm" 
           : "bg-transparent"
       )}>
@@ -68,10 +68,7 @@ export const Navbar = () => {
               <img 
                 src="/logo.png" 
                 alt="Sangronyx Logo" 
-                className={cn(
-                  "h-10 lg:h-12 w-auto transition-all",
-                  !isScrolled && isHomePage && "brightness-0 invert"
-                )}
+                className="h-10 lg:h-12 w-auto transition-all"
               />
             </Link>
 
@@ -85,11 +82,9 @@ export const Navbar = () => {
                         <button
                           className={cn(
                             "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                            !isScrolled && isHomePage
-                              ? "text-white/90 hover:text-white hover:bg-white/10"
-                              : isActive(item.href)
+                            isActive(item.href)
                               ? "text-primary bg-primary/5"
-                              : "text-foreground hover:text-primary hover:bg-primary/5"
+                              : "text-gray-700 hover:text-primary hover:bg-primary/5"
                           )}
                         >
                           {item.label}
@@ -118,11 +113,9 @@ export const Navbar = () => {
                     to={item.href}
                     className={cn(
                       "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                      !isScrolled && isHomePage
-                        ? "text-white/90 hover:text-white hover:bg-white/10"
-                        : isActive(item.href)
+                      isActive(item.href)
                         ? "text-primary bg-primary/5"
-                        : "text-foreground hover:text-primary hover:bg-primary/5"
+                        : "text-gray-700 hover:text-primary hover:bg-primary/5"
                     )}
                   >
                     {item.label}
@@ -137,12 +130,7 @@ export const Navbar = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className={cn(
-                    "font-medium",
-                    !isScrolled && isHomePage
-                      ? "text-white/90 hover:text-white hover:bg-white/10"
-                      : "text-foreground hover:text-primary"
-                  )}
+                  className="font-medium text-gray-700 hover:text-primary"
                 >
                   Demo
                 </Button>
@@ -150,35 +138,21 @@ export const Navbar = () => {
               <Button 
                 variant="ghost" 
                 size="sm"
-                className={cn(
-                  "font-medium",
-                  !isScrolled && isHomePage
-                    ? "text-white/90 hover:text-white hover:bg-white/10"
-                    : "text-foreground hover:text-primary"
-                )}
+                className="font-medium text-gray-700 hover:text-primary"
               >
                 Login
               </Button>
               <Button 
                 variant="ghost" 
                 size="icon"
-                className={cn(
-                  !isScrolled && isHomePage
-                    ? "text-white/90 hover:text-white hover:bg-white/10"
-                    : "text-foreground hover:text-primary"
-                )}
+                className="text-gray-700 hover:text-primary"
               >
                 <Globe className="w-5 h-5" />
               </Button>
               <Link to="/contact">
                 <Button 
                   size="sm"
-                  className={cn(
-                    "font-semibold",
-                    !isScrolled && isHomePage
-                      ? "bg-white text-primary hover:bg-white/90"
-                      : "bg-primary text-primary-foreground hover:bg-primary/90"
-                  )}
+                  className="font-semibold bg-[#0096d6] text-white hover:bg-[#0077b3]"
                 >
                   Contact Us
                 </Button>
@@ -189,10 +163,7 @@ export const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              className={cn(
-                "lg:hidden",
-                !isScrolled && isHomePage && "text-white hover:bg-white/10"
-              )}
+              className="lg:hidden text-gray-700"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
