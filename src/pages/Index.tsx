@@ -4,7 +4,6 @@ import { SolutionsSection } from "@/components/sections/SolutionsSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { TrustedBySection } from "@/components/sections/TrustedBySection";
-import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/layout/Footer";
 
 const Index = () => {
@@ -17,7 +16,6 @@ const Index = () => {
         <FeaturesSection />
         <SolutionsSection />
         <StatsSection />
-        <CTASection />
       </main>
       <Footer />
     </div>
