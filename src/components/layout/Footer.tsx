@@ -1,23 +1,39 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Twitter, Youtube, Facebook } from "lucide-react";
+import { Linkedin, Twitter, Youtube, Facebook, Instagram } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const footerLinks = {
-  "SAP Solutions": [
-    { label: "SAP S/4HANA Implementation", href: "/solutions" },
-    { label: "SAP ECC to S/4HANA Migration", href: "/solutions" },
-    { label: "SAP Licensing & Software", href: "/solutions" },
-    { label: "SAP Module Implementations", href: "/solutions" },
-    { label: "SAP Custom Development", href: "/solutions" },
-    { label: "SAP Corporate Training", href: "/solutions" },
-    { label: "SAP Support & Maintenance", href: "/solutions" },
-    { label: "SAP Integration Services", href: "/solutions" },
+  Products: [
+    { label: "SAP S/4HANA", href: "/products" },
+    { label: "SAP ECC", href: "/products" },
+    { label: "SAP Fiori", href: "/products" },
+    { label: "SAP HANA", href: "/products" },
+    { label: "SAP BTP", href: "/products" },
   ],
+  Solutions: {
+    main: [
+      { label: "Implementation", href: "/solutions" },
+      { label: "Migration", href: "/solutions" },
+      { label: "Custom Development", href: "/solutions" },
+    ],
+    Industries: [
+      { label: "Manufacturing", href: "/industries" },
+      { label: "Healthcare", href: "/industries" },
+      { label: "Finance", href: "/industries" },
+      { label: "Retail", href: "/industries" },
+      { label: "Technology", href: "/industries" },
+    ],
+    Services: [
+      { label: "Training", href: "/solutions" },
+      { label: "Support", href: "/solutions" },
+      { label: "Consulting", href: "/solutions" },
+    ],
+  },
   Company: [
-    { label: "Who We Are", href: "/about" },
-    { label: "Our Services", href: "/solutions" },
-    { label: "Industries", href: "/industries" },
+    { label: "Our Story", href: "/about" },
     { label: "Partners", href: "/partners" },
-    { label: "Contact", href: "/contact" },
+    { label: "Careers", href: "/about" },
+    { label: "Contact Us", href: "/contact" },
   ],
   Resources: [
     { label: "Documentation", href: "/resources/documentation" },
@@ -25,102 +41,238 @@ const footerLinks = {
     { label: "Whitepapers", href: "/resources/whitepapers" },
     { label: "Downloads", href: "/resources/downloads" },
     { label: "FAQ", href: "/resources/faq" },
-    { label: "Developer Resources", href: "/resources/developer-resources" },
-    { label: "Training Materials", href: "/resources/training-materials" },
-  ],
-  Support: [
-    { label: "Contact Us", href: "/contact" },
-    { label: "Email: info@sangronyx.com", href: "mailto:info@sangronyx.com" },
-    { label: "Phone: +91-XXXXXXXXXX", href: "tel:+91-XXXXXXXXXX" },
+    { label: "Training", href: "/resources/training-classes" },
   ],
 };
 
 const socialLinks = [
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Youtube, href: "#", label: "YouTube" },
   { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+];
+
+const legalLinks = [
+  { label: "Privacy", href: "#" },
+  { label: "Legal", href: "#" },
+  { label: "Cookies", href: "#" },
+  { label: "Terms", href: "#" },
 ];
 
 export const Footer = () => {
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 lg:px-8 py-16 md:py-20">
+    <footer className="relative bg-[#0a1628] text-white">
+      {/* Curved top edge */}
+      <div className="absolute top-0 left-0 right-0 h-16 md:h-24 -translate-y-full overflow-hidden">
+        <svg
+          viewBox="0 0 1440 96"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute bottom-0 w-full h-full"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 96L1440 96L1440 32C1440 32 1280 0 720 0C160 0 0 32 0 32L0 96Z"
+            fill="#0a1628"
+          />
+        </svg>
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8 py-12 md:py-16">
         {/* Main footer content */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
-          {/* Logo and description */}
-          <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-8 lg:mb-0">
-            <Link to="/" className="inline-block mb-6">
-              <img 
-                src="/logo.png" 
-                alt="Sangronyx Logo" 
-                className="h-12 w-auto brightness-0 invert"
-              />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6 mb-12">
+          {/* Contact CTA Column */}
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="text-white font-semibold mb-4">How can we help you?</h4>
+            <Link to="/contact">
+              <Button className="bg-[#00a3c4] hover:bg-[#00b8db] text-white rounded-full px-6 mb-6">
+                Contact Us
+              </Button>
             </Link>
-            <p className="text-primary-foreground/70 text-sm mb-6 leading-relaxed">
-              Sangronyx - Modern IT and SAP service company providing end-to-end digital solutions.
-            </p>
-            <div className="flex gap-3">
+            
+            {/* Divider */}
+            <div className="border-t border-white/20 my-6 w-32"></div>
+            
+            {/* Social Icons */}
+            <div className="flex flex-wrap gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
+                  className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Link columns */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h4 className="font-semibold mb-4 text-primary-foreground">{category}</h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      to={link.href}
-                      className="text-primary-foreground/60 text-sm hover:text-primary-foreground transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Products Column */}
+          <div>
+            <h4 className="font-semibold mb-4 text-white">Products</h4>
+            <ul className="space-y-2.5">
+              {footerLinks.Products.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.href}
+                    className="text-white/60 text-sm hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Solutions Column with subheaders */}
+          <div>
+            <h4 className="font-semibold mb-4 text-white">Solutions</h4>
+            <ul className="space-y-2.5 mb-5">
+              {footerLinks.Solutions.main.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.href}
+                    className="text-white/60 text-sm hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            
+            <h5 className="font-semibold mb-3 text-[#00a3c4] text-sm uppercase tracking-wide">Industries</h5>
+            <ul className="space-y-2.5 mb-5">
+              {footerLinks.Solutions.Industries.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.href}
+                    className="text-white/60 text-sm hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            
+            <h5 className="font-semibold mb-3 text-[#00a3c4] text-sm uppercase tracking-wide">Services</h5>
+            <ul className="space-y-2.5">
+              {footerLinks.Solutions.Services.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.href}
+                    className="text-white/60 text-sm hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company Column */}
+          <div>
+            <h4 className="font-semibold mb-4 text-white">Company</h4>
+            <ul className="space-y-2.5">
+              {footerLinks.Company.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.href}
+                    className="text-white/60 text-sm hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources Column */}
+          <div>
+            <h4 className="font-semibold mb-4 text-white">Resources</h4>
+            <ul className="space-y-2.5">
+              {footerLinks.Resources.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.href}
+                    className="text-white/60 text-sm hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support Column */}
+          <div>
+            <h4 className="font-semibold mb-4 text-white">Support</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <Link to="/contact" className="text-white/60 text-sm hover:text-white transition-colors">
+                  Help Center
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-white/60 text-sm hover:text-white transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <a href="mailto:info@sangronyx.com" className="text-white/60 text-sm hover:text-white transition-colors">
+                  Email Support
+                </a>
+              </li>
+              <li>
+                <Link to="/resources/developer-resources" className="text-white/60 text-sm hover:text-white transition-colors">
+                  Developer Portal
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-primary-foreground/10 pt-8">
+        <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-primary-foreground/50 text-sm">
-              © 2025 Sangronyx. All rights reserved.{" "}
-              <a 
-                href="https://octaleads.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors underline"
-              >
-                Developed by Octaleads Pvt Ltd.
-              </a>
-            </p>
-            <div className="flex gap-6">
-              <a href="#" className="text-primary-foreground/50 text-sm hover:text-primary-foreground/80 transition-colors">
-                Privacy
-              </a>
-              <a href="#" className="text-primary-foreground/50 text-sm hover:text-primary-foreground/80 transition-colors">
-                Terms
-              </a>
-              <a href="#" className="text-primary-foreground/50 text-sm hover:text-primary-foreground/80 transition-colors">
-                Cookies
-              </a>
-              <a href="#" className="text-primary-foreground/50 text-sm hover:text-primary-foreground/80 transition-colors">
-                Sitemap
-              </a>
+            {/* Logo and copyright */}
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <Link to="/">
+                <img 
+                  src="/logo.png" 
+                  alt="Sangronyx Logo" 
+                  className="h-8 w-auto brightness-0 invert"
+                />
+              </Link>
+              <p className="text-white/50 text-sm">
+                © 2025 Sangronyx. All rights reserved.{" "}
+                <a 
+                  href="https://octaleads.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-white/80 transition-colors"
+                >
+                  Developed by Octaleads Pvt Ltd.
+                </a>
+              </p>
+            </div>
+            
+            {/* Legal links with separators */}
+            <div className="flex items-center gap-0 text-sm">
+              {legalLinks.map((link, index) => (
+                <span key={link.label} className="flex items-center">
+                  <a 
+                    href={link.href} 
+                    className="text-white/50 hover:text-white/80 transition-colors px-3"
+                  >
+                    {link.label}
+                  </a>
+                  {index < legalLinks.length - 1 && (
+                    <span className="text-white/30">|</span>
+                  )}
+                </span>
+              ))}
             </div>
           </div>
         </div>
