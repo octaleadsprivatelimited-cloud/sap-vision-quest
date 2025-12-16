@@ -126,22 +126,6 @@ export const Navbar = () => {
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-3">
-              <Link to="/contact">
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  className="font-medium text-gray-700 hover:text-primary"
-                >
-                  Demo
-                </Button>
-              </Link>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="font-medium text-gray-700 hover:text-primary"
-              >
-                Login
-              </Button>
               <Button 
                 variant="ghost" 
                 size="icon"
@@ -224,12 +208,7 @@ export const Navbar = () => {
                 })}
                 <div className="pt-4 border-t border-border space-y-2">
                   <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button variant="outline" className="w-full">
-                      Demo
-                    </Button>
-                  </Link>
-                  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button className="w-full bg-primary text-primary-foreground">
+                    <Button className="w-full bg-[#0096d6] text-white hover:bg-[#0077b3]">
                       Contact Us
                     </Button>
                   </Link>
