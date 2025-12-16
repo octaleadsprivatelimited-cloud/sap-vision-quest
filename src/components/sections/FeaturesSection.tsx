@@ -1,31 +1,39 @@
 import { motion } from "framer-motion";
+import { ArrowRight, Award, Shield, BarChart3, Headphones } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const features = [
   {
-    title: "Unified Platform",
-    description: "Empower your enterprise teams with a unified SAP platform to deliver frictionless, omnichannel business experiences — while staying ",
-    highlight: "on-brand every time, everywhere.",
-    highlightColor: "text-foreground",
-    image: "/sap-s4hana-implementation.webp",
+    icon: Award,
+    title: "SAP Expertise",
+    description: "Leverage our certified SAP consultants with extensive industry knowledge to build great solutions, drive efficiency, and deliver extraordinary business outcomes.",
+    link: "/solutions",
+    linkText: "Explore Expertise",
+    underlineColor: "bg-sprinklr-blue",
   },
   {
-    title: "AI-Native Foundation",
-    description: "AI is seamlessly infused across the Sangronyx platform, enabling you to ",
-    highlight: "scale effortlessly",
-    highlightColor: "text-sprinklr-blue",
-    afterHighlight: " while powering ",
-    secondHighlight: "continuous innovation",
-    secondHighlightColor: "text-sprinklr-purple",
-    afterSecondHighlight: " for your enterprise teams.",
-    image: "/sap-corporate-training.avif",
+    icon: BarChart3,
+    title: "SAP Implementation",
+    description: "Orchestrate end-to-end SAP implementation across your enterprise systems, optimize processes, and boost operational ROI.",
+    link: "/solutions",
+    linkText: "Explore Implementation",
+    underlineColor: "bg-sprinklr-green",
   },
   {
-    title: "Enterprise-Grade Scale",
-    description: "Equip your global teams with extensive customizability and seamless integration with your existing tech stack. Built for enterprises, our ",
-    highlight: "Unified-SAP platform",
-    highlightColor: "text-sprinklr-blue",
-    afterHighlight: " scales effortlessly as your needs evolve.",
-    image: "/sap-ecc-to-s4hana-migration.avif",
+    icon: Shield,
+    title: "SAP Security",
+    description: "Protect your enterprise data across all SAP modules and systems to maximize security, build trust and ensure compliance.",
+    link: "/solutions",
+    linkText: "Explore Security",
+    underlineColor: "bg-sprinklr-purple",
+  },
+  {
+    icon: Headphones,
+    title: "SAP Support",
+    description: "Give your teams the 24/7 support they need to connect with context, resolve issues quickly, and deliver delightful experiences consistently.",
+    link: "/solutions",
+    linkText: "Explore Support",
+    underlineColor: "bg-accent",
   },
 ];
 
@@ -42,12 +50,12 @@ export const FeaturesSection = () => {
           className="text-center mb-12 md:mb-16 lg:mb-20"
         >
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight">
-            Get the Sangronyx Advantage
+            Four SAP-native service suites. One Unified Enterprise platform.
           </h2>
         </motion.div>
 
-        {/* Features Grid - 3-column card style */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Features Grid - Sprinklr 4-column style */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -55,32 +63,34 @@ export const FeaturesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-card rounded-xl border border-border/50 p-6 lg:p-8 flex flex-col h-full hover:shadow-lg transition-shadow duration-300"
+              className="group"
             >
-              {/* Title */}
-              <h3 className="text-lg md:text-xl font-bold text-foreground mb-4">
+              {/* Icon */}
+              <div className="mb-5">
+                <feature.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground" strokeWidth={1.5} />
+              </div>
+              
+              {/* Title with underline */}
+              <h3 className="text-lg md:text-xl font-bold text-foreground mb-2">
                 {feature.title}
               </h3>
               
-              {/* Description with highlights */}
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6 flex-grow">
+              {/* Colored underline */}
+              <div className={`w-10 h-1 ${feature.underlineColor} mb-5`}></div>
+              
+              {/* Description */}
+              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
                 {feature.description}
-                <span className={feature.highlightColor}>{feature.highlight}</span>
-                {feature.afterHighlight && feature.afterHighlight}
-                {feature.secondHighlight && (
-                  <span className={feature.secondHighlightColor}>{feature.secondHighlight}</span>
-                )}
-                {feature.afterSecondHighlight && feature.afterSecondHighlight}
               </p>
               
-              {/* Image */}
-              <div className="mt-auto">
-                <img 
-                  src={feature.image} 
-                  alt={feature.title}
-                  className="w-full h-40 md:h-48 object-cover rounded-lg"
-                />
-              </div>
+              {/* Explore link */}
+              <Link 
+                to={feature.link}
+                className="inline-flex items-center text-foreground font-semibold text-sm md:text-base hover:text-accent transition-colors group/link"
+              >
+                <ArrowRight className="w-4 h-4 mr-2 text-sprinklr-green group-hover/link:translate-x-1 transition-transform" />
+                {feature.linkText}
+              </Link>
             </motion.div>
           ))}
         </div>
