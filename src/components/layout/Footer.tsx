@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Twitter, Youtube, Facebook, Instagram } from "lucide-react";
+import { Linkedin, Youtube, Facebook, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const footerLinks = {
@@ -40,7 +40,6 @@ const footerLinks = {
 
 const socialLinks = [
   { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
   { icon: Linkedin, href: "#", label: "LinkedIn" },
   { icon: Youtube, href: "#", label: "YouTube" },
   { icon: Instagram, href: "#", label: "Instagram" },
