@@ -3,7 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Cloud, Database, Settings, Code, GraduationCap, Wrench, Link2, CheckCircle2, Users, Star, Headphones } from "lucide-react";
+import { ArrowRight, Cloud, Database, Settings, Code, GraduationCap, Wrench, Link2, Users, Star, Headphones, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const sapOfferings = [
@@ -105,8 +105,8 @@ const Solutions = () => {
         </div>
       </section>
 
-      {/* SAP Offerings Grid */}
-      <section className="py-16 md:py-24 lg:py-32 bg-background">
+      {/* SAP Offerings Grid - Sprinklr Style */}
+      <section className="py-16 md:py-24 lg:py-32 bg-secondary/20">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -122,62 +122,39 @@ const Solutions = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {sapOfferings.map((offering, index) => (
-              <motion.div
-                key={offering.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05, duration: 0.5 }}
-                className="group"
-              >
-                <div className="h-full bg-card rounded-2xl border border-border hover:border-accent/50 hover:shadow-xl transition-all duration-300 overflow-hidden">
-                  {offering.image && (
-                    <div className="relative h-40 overflow-hidden">
-                      <img 
-                        src={offering.image} 
-                        alt={offering.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                      <div className={`absolute bottom-3 left-3 w-10 h-10 rounded-lg ${offering.color} flex items-center justify-center`}>
-                        <offering.icon className="w-5 h-5 text-white" />
-                      </div>
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {sapOfferings.map((offering, index) => {
+              // Alternate border colors: cyan for even, yellow for odd
+              const borderColor = index % 2 === 0 ? "border-l-accent" : "border-l-yellow-400";
+              
+              return (
+                <motion.div
+                  key={offering.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05, duration: 0.5 }}
+                  className="group"
+                >
+                  <div className={`h-full bg-card rounded-lg border border-border ${borderColor} border-l-4 p-6 md:p-8 hover:shadow-lg transition-all duration-300`}>
+                    {/* Large Icon */}
+                    <div className="mb-6">
+                      <offering.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground" strokeWidth={1.5} />
                     </div>
-                  )}
-                  
-                  <div className="p-6">
-                    {!offering.image && (
-                      <div className={`w-12 h-12 rounded-xl ${offering.color} flex items-center justify-center mb-4`}>
-                        <offering.icon className="w-6 h-6 text-white" />
-                      </div>
-                    )}
                     
-                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+                    {/* Title */}
+                    <h3 className="text-lg md:text-xl font-bold text-foreground mb-3">
                       {offering.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                    
+                    {/* Description */}
+                    <p className="text-muted-foreground leading-relaxed">
                       {offering.description}
                     </p>
-
-                    <ul className="space-y-2 mb-4">
-                      {offering.features.slice(0, 3).map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <Link to="/contact" className="inline-flex items-center gap-2 text-accent font-medium text-sm group/link">
-                      <span>Get Started</span>
-                      <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                    </Link>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
