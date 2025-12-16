@@ -1,44 +1,39 @@
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, BarChart3, Shield, Zap, Users, Headphones, Award } from "lucide-react";
+import { ArrowRight, Award, Shield, BarChart3, Headphones } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const features = [
   {
     icon: Award,
-    title: "Certified SAP Consultants",
-    description: "Our team of certified SAP consultants brings extensive expertise and industry knowledge to every project.",
-    color: "bg-accent",
-  },
-  {
-    icon: Shield,
-    title: "Enterprise-Grade Security",
-    description: "Robust security protocols and compliance standards to protect your sensitive business data.",
-    color: "bg-sprinklr-green",
+    title: "SAP Expertise",
+    description: "Leverage our certified SAP consultants with extensive industry knowledge to build great solutions, drive efficiency, and deliver extraordinary business outcomes.",
+    link: "/solutions",
+    linkText: "Explore Expertise",
+    underlineColor: "bg-sprinklr-blue",
   },
   {
     icon: BarChart3,
-    title: "Cost-Effective Implementation",
-    description: "Cost-effective SAP implementation and optimization to maximize your ROI and business value.",
-    color: "bg-sprinklr-purple",
+    title: "SAP Implementation",
+    description: "Orchestrate end-to-end SAP implementation across your enterprise systems, optimize processes, and boost operational ROI.",
+    link: "/solutions",
+    linkText: "Explore Implementation",
+    underlineColor: "bg-sprinklr-green",
+  },
+  {
+    icon: Shield,
+    title: "SAP Security",
+    description: "Protect your enterprise data across all SAP modules and systems to maximize security, build trust and ensure compliance.",
+    link: "/solutions",
+    linkText: "Explore Security",
+    underlineColor: "bg-sprinklr-purple",
   },
   {
     icon: Headphones,
-    title: "24/7 Support Availability",
-    description: "Round-the-clock SAP support and maintenance to ensure your systems run smoothly.",
-    color: "bg-accent",
-  },
-  {
-    icon: Zap,
-    title: "Rapid Deployment",
-    description: "Accelerated implementation timelines with proven methodologies to get you up and running faster.",
-    color: "bg-sprinklr-green",
-  },
-  {
-    icon: Users,
-    title: "Expert Training & Support",
-    description: "Comprehensive training programs and ongoing support to empower your team.",
-    color: "bg-sprinklr-purple",
+    title: "SAP Support",
+    description: "Give your teams the 24/7 support they need to connect with context, resolve issues quickly, and deliver delightful experiences consistently.",
+    link: "/solutions",
+    linkText: "Explore Support",
+    underlineColor: "bg-accent",
   },
 ];
 
@@ -54,18 +49,13 @@ export const FeaturesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16 lg:mb-20"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-            Why Choose{" "}
-            <span className="text-accent">Sangronyx</span>{" "}
-            for SAP?
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight">
+            Four SAP-native service suites. One Unified Enterprise platform.
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            End-to-end SAP software, implementation, training and support services designed to transform your business.
-          </p>
         </motion.div>
 
-        {/* Features Grid - Clean Sprinklr style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
+        {/* Features Grid - Sprinklr 4-column style */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -75,39 +65,35 @@ export const FeaturesSection = () => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group"
             >
-              <div className="h-full p-6 md:p-8 rounded-2xl bg-secondary/50 hover:bg-secondary transition-colors duration-300">
-                {/* Icon */}
-                <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl ${feature.color} flex items-center justify-center mb-5 md:mb-6`}>
-                  <feature.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
-                </div>
-                
-                {/* Content */}
-                <h3 className="text-lg md:text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
+              {/* Icon */}
+              <div className="mb-5">
+                <feature.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground" strokeWidth={1.5} />
               </div>
+              
+              {/* Title with underline */}
+              <h3 className="text-lg md:text-xl font-bold text-foreground mb-2">
+                {feature.title}
+              </h3>
+              
+              {/* Colored underline */}
+              <div className={`w-10 h-1 ${feature.underlineColor} mb-5`}></div>
+              
+              {/* Description */}
+              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
+                {feature.description}
+              </p>
+              
+              {/* Explore link */}
+              <Link 
+                to={feature.link}
+                className="inline-flex items-center text-foreground font-semibold text-sm md:text-base hover:text-accent transition-colors group/link"
+              >
+                <ArrowRight className="w-4 h-4 mr-2 text-sprinklr-green group-hover/link:translate-x-1 transition-transform" />
+                {feature.linkText}
+              </Link>
             </motion.div>
           ))}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="text-center mt-12 md:mt-16"
-        >
-          <Link to="/contact">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 h-auto text-base font-semibold group">
-              Get Free SAP Consultation
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
