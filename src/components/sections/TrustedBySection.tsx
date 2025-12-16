@@ -14,31 +14,50 @@ const logos = [
 ];
 
 export const TrustedBySection = () => {
+  // Duplicate logos for seamless infinite scroll
+  const duplicatedLogos = [...logos, ...logos];
+
   return (
-    <section className="py-12 md:py-16 bg-secondary/50">
-      <div className="container mx-auto px-4 lg:px-8">
-        {/* Logo row - Sprinklr style */}
+    <section className="py-8 md:py-12 bg-white overflow-hidden">
+      <div className="relative">
+        {/* Left gradient fade */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        
+        {/* Right gradient fade */}
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+        {/* Scrolling container */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex items-center justify-center gap-8 md:gap-12 lg:gap-16 flex-wrap"
+          className="flex"
         >
-          {logos.map((logo, index) => (
-            <motion.div
-              key={logo}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05, duration: 0.4 }}
-              className="px-4 py-2"
-            >
-              <span className="text-lg md:text-xl font-bold text-muted-foreground/50 hover:text-muted-foreground transition-colors duration-300">
-                {logo}
-              </span>
-            </motion.div>
-          ))}
+          <div className="flex animate-scroll gap-8 md:gap-12 lg:gap-16">
+            {duplicatedLogos.map((logo, index) => (
+              <div
+                key={`${logo}-${index}`}
+                className="flex-shrink-0 px-4 md:px-6 py-2"
+              >
+                <span className="text-base md:text-lg lg:text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300 whitespace-nowrap">
+                  {logo}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="flex animate-scroll gap-8 md:gap-12 lg:gap-16">
+            {duplicatedLogos.map((logo, index) => (
+              <div
+                key={`${logo}-duplicate-${index}`}
+                className="flex-shrink-0 px-4 md:px-6 py-2"
+              >
+                <span className="text-base md:text-lg lg:text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300 whitespace-nowrap">
+                  {logo}
+                </span>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
