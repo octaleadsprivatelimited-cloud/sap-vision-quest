@@ -1,15 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, Globe } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, Globe, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   { label: "Products", href: "/products", hasDropdown: false },
@@ -20,21 +14,57 @@ const navItems = [
   { label: "Company", href: "/about", hasDropdown: false },
 ];
 
-const resourcesMenuItems = [
-  { label: "All Resources", href: "/resources" },
-  { label: "Documentation", href: "/resources/documentation" },
-  { label: "Video Tutorials", href: "/resources/video-tutorials" },
-  { label: "Whitepapers", href: "/resources/whitepapers" },
-  { label: "Downloads", href: "/resources/downloads" },
-  { label: "FAQ", href: "/resources/faq" },
-  { label: "Developer Resources", href: "/resources/developer-resources" },
-  { label: "Training Materials", href: "/resources/training-materials" },
-  { label: "Training Classes", href: "/resources/training-classes" },
+const resourceCategories = [
+  {
+    id: "learn",
+    label: "Learn",
+    items: [
+      { label: "Documentation", href: "/resources/documentation" },
+      { label: "Video Tutorials", href: "/resources/video-tutorials" },
+      { label: "Whitepapers", href: "/resources/whitepapers" },
+      { label: "Training Materials", href: "/resources/training-materials" },
+      { label: "Training Classes", href: "/resources/training-classes" },
+    ],
+  },
+  {
+    id: "services",
+    label: "Services",
+    items: [
+      { label: "Developer Resources", href: "/resources/developer-resources" },
+      { label: "Downloads", href: "/resources/downloads" },
+      { label: "FAQ", href: "/resources/faq" },
+    ],
+  },
+  {
+    id: "support",
+    label: "Support",
+    items: [
+      { label: "All Resources", href: "/resources" },
+      { label: "Contact Support", href: "/contact" },
+    ],
+  },
+];
+
+const spotlightItems = [
+  {
+    title: "SAP S/4HANA Migration Guide",
+    subtitle: "Complete migration roadmap for enterprises",
+    cta: "Read guide",
+    image: "/sap-ecc-to-s4hana-migration.avif",
+  },
+  {
+    title: "Enterprise Training Programs",
+    subtitle: "Upskill your team with expert-led courses",
+    cta: "Explore courses",
+    image: "/sap-corporate-training.avif",
+  },
 ];
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("learn");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -52,6 +82,8 @@ export const Navbar = () => {
   };
 
   const isHomePage = location.pathname === "/";
+
+  const currentCategory = resourceCategories.find((cat) => cat.id === activeCategory);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -77,34 +109,27 @@ export const Navbar = () => {
               {navItems.map((item) => {
                 if (item.hasDropdown) {
                   return (
-                    <DropdownMenu key={item.label}>
-                      <DropdownMenuTrigger asChild>
-                        <button
-                          className={cn(
-                            "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                            isActive(item.href)
-                              ? "text-primary bg-primary/5"
-                              : "text-gray-700 hover:text-primary hover:bg-primary/5"
-                          )}
-                        >
-                          {item.label}
-                          <ChevronDown className="w-4 h-4" />
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="start" className="w-56 bg-background border border-border">
-                        {resourcesMenuItems.map((menuItem) => (
-                          <DropdownMenuItem
-                            key={menuItem.label}
-                            onClick={() => {
-                              navigate(menuItem.href);
-                            }}
-                            className="cursor-pointer"
-                          >
-                            {menuItem.label}
-                          </DropdownMenuItem>
-                        ))}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <div
+                      key={item.label}
+                      className="relative"
+                      onMouseEnter={() => setIsResourcesOpen(true)}
+                      onMouseLeave={() => setIsResourcesOpen(false)}
+                    >
+                      <button
+                        className={cn(
+                          "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                          isActive(item.href) || isResourcesOpen
+                            ? "text-primary bg-primary/5"
+                            : "text-gray-700 hover:text-primary hover:bg-primary/5"
+                        )}
+                      >
+                        {item.label}
+                        <ChevronDown className={cn(
+                          "w-4 h-4 transition-transform duration-200",
+                          isResourcesOpen && "rotate-180"
+                        )} />
+                      </button>
+                    </div>
                   );
                 }
                 return (
@@ -155,6 +180,98 @@ export const Navbar = () => {
           </div>
         </div>
 
+        {/* Resources Mega Menu */}
+        <AnimatePresence>
+          {isResourcesOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute left-0 right-0 top-full bg-white shadow-xl border-t border-gray-100 hidden lg:block"
+              onMouseEnter={() => setIsResourcesOpen(true)}
+              onMouseLeave={() => setIsResourcesOpen(false)}
+            >
+              <div className="container mx-auto px-4 lg:px-8">
+                <div className="grid grid-cols-12 gap-0 py-8">
+                  {/* Left Categories */}
+                  <div className="col-span-2 border-r border-gray-100 pr-6">
+                    <nav className="space-y-1">
+                      {resourceCategories.map((category) => (
+                        <button
+                          key={category.id}
+                          onMouseEnter={() => setActiveCategory(category.id)}
+                          className={cn(
+                            "w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium transition-all rounded-r-md",
+                            activeCategory === category.id
+                              ? "text-gray-900 bg-gray-50 border-l-4 border-[#0096d6]"
+                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-4 border-transparent"
+                          )}
+                        >
+                          {category.label}
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                      ))}
+                    </nav>
+                  </div>
+
+                  {/* Middle Links */}
+                  <div className="col-span-4 px-8">
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                      {currentCategory?.items.map((item) => (
+                        <Link
+                          key={item.label}
+                          to={item.href}
+                          onClick={() => setIsResourcesOpen(false)}
+                          className="text-sm text-gray-700 hover:text-[#0096d6] transition-colors py-2"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right Spotlight */}
+                  <div className="col-span-6 pl-8 border-l border-gray-100">
+                    <div className="bg-[#e6f7fc] rounded-lg p-6">
+                      <span className="inline-block px-3 py-1 text-xs font-semibold text-[#0096d6] border border-[#0096d6] rounded-full mb-4">
+                        SPOTLIGHT
+                      </span>
+                      <div className="grid grid-cols-2 gap-6">
+                        {spotlightItems.map((item, index) => (
+                          <div key={index} className="group">
+                            <div className="aspect-video rounded-lg overflow-hidden mb-3 bg-gray-200">
+                              <img
+                                src={item.image}
+                                alt={item.title}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            </div>
+                            <h4 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-2">
+                              {item.title}
+                            </h4>
+                            <p className="text-xs text-gray-600 mb-2 line-clamp-2">
+                              {item.subtitle}
+                            </p>
+                            <Link
+                              to="/resources"
+                              onClick={() => setIsResourcesOpen(false)}
+                              className="inline-flex items-center gap-1 text-sm font-medium text-[#0096d6] hover:gap-2 transition-all"
+                            >
+                              <ArrowRight className="w-4 h-4" />
+                              {item.cta}
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
@@ -162,17 +279,17 @@ export const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-background border-t border-border"
+              className="lg:hidden bg-white border-t border-gray-100"
             >
               <div className="container mx-auto px-4 py-4 space-y-2">
                 {navItems.map((item) => {
                   if (item.hasDropdown) {
                     return (
                       <div key={item.label} className="space-y-2">
-                        <div className="px-4 py-2 text-sm font-semibold text-foreground">
+                        <div className="px-4 py-2 text-sm font-semibold text-gray-900">
                           {item.label}
                         </div>
-                        {resourcesMenuItems.map((menuItem) => (
+                        {resourceCategories.flatMap((cat) => cat.items).map((menuItem) => (
                           <Link
                             key={menuItem.label}
                             to={menuItem.href}
@@ -180,8 +297,8 @@ export const Navbar = () => {
                             className={cn(
                               "block w-full px-6 py-2 text-left rounded-md transition-colors text-sm",
                               isActive(menuItem.href)
-                                ? "text-accent bg-accent/5 font-medium"
-                                : "text-muted-foreground hover:bg-accent/5"
+                                ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
+                                : "text-gray-600 hover:bg-gray-50"
                             )}
                           >
                             {menuItem.label}
@@ -198,15 +315,15 @@ export const Navbar = () => {
                       className={cn(
                         "block w-full px-4 py-3 text-left rounded-md transition-colors",
                         isActive(item.href)
-                          ? "text-accent bg-accent/5 font-medium"
-                          : "text-foreground hover:bg-accent/5"
+                          ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
+                          : "text-gray-900 hover:bg-gray-50"
                       )}
                     >
                       {item.label}
                     </Link>
                   );
                 })}
-                <div className="pt-4 border-t border-border space-y-2">
+                <div className="pt-4 border-t border-gray-100 space-y-2">
                   <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button className="w-full bg-[#0096d6] text-white hover:bg-[#0077b3]">
                       Contact Us
