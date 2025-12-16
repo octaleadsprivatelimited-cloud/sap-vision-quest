@@ -1,202 +1,88 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, BarChart3, CheckCircle2, Share2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[90vh] overflow-hidden pt-20">
-      {/* Background Image */}
+    <section className="relative min-h-screen overflow-hidden bg-primary pt-20">
+      {/* Background Image with overlay */}
       <div className="absolute inset-0 z-0">
         <img 
           src="/hero-background.jpg" 
           alt="SAP Solutions Background" 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover opacity-30"
         />
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/70 to-sap-blue/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary" />
       </div>
       
-      {/* Background decorative elements */}
+      {/* Subtle background elements */}
       <div className="absolute inset-0 overflow-hidden z-0">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-primary-foreground/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary-foreground/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-sprinklr-purple/10 rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(90vh-5rem)]">
-          {/* Left Content */}
+        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] text-center">
+          {/* Small tag */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-primary-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="mb-6"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">SAP Solutions – Sangronyx</span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-            >
-              Complete SAP Solutions
-              <br />
-              for Your Business
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-lg md:text-xl text-primary-foreground/90 mb-8 max-w-lg"
-            >
-              Sangronyx provides end-to-end SAP software, implementation, training and support services designed to transform your business with automation, integration and powerful enterprise capabilities.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-wrap gap-4"
-            >
-              <Button variant="hero" size="lg" className="group">
-                Get Free SAP Consultation
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button variant="hero-outline" size="lg">
-                Explore SAP Services
-              </Button>
-            </motion.div>
+            <Link to="/contact" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 transition-colors rounded-full px-4 py-2 text-primary-foreground/80 text-sm">
+              <span className="w-2 h-2 rounded-full bg-sprinklr-green animate-pulse" />
+              Demo
+            </Link>
           </motion.div>
 
-          {/* Right - Illustration */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="relative hidden lg:block"
+          {/* Main headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] mb-8 text-primary-foreground max-w-5xl"
           >
-            <div className="relative">
-              {/* Main illustration container */}
-              <div className="relative w-full aspect-square max-w-lg mx-auto">
-                {/* Connecting lines - SVG */}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
-                  <motion.path
-                    d="M100 100 L200 180 L320 120"
-                    stroke="rgba(255,255,255,0.3)"
-                    strokeWidth="2"
-                    strokeDasharray="8 4"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ delay: 0.8, duration: 1.5, ease: "easeInOut" }}
-                  />
-                  <motion.path
-                    d="M200 180 L280 260 L350 300"
-                    stroke="rgba(255,255,255,0.3)"
-                    strokeWidth="2"
-                    strokeDasharray="8 4"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ delay: 1.2, duration: 1.5, ease: "easeInOut" }}
-                  />
-                  <motion.path
-                    d="M200 180 L100 280"
-                    stroke="rgba(255,255,255,0.3)"
-                    strokeWidth="2"
-                    strokeDasharray="8 4"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ delay: 1, duration: 1.2, ease: "easeInOut" }}
-                  />
-                </svg>
+            The definitive platform for{" "}
+            <span className="text-gradient bg-gradient-to-r from-accent via-sprinklr-purple to-accent bg-clip-text text-transparent">
+              complete SAP
+            </span>{" "}
+            solutions
+          </motion.h1>
 
-                {/* Floating icons */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.6, duration: 0.5 }}
-                  className="absolute top-12 left-12 w-16 h-16 bg-sap-navy rounded-xl flex items-center justify-center shadow-xl animate-float"
-                >
-                  <BarChart3 className="w-8 h-8 text-primary-foreground" />
-                </motion.div>
+          {/* Subheadline */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-lg md:text-xl text-primary-foreground/70 mb-10 max-w-3xl leading-relaxed"
+          >
+            Unify your business processes and empower teams by implementing world-class SAP solutions. 
+            Elevate every operation with expert guidance to deliver extraordinary experiences.
+          </motion.p>
 
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8, duration: 0.5 }}
-                  className="absolute top-8 right-16 w-14 h-14 bg-primary-foreground rounded-xl flex items-center justify-center shadow-xl animate-float animation-delay-150"
-                >
-                  <CheckCircle2 className="w-7 h-7 text-primary" />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1, duration: 0.5 }}
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-sap-navy rounded-2xl flex items-center justify-center shadow-2xl animate-pulse-soft"
-                >
-                  <Sparkles className="w-10 h-10 text-primary-foreground" />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.2, duration: 0.5 }}
-                  className="absolute bottom-20 right-8 w-14 h-14 bg-primary-foreground rounded-full flex items-center justify-center shadow-xl animate-float animation-delay-300"
-                >
-                  <Share2 className="w-7 h-7 text-primary" />
-                </motion.div>
-
-                {/* Chart card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.4, duration: 0.6 }}
-                  className="absolute bottom-16 left-8 bg-primary-foreground/10 backdrop-blur-md rounded-xl p-4 shadow-xl"
-                >
-                  <div className="flex items-end gap-1 h-16">
-                    {[40, 65, 45, 80, 60, 90, 75].map((height, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ height: 0 }}
-                        animate={{ height: `${height}%` }}
-                        transition={{ delay: 1.6 + i * 0.1, duration: 0.4 }}
-                        className="w-3 bg-primary-foreground/60 rounded-t"
-                      />
-                    ))}
-                  </div>
-                  <div className="mt-2 flex gap-2">
-                    {[1, 2, 3].map((_, i) => (
-                      <div key={i} className="h-1 flex-1 bg-primary-foreground/30 rounded" />
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            </div>
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+          >
+            <Link to="/contact">
+              <Button 
+                size="lg" 
+                className="bg-white text-primary hover:bg-white/90 text-base px-8 py-6 h-auto font-semibold group"
+              >
+                Contact us
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </div>
 
-      {/* Bottom wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path
-            d="M0 100V50C240 83 480 100 720 100C960 100 1200 83 1440 50V100H0Z"
-            fill="hsl(var(--background))"
-          />
-        </svg>
-      </div>
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
     </section>
   );
 };

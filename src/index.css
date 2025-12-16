@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,106 +6,113 @@
 
 @layer base {
   :root {
-    /* Blue enterprise color palette */
+    /* Sprinklr-inspired color palette - clean, modern, professional */
     --background: 0 0% 100%;
-    --foreground: 215 25% 15%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Primary Blue */
-    --primary: 210 100% 45%;
+    /* Primary - Deep Navy Blue */
+    --primary: 222 47% 11%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Light blue gray */
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 215 25% 15%;
+    /* Secondary - Light gray */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 15% 46%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    /* Accent - Lighter Blue */
-    --accent: 200 85% 55%;
+    /* Accent - Vibrant Blue */
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 15% 90%;
-    --input: 210 15% 90%;
-    --ring: 210 100% 45%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Custom blue colors */
-    --sap-gold: 43 96% 56%;
-    --sap-navy: 215 60% 15%;
-    --sap-blue: 210 100% 45%;
-    --sap-light-blue: 200 85% 55%;
-    --sap-sky: 200 90% 95%;
+    /* Custom Sprinklr colors */
+    --sprinklr-navy: 222 47% 11%;
+    --sprinklr-blue: 217 91% 60%;
+    --sprinklr-light: 220 14% 96%;
+    --sprinklr-green: 158 64% 52%;
+    --sprinklr-purple: 262 83% 58%;
     
-    /* Gradients - Blue theme */
-    --gradient-hero: linear-gradient(135deg, hsl(210 100% 45%) 0%, hsl(200 85% 55%) 50%, hsl(215 90% 40%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(210 100% 45%) 0%, hsl(200 85% 50%) 100%);
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(222 47% 18%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 14% 98%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(262 83% 58%) 100%);
     
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(215 25% 15% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(215 25% 15% / 0.1), 0 2px 4px -2px hsl(215 25% 15% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(215 25% 15% / 0.1), 0 4px 6px -4px hsl(215 25% 15% / 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(215 25% 15% / 0.1), 0 8px 10px -6px hsl(215 25% 15% / 0.1);
-    --shadow-glow: 0 0 40px hsl(210 100% 45% / 0.3);
+    --shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(222 47% 11% / 0.1), 0 2px 4px -2px hsl(222 47% 11% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(222 47% 11% / 0.1), 0 4px 6px -4px hsl(222 47% 11% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(222 47% 11% / 0.1), 0 8px 10px -6px hsl(222 47% 11% / 0.1);
+    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.3);
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 215 25% 26%;
-    --sidebar-primary: 215 25% 10%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 222 47% 11%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 210 20% 96%;
-    --sidebar-accent-foreground: 215 25% 10%;
-    --sidebar-border: 210 15% 90%;
-    --sidebar-ring: 210 100% 50%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* SAP colors for compatibility */
+    --sap-gold: 43 96% 56%;
+    --sap-navy: 222 47% 11%;
+    --sap-blue: 217 91% 60%;
+    --sap-light-blue: 217 91% 70%;
+    --sap-sky: 220 14% 96%;
   }
 
   .dark {
-    --background: 215 25% 8%;
+    --background: 222 47% 6%;
     --foreground: 0 0% 98%;
 
-    --card: 215 25% 12%;
+    --card: 222 47% 10%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 215 25% 12%;
+    --popover: 222 47% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 210 100% 55%;
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 215 25% 18%;
+    --secondary: 222 47% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 215 25% 18%;
-    --muted-foreground: 210 15% 60%;
+    --muted: 222 47% 15%;
+    --muted-foreground: 220 9% 60%;
 
-    --accent: 200 85% 60%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 25% 20%;
-    --input: 215 25% 20%;
-    --ring: 210 100% 55%;
+    --border: 222 47% 18%;
+    --input: 222 47% 18%;
+    --ring: 217 91% 60%;
 
-    --sidebar-background: 215 25% 10%;
+    --sidebar-background: 222 47% 8%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 210 100% 55%;
+    --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 25% 15%;
+    --sidebar-accent: 222 47% 15%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 215 25% 20%;
-    --sidebar-ring: 210 100% 55%;
+    --sidebar-border: 222 47% 18%;
+    --sidebar-ring: 217 91% 60%;
   }
 }
 
@@ -120,11 +127,12 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply font-bold tracking-tight;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 }
 
@@ -137,8 +145,8 @@
     background: var(--gradient-card);
   }
 
-  .gradient-cta {
-    background: var(--gradient-cta);
+  .gradient-accent {
+    background: var(--gradient-accent);
   }
 
   .shadow-glow {
@@ -147,7 +155,16 @@
 
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-hero);
+    background-image: var(--gradient-accent);
+  }
+
+  /* Sprinklr-style section */
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .container-narrow {
+    @apply max-w-5xl mx-auto;
   }
 }
 

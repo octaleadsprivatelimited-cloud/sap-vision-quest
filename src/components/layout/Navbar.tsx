@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Search, User, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
@@ -12,13 +12,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const navItems = [
-  { label: "Home", href: "/", hasDropdown: false },
   { label: "Products", href: "/products", hasDropdown: false },
   { label: "Solutions", href: "/solutions", hasDropdown: false },
   { label: "Industries", href: "/industries", hasDropdown: false },
   { label: "Resources", href: "/resources", hasDropdown: true },
   { label: "Partners", href: "/partners", hasDropdown: false },
-  { label: "Who We Are", href: "/about", hasDropdown: false },
+  { label: "Company", href: "/about", hasDropdown: false },
 ];
 
 const resourcesMenuItems = [
@@ -35,28 +34,44 @@ const resourcesMenuItems = [
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "#") return false;
     return location.pathname === href;
   };
 
+  const isHomePage = location.pathname === "/";
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Top accent bar */}
-      <div className="h-1 gradient-hero" />
-      
-      <nav className="bg-background/95 backdrop-blur-md">
+      <nav className={cn(
+        "transition-all duration-300",
+        isScrolled || !isHomePage
+          ? "bg-background/95 backdrop-blur-md shadow-sm" 
+          : "bg-transparent"
+      )}>
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
               <img 
                 src="/logo.png" 
                 alt="Sangronyx Logo" 
-                className="h-14 w-auto border-0 outline-none"
+                className={cn(
+                  "h-10 lg:h-12 w-auto transition-all",
+                  !isScrolled && isHomePage && "brightness-0 invert"
+                )}
               />
             </Link>
 
@@ -70,7 +85,9 @@ export const Navbar = () => {
                         <button
                           className={cn(
                             "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                            isActive(item.href)
+                            !isScrolled && isHomePage
+                              ? "text-white/90 hover:text-white hover:bg-white/10"
+                              : isActive(item.href)
                               ? "text-primary bg-primary/5"
                               : "text-foreground hover:text-primary hover:bg-primary/5"
                           )}
@@ -79,7 +96,7 @@ export const Navbar = () => {
                           <ChevronDown className="w-4 h-4" />
                         </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="start" className="w-56">
+                      <DropdownMenuContent align="start" className="w-56 bg-background border border-border">
                         {resourcesMenuItems.map((menuItem) => (
                           <DropdownMenuItem
                             key={menuItem.label}
@@ -101,7 +118,9 @@ export const Navbar = () => {
                     to={item.href}
                     className={cn(
                       "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                      isActive(item.href)
+                      !isScrolled && isHomePage
+                        ? "text-white/90 hover:text-white hover:bg-white/10"
+                        : isActive(item.href)
                         ? "text-primary bg-primary/5"
                         : "text-foreground hover:text-primary hover:bg-primary/5"
                     )}
@@ -114,14 +133,53 @@ export const Navbar = () => {
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-3">
-              <Button variant="ghost" size="icon">
-                <Search className="w-5 h-5" />
+              <Link to="/contact">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  className={cn(
+                    "font-medium",
+                    !isScrolled && isHomePage
+                      ? "text-white/90 hover:text-white hover:bg-white/10"
+                      : "text-foreground hover:text-primary"
+                  )}
+                >
+                  Demo
+                </Button>
+              </Link>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                className={cn(
+                  "font-medium",
+                  !isScrolled && isHomePage
+                    ? "text-white/90 hover:text-white hover:bg-white/10"
+                    : "text-foreground hover:text-primary"
+                )}
+              >
+                Login
               </Button>
-              <Button variant="ghost" size="icon">
-                <User className="w-5 h-5" />
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className={cn(
+                  !isScrolled && isHomePage
+                    ? "text-white/90 hover:text-white hover:bg-white/10"
+                    : "text-foreground hover:text-primary"
+                )}
+              >
+                <Globe className="w-5 h-5" />
               </Button>
               <Link to="/contact">
-                <Button variant="cta" size="sm">
+                <Button 
+                  size="sm"
+                  className={cn(
+                    "font-semibold",
+                    !isScrolled && isHomePage
+                      ? "bg-white text-primary hover:bg-white/90"
+                      : "bg-primary text-primary-foreground hover:bg-primary/90"
+                  )}
+                >
                   Contact Us
                 </Button>
               </Link>
@@ -131,7 +189,10 @@ export const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden"
+              className={cn(
+                "lg:hidden",
+                !isScrolled && isHomePage && "text-white hover:bg-white/10"
+              )}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -164,8 +225,8 @@ export const Navbar = () => {
                             className={cn(
                               "block w-full px-6 py-2 text-left rounded-md transition-colors text-sm",
                               isActive(menuItem.href)
-                                ? "text-primary bg-primary/5 font-medium"
-                                : "text-muted-foreground hover:bg-primary/5"
+                                ? "text-accent bg-accent/5 font-medium"
+                                : "text-muted-foreground hover:bg-accent/5"
                             )}
                           >
                             {menuItem.label}
@@ -182,17 +243,22 @@ export const Navbar = () => {
                       className={cn(
                         "block w-full px-4 py-3 text-left rounded-md transition-colors",
                         isActive(item.href)
-                          ? "text-primary bg-primary/5 font-medium"
-                          : "text-foreground hover:bg-primary/5"
+                          ? "text-accent bg-accent/5 font-medium"
+                          : "text-foreground hover:bg-accent/5"
                       )}
                     >
                       {item.label}
                     </Link>
                   );
                 })}
-                <div className="pt-4 border-t border-border">
+                <div className="pt-4 border-t border-border space-y-2">
                   <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button variant="cta" className="w-full">
+                    <Button variant="outline" className="w-full">
+                      Demo
+                    </Button>
+                  </Link>
+                  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button className="w-full bg-primary text-primary-foreground">
                       Contact Us
                     </Button>
                   </Link>
