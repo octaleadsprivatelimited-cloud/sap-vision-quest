@@ -3,7 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, HelpCircle, ChevronDown, Search } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import {
@@ -103,6 +103,8 @@ const FAQ = () => {
       <PageHero 
         title="Frequently Asked Questions"
         description="Find answers to common questions about our services and how we can help you."
+        label="FAQ"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "FAQ" }]}
       />
 
       {/* Search Bar */}

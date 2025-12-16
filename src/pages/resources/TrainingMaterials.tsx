@@ -79,6 +79,8 @@ const TrainingMaterials = () => {
       <PageHero 
         title="Training Materials"
         description="Training materials and resources for SAP modules and IT services."
+        label="LEARNING RESOURCES"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Training Materials" }]}
       />
 
       {/* Search Bar */}

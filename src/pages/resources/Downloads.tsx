@@ -65,6 +65,8 @@ const Downloads = () => {
       <PageHero 
         title="Downloads"
         description="Download resources, templates, and tools to support your projects."
+        label="DOWNLOAD CENTER"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Downloads" }]}
       />
 
       {/* Search Bar */}

@@ -47,6 +47,9 @@ const Partners = () => {
       <PageHero 
         title="Partners"
         description="Join our partner network and grow your business with Sangronyx."
+        label="PARTNER PROGRAM"
+        breadcrumbs={[{ label: "Partners" }]}
+        ctaText="Become a Partner"
       />
 
       {/* Partner Benefits */}
