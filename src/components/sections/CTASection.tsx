@@ -26,20 +26,20 @@ export const CTASection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary via-sap-blue to-accent p-8 md:p-12 lg:p-16 shadow-2xl"
+          className="relative overflow-hidden rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl"
+          style={{
+            backgroundImage: `url('/cta-background.png')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
         >
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-sap-blue/70 to-accent/60" />
+          
           {/* Background decorations */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-          
-          {/* Animated grid pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
-                                linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
-              backgroundSize: '50px 50px'
-            }} />
-          </div>
           
           <div className="relative z-10">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
