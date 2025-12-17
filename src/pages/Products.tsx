@@ -13,7 +13,7 @@ const products = [
     title: "SAP S/4HANA Implementation",
     subtitle: "Complete Implementation",
     description: "Complete SAP S/4HANA implementation with cloud, on-prem, or hybrid setup. Business process mapping, module configuration, UAT & go-live support, and post-go-live AMC.",
-    features: ["Cloud / On-prem / Hybrid", "Business Process Mapping", "Module Configuration", "UAT & Go-live Support", "Real-time Reporting", "Post-go-live AMC"],
+    features: ["Implementation Strategy & Planning", "Business Process & Blueprinting", "Fit–Gap Analysis", "Functional Implementation", "Technical & System Configuration", "SAP BTP Integration", "Data Migration & Management", "Custom Development & Enhancements", "Analytics & Reporting", "Testing & Quality Assurance", "Security & Authorizations", "Training & Change Management", "Go-Live & Hypercare", "Post Go-Live Support (AMC)", "SAP Analytics Cloud Integration"],
     color: "bg-accent",
     image: "/sap-s4hana-implementation.webp",
   },
