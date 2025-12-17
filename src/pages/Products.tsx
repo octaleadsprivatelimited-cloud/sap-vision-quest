@@ -33,7 +33,7 @@ const products = [
     title: "SAP Corporate Training",
     subtitle: "Comprehensive Training",
     description: "Functional and technical SAP training for all major modules. Online, offline, and corporate batches with hands-on project experience and certification assistance.",
-    features: ["Functional + Technical", "Online / Offline / Corporate", "Hands-on Experience", "Certification Assistance"],
+    features: ["Training Delivery Models", "Functional SAP Training", "Technical SAP Training", "S/4HANA-Focused Programs", "Hands-On & Practical Learning", "Corporate Enablement Programs", "Certification & Career Support", "Evaluation & Reporting", "Industry-Specific Training", "Post-Training Support"],
     color: "bg-sprinklr-purple",
     image: "/sap-corporate-training.avif",
   },
