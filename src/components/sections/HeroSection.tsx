@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
@@ -83,22 +81,6 @@ export const HeroSection = () => {
 
       <div className="container mx-auto px-4 lg:px-8 relative z-20">
         <div className="flex items-center justify-center min-h-[calc(100vh-5rem)]">
-          {/* Centered Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center py-12 lg:py-0"
-          >
-            <Link to="/contact">
-              <Button 
-                size="lg" 
-                className="bg-[#0096d6] hover:bg-[#0077b3] text-white text-base px-8 py-6 h-auto font-semibold rounded-md"
-              >
-                Contact us
-              </Button>
-            </Link>
-          </motion.div>
         </div>
       </div>
 
