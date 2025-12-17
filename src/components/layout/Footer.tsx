@@ -23,6 +23,8 @@ const footerLinks = {
     ],
   },
   Company: [
+    { label: "Who We Are", href: "/who-we-are" },
+    { label: "What We Do", href: "/what-we-do" },
     { label: "Our Story", href: "/about" },
     { label: "Partners", href: "/partners" },
     { label: "Careers", href: "/careers" },
