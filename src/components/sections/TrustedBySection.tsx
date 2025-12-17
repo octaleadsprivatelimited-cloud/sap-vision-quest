@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 
 const logos = [
-  "WebMD",
-  "Acer",
-  "Infosys",
-  "Prada",
-  "Superdry",
-  "LATAM",
-  "LG",
-  "Ford",
-  "Puma",
-  "Diageo",
+  { name: "WebMD", logo: null },
+  { name: "Acer", logo: null },
+  { name: "Infosys", logo: "/logos/infosys.png" },
+  { name: "Prada", logo: null },
+  { name: "Superdry", logo: null },
+  { name: "LATAM", logo: null },
+  { name: "LG", logo: null },
+  { name: "Ford", logo: null },
+  { name: "Puma", logo: "/logos/puma.png" },
+  { name: "Diageo", logo: null },
 ];
 
 export const TrustedBySection = () => {
@@ -35,26 +35,42 @@ export const TrustedBySection = () => {
           className="flex"
         >
           <div className="flex animate-scroll gap-8 md:gap-12 lg:gap-16">
-            {duplicatedLogos.map((logo, index) => (
+            {duplicatedLogos.map((item, index) => (
               <div
-                key={`${logo}-${index}`}
-                className="flex-shrink-0 px-4 md:px-6 py-2"
+                key={`${item.name}-${index}`}
+                className="flex-shrink-0 px-4 md:px-6 py-2 flex items-center justify-center"
               >
-                <span className="text-base md:text-lg lg:text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300 whitespace-nowrap">
-                  {logo}
-                </span>
+                {item.logo ? (
+                  <img
+                    src={item.logo}
+                    alt={`${item.name} logo`}
+                    className="h-8 md:h-10 lg:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  />
+                ) : (
+                  <span className="text-base md:text-lg lg:text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300 whitespace-nowrap">
+                    {item.name}
+                  </span>
+                )}
               </div>
             ))}
           </div>
           <div className="flex animate-scroll gap-8 md:gap-12 lg:gap-16">
-            {duplicatedLogos.map((logo, index) => (
+            {duplicatedLogos.map((item, index) => (
               <div
-                key={`${logo}-duplicate-${index}`}
-                className="flex-shrink-0 px-4 md:px-6 py-2"
+                key={`${item.name}-duplicate-${index}`}
+                className="flex-shrink-0 px-4 md:px-6 py-2 flex items-center justify-center"
               >
-                <span className="text-base md:text-lg lg:text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300 whitespace-nowrap">
-                  {logo}
-                </span>
+                {item.logo ? (
+                  <img
+                    src={item.logo}
+                    alt={`${item.name} logo`}
+                    className="h-8 md:h-10 lg:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  />
+                ) : (
+                  <span className="text-base md:text-lg lg:text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300 whitespace-nowrap">
+                    {item.name}
+                  </span>
+                )}
               </div>
             ))}
           </div>
