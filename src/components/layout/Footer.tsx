@@ -66,7 +66,7 @@ export const Footer = () => {
       }}
     >
       {/* Background overlay for text readability */}
-      <div className="absolute inset-0 bg-[#0a1628]/80"></div>
+      <div className="absolute inset-0 bg-[#0a1628]/40"></div>
 
       <div className="container mx-auto px-4 lg:px-8 py-10 md:py-14 relative z-10">
         {/* Main footer content */}
