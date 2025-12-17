@@ -23,7 +23,7 @@ const products = [
     title: "SAP ECC to S/4HANA Migration",
     subtitle: "Seamless Migration",
     description: "Seamless migration from ECC to S/4HANA with readiness check, database migration, custom code adaptation, master data cleansing, and end-user training.",
-    features: ["Readiness Check", "Database Migration", "Custom Code Adaptation", "Master Data Cleansing", "End-user Training"],
+    features: ["Training Delivery Models", "Functional SAP Training", "Technical SAP Training", "S/4HANA-Focused Programs", "Hands-On & Practical Learning", "Corporate Enablement Programs", "Certification & Career Support", "Evaluation & Reporting", "Industry-Specific Training", "Post-Training Support"],
     color: "bg-sprinklr-green",
     image: "/sap-ecc-to-s4hana-migration.avif",
   },
