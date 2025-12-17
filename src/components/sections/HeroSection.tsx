@@ -3,20 +3,20 @@ import { CheckSquare, Sparkles, Share2, FileEdit, LayoutGrid } from "lucide-reac
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-screen overflow-hidden pt-20 bg-gradient-to-br from-[#7c3aed] via-[#8b5cf6] to-[#a78bfa]">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full blur-3xl" 
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.1, 0.05] }}
-          transition={{ duration: 10, repeat: Infinity, delay: 2 }}
-          className="absolute bottom-40 right-20 w-48 h-48 bg-white rounded-full blur-3xl" 
-        />
-      </div>
+    <section className="relative min-h-screen overflow-hidden pt-20">
+      {/* Video background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/hero-video-bg.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Overlay for better contrast */}
+      <div className="absolute inset-0 bg-black/30" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-20">
         <div className="flex items-center justify-center min-h-[calc(100vh-5rem)] py-12">
