@@ -56,24 +56,19 @@ const legalLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="relative bg-[#0a1628] text-white font-['Inter',sans-serif]">
-      {/* Curved top edge */}
-      <div className="absolute top-0 left-0 right-0 h-16 md:h-24 -translate-y-full overflow-hidden">
-        <svg
-          viewBox="0 0 1440 96"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="absolute bottom-0 w-full h-full"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0 96L1440 96L1440 32C1440 32 1280 0 720 0C160 0 0 32 0 32L0 96Z"
-            fill="#0a1628"
-          />
-        </svg>
-      </div>
+    <footer 
+      className="relative text-white font-['Inter',sans-serif]"
+      style={{
+        backgroundImage: 'url(/footer-bg.jpeg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      {/* Background overlay for text readability */}
+      <div className="absolute inset-0 bg-[#0a1628]/80"></div>
 
-      <div className="container mx-auto px-4 lg:px-8 py-10 md:py-14">
+      <div className="container mx-auto px-4 lg:px-8 py-10 md:py-14 relative z-10">
         {/* Main footer content */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-5 mb-10">
           {/* Contact CTA Column */}
