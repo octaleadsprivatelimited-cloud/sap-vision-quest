@@ -121,7 +121,9 @@ export const Navbar = () => {
                           "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
                           isActive(item.href) || isResourcesOpen
                             ? "text-primary bg-primary/5"
-                            : "text-gray-700 hover:text-primary hover:bg-primary/5"
+                            : isHomePage && !isScrolled
+                              ? "text-white hover:text-white/80"
+                              : "text-gray-700 hover:text-primary hover:bg-primary/5"
                         )}
                       >
                         {item.label}
@@ -141,7 +143,9 @@ export const Navbar = () => {
                       "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
                       isActive(item.href)
                         ? "text-primary bg-primary/5"
-                        : "text-gray-700 hover:text-primary hover:bg-primary/5"
+                        : isHomePage && !isScrolled
+                          ? "text-white hover:text-white/80"
+                          : "text-gray-700 hover:text-primary hover:bg-primary/5"
                     )}
                   >
                     {item.label}
@@ -155,7 +159,11 @@ export const Navbar = () => {
               <Button 
                 variant="ghost" 
                 size="icon"
-                className="text-gray-700 hover:text-primary"
+                className={cn(
+                  isHomePage && !isScrolled
+                    ? "text-white hover:text-white/80"
+                    : "text-gray-700 hover:text-primary"
+                )}
               >
                 <Globe className="w-5 h-5" />
               </Button>
@@ -173,7 +181,10 @@ export const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden text-gray-700"
+              className={cn(
+                "lg:hidden",
+                isHomePage && !isScrolled ? "text-white" : "text-gray-700"
+              )}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
