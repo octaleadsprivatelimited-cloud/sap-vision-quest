@@ -11,7 +11,8 @@ const navItems = [
   { label: "Industries", href: "/industries", hasDropdown: false },
   { label: "Resources", href: "/resources", hasDropdown: true },
   { label: "Partners", href: "/partners", hasDropdown: false },
-  { label: "Company", href: "/about", hasDropdown: false },
+  { label: "Who We Are", href: "/who-we-are", hasDropdown: false },
+  { label: "What We Do", href: "/what-we-do", hasDropdown: false },
 ];
 
 const resourceCategories = [
