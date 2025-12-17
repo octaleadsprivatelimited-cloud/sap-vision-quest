@@ -14,6 +14,7 @@ const sapOfferings = [
     features: ["Cloud / On-prem / Hybrid setup", "Business process mapping", "Module configuration", "UAT & go-live support"],
     color: "bg-accent",
     image: "/sap-s4hana-implementation.webp",
+    href: "/services/sap-s4hana-implementation",
   },
   {
     icon: Database,
@@ -22,6 +23,7 @@ const sapOfferings = [
     features: ["Readiness check & assessment", "Database migration", "Custom code adaptation", "End-user training"],
     color: "bg-sprinklr-green",
     image: "/sap-ecc-to-s4hana-migration.avif",
+    href: "/services/sap-ecc-migration",
   },
   {
     icon: Settings,
@@ -29,6 +31,7 @@ const sapOfferings = [
     description: "Comprehensive SAP licensing solutions optimized for your business needs and budget.",
     features: ["SAP S/4HANA subscription", "Module-based licensing", "Cost optimisation guidance"],
     color: "bg-sprinklr-purple",
+    href: "/services/sap-licensing",
   },
   {
     icon: Settings,
@@ -36,6 +39,7 @@ const sapOfferings = [
     description: "Expert implementation of all major SAP functional and technical modules.",
     features: ["Functional: PP, MM, SD, FI, CO, QM, PM", "Technical: ABAP, BASIS, HANA, Fiori"],
     color: "bg-accent",
+    href: "/services/sap-module-implementations",
   },
   {
     icon: Code,
@@ -43,6 +47,7 @@ const sapOfferings = [
     description: "Tailored SAP development and enhancements to meet your unique business requirements.",
     features: ["ABAP reports & enhancements", "SmartForms / Adobe Forms", "Fiori UI apps"],
     color: "bg-sprinklr-green",
+    href: "/services/sap-custom-development",
   },
   {
     icon: GraduationCap,
@@ -51,6 +56,7 @@ const sapOfferings = [
     features: ["Functional + Technical training", "Online / Offline / Corporate batches", "Certification assistance"],
     color: "bg-sprinklr-purple",
     image: "/sap-corporate-training.avif",
+    href: "/services/sap-corporate-training",
   },
   {
     icon: Wrench,
@@ -58,6 +64,7 @@ const sapOfferings = [
     description: "24/7 ongoing SAP support and maintenance for uninterrupted business operations.",
     features: ["Functional & technical support", "Performance tuning", "Monthly health checks"],
     color: "bg-accent",
+    href: "/services/sap-support-maintenance",
   },
   {
     icon: Link2,
@@ -65,6 +72,7 @@ const sapOfferings = [
     description: "Seamless SAP integration with your existing enterprise systems and applications.",
     features: ["SAP ↔ ERP integration", "API / Middleware integrations", "Third-party app connections"],
     color: "bg-sprinklr-green",
+    href: "/services/sap-integration-services",
   },
 ];
 
@@ -137,22 +145,29 @@ const Solutions = () => {
                   transition={{ delay: index * 0.05, duration: 0.5 }}
                   className="group"
                 >
-                  <div className={`h-full bg-card rounded-lg border border-border/50 ${borderColor} border-l-4 p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300`}>
-                    {/* Large Icon */}
-                    <div className="mb-5">
-                      <offering.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground" strokeWidth={1.5} />
+                  <Link to={offering.href}>
+                    <div className={`h-full bg-card rounded-lg border border-border/50 ${borderColor} border-l-4 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-accent/50 transition-all duration-300 cursor-pointer`}>
+                      {/* Large Icon */}
+                      <div className="mb-5">
+                        <offering.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground group-hover:text-accent transition-colors" strokeWidth={1.5} />
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 className="text-base md:text-lg font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+                        {offering.title}
+                      </h3>
+                      
+                      {/* Description */}
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {offering.description}
+                      </p>
+                      
+                      {/* Learn More */}
+                      <div className="mt-4 flex items-center text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        Learn more <ArrowRight className="w-4 h-4 ml-1" />
+                      </div>
                     </div>
-                    
-                    {/* Title */}
-                    <h3 className="text-base md:text-lg font-bold text-foreground mb-2">
-                      {offering.title}
-                    </h3>
-                    
-                    {/* Description */}
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {offering.description}
-                    </p>
-                  </div>
+                  </Link>
                 </motion.div>
               );
             })}
