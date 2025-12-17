@@ -28,10 +28,6 @@ export const HeroSection = () => {
               solutions
             </h1>
 
-            <p className="text-base md:text-lg text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Unify your business processes and empower teams by implementing world-class SAP solutions. 
-              Elevate every operation with expert guidance to deliver extraordinary experiences that build lasting success.
-            </p>
 
             <Link to="/contact">
               <Button 
