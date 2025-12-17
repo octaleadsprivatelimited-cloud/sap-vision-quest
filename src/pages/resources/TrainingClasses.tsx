@@ -157,7 +157,7 @@ const TrainingClasses = () => {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/contact">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 group">
+                <Button size="lg" className="bg-accent text-white hover:bg-accent/90 group">
                   Request Custom Training
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
