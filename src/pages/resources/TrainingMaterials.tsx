@@ -157,7 +157,7 @@ const TrainingMaterials = () => {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/contact">
-                <Button variant="cta" size="lg" className="group">
+                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 group">
                   Contact Training Team
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
