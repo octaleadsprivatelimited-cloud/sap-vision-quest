@@ -8,31 +8,37 @@ const solutions = [
     icon: Cloud,
     title: "SAP S/4HANA Implementation",
     description: "Complete SAP S/4HANA implementation with cloud, on-prem, or hybrid setup. Business process mapping, module configuration, and go-live support.",
+    link: "/services/sap-s4hana-implementation",
   },
   {
     icon: Database,
     title: "SAP ECC to S/4HANA Migration",
     description: "Seamless migration from ECC to S/4HANA with readiness check, database migration, custom code adaptation, and end-user training.",
+    link: "/services/sap-ecc-migration",
   },
   {
     icon: Users,
     title: "SAP Corporate Training",
     description: "Functional and technical SAP training for all major modules. Online, offline, and corporate batches with certification assistance.",
+    link: "/services/sap-corporate-training",
   },
   {
     icon: Shield,
     title: "SAP Support & Maintenance",
     description: "24/7 SAP support and maintenance (AMC) with functional & technical support, performance tuning, and monthly health checks.",
+    link: "/services/sap-support-maintenance",
   },
   {
     icon: Zap,
     title: "SAP Custom Development",
     description: "ABAP reports, SmartForms, Fiori UI apps, custom workflows, Z-programs, and dashboards tailored to your business needs.",
+    link: "/services/sap-custom-development",
   },
   {
     icon: Link2,
     title: "SAP Integration Services",
     description: "SAP integration with ERP, CRM, HRMS, web portals, third-party apps, and API/middleware integrations.",
+    link: "/services/sap-integration-services",
   },
 ];
 
@@ -73,22 +79,30 @@ export const SolutionsSection = () => {
                 transition={{ delay: index * 0.05, duration: 0.5 }}
                 className="group"
               >
-                <div className={`h-full bg-card rounded-lg border border-border/50 ${borderColor} border-l-4 p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300`}>
-                  {/* Large Icon */}
-                  <div className="mb-5">
-                    <solution.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground" strokeWidth={1.5} />
+                <Link to={solution.link} className="block h-full">
+                  <div className={`h-full bg-card rounded-lg border border-border/50 ${borderColor} border-l-4 p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300`}>
+                    {/* Large Icon */}
+                    <div className="mb-5">
+                      <solution.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground" strokeWidth={1.5} />
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-base md:text-lg font-bold text-foreground mb-2">
+                      {solution.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                      {solution.description}
+                    </p>
+
+                    {/* Learn More Link */}
+                    <span className="inline-flex items-center text-sm font-medium text-primary group-hover:text-primary/80">
+                      Learn more
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </div>
-                  
-                  {/* Title */}
-                  <h3 className="text-base md:text-lg font-bold text-foreground mb-2">
-                    {solution.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {solution.description}
-                  </p>
-                </div>
+                </Link>
               </motion.div>
             );
           })}
