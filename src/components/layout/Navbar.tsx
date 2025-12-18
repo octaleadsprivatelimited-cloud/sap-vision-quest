@@ -17,31 +17,57 @@ const navItems = [
 
 const resourceCategories = [
   {
-    id: "learn",
-    label: "Learn",
+    id: "human",
+    label: "Human Resources",
     items: [
-      { label: "Documentation", href: "/resources/documentation" },
-      { label: "Video Tutorials", href: "/resources/video-tutorials" },
-      { label: "Whitepapers", href: "/resources/whitepapers" },
-      { label: "Training Materials", href: "/resources/training-materials" },
-      { label: "Training Classes", href: "/resources/training-classes" },
+      { label: "Employees and Management Team", href: "/resources/employees" },
+      { label: "Skills, Expertise, and Experience", href: "/resources/skills" },
+      { label: "Leadership and Organizational Structure", href: "/resources/leadership" },
     ],
   },
   {
-    id: "services",
-    label: "Services",
+    id: "physical",
+    label: "Physical Resources",
     items: [
-      { label: "Developer Resources", href: "/resources/developer-resources" },
-      { label: "Downloads", href: "/resources/downloads" },
-      { label: "FAQ", href: "/resources/faq" },
+      { label: "Office Buildings, Factories, Warehouses", href: "/resources/facilities" },
+      { label: "Machinery, Equipment, Tools", href: "/resources/equipment" },
+      { label: "Vehicles and Other Infrastructure", href: "/resources/infrastructure" },
     ],
   },
   {
-    id: "support",
-    label: "Support",
+    id: "financial",
+    label: "Financial Resources",
     items: [
-      { label: "All Resources", href: "/resources" },
-      { label: "Contact Support", href: "/contact" },
+      { label: "Capital and Investments", href: "/resources/capital" },
+      { label: "Revenue and Profits", href: "/resources/revenue" },
+      { label: "Loans, Funding, and Cash Flow", href: "/resources/funding" },
+    ],
+  },
+  {
+    id: "technological",
+    label: "Technological Resources",
+    items: [
+      { label: "Software and IT Systems", href: "/resources/software" },
+      { label: "Patents, Licenses, and Proprietary Technology", href: "/resources/patents" },
+      { label: "Research and Development Capabilities", href: "/resources/research" },
+    ],
+  },
+  {
+    id: "intellectual",
+    label: "Intellectual Resources",
+    items: [
+      { label: "Brand Name and Reputation", href: "/resources/brand" },
+      { label: "Trademarks and Copyrights", href: "/resources/trademarks" },
+      { label: "Business Processes and Know-how", href: "/resources/processes" },
+    ],
+  },
+  {
+    id: "operational",
+    label: "Operational Resources",
+    items: [
+      { label: "Supply Chain and Vendor Network", href: "/resources/supply-chain" },
+      { label: "Distribution Channels", href: "/resources/distribution" },
+      { label: "Quality Control Systems", href: "/resources/quality-control" },
     ],
   },
 ];
@@ -65,7 +91,7 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("learn");
+  const [activeCategory, setActiveCategory] = useState("human");
   const location = useLocation();
   const navigate = useNavigate();
 
