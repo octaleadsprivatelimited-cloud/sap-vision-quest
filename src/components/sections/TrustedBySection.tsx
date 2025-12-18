@@ -1,16 +1,15 @@
 import { motion } from "framer-motion";
 
 const logos = [
-  { name: "Acer", logo: "/logos/acer.webp" },
-  { name: "Ford", logo: "/logos/ford.png" },
-  { name: "Gulf", logo: "/logos/gulf.png" },
-  { name: "Walmart", logo: "/logos/walmart.webp" },
-  { name: "Superdry", logo: "/logos/superdry.png" },
-  { name: "LG", logo: "/logos/lg.webp" },
-  { name: "L&T", logo: "/logos/lnt.png" },
-  { name: "Mercedes-Benz", logo: "/logos/mercedes.png" },
-  { name: "Samsung", logo: "/logos/samsung.webp" },
-  { name: "Shell", logo: "/logos/shell.svg" },
+  { name: "Ford", logo: "/logos/ford.png", large: false },
+  { name: "Gulf", logo: "/logos/gulf.png", large: false },
+  { name: "Walmart", logo: "/logos/walmart.webp", large: true },
+  { name: "Superdry", logo: "/logos/superdry.png", large: false },
+  { name: "LG", logo: "/logos/lg.webp", large: false },
+  { name: "L&T", logo: "/logos/lnt.png", large: false },
+  { name: "Mercedes-Benz", logo: "/logos/mercedes.png", large: false },
+  { name: "Samsung", logo: "/logos/samsung.webp", large: true },
+  { name: "Shell", logo: "/logos/shell.svg", large: false },
 ];
 
 export const TrustedBySection = () => {
@@ -44,7 +43,7 @@ export const TrustedBySection = () => {
                   <img
                     src={item.logo}
                     alt={`${item.name} logo`}
-                    className="h-8 md:h-10 lg:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                    className={`${item.large ? 'h-12 md:h-16 lg:h-20' : 'h-8 md:h-10 lg:h-12'} w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300`}
                   />
                 ) : (
                   <span className="text-base md:text-lg lg:text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300 whitespace-nowrap">
@@ -64,7 +63,7 @@ export const TrustedBySection = () => {
                   <img
                     src={item.logo}
                     alt={`${item.name} logo`}
-                    className="h-8 md:h-10 lg:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                    className={`${item.large ? 'h-12 md:h-16 lg:h-20' : 'h-8 md:h-10 lg:h-12'} w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300`}
                   />
                 ) : (
                   <span className="text-base md:text-lg lg:text-xl font-bold text-gray-400 hover:text-gray-600 transition-colors duration-300 whitespace-nowrap">
