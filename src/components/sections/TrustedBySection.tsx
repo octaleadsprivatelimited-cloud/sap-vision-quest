@@ -13,8 +13,6 @@ const logos = [
 ];
 
 export const TrustedBySection = () => {
-  // Duplicate logos for seamless infinite scroll
-  const duplicatedLogos = [...logos, ...logos];
 
   return (
     <section className="py-8 md:py-12 bg-white overflow-hidden">
@@ -34,7 +32,7 @@ export const TrustedBySection = () => {
           className="flex"
         >
           <div className="flex animate-scroll gap-8 md:gap-12 lg:gap-16">
-            {duplicatedLogos.map((item, index) => (
+          {logos.map((item, index) => (
               <div
                 key={`${item.name}-${index}`}
                 className="flex-shrink-0 px-4 md:px-6 py-2 flex items-center justify-center"
@@ -54,7 +52,7 @@ export const TrustedBySection = () => {
             ))}
           </div>
           <div className="flex animate-scroll gap-8 md:gap-12 lg:gap-16">
-            {duplicatedLogos.map((item, index) => (
+            {logos.map((item, index) => (
               <div
                 key={`${item.name}-duplicate-${index}`}
                 className="flex-shrink-0 px-4 md:px-6 py-2 flex items-center justify-center"
