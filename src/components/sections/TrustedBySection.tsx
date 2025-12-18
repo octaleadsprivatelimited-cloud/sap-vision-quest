@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 
 const logos = [
-  { name: "WebMD", logo: null },
-  { name: "Acer", logo: null },
-  { name: "Infosys", logo: "/logos/infosys.png" },
-  { name: "Prada", logo: null },
-  { name: "Superdry", logo: null },
-  { name: "LATAM", logo: null },
-  { name: "LG", logo: null },
-  { name: "Ford", logo: null },
-  { name: "Puma", logo: "/logos/puma.png" },
-  { name: "Diageo", logo: null },
+  { name: "Acer", logo: "/logos/acer.webp" },
+  { name: "Ford", logo: "/logos/ford.png" },
+  { name: "Gulf", logo: "/logos/gulf.png" },
+  { name: "Walmart", logo: "/logos/walmart.webp" },
+  { name: "Superdry", logo: "/logos/superdry.png" },
+  { name: "LG", logo: "/logos/lg.webp" },
+  { name: "L&T", logo: "/logos/lnt.png" },
+  { name: "Mercedes-Benz", logo: "/logos/mercedes.png" },
+  { name: "Samsung", logo: "/logos/samsung.webp" },
+  { name: "Shell", logo: "/logos/shell.svg" },
 ];
 
 export const TrustedBySection = () => {
