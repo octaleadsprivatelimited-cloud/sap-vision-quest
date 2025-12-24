@@ -475,12 +475,12 @@ export const Navbar = () => {
                       href="https://maps.google.com/?q=Sangronyx+Technologies" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#0096d6] transition-colors"
+                      className="flex items-start gap-3 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
                     >
-                      <div className="w-8 h-8 rounded-full bg-[#0096d6]/10 flex items-center justify-center">
-                        <MapPin className="w-4 h-4 text-[#0096d6]" />
+                      <div className="w-7 h-7 rounded-full bg-[#0096d6]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <MapPin className="w-3.5 h-3.5 text-[#0096d6]" />
                       </div>
-                      <span>View on Google Maps</span>
+                      <span className="leading-relaxed">Sangronyx Technologies, Business Park, Hyderabad, India</span>
                     </a>
                     <a 
                       href="https://wa.me/919876543210" 
