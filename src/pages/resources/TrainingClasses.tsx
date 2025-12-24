@@ -3,7 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle, BookOpen, Code, Cloud } from "lucide-react";
+import { ArrowRight, BookOpen, Code, Cloud } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const functionalModules = [
@@ -34,108 +34,80 @@ const cloudModules = [
 ];
 
 const TrainingClasses = () => {
+  const modules = [
+    {
+      icon: BookOpen,
+      title: "Functional Modules",
+      description: "Master SAP functional modules for business processes and operations.",
+      color: "bg-blue-500",
+      items: functionalModules,
+    },
+    {
+      icon: Code,
+      title: "Technical Modules",
+      description: "Learn SAP technical development and system administration.",
+      color: "bg-orange-500",
+      items: technicalModules,
+    },
+    {
+      icon: Cloud,
+      title: "SAP Cloud & New Technology",
+      description: "Explore modern SAP cloud platforms and emerging technologies.",
+      color: "bg-green-500",
+      items: cloudModules,
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
       <PageHero 
         title="SAP Training Classes"
-        description="Join our comprehensive SAP training classes led by industry experts. Master functional, technical, and cloud modules."
-        label="CERTIFICATION PROGRAMS"
+        description="Join our comprehensive SAP training classes led by industry experts."
+        label="TRAINING & PLACEMENTS"
         breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Training Classes" }]}
+        ctaText="Enroll Now"
+        ctaHref="/contact"
       />
 
-      {/* SAP Modules */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                SAP Training Modules
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                We offer comprehensive training programs across all major SAP modules
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Functional Modules */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {modules.map((module, index) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                key={module.title}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="bg-card rounded-xl p-6 border border-border"
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="group"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <BookOpen className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground">Functional Modules</h3>
+                <div className="mb-6">
+                  <module.icon className="w-16 h-16 text-foreground" strokeWidth={1.5} />
                 </div>
-                <ul className="space-y-3">
-                  {functionalModules.map((module, index) => (
-                    <li key={index} className="flex items-start gap-3 text-foreground">
-                      <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                      <span>{module}</span>
-                    </li>
+                <h3 className="text-xl font-bold text-foreground mb-1">
+                  {module.title}
+                </h3>
+                <div className={`w-12 h-1 ${module.color} mb-4`}></div>
+                <p className="text-muted-foreground mb-4 leading-relaxed">{module.description}</p>
+                <ul className="space-y-2 mb-6">
+                  {module.items.slice(0, 5).map((item, i) => (
+                    <li key={i} className="text-sm text-muted-foreground">• {item}</li>
                   ))}
+                  {module.items.length > 5 && (
+                    <li className="text-sm text-muted-foreground">• +{module.items.length - 5} more modules</li>
+                  )}
                 </ul>
+                <Link 
+                  to="/contact"
+                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
+                >
+                  Explore {module.title.split(' ')[0]}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </motion.div>
-
-              {/* Technical Modules */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="bg-card rounded-xl p-6 border border-border"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
-                    <Code className="w-6 h-6 text-accent" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground">Technical Modules</h3>
-                </div>
-                <ul className="space-y-3">
-                  {technicalModules.map((module, index) => (
-                    <li key={index} className="flex items-start gap-3 text-foreground">
-                      <CheckCircle className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
-                      <span>{module}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {/* Cloud & New Technology */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="bg-card rounded-xl p-6 border border-border"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-sprinklr-green/10 flex items-center justify-center">
-                    <Cloud className="w-6 h-6 text-sprinklr-green" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground">SAP Cloud & New Technology</h3>
-                </div>
-                <ul className="space-y-3">
-                  {cloudModules.map((module, index) => (
-                    <li key={index} className="flex items-start gap-3 text-foreground">
-                      <CheckCircle className="w-5 h-5 text-sprinklr-green mt-0.5 flex-shrink-0" />
-                      <span>{module}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -153,7 +125,7 @@ const TrainingClasses = () => {
               Need Custom Training for Your Team?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              We offer customized corporate training programs tailored to your organization's specific needs. Contact us to discuss your training requirements.
+              We offer customized corporate training programs tailored to your organization's specific needs.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/contact">
