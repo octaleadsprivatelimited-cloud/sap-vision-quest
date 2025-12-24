@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, ChevronRight, Globe, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, Globe, ArrowRight, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -327,9 +327,28 @@ export const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-white border-t border-gray-100 max-h-[80vh] overflow-y-auto"
+              className="lg:hidden fixed inset-0 top-0 bg-white z-50 overflow-y-auto"
             >
-              <div className="container mx-auto px-4 py-4 space-y-1">
+              {/* Mobile Menu Header with Logo */}
+              <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between shadow-sm">
+                <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+                  <img 
+                    src="/logo.png" 
+                    alt="Sangronyx Logo" 
+                    className="h-10 w-auto"
+                  />
+                </Link>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-gray-700"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <X className="w-6 h-6" />
+                </Button>
+              </div>
+
+              <div className="px-4 py-4 space-y-1">
                 {navItems.map((item) => {
                   if (item.hasDropdown) {
                     return (
@@ -430,7 +449,54 @@ export const Navbar = () => {
                     </Link>
                   );
                 })}
-                <div className="pt-4 border-t border-gray-100 space-y-2">
+                {/* Contact Info Box */}
+                <div className="mt-6 p-4 bg-gradient-to-br from-[#0096d6]/10 to-[#0096d6]/5 rounded-xl border border-[#0096d6]/20">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Get in Touch</h3>
+                  <div className="space-y-3">
+                    <a 
+                      href="tel:+919876543210" 
+                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#0096d6] transition-colors"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-[#0096d6]/10 flex items-center justify-center">
+                        <Phone className="w-4 h-4 text-[#0096d6]" />
+                      </div>
+                      <span>+91 98765 43210</span>
+                    </a>
+                    <a 
+                      href="mailto:info@sangronyx.com" 
+                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#0096d6] transition-colors"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-[#0096d6]/10 flex items-center justify-center">
+                        <Mail className="w-4 h-4 text-[#0096d6]" />
+                      </div>
+                      <span>info@sangronyx.com</span>
+                    </a>
+                    <a 
+                      href="https://maps.google.com/?q=Sangronyx+Technologies" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#0096d6] transition-colors"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-[#0096d6]/10 flex items-center justify-center">
+                        <MapPin className="w-4 h-4 text-[#0096d6]" />
+                      </div>
+                      <span>View on Google Maps</span>
+                    </a>
+                    <a 
+                      href="https://wa.me/919876543210" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#25D366] transition-colors"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-[#25D366]/10 flex items-center justify-center">
+                        <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                      </div>
+                      <span>Chat on WhatsApp</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="pt-4 space-y-2">
                   <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button className="w-full bg-[#0096d6] text-white hover:bg-[#0077b3]">
                       Contact Us
