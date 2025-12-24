@@ -12,42 +12,49 @@ const industries = [
     title: "Manufacturing",
     description: "SAP solutions for manufacturing to optimize production, quality, and supply chain operations.",
     color: "bg-accent",
+    slug: "manufacturing",
   },
   {
     icon: ShoppingCart,
     title: "Retail & FMCG",
     description: "SAP solutions for retail and FMCG to deliver seamless experiences and optimize inventory.",
     color: "bg-sprinklr-green",
+    slug: "retail",
   },
   {
     icon: Heart,
     title: "Pharma",
     description: "SAP solutions for pharmaceutical companies to ensure compliance and streamline operations.",
     color: "bg-sprinklr-purple",
+    slug: "pharma",
   },
   {
     icon: Truck,
     title: "Logistics & Supply Chain",
     description: "SAP solutions for logistics to build resilient supply chains with end-to-end visibility.",
     color: "bg-accent",
+    slug: "logistics",
   },
   {
     icon: GraduationCap,
     title: "Education",
     description: "SAP solutions for educational institutions to transform operations and student experiences.",
     color: "bg-sprinklr-green",
+    slug: "education",
   },
   {
     icon: Banknote,
     title: "Finance",
     description: "SAP solutions for finance to modernize operations with real-time insights and compliance.",
     color: "bg-sprinklr-purple",
+    slug: "finance",
   },
   {
     icon: Building2,
     title: "Small & Mid Businesses",
     description: "Tailored SAP solutions for small and mid-sized businesses to drive growth and efficiency.",
     color: "bg-accent",
+    slug: "small-business",
   },
 ];
 
@@ -109,7 +116,7 @@ const Industries = () => {
                   
                   {/* Explore Link */}
                   <Link 
-                    to="/solutions" 
+                    to={`/industries/${industry.slug}`} 
                     className="inline-flex items-center gap-2 text-foreground font-semibold text-sm group-hover:gap-3 transition-all duration-300"
                   >
                     <ArrowRight className="w-4 h-4" />
