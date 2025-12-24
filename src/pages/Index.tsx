@@ -3,7 +3,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { SolutionsSection } from "@/components/sections/SolutionsSection";
 import { TrustedBySection } from "@/components/sections/TrustedBySection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
-import { StatsSection } from "@/components/sections/StatsSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
 import { TrainingHighlightsSection } from "@/components/sections/TrainingHighlightsSection";
 import { CTASection } from "@/components/sections/CTASection";
@@ -18,7 +17,6 @@ const Index = () => {
         <TrustedBySection />
         <TrainingHighlightsSection />
         <FeaturesSection />
-        <StatsSection />
         <WhyChooseUsSection />
         <SolutionsSection />
         <CTASection />
