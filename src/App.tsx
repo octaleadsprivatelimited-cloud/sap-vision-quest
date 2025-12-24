@@ -60,6 +60,14 @@ import SapCustomDevelopment from "./pages/services/SapCustomDevelopment";
 import SapCorporateTraining from "./pages/services/SapCorporateTraining";
 import SapSupportMaintenance from "./pages/services/SapSupportMaintenance";
 import SapIntegrationServices from "./pages/services/SapIntegrationServices";
+// Industry Pages
+import Manufacturing from "./pages/industries/Manufacturing";
+import Retail from "./pages/industries/Retail";
+import Pharma from "./pages/industries/Pharma";
+import Logistics from "./pages/industries/Logistics";
+import Education from "./pages/industries/Education";
+import Finance from "./pages/industries/Finance";
+import SmallBusiness from "./pages/industries/SmallBusiness";
 
 const queryClient = new QueryClient();
 
@@ -75,6 +83,13 @@ const App = () => (
           <Route path="/products" element={<Products />} />
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/industries" element={<Industries />} />
+          <Route path="/industries/manufacturing" element={<Manufacturing />} />
+          <Route path="/industries/retail" element={<Retail />} />
+          <Route path="/industries/pharma" element={<Pharma />} />
+          <Route path="/industries/logistics" element={<Logistics />} />
+          <Route path="/industries/education" element={<Education />} />
+          <Route path="/industries/finance" element={<Finance />} />
+          <Route path="/industries/small-business" element={<SmallBusiness />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/documentation" element={<Documentation />} />
           <Route path="/resources/video-tutorials" element={<VideoTutorials />} />
