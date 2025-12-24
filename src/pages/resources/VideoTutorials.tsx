@@ -56,60 +56,71 @@ const VideoTutorials = () => {
       />
 
       {/* Video Categories */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="space-y-16">
-            {tutorialCategories.map((category, categoryIndex) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: categoryIndex * 0.1 }}
-              >
-                <div className="mb-8">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                    {category.title}
-                  </h2>
-                </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {category.videos.map((video, videoIndex) => (
-                    <motion.div
-                      key={video.title}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: (categoryIndex * 0.1) + (videoIndex * 0.05) }}
-                      className="group bg-card rounded-xl overflow-hidden border border-border hover:border-primary/30 hover:shadow-card-hover transition-all duration-300 cursor-pointer"
-                    >
-                      <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-sap-blue/20 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-primary-foreground/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <Play className="w-8 h-8 text-primary ml-1" />
-                        </div>
-                        <div className="absolute top-2 right-2 bg-background/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-medium">
-                          {video.duration}
-                        </div>
-                      </div>
-                      <div className="p-4">
-                        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                          {video.title}
-                        </h3>
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-1">
-                            <User className="w-4 h-4" />
-                            {video.views} views
+            {tutorialCategories.map((category, categoryIndex) => {
+              const colors = ["bg-accent", "bg-sprinklr-green", "bg-sprinklr-purple", "bg-accent"];
+              return (
+                <motion.div
+                  key={category.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: categoryIndex * 0.1 }}
+                >
+                  <div className="mb-8">
+                    <div className="mb-4">
+                      <Video className="w-12 h-12 text-foreground" strokeWidth={1.5} />
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                      {category.title}
+                    </h2>
+                    <div className={`w-16 h-1 rounded-full ${colors[categoryIndex % colors.length]}`}></div>
+                  </div>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {category.videos.map((video, videoIndex) => (
+                      <motion.div
+                        key={video.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: (categoryIndex * 0.1) + (videoIndex * 0.05) }}
+                        className="group cursor-pointer"
+                      >
+                        <div className="flex flex-col">
+                          {/* Icon */}
+                          <div className="mb-4">
+                            <Play className="w-10 h-10 text-foreground" strokeWidth={1.5} />
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            {video.duration}
+                          
+                          {/* Title with colored underline */}
+                          <div className="mb-3">
+                            <h3 className="text-base font-bold text-foreground mb-2">
+                              {video.title}
+                            </h3>
+                            <div className={`w-10 h-1 rounded-full ${colors[videoIndex % colors.length]}`}></div>
                           </div>
+                          
+                          {/* Info */}
+                          <p className="text-muted-foreground text-sm mb-4">
+                            {video.duration} • {video.views} views
+                          </p>
+                          
+                          {/* Watch Link */}
+                          <button 
+                            className="inline-flex items-center gap-2 text-foreground font-semibold text-sm group-hover:gap-3 transition-all duration-300"
+                          >
+                            <ArrowRight className="w-4 h-4" />
+                            <span>Watch Video</span>
+                          </button>
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
