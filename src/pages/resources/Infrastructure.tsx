@@ -2,14 +2,15 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { Truck, Globe, Wifi, Shield } from "lucide-react";
+import { Truck, Globe, Wifi, Shield, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Infrastructure = () => {
   const infrastructure = [
-    { icon: Truck, title: "Vehicle Fleet", description: "Dedicated vehicles for on-site support and equipment transportation." },
-    { icon: Globe, title: "Network Infrastructure", description: "Robust network connectivity enabling seamless global operations." },
-    { icon: Wifi, title: "Communication Systems", description: "Advanced communication infrastructure for remote and hybrid work." },
-    { icon: Shield, title: "Security Infrastructure", description: "Physical and digital security systems protecting our assets." },
+    { icon: Truck, title: "Vehicle Fleet", description: "Dedicated vehicles for on-site support and equipment transportation.", color: "bg-blue-500", link: "/contact" },
+    { icon: Globe, title: "Network Infrastructure", description: "Robust network connectivity enabling seamless global operations.", color: "bg-orange-500", link: "/contact" },
+    { icon: Wifi, title: "Communication Systems", description: "Advanced communication infrastructure for remote and hybrid work.", color: "bg-green-500", link: "/contact" },
+    { icon: Shield, title: "Security Infrastructure", description: "Physical and digital security systems protecting our assets.", color: "bg-purple-500", link: "/contact" },
   ];
 
   return (
@@ -26,7 +27,7 @@ const Infrastructure = () => {
 
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {infrastructure.map((item, index) => (
               <motion.div
                 key={item.title}
@@ -34,11 +35,23 @@ const Infrastructure = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-card rounded-2xl p-8 border border-border hover:border-accent/50 transition-all"
+                className="group"
               >
-                <item.icon className="w-12 h-12 text-accent mb-4" />
-                <h3 className="text-xl font-bold text-foreground mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
+                <div className="mb-6">
+                  <item.icon className="w-16 h-16 text-foreground" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-1">
+                  {item.title}
+                </h3>
+                <div className={`w-12 h-1 ${item.color} mb-4`}></div>
+                <p className="text-muted-foreground mb-6 leading-relaxed">{item.description}</p>
+                <Link 
+                  to={item.link}
+                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
+                >
+                  Explore {item.title.split(' ')[0]}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </motion.div>
             ))}
           </div>

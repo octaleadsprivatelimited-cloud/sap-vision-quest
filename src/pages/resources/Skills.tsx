@@ -2,14 +2,15 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { Brain, Code, Database, Settings } from "lucide-react";
+import { Brain, Code, Database, Settings, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Skills = () => {
   const skills = [
-    { icon: Brain, title: "Technical Expertise", description: "Deep knowledge in SAP modules, cloud technologies, and enterprise solutions." },
-    { icon: Code, title: "Development Skills", description: "Proficiency in ABAP, Fiori, UI5, and modern programming languages." },
-    { icon: Database, title: "Data Management", description: "Expert capabilities in database administration and data analytics." },
-    { icon: Settings, title: "System Integration", description: "Experience integrating complex enterprise systems and workflows." },
+    { icon: Brain, title: "Technical Expertise", description: "Deep knowledge in SAP modules, cloud technologies, and enterprise solutions.", color: "bg-blue-500", link: "/solutions" },
+    { icon: Code, title: "Development Skills", description: "Proficiency in ABAP, Fiori, UI5, and modern programming languages.", color: "bg-orange-500", link: "/solutions" },
+    { icon: Database, title: "Data Management", description: "Expert capabilities in database administration and data analytics.", color: "bg-green-500", link: "/solutions" },
+    { icon: Settings, title: "System Integration", description: "Experience integrating complex enterprise systems and workflows.", color: "bg-purple-500", link: "/solutions" },
   ];
 
   return (
@@ -26,7 +27,7 @@ const Skills = () => {
 
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {skills.map((skill, index) => (
               <motion.div
                 key={skill.title}
@@ -34,11 +35,23 @@ const Skills = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-card rounded-2xl p-8 border border-border hover:border-accent/50 transition-all"
+                className="group"
               >
-                <skill.icon className="w-12 h-12 text-accent mb-4" />
-                <h3 className="text-xl font-bold text-foreground mb-2">{skill.title}</h3>
-                <p className="text-muted-foreground">{skill.description}</p>
+                <div className="mb-6">
+                  <skill.icon className="w-16 h-16 text-foreground" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-1">
+                  {skill.title}
+                </h3>
+                <div className={`w-12 h-1 ${skill.color} mb-4`}></div>
+                <p className="text-muted-foreground mb-6 leading-relaxed">{skill.description}</p>
+                <Link 
+                  to={skill.link}
+                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
+                >
+                  Explore {skill.title.split(' ')[0]}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </motion.div>
             ))}
           </div>
