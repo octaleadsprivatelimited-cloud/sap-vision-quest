@@ -71,53 +71,71 @@ const Whitepapers = () => {
       />
 
       {/* Whitepapers List */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-6">
-            {whitepapers.map((paper, index) => (
-              <motion.div
-                key={paper.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-card-hover transition-all duration-300"
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-sap-light-purple flex items-center justify-center flex-shrink-0">
-                    <FileText className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
+              In-depth Research & Insights
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
+            {whitepapers.map((paper, index) => {
+              const colors = ["bg-accent", "bg-sprinklr-green", "bg-sprinklr-purple"];
+              return (
+                <motion.div
+                  key={paper.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group"
+                >
+                  <div className="flex flex-col">
+                    {/* Icon */}
+                    <div className="mb-6">
+                      <FileText className="w-12 h-12 text-foreground" strokeWidth={1.5} />
+                    </div>
+                    
+                    {/* Title with colored underline */}
+                    <div className="mb-4">
+                      <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                         {paper.category}
                       </span>
+                      <h3 className="text-lg font-bold text-foreground mt-1 mb-2">
+                        {paper.title}
+                      </h3>
+                      <div className={`w-12 h-1 rounded-full ${colors[index % colors.length]}`}></div>
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                      {paper.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-4">
+                    
+                    {/* Description */}
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4 min-h-[60px]">
                       {paper.description}
                     </p>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {new Date(paper.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <User className="w-4 h-4" />
-                        {paper.author}
-                      </div>
-                    </div>
-                    <Button variant="outline" size="sm" className="group">
-                      <Download className="w-4 h-4 mr-2" />
-                      Download PDF
-                      <ExternalLink className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </Button>
+
+                    {/* Meta */}
+                    <p className="text-muted-foreground text-xs mb-4">
+                      {new Date(paper.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} • {paper.author}
+                    </p>
+                    
+                    {/* Download Link */}
+                    <a 
+                      href={paper.downloadLink}
+                      className="inline-flex items-center gap-2 text-foreground font-semibold text-sm group-hover:gap-3 transition-all duration-300"
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                      <span>Download PDF</span>
+                    </a>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

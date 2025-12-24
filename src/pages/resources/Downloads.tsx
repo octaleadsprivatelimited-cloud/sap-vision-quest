@@ -88,58 +88,71 @@ const Downloads = () => {
       </section>
 
       {/* Download Categories */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="space-y-12">
-            {filteredCategories.map((category, categoryIndex) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: categoryIndex * 0.1 }}
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-lg bg-sap-light-purple flex items-center justify-center">
-                    <category.icon className="w-5 h-5 text-primary" />
+          <div className="space-y-16">
+            {filteredCategories.map((category, categoryIndex) => {
+              const colors = ["bg-accent", "bg-sprinklr-green", "bg-sprinklr-purple", "bg-accent"];
+              return (
+                <motion.div
+                  key={category.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: categoryIndex * 0.1 }}
+                >
+                  <div className="mb-8">
+                    <div className="mb-4">
+                      <category.icon className="w-12 h-12 text-foreground" strokeWidth={1.5} />
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                      {category.title}
+                    </h2>
+                    <div className={`w-16 h-1 rounded-full ${colors[categoryIndex % colors.length]}`}></div>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-                    {category.title}
-                  </h2>
-                </div>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {category.items.map((item, itemIndex) => (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: (categoryIndex * 0.1) + (itemIndex * 0.05) }}
-                      className="group bg-card rounded-xl p-6 border border-border hover:border-primary/30 hover:shadow-card-hover transition-all duration-300"
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                            {item.name}
-                          </h3>
-                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                            <span>{item.type}</span>
-                            <span>•</span>
-                            <span>{item.size}</span>
-                            <span>•</span>
-                            <span>{item.downloads} downloads</span>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {category.items.map((item, itemIndex) => (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: (categoryIndex * 0.1) + (itemIndex * 0.05) }}
+                        className="group"
+                      >
+                        <div className="flex flex-col">
+                          {/* Icon */}
+                          <div className="mb-4">
+                            <Download className="w-10 h-10 text-foreground" strokeWidth={1.5} />
                           </div>
+                          
+                          {/* Title with colored underline */}
+                          <div className="mb-3">
+                            <h3 className="text-base font-bold text-foreground mb-2">
+                              {item.name}
+                            </h3>
+                            <div className={`w-10 h-1 rounded-full ${colors[itemIndex % colors.length]}`}></div>
+                          </div>
+                          
+                          {/* Info */}
+                          <p className="text-muted-foreground text-sm mb-4">
+                            {item.type} • {item.size} • {item.downloads} downloads
+                          </p>
+                          
+                          {/* Download Link */}
+                          <button 
+                            className="inline-flex items-center gap-2 text-foreground font-semibold text-sm group-hover:gap-3 transition-all duration-300"
+                          >
+                            <ArrowRight className="w-4 h-4" />
+                            <span>Download File</span>
+                          </button>
                         </div>
-                        <Button variant="outline" size="sm" className="group/btn">
-                          <Download className="w-4 h-4 mr-2" />
-                          Download
-                        </Button>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
