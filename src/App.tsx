@@ -41,6 +41,9 @@ import Processes from "./pages/resources/Processes";
 import SupplyChain from "./pages/resources/SupplyChain";
 import Distribution from "./pages/resources/Distribution";
 import QualityControl from "./pages/resources/QualityControl";
+// Training & Placements
+import Training from "./pages/resources/Training";
+import Placements from "./pages/resources/Placements";
 
 import Partners from "./pages/Partners";
 import About from "./pages/About";
@@ -105,6 +108,9 @@ const App = () => (
           <Route path="/resources/supply-chain" element={<SupplyChain />} />
           <Route path="/resources/distribution" element={<Distribution />} />
           <Route path="/resources/quality-control" element={<QualityControl />} />
+          {/* Training & Placements */}
+          <Route path="/resources/training" element={<Training />} />
+          <Route path="/resources/placements" element={<Placements />} />
           
           <Route path="/services/sap-s4hana-implementation" element={<SapS4HanaImplementation />} />
           <Route path="/services/sap-ecc-migration" element={<SapEccMigration />} />
