@@ -70,6 +70,14 @@ const resourceCategories = [
       { label: "Quality Control Systems", href: "/resources/quality-control" },
     ],
   },
+  {
+    id: "training",
+    label: "Training & Placements",
+    items: [
+      { label: "Training Programs", href: "/resources/training" },
+      { label: "Placement Assistance", href: "/resources/placements" },
+    ],
+  },
 ];
 
 const spotlightItems = [
@@ -92,6 +100,8 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("human");
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
+  const [mobileExpandedCategory, setMobileExpandedCategory] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -317,31 +327,90 @@ export const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-white border-t border-gray-100"
+              className="lg:hidden bg-white border-t border-gray-100 max-h-[80vh] overflow-y-auto"
             >
-              <div className="container mx-auto px-4 py-4 space-y-2">
+              <div className="container mx-auto px-4 py-4 space-y-1">
                 {navItems.map((item) => {
                   if (item.hasDropdown) {
                     return (
-                      <div key={item.label} className="space-y-2">
-                        <div className="px-4 py-2 text-sm font-semibold text-gray-900">
+                      <div key={item.label}>
+                        <button
+                          onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
+                          className={cn(
+                            "flex items-center justify-between w-full px-4 py-3 text-left rounded-md transition-colors",
+                            mobileResourcesOpen
+                              ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
+                              : "text-gray-900 hover:bg-gray-50"
+                          )}
+                        >
                           {item.label}
-                        </div>
-                        {resourceCategories.flatMap((cat) => cat.items).map((menuItem) => (
-                          <Link
-                            key={menuItem.label}
-                            to={menuItem.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className={cn(
-                              "block w-full px-6 py-2 text-left rounded-md transition-colors text-sm",
-                              isActive(menuItem.href)
-                                ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
-                                : "text-gray-600 hover:bg-gray-50"
-                            )}
-                          >
-                            {menuItem.label}
-                          </Link>
-                        ))}
+                          <ChevronDown className={cn(
+                            "w-4 h-4 transition-transform",
+                            mobileResourcesOpen && "rotate-180"
+                          )} />
+                        </button>
+                        <AnimatePresence>
+                          {mobileResourcesOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              className="pl-4 space-y-1"
+                            >
+                              {resourceCategories.map((category) => (
+                                <div key={category.id}>
+                                  <button
+                                    onClick={() => setMobileExpandedCategory(
+                                      mobileExpandedCategory === category.id ? null : category.id
+                                    )}
+                                    className={cn(
+                                      "flex items-center justify-between w-full px-4 py-2 text-left text-sm rounded-md transition-colors",
+                                      mobileExpandedCategory === category.id
+                                        ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
+                                        : "text-gray-700 hover:bg-gray-50"
+                                    )}
+                                  >
+                                    {category.label}
+                                    <ChevronRight className={cn(
+                                      "w-4 h-4 transition-transform",
+                                      mobileExpandedCategory === category.id && "rotate-90"
+                                    )} />
+                                  </button>
+                                  <AnimatePresence>
+                                    {mobileExpandedCategory === category.id && (
+                                      <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        className="pl-4 space-y-1"
+                                      >
+                                        {category.items.map((menuItem) => (
+                                          <Link
+                                            key={menuItem.label}
+                                            to={menuItem.href}
+                                            onClick={() => {
+                                              setIsMobileMenuOpen(false);
+                                              setMobileResourcesOpen(false);
+                                              setMobileExpandedCategory(null);
+                                            }}
+                                            className={cn(
+                                              "block w-full px-4 py-2 text-left rounded-md transition-colors text-sm",
+                                              isActive(menuItem.href)
+                                                ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
+                                                : "text-gray-600 hover:bg-gray-50"
+                                            )}
+                                          >
+                                            {menuItem.label}
+                                          </Link>
+                                        ))}
+                                      </motion.div>
+                                    )}
+                                  </AnimatePresence>
+                                </div>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                     );
                   }
