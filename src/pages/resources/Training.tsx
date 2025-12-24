@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { GraduationCap, Users, BookOpen, Award, Clock, Target, CheckCircle, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { TrainingContactPopup } from "@/components/TrainingContactPopup";
 
 const trainingPrograms = [
   {
@@ -38,9 +40,20 @@ const benefits = [
 ];
 
 const Training = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  useEffect(() => {
+    // Show popup when page loads
+    const timer = setTimeout(() => {
+      setIsPopupOpen(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <TrainingContactPopup open={isPopupOpen} onOpenChange={setIsPopupOpen} />
       
       <PageHero
         title="Training Programs"

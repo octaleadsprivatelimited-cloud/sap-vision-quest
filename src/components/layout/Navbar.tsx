@@ -10,6 +10,7 @@ const navItems = [
   { label: "Solutions", href: "/solutions", hasDropdown: false },
   { label: "Industries", href: "/industries", hasDropdown: false },
   { label: "Resources", href: "/resources", hasDropdown: true },
+  { label: "Training", href: "/resources/training", hasDropdown: false },
   { label: "Partners", href: "/partners", hasDropdown: false },
   { label: "Who We Are", href: "/who-we-are", hasDropdown: false },
   { label: "What We Do", href: "/what-we-do", hasDropdown: false },
