@@ -157,10 +157,10 @@ export const Navbar = () => {
                         className={cn(
                           "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
                           isActive(item.href) || isResourcesOpen
-                            ? "text-primary bg-primary/5"
+                            ? "text-[#0096d6] bg-[#0096d6]/10"
                             : isHomePage && !isScrolled
                               ? "text-white hover:text-white/80"
-                              : "text-gray-700 hover:text-primary hover:bg-primary/5"
+                              : "text-gray-700 hover:text-[#0096d6] hover:bg-[#0096d6]/5"
                         )}
                       >
                         {item.label}
