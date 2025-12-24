@@ -44,8 +44,21 @@ const trainingFeatures = [
 
 export const TrainingHighlightsSection = () => {
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-background">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url('/sap-training-background.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-foreground/90 z-0" />
+      
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,10 +70,10 @@ export const TrainingHighlightsSection = () => {
           <span className="inline-block text-sm font-semibold text-accent uppercase tracking-wider mb-4">
             SAP Training & Development
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-            Launch Your <span className="text-primary">SAP Career</span> with Expert Training
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Launch Your <span className="text-accent">SAP Career</span> with Expert Training
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-white/80 max-w-3xl mx-auto">
             Comprehensive SAP training programs designed for freshers and professionals. 
             Get certified, gain practical experience, and accelerate your career in the SAP ecosystem.
           </p>
@@ -75,23 +88,23 @@ export const TrainingHighlightsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group bg-card border border-border rounded-xl p-6 hover:border-primary/30 hover:shadow-xl transition-all duration-300"
+              className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 hover:bg-white/15 hover:border-white/30 transition-all duration-300"
             >
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                <feature.icon className="w-7 h-7 text-primary" />
+              <div className="w-14 h-14 rounded-xl bg-accent/20 flex items-center justify-center mb-5 group-hover:bg-accent/30 transition-colors">
+                <feature.icon className="w-7 h-7 text-accent" />
               </div>
               
-              <h3 className="text-xl font-bold text-foreground mb-3">
+              <h3 className="text-xl font-bold text-white mb-3">
                 {feature.title}
               </h3>
               
-              <p className="text-muted-foreground text-sm leading-relaxed mb-5">
+              <p className="text-white/70 text-sm leading-relaxed mb-5">
                 {feature.description}
               </p>
               
               <Link 
                 to={feature.link}
-                className="inline-flex items-center text-primary font-semibold text-sm hover:text-primary/80 transition-colors group/link"
+                className="inline-flex items-center text-accent font-semibold text-sm hover:text-accent/80 transition-colors group/link"
               >
                 Learn More
                 <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
