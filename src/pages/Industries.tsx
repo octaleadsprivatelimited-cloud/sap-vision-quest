@@ -64,9 +64,21 @@ const Industries = () => {
       />
 
       {/* Industries Grid */}
-      <section className="py-16 md:py-24 lg:py-32 bg-background">
+      <section className="py-16 md:py-24 lg:py-32 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
+              Seven Industry Verticals. One Unified SAP Platform.
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
             {industries.map((industry, index) => (
               <motion.div
                 key={industry.title}
@@ -74,27 +86,36 @@ const Industries = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05, duration: 0.5 }}
+                className="group"
               >
-                <Link to="/solutions">
-                  <div className="group h-full bg-card rounded-2xl p-6 md:p-8 border border-border hover:border-accent/50 hover:shadow-xl transition-all duration-300">
-                    <div className={`w-14 h-14 rounded-xl ${industry.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                      <industry.icon className="w-7 h-7 text-white" />
-                    </div>
-                    
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
+                <div className="flex flex-col">
+                  {/* Icon */}
+                  <div className="mb-6">
+                    <industry.icon className="w-12 h-12 text-foreground" strokeWidth={1.5} />
+                  </div>
+                  
+                  {/* Title with colored underline */}
+                  <div className="mb-4">
+                    <h3 className="text-lg font-bold text-foreground mb-2">
                       {industry.title}
                     </h3>
-                    
-                    <p className="text-muted-foreground mb-4 leading-relaxed">
-                      {industry.description}
-                    </p>
-                    
-                    <div className="flex items-center gap-2 text-accent font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      Learn more
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                    <div className={`w-12 h-1 rounded-full ${industry.color}`}></div>
                   </div>
-                </Link>
+                  
+                  {/* Description */}
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6 min-h-[80px]">
+                    {industry.description}
+                  </p>
+                  
+                  {/* Explore Link */}
+                  <Link 
+                    to="/solutions" 
+                    className="inline-flex items-center gap-2 text-foreground font-semibold text-sm group-hover:gap-3 transition-all duration-300"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                    <span>Explore {industry.title}</span>
+                  </Link>
+                </div>
               </motion.div>
             ))}
           </div>
