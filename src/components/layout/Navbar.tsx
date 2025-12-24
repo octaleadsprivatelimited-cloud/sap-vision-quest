@@ -480,7 +480,7 @@ export const Navbar = () => {
                       <div className="w-7 h-7 rounded-full bg-[#0096d6]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <MapPin className="w-3.5 h-3.5 text-[#0096d6]" />
                       </div>
-                      <span className="leading-relaxed">Sangronyx Technologies, Business Park, Hyderabad, India</span>
+                      <span className="leading-relaxed">Sangronyx Technologies, Business Park, Hyderabad, India · <span className="text-[#0096d6] font-medium">Maps</span></span>
                     </a>
                     <a 
                       href="https://wa.me/919876543210" 
