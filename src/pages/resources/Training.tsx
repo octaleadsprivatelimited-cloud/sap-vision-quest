@@ -4,9 +4,19 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { GraduationCap, Users, BookOpen, Award, ArrowRight } from "lucide-react";
+import { 
+  GraduationCap, Users, BookOpen, Award, ArrowRight, CheckCircle2, 
+  Clock, Target, Briefcase, Monitor, MessageSquare, FileCheck, Laptop,
+  HelpCircle
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { TrainingContactPopup } from "@/components/TrainingContactPopup";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const trainingPrograms = [
   {
@@ -39,6 +49,77 @@ const trainingPrograms = [
   },
 ];
 
+const whyChooseUs = [
+  { icon: Monitor, title: "Live Interactive Sessions", description: "Real-time instructor-led training with hands-on practice on live SAP systems" },
+  { icon: Briefcase, title: "Industry-Expert Trainers", description: "Learn from certified SAP consultants with 10+ years of real-world experience" },
+  { icon: Target, title: "100% Placement Assistance", description: "Dedicated placement support with resume building, mock interviews, and job referrals" },
+  { icon: Clock, title: "Flexible Timings", description: "Weekend and weekday batches to accommodate working professionals and students" },
+  { icon: FileCheck, title: "Real Project Experience", description: "Work on live projects and case studies from actual SAP implementations" },
+  { icon: MessageSquare, title: "Lifetime Support", description: "Access to learning materials and doubt-clearing sessions even after course completion" },
+];
+
+const trainingProcess = [
+  { step: "01", title: "Consultation", description: "Free career counseling to identify the right SAP module based on your background" },
+  { step: "02", title: "Enrollment", description: "Choose your preferred batch timing and complete the registration process" },
+  { step: "03", title: "Training", description: "Attend live sessions, complete assignments, and practice on SAP systems" },
+  { step: "04", title: "Certification", description: "Prepare for and clear official SAP certification exams with our guidance" },
+  { step: "05", title: "Placement", description: "Get placed in top companies with our dedicated placement assistance team" },
+];
+
+const curriculumHighlights = [
+  "SAP S/4HANA Overview & Navigation",
+  "Module-specific Configuration & Customization",
+  "Integration Points Between SAP Modules",
+  "Real-time Reporting & Analytics",
+  "Business Process Workflows",
+  "Data Migration & Management",
+  "Troubleshooting & Support Scenarios",
+  "SAP Fiori & User Experience",
+];
+
+const faqs = [
+  {
+    question: "What are the prerequisites for joining SAP training?",
+    answer: "No prior SAP experience is required for functional modules. A basic understanding of business processes is helpful. For technical training (ABAP, Basis), knowledge of programming concepts or database management is beneficial but not mandatory. We assess each candidate and provide foundational support as needed."
+  },
+  {
+    question: "How long does the SAP training program take?",
+    answer: "The duration varies by module. Functional modules like MM, SD, and FICO typically take 6-8 weeks. Technical modules like ABAP take 8-10 weeks. We also offer fast-track programs for candidates with prior experience. Corporate batches can be customized based on organizational requirements."
+  },
+  {
+    question: "Do you provide hands-on practice on real SAP systems?",
+    answer: "Yes, absolutely! We provide access to live SAP S/4HANA systems for hands-on practice. Each participant gets individual login credentials to practice configurations, transactions, and scenarios covered during training sessions."
+  },
+  {
+    question: "What is the SAP certification process?",
+    answer: "After completing the training, we guide you through the SAP certification process. This includes registration on SAP's certification portal, exam preparation with mock tests, and scheduling the exam at authorized Pearson VUE centers. Our trainers share tips and focus areas based on their certification experience."
+  },
+  {
+    question: "How does your placement assistance work?",
+    answer: "Our placement assistance includes resume preparation tailored for SAP roles, LinkedIn profile optimization, mock interviews with industry experts, and direct referrals to our network of 100+ hiring partners. We also share relevant job openings and help with interview scheduling until you get placed."
+  },
+  {
+    question: "Can I attend training while working full-time?",
+    answer: "Yes! We offer flexible batch timings including weekday evenings and weekend batches specifically designed for working professionals. All sessions are recorded, so you can catch up if you miss a class. We also provide additional doubt-clearing sessions as needed."
+  },
+  {
+    question: "What is the fee structure and payment options?",
+    answer: "Our fee structure varies by module and training mode (online/classroom). We offer flexible payment options including EMI facilities. Contact our counselors for detailed pricing. We also have special discounts for early enrollments, referrals, and group registrations."
+  },
+  {
+    question: "Do you offer corporate training for companies?",
+    answer: "Yes, we specialize in corporate SAP training. We customize curriculum based on your organization's SAP landscape and business processes. Training can be conducted on-site at your premises or online. We also offer train-the-trainer programs and post-training support."
+  },
+  {
+    question: "What support do I get after completing the training?",
+    answer: "We provide lifetime access to recorded sessions and learning materials. Our alumni community offers networking opportunities and knowledge sharing. You can attend doubt-clearing sessions even after course completion. We also provide support during your initial months on the job."
+  },
+  {
+    question: "Which SAP module should I choose for my career?",
+    answer: "The right module depends on your background and career goals. If you have a commerce/finance background, FICO is ideal. For supply chain, consider MM or SD. Technical roles suit candidates with programming interest (ABAP) or IT infrastructure experience (Basis). Our career counselors can help you decide based on your profile."
+  },
+];
+
 const Training = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -66,8 +147,23 @@ const Training = () => {
         ctaHref="/contact"
       />
 
+      {/* Training Programs Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Our <span className="text-accent">Training Programs</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Choose from a wide range of SAP training programs designed to launch your career
+            </p>
+          </motion.div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {trainingPrograms.map((program, index) => (
               <motion.div
@@ -99,13 +195,207 @@ const Training = () => {
         </div>
       </section>
 
+      {/* Why Choose Us Section */}
+      <section className="py-16 md:py-24 bg-secondary/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Why Choose <span className="text-accent">Our Training?</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              We go beyond traditional training to ensure your success in the SAP ecosystem
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {whyChooseUs.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="bg-card rounded-xl p-6 border border-border/50 hover:border-accent/50 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+                  <item.icon className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Training Process Section */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Your Journey to <span className="text-accent">SAP Success</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              A structured approach to transform you from a beginner to a certified SAP professional
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-5 gap-6">
+            {trainingProcess.map((item, index) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="relative text-center"
+              >
+                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl font-bold text-accent">{item.step}</span>
+                </div>
+                {index < trainingProcess.length - 1 && (
+                  <div className="hidden md:block absolute top-8 left-[60%] w-full h-0.5 bg-border" />
+                )}
+                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Curriculum Highlights Section */}
+      <section className="py-16 md:py-24 bg-secondary/30">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <Laptop className="w-10 h-10 text-accent" />
+                <span className="text-sm font-semibold text-accent uppercase tracking-wider">Curriculum</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                What You Will <span className="text-accent">Learn</span>
+              </h2>
+              <p className="text-muted-foreground mb-8 leading-relaxed">
+                Our comprehensive curriculum is designed by industry experts and aligned with SAP certification requirements. 
+                Each module covers theoretical concepts, practical exercises, and real-world scenarios to ensure job readiness.
+              </p>
+              <Link to="/resources/training-classes">
+                <Button size="lg" className="gap-2">
+                  View All Courses <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-card rounded-2xl p-8 border border-border/50">
+                <h3 className="text-xl font-bold text-foreground mb-6">Key Topics Covered</h3>
+                <div className="grid gap-4">
+                  {curriculumHighlights.map((topic, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      className="flex items-center gap-3"
+                    >
+                      <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
+                      <span className="text-foreground">{topic}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <HelpCircle className="w-8 h-8 text-accent" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Frequently Asked <span className="text-accent">Questions</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Find answers to common questions about our SAP training programs
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto"
+          >
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqs.map((faq, index) => (
+                <AccordionItem 
+                  key={index} 
+                  value={`item-${index}`}
+                  className="bg-card border border-border/50 rounded-lg px-6 data-[state=open]:border-accent/50"
+                >
+                  <AccordionTrigger className="text-left text-foreground hover:text-accent hover:no-underline py-4">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4 leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mt-10"
+          >
+            <p className="text-muted-foreground mb-4">Still have questions?</p>
+            <Link to="/contact">
+              <Button variant="outline" className="gap-2">
+                Contact Us <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16 lg:py-24 bg-primary">
         <div className="container mx-auto px-4 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground mb-4">
             Ready to Start Your SAP Journey?
           </h2>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto mb-8">
+          <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-8">
             Enroll in our training programs and take the first step towards a successful SAP career
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -116,7 +406,7 @@ const Training = () => {
               </Button>
             </Link>
             <Link to="/resources/placements">
-              <Button size="lg" variant="outline" className="font-semibold bg-transparent text-white border-white hover:bg-white hover:text-primary">
+              <Button size="lg" variant="outline" className="font-semibold bg-transparent text-primary-foreground border-primary-foreground/50 hover:bg-primary-foreground/10">
                 View Placements
               </Button>
             </Link>
