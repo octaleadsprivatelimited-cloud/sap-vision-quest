@@ -17,6 +17,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import trainingClassroomImg from "@/assets/training-classroom.jpg";
+import trainingSuccessImg from "@/assets/training-success.jpg";
+import trainingCurriculumImg from "@/assets/training-curriculum.jpg";
 
 const trainingPrograms = [
   {
@@ -52,10 +55,10 @@ const trainingPrograms = [
 const whyChooseUs = [
   { icon: Monitor, title: "Live Interactive Sessions", description: "Real-time instructor-led training with hands-on practice on live SAP systems" },
   { icon: Briefcase, title: "Industry-Expert Trainers", description: "Learn from certified SAP consultants with 10+ years of real-world experience" },
-  { icon: Target, title: "100% Placement Assistance", description: "Dedicated placement support with resume building, mock interviews, and job referrals" },
+  { icon: Target, title: "Placement Assistance", description: "Dedicated placement support with resume building, mock interviews, and job referrals" },
   { icon: Clock, title: "Flexible Timings", description: "Weekend and weekday batches to accommodate working professionals and students" },
   { icon: FileCheck, title: "Real Project Experience", description: "Work on live projects and case studies from actual SAP implementations" },
-  { icon: MessageSquare, title: "Lifetime Support", description: "Access to learning materials and doubt-clearing sessions even after course completion" },
+  { icon: MessageSquare, title: "Ongoing Support", description: "Access to learning materials and doubt-clearing sessions even after course completion" },
 ];
 
 const trainingProcess = [
@@ -150,19 +153,37 @@ const Training = () => {
       {/* Training Programs Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Our <span className="text-accent">Training Programs</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Choose from a wide range of SAP training programs designed to launch your career
-            </p>
-          </motion.div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Our <span className="text-accent">Training Programs</span>
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Choose from a wide range of SAP training programs designed to launch your career. Our expert-led courses combine theoretical knowledge with hands-on practice on live SAP systems.
+              </p>
+              <Link to="/contact">
+                <Button size="lg" className="gap-2">
+                  Enroll Now <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <img 
+                src={trainingClassroomImg} 
+                alt="SAP Training Classroom" 
+                className="rounded-2xl shadow-xl w-full"
+              />
+            </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {trainingPrograms.map((program, index) => (
@@ -236,19 +257,33 @@ const Training = () => {
       {/* Training Process Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Your Journey to <span className="text-accent">SAP Success</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              A structured approach to transform you from a beginner to a certified SAP professional
-            </p>
-          </motion.div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="order-2 lg:order-1"
+            >
+              <img 
+                src={trainingSuccessImg} 
+                alt="SAP Career Success Journey" 
+                className="rounded-2xl shadow-xl w-full max-w-md mx-auto"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="order-1 lg:order-2"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Your Journey to <span className="text-accent">SAP Success</span>
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                A structured approach to transform you from a beginner to a certified SAP professional
+              </p>
+            </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-5 gap-6">
             {trainingProcess.map((item, index) => (
@@ -305,7 +340,13 @@ const Training = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              className="space-y-6"
             >
+              <img 
+                src={trainingCurriculumImg} 
+                alt="SAP Training Curriculum" 
+                className="rounded-2xl shadow-lg w-full max-w-sm mx-auto mb-6"
+              />
               <div className="bg-card rounded-2xl p-8 border border-border/50">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Topics Covered</h3>
                 <div className="grid gap-4">
