@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Building2, TrendingUp, Package, Users, BarChart3, CreditCard, Cloud, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
-import industrySmallBusinessImg from "@/assets/industry-smallbusiness.jpg";
 
 const sapSolutions = [
   { icon: Cloud, title: "SAP Business One", desc: "Affordable, integrated ERP designed specifically for small and mid-sized businesses." },
@@ -79,11 +78,6 @@ const SmallBusiness = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <img 
-                src={industrySmallBusinessImg} 
-                alt="SAP Small Business Solutions" 
-                className="rounded-2xl shadow-xl w-full mb-6"
-              />
               <div className="bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl p-8">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Benefits</h3>
                 <div className="space-y-4">

@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Factory, Settings, BarChart3, Truck, ShieldCheck, Cog, Package, Users, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
-import industryManufacturingImg from "@/assets/industry-manufacturing.jpg";
 
 const sapSolutions = [
   { icon: Settings, title: "Production Planning (PP)", desc: "Optimize production schedules, manage work orders, and streamline shop floor operations with real-time visibility." },
@@ -79,11 +78,6 @@ const Manufacturing = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <img 
-                src={industryManufacturingImg} 
-                alt="SAP Manufacturing Solutions" 
-                className="rounded-2xl shadow-xl w-full mb-6"
-              />
               <div className="bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl p-8">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Benefits</h3>
                 <div className="space-y-4">

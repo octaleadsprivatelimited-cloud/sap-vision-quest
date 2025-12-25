@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Banknote, ShieldCheck, BarChart3, FileCheck, Globe, Clock, Calculator, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
-import industryFinanceImg from "@/assets/industry-finance.jpg";
 
 const sapSolutions = [
   { icon: Calculator, title: "Financial Accounting (FI)", desc: "Complete financial accounting with real-time reporting and compliance." },
@@ -79,11 +78,6 @@ const Finance = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <img 
-                src={industryFinanceImg} 
-                alt="SAP Finance Solutions" 
-                className="rounded-2xl shadow-xl w-full mb-6"
-              />
               <div className="bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl p-8">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Benefits</h3>
                 <div className="space-y-4">

@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, GraduationCap, Users, BookOpen, BarChart3, Calendar, CreditCard, Building, Award } from "lucide-react";
 import { Link } from "react-router-dom";
-import industryEducationImg from "@/assets/industry-education.jpg";
 
 const sapSolutions = [
   { icon: Users, title: "Student Lifecycle Management", desc: "Manage the complete student journey from admission to alumni engagement." },
@@ -79,11 +78,6 @@ const Education = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <img 
-                src={industryEducationImg} 
-                alt="SAP Education Solutions" 
-                className="rounded-2xl shadow-xl w-full mb-6"
-              />
               <div className="bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl p-8">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Benefits</h3>
                 <div className="space-y-4">

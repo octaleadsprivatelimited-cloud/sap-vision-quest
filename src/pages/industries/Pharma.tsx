@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Heart, ShieldCheck, FlaskConical, FileCheck, Package, BarChart3, Truck, ClipboardList } from "lucide-react";
 import { Link } from "react-router-dom";
-import industryPharmaImg from "@/assets/industry-pharma.jpg";
 
 const sapSolutions = [
   { icon: ShieldCheck, title: "GxP Compliance", desc: "Ensure FDA, EMA, and global regulatory compliance with validated SAP processes." },
@@ -79,11 +78,6 @@ const Pharma = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <img 
-                src={industryPharmaImg} 
-                alt="SAP Pharmaceutical Solutions" 
-                className="rounded-2xl shadow-xl w-full mb-6"
-              />
               <div className="bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl p-8">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Benefits</h3>
                 <div className="space-y-4">

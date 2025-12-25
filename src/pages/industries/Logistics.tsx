@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Truck, Package, MapPin, BarChart3, Clock, Warehouse, Ship, Route } from "lucide-react";
 import { Link } from "react-router-dom";
-import industryLogisticsImg from "@/assets/industry-logistics.jpg";
 
 const sapSolutions = [
   { icon: Warehouse, title: "Warehouse Management", desc: "Optimize warehouse operations with real-time inventory visibility and automated processes." },
@@ -79,11 +78,6 @@ const Logistics = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <img 
-                src={industryLogisticsImg} 
-                alt="SAP Logistics Solutions" 
-                className="rounded-2xl shadow-xl w-full mb-6"
-              />
               <div className="bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl p-8">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Benefits</h3>
                 <div className="space-y-4">
