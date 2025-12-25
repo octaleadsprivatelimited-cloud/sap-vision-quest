@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ShoppingCart, Package, BarChart3, Users, Store, CreditCard, Truck, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
+import industryRetailImg from "@/assets/industry-retail.jpg";
 
 const sapSolutions = [
   { icon: Store, title: "SAP Retail (IS-Retail)", desc: "End-to-end retail management including merchandise planning, pricing, and store operations." },
@@ -78,6 +79,11 @@ const Retail = () => {
               viewport={{ once: true }}
               className="relative"
             >
+              <img 
+                src={industryRetailImg} 
+                alt="SAP Retail Solutions" 
+                className="rounded-2xl shadow-xl w-full mb-6"
+              />
               <div className="bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl p-8">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Benefits</h3>
                 <div className="space-y-4">
