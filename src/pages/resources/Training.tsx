@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { TrainingContactPopup } from "@/components/TrainingContactPopup";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import {
   Accordion,
   AccordionContent,
@@ -455,6 +456,10 @@ const Training = () => {
         </div>
       </section>
 
+      <WhatsAppButton 
+        phoneNumber="919876543210" 
+        message="Hello! I'm interested in your SAP workshop programs. Please share more details."
+      />
       <Footer />
     </div>
   );

@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { CookieConsent } from "./components/CookieConsent";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import Solutions from "./pages/Solutions";
@@ -68,6 +69,11 @@ import Logistics from "./pages/industries/Logistics";
 import Education from "./pages/industries/Education";
 import Finance from "./pages/industries/Finance";
 import SmallBusiness from "./pages/industries/SmallBusiness";
+// Legal Pages
+import Privacy from "./pages/legal/Privacy";
+import Legal from "./pages/legal/Legal";
+import Cookies from "./pages/legal/Cookies";
+import Terms from "./pages/legal/Terms";
 
 const queryClient = new QueryClient();
 
@@ -141,9 +147,15 @@ const App = () => (
           <Route path="/who-we-are" element={<WhoWeAre />} />
           <Route path="/what-we-do" element={<WhatWeDo />} />
           <Route path="/contact" element={<Contact />} />
+          {/* Legal Pages */}
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/legal" element={<Legal />} />
+          <Route path="/cookies" element={<Cookies />} />
+          <Route path="/terms" element={<Terms />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <CookieConsent />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
