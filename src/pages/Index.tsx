@@ -4,7 +4,6 @@ import { SolutionsSection } from "@/components/sections/SolutionsSection";
 import { TrustedBySection } from "@/components/sections/TrustedBySection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
-import { TrainingHighlightsSection } from "@/components/sections/TrainingHighlightsSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { Footer } from "@/components/layout/Footer";
 
@@ -15,7 +14,6 @@ const Index = () => {
       <main>
         <HeroSection />
         <TrustedBySection />
-        <TrainingHighlightsSection />
         <FeaturesSection />
         <WhyChooseUsSection />
         <SolutionsSection />
