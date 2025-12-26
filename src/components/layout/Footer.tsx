@@ -48,10 +48,10 @@ const socialLinks = [
 ];
 
 const legalLinks = [
-  { label: "Privacy", href: "#" },
-  { label: "Legal", href: "#" },
-  { label: "Cookies", href: "#" },
-  { label: "Terms", href: "#" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Legal", href: "/legal" },
+  { label: "Cookies", href: "/cookies" },
+  { label: "Terms", href: "/terms" },
 ];
 
 export const Footer = () => {
@@ -237,12 +237,12 @@ export const Footer = () => {
             <div className="flex items-center gap-0 text-[11px]">
               {legalLinks.map((link, index) => (
                 <span key={link.label} className="flex items-center">
-                  <a 
-                    href={link.href} 
+                  <Link 
+                    to={link.href} 
                     className="text-white/40 hover:text-white/70 transition-colors px-2"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                   {index < legalLinks.length - 1 && (
                     <span className="text-white/25">|</span>
                   )}
