@@ -19,7 +19,7 @@ const faqCategories = [
     questions: [
       {
         question: "What services does Sangronyx offer?",
-        answer: "Sangronyx offers comprehensive IT support services, SAP training for all major modules, and custom software development including mobile apps and web applications. We provide end-to-end digital solutions to help transform your business.",
+        answer: "Sangronyx offers comprehensive IT support services, SAP workshop for all major modules, and custom software development including mobile apps and web applications. We provide end-to-end digital solutions to help transform your business.",
       },
       {
         question: "How do I get started with Sangronyx?",
@@ -49,19 +49,19 @@ const faqCategories = [
     ],
   },
   {
-    title: "SAP Training Services",
+    title: "SAP Workshop Services",
     questions: [
       {
-        question: "Which SAP modules do you provide training for?",
-        answer: "We provide corporate SAP training for all major modules including SAP FICO (Financial Accounting and Controlling), SAP MM (Materials Management), SAP SD (Sales and Distribution), SAP HCM (Human Capital Management), and more.",
+        question: "Which SAP modules do you provide workshop for?",
+        answer: "We provide corporate SAP workshop for all major modules including SAP FICO (Financial Accounting and Controlling), SAP MM (Materials Management), SAP SD (Sales and Distribution), SAP HCM (Human Capital Management), and more.",
       },
       {
-        question: "Do you offer customized SAP training programs?",
-        answer: "Yes, we offer customized SAP training programs tailored to your organization's needs. Our expert trainers work with you to develop training programs that align with your business objectives.",
+        question: "Do you offer customized SAP workshop programs?",
+        answer: "Yes, we offer customized SAP workshop programs tailored to your organization's needs. Our expert instructors work with you to develop workshop programs that align with your business objectives.",
       },
       {
-        question: "Can training be conducted on-site?",
-        answer: "Yes, we can conduct training on-site at your location or provide virtual training sessions. We work with you to determine the best delivery method for your team.",
+        question: "Can workshop be conducted on-site?",
+        answer: "Yes, we can conduct workshop on-site at your location or provide virtual workshop sessions. We work with you to determine the best delivery method for your team.",
       },
     ],
   },

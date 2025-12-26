@@ -63,10 +63,10 @@ const TrainingMaterials = () => {
       <Navbar />
       
       <PageHero 
-        title="Training Materials"
-        description="Training materials and resources for SAP modules and IT services."
-        label="TRAINING & PLACEMENTS"
-        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Training Materials" }]}
+        title="Workshop Materials"
+        description="Workshop materials and resources for SAP modules and IT services."
+        label="WORKSHOP & PLACEMENTS"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Workshop Materials" }]}
         ctaText="Access Materials"
         ctaHref="/contact"
       />
@@ -122,15 +122,15 @@ const TrainingMaterials = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Need More Training Resources?
+              Need More Workshop Resources?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Contact us to learn about our comprehensive training programs and customized materials.
+              Contact us to learn about our comprehensive workshop programs and customized materials.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/contact">
                 <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 group">
-                  Contact Training Team
+                  Contact Workshop Team
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>

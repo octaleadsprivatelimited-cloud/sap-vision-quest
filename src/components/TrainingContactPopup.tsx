@@ -103,7 +103,7 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
               <GraduationCap className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <DialogTitle className="text-xl">Get Training Details</DialogTitle>
+              <DialogTitle className="text-xl">Get Workshop Details</DialogTitle>
               <DialogDescription className="text-sm">
                 Enter your details for course information
               </DialogDescription>
@@ -119,7 +119,7 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">Thank You!</h3>
-            <p className="text-muted-foreground">We'll contact you shortly with training details.</p>
+            <p className="text-muted-foreground">We'll contact you shortly with workshop details.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
@@ -176,7 +176,7 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
             </Button>
 
             <p className="text-xs text-center text-muted-foreground">
-              By submitting, you agree to receive training information via call/SMS.
+              By submitting, you agree to receive workshop information via call/SMS.
             </p>
           </form>
         )}
