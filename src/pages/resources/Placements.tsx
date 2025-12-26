@@ -31,7 +31,7 @@ const placementFeatures = [
   {
     icon: Briefcase,
     title: "₹8 LPA Average Package",
-    description: "Competitive salary packages for our trained professionals.",
+    description: "Competitive salary packages for our workshop professionals.",
     color: "bg-purple-500",
     link: "/contact",
   },
@@ -46,7 +46,7 @@ const testimonials = [
     name: "Rahul Sharma",
     role: "SAP FICO Consultant",
     company: "Infosys",
-    testimonial: "The training was excellent and the placement support helped me land my dream job at Infosys.",
+    testimonial: "The workshop was excellent and the placement support helped me land my dream job at Infosys.",
   },
   {
     name: "Priya Patel",
@@ -69,8 +69,8 @@ const Placements = () => {
       
       <PageHero
         title="Placement Assistance"
-        description="Your gateway to a successful SAP career with 100% placement support"
-        label="TRAINING & PLACEMENTS"
+        description="Your gateway to a successful SAP career with dedicated placement support"
+        label="WORKSHOP & PLACEMENTS"
         breadcrumbs={[
           { label: "Resources", href: "/resources" },
           { label: "Placements" },
@@ -186,7 +186,7 @@ const Placements = () => {
             Ready to Launch Your SAP Career?
           </h2>
           <p className="text-white/80 text-lg max-w-2xl mx-auto mb-8">
-            Join our training program and get 100% placement assistance
+            Join our workshop program and get dedicated placement assistance
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
@@ -197,7 +197,7 @@ const Placements = () => {
             </Link>
             <Link to="/resources/training">
               <Button size="lg" variant="outline" className="font-semibold bg-transparent text-white border-white hover:bg-white hover:text-primary">
-                View Training Programs
+                View Workshop Programs
               </Button>
             </Link>
           </div>

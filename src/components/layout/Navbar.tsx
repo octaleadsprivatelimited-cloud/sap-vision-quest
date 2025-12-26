@@ -74,9 +74,9 @@ const resourceCategories = [
   },
   {
     id: "training",
-    label: "Training & Placements",
+    label: "Workshop & Placements",
     items: [
-      { label: "Training Programs", href: "/resources/training" },
+      { label: "Workshop Programs", href: "/resources/training" },
       { label: "Placement Assistance", href: "/resources/placements" },
     ],
   },

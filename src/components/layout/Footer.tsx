@@ -17,7 +17,7 @@ const footerLinks = {
       { label: "Custom Development", href: "/solutions" },
     ],
     Services: [
-      { label: "Training", href: "/solutions" },
+      { label: "Workshop", href: "/solutions" },
       { label: "Support", href: "/solutions" },
       { label: "Consulting", href: "/solutions" },
     ],
@@ -36,7 +36,7 @@ const footerLinks = {
     { label: "Whitepapers", href: "/resources/whitepapers" },
     { label: "Downloads", href: "/resources/downloads" },
     { label: "FAQ", href: "/resources/faq" },
-    { label: "Training", href: "/resources/training-classes" },
+    { label: "Workshop", href: "/resources/training-classes" },
   ],
 };
 

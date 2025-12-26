@@ -63,10 +63,10 @@ const TrainingClasses = () => {
       <Navbar />
       
       <PageHero 
-        title="SAP Training Classes"
-        description="Join our comprehensive SAP training classes led by industry experts."
-        label="TRAINING & PLACEMENTS"
-        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Training Classes" }]}
+        title="SAP Workshop Classes"
+        description="Join our comprehensive SAP workshop classes led by industry experts."
+        label="WORKSHOP & PLACEMENTS"
+        breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Workshop Classes" }]}
         ctaText="Enroll Now"
         ctaHref="/contact"
       />
@@ -122,21 +122,21 @@ const TrainingClasses = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Need Custom Training for Your Team?
+              Need Custom Workshop for Your Team?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              We offer customized corporate training programs tailored to your organization's specific needs.
+              We offer customized corporate workshop programs tailored to your organization's specific needs.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/contact">
                 <Button size="lg" className="bg-accent text-white hover:bg-accent/90 group">
-                  Request Custom Training
+                  Request Custom Workshop
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link to="/resources/training-materials">
                 <Button variant="outline" size="lg">
-                  View Training Materials
+                  View Workshop Materials
                 </Button>
               </Link>
             </div>

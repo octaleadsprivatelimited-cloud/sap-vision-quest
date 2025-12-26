@@ -21,18 +21,18 @@ import trainingClassroomImg from "@/assets/training-classroom.jpg";
 import trainingSuccessImg from "@/assets/training-success.jpg";
 import trainingCurriculumImg from "@/assets/training-curriculum.jpg";
 
-const trainingPrograms = [
+const workshopPrograms = [
   {
     icon: BookOpen,
-    title: "SAP Functional Training",
-    description: "Comprehensive training on SAP modules including MM, SD, FICO, HR, and more.",
+    title: "SAP Functional Workshop",
+    description: "Comprehensive workshop on SAP modules including MM, SD, FICO, HR, and more.",
     color: "bg-blue-500",
     link: "/resources/training-classes",
   },
   {
     icon: GraduationCap,
-    title: "SAP Technical Training",
-    description: "In-depth technical training on ABAP, Basis, HANA, and integration technologies.",
+    title: "SAP Technical Workshop",
+    description: "In-depth technical workshop on ABAP, Basis, HANA, and integration technologies.",
     color: "bg-orange-500",
     link: "/resources/training-classes",
   },
@@ -46,25 +46,25 @@ const trainingPrograms = [
   {
     icon: Users,
     title: "Corporate Batches",
-    description: "Customized training programs designed for enterprise teams and organizations.",
+    description: "Customized workshop programs designed for enterprise teams and organizations.",
     color: "bg-purple-500",
     link: "/contact",
   },
 ];
 
 const whyChooseUs = [
-  { icon: Monitor, title: "Live Interactive Sessions", description: "Real-time instructor-led training with hands-on practice on live SAP systems" },
-  { icon: Briefcase, title: "Industry-Expert Trainers", description: "Learn from certified SAP consultants with 10+ years of real-world experience" },
+  { icon: Monitor, title: "Live Interactive Sessions", description: "Real-time instructor-led workshop with hands-on practice on live SAP systems" },
+  { icon: Briefcase, title: "Industry-Expert Instructors", description: "Learn from certified SAP consultants with 10+ years of real-world experience" },
   { icon: Target, title: "Placement Assistance", description: "Dedicated placement support with resume building, mock interviews, and job referrals" },
   { icon: Clock, title: "Flexible Timings", description: "Weekend and weekday batches to accommodate working professionals and students" },
   { icon: FileCheck, title: "Real Project Experience", description: "Work on live projects and case studies from actual SAP implementations" },
   { icon: MessageSquare, title: "Ongoing Support", description: "Access to learning materials and doubt-clearing sessions even after course completion" },
 ];
 
-const trainingProcess = [
+const workshopProcess = [
   { step: "01", title: "Consultation", description: "Free career counseling to identify the right SAP module based on your background" },
   { step: "02", title: "Enrollment", description: "Choose your preferred batch timing and complete the registration process" },
-  { step: "03", title: "Training", description: "Attend live sessions, complete assignments, and practice on SAP systems" },
+  { step: "03", title: "Workshop", description: "Attend live sessions, complete assignments, and practice on SAP systems" },
   { step: "04", title: "Certification", description: "Prepare for and clear official SAP certification exams with our guidance" },
   { step: "05", title: "Placement", description: "Get placed in top companies with our dedicated placement assistance team" },
 ];
@@ -82,39 +82,39 @@ const curriculumHighlights = [
 
 const faqs = [
   {
-    question: "What are the prerequisites for joining SAP training?",
-    answer: "No prior SAP experience is required for functional modules. A basic understanding of business processes is helpful. For technical training (ABAP, Basis), knowledge of programming concepts or database management is beneficial but not mandatory. We assess each candidate and provide foundational support as needed."
+    question: "What are the prerequisites for joining SAP workshop?",
+    answer: "No prior SAP experience is required for functional modules. A basic understanding of business processes is helpful. For technical workshop (ABAP, Basis), knowledge of programming concepts or database management is beneficial but not mandatory. We assess each candidate and provide foundational support as needed."
   },
   {
-    question: "How long does the SAP training program take?",
+    question: "How long does the SAP workshop program take?",
     answer: "The duration varies by module. Functional modules like MM, SD, and FICO typically take 6-8 weeks. Technical modules like ABAP take 8-10 weeks. We also offer fast-track programs for candidates with prior experience. Corporate batches can be customized based on organizational requirements."
   },
   {
     question: "Do you provide hands-on practice on real SAP systems?",
-    answer: "Yes, absolutely! We provide access to live SAP S/4HANA systems for hands-on practice. Each participant gets individual login credentials to practice configurations, transactions, and scenarios covered during training sessions."
+    answer: "Yes, absolutely! We provide access to live SAP S/4HANA systems for hands-on practice. Each participant gets individual login credentials to practice configurations, transactions, and scenarios covered during workshop sessions."
   },
   {
     question: "What is the SAP certification process?",
-    answer: "After completing the training, we guide you through the SAP certification process. This includes registration on SAP's certification portal, exam preparation with mock tests, and scheduling the exam at authorized Pearson VUE centers. Our trainers share tips and focus areas based on their certification experience."
+    answer: "After completing the workshop, we guide you through the SAP certification process. This includes registration on SAP's certification portal, exam preparation with mock tests, and scheduling the exam at authorized Pearson VUE centers. Our instructors share tips and focus areas based on their certification experience."
   },
   {
     question: "How does your placement assistance work?",
     answer: "Our placement assistance includes resume preparation tailored for SAP roles, LinkedIn profile optimization, mock interviews with industry experts, and direct referrals to our network of 100+ hiring partners. We also share relevant job openings and help with interview scheduling until you get placed."
   },
   {
-    question: "Can I attend training while working full-time?",
+    question: "Can I attend workshop while working full-time?",
     answer: "Yes! We offer flexible batch timings including weekday evenings and weekend batches specifically designed for working professionals. All sessions are recorded, so you can catch up if you miss a class. We also provide additional doubt-clearing sessions as needed."
   },
   {
     question: "What is the fee structure and payment options?",
-    answer: "Our fee structure varies by module and training mode (online/classroom). We offer flexible payment options including EMI facilities. Contact our counselors for detailed pricing. We also have special discounts for early enrollments, referrals, and group registrations."
+    answer: "Our fee structure varies by module and workshop mode (online/classroom). We offer flexible payment options including EMI facilities. Contact our counselors for detailed pricing. We also have special discounts for early enrollments, referrals, and group registrations."
   },
   {
-    question: "Do you offer corporate training for companies?",
-    answer: "Yes, we specialize in corporate SAP training. We customize curriculum based on your organization's SAP landscape and business processes. Training can be conducted on-site at your premises or online. We also offer train-the-trainer programs and post-training support."
+    question: "Do you offer corporate workshop for companies?",
+    answer: "Yes, we specialize in corporate SAP workshop. We customize curriculum based on your organization's SAP landscape and business processes. Workshop can be conducted on-site at your premises or online. We also offer train-the-trainer programs and post-workshop support."
   },
   {
-    question: "What support do I get after completing the training?",
+    question: "What support do I get after completing the workshop?",
     answer: "We provide lifetime access to recorded sessions and learning materials. Our alumni community offers networking opportunities and knowledge sharing. You can attend doubt-clearing sessions even after course completion. We also provide support during your initial months on the job."
   },
   {
@@ -139,18 +139,18 @@ const Training = () => {
       <TrainingContactPopup open={isPopupOpen} onOpenChange={setIsPopupOpen} />
       
       <PageHero
-        title="Training Programs"
-        description="Build your SAP career with industry-leading training programs"
-        label="TRAINING & PLACEMENTS"
+        title="Workshop Programs"
+        description="Build your SAP career with industry-leading workshop programs"
+        label="WORKSHOP & PLACEMENTS"
         breadcrumbs={[
           { label: "Resources", href: "/resources" },
-          { label: "Training" },
+          { label: "Workshop" },
         ]}
         ctaText="Enroll Now"
         ctaHref="/contact"
       />
 
-      {/* Training Programs Section */}
+      {/* Workshop Programs Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
@@ -160,10 +160,10 @@ const Training = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Our <span className="text-accent">Training Programs</span>
+                Our <span className="text-accent">Workshop Programs</span>
               </h2>
               <p className="text-muted-foreground mb-6">
-                Choose from a wide range of SAP training programs designed to launch your career. Our expert-led courses combine theoretical knowledge with hands-on practice on live SAP systems.
+                Choose from a wide range of SAP workshop programs designed to launch your career. Our expert-led courses combine theoretical knowledge with hands-on practice on live SAP systems.
               </p>
               <Link to="/contact">
                 <Button size="lg" className="gap-2">
@@ -179,14 +179,14 @@ const Training = () => {
             >
               <img 
                 src={trainingClassroomImg} 
-                alt="SAP Training Classroom" 
+                alt="SAP Workshop Classroom" 
                 className="rounded-2xl shadow-xl w-full"
               />
             </motion.div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {trainingPrograms.map((program, index) => (
+            {workshopPrograms.map((program, index) => (
               <motion.div
                 key={program.title}
                 initial={{ opacity: 0, y: 30 }}
@@ -226,10 +226,10 @@ const Training = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Why Choose <span className="text-accent">Our Training?</span>
+              Why Choose <span className="text-accent">Our Workshop?</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              We go beyond traditional training to ensure your success in the SAP ecosystem
+              We go beyond traditional learning to ensure your success in the SAP ecosystem
             </p>
           </motion.div>
 
@@ -254,7 +254,7 @@ const Training = () => {
         </div>
       </section>
 
-      {/* Training Process Section */}
+      {/* Workshop Process Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
@@ -286,7 +286,7 @@ const Training = () => {
           </div>
 
           <div className="grid md:grid-cols-5 gap-6">
-            {trainingProcess.map((item, index) => (
+            {workshopProcess.map((item, index) => (
               <motion.div
                 key={item.step}
                 initial={{ opacity: 0, y: 20 }}
@@ -298,7 +298,7 @@ const Training = () => {
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-accent">{item.step}</span>
                 </div>
-                {index < trainingProcess.length - 1 && (
+                {index < workshopProcess.length - 1 && (
                   <div className="hidden md:block absolute top-8 left-[60%] w-full h-0.5 bg-border" />
                 )}
                 <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
@@ -344,7 +344,7 @@ const Training = () => {
             >
               <img 
                 src={trainingCurriculumImg} 
-                alt="SAP Training Curriculum" 
+                alt="SAP Workshop Curriculum" 
                 className="rounded-2xl shadow-lg w-full max-w-sm mx-auto mb-6"
               />
               <div className="bg-card rounded-2xl p-8 border border-border/50">
@@ -386,7 +386,7 @@ const Training = () => {
               Frequently Asked <span className="text-accent">Questions</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Find answers to common questions about our SAP training programs
+              Find answers to common questions about our SAP workshop programs
             </p>
           </motion.div>
 
@@ -437,7 +437,7 @@ const Training = () => {
             Ready to Start Your SAP Journey?
           </h2>
           <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-8">
-            Enroll in our training programs and take the first step towards a successful SAP career
+            Enroll in our workshop programs and take the first step towards a successful SAP career
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">

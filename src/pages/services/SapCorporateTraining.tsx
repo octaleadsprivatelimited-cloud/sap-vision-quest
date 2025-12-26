@@ -7,21 +7,21 @@ import { ArrowRight, GraduationCap, Users, Monitor, Building, Award, BookOpen, B
 import { Link } from "react-router-dom";
 
 const services = [
-  { icon: Monitor, title: "Training Delivery Models", desc: "Online, offline, and blended learning options" },
-  { icon: BookOpen, title: "Functional SAP Training", desc: "FI, CO, MM, SD, PP, QM, PM, WM, EWM, PS modules" },
-  { icon: GraduationCap, title: "Technical SAP Training", desc: "ABAP, BASIS, Security/GRC, PI/PO, CPI" },
-  { icon: Building, title: "S/4HANA-Focused Programs", desc: "Migration-ready training for S/4HANA" },
+  { icon: Monitor, title: "Workshop Delivery Models", desc: "Online, offline, and blended learning options" },
+  { icon: BookOpen, title: "Functional SAP Workshop", desc: "FI, CO, MM, SD, PP, QM, PM, WM, EWM, PS modules" },
+  { icon: GraduationCap, title: "Technical SAP Workshop", desc: "ABAP, BASIS, Security/GRC, PI/PO, CPI" },
+  { icon: Building, title: "S/4HANA-Focused Programs", desc: "Migration-ready workshop for S/4HANA" },
   { icon: Users, title: "Hands-On & Practical Learning", desc: "Real-world scenarios and sandbox access" },
-  { icon: Building, title: "Corporate Enablement Programs", desc: "Customized training for your teams" },
+  { icon: Building, title: "Corporate Enablement Programs", desc: "Customized workshop for your teams" },
   { icon: Award, title: "Certification & Career Support", desc: "SAP certification preparation assistance" },
   { icon: BarChart3, title: "Evaluation & Reporting", desc: "Progress tracking and assessments" },
-  { icon: Factory, title: "Industry-Specific Training", desc: "Training tailored to your industry" },
-  { icon: Headphones, title: "Post-Training Support", desc: "Ongoing support after training completion" },
+  { icon: Factory, title: "Industry-Specific Workshop", desc: "Workshop tailored to your industry" },
+  { icon: Headphones, title: "Post-Workshop Support", desc: "Ongoing support after workshop completion" },
 ];
 
 const deliveryModes = [
-  { title: "Online Training", desc: "Live virtual instructor-led sessions", icon: Monitor },
-  { title: "Classroom Training", desc: "In-person training at your location or ours", icon: Building },
+  { title: "Online Workshop", desc: "Live virtual instructor-led sessions", icon: Monitor },
+  { title: "Classroom Workshop", desc: "In-person workshop at your location or ours", icon: Building },
   { title: "Corporate Batches", desc: "Dedicated batches for your organization", icon: Users },
 ];
 
@@ -31,12 +31,12 @@ const SapCorporateTraining = () => {
       <Navbar />
       
       <PageHero 
-        title="SAP Corporate Training"
-        description="Comprehensive SAP training programs for teams of all skill levels. Empower your workforce with expert-led training."
+        title="SAP Corporate Workshop"
+        description="Comprehensive SAP workshop programs for teams of all skill levels. Empower your workforce with expert-led workshop."
         label="SAP SERVICES"
         breadcrumbs={[
           { label: "Solutions", href: "/solutions" },
-          { label: "SAP Corporate Training" }
+          { label: "SAP Corporate Workshop" }
         ]}
       />
 
@@ -53,10 +53,10 @@ const SapCorporateTraining = () => {
                 Invest in Your <span className="text-accent">Team's Growth</span>
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                A well-trained team is the foundation of successful SAP operations. Our corporate training programs are designed to equip your employees with the skills they need to maximize your SAP investment.
+                A well-equipped team is the foundation of successful SAP operations. Our corporate workshop programs are designed to equip your employees with the skills they need to maximize your SAP investment.
               </p>
               <p className="text-muted-foreground mb-8 leading-relaxed">
-                From end-users to technical teams, we offer training programs that cater to all roles and experience levels within your organization.
+                From end-users to technical teams, we offer workshop programs that cater to all roles and experience levels within your organization.
               </p>
             </motion.div>
             <motion.div
@@ -67,7 +67,7 @@ const SapCorporateTraining = () => {
             >
               <img 
                 src="/sap-corporate-training.avif" 
-                alt="SAP Corporate Training"
+                alt="SAP Corporate Workshop"
                 className="rounded-2xl shadow-2xl w-full"
               />
             </motion.div>
@@ -85,10 +85,10 @@ const SapCorporateTraining = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Training <span className="text-accent">Delivery Modes</span>
+              Workshop <span className="text-accent">Delivery Modes</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Flexible training options to suit your organization's needs
+              Flexible workshop options to suit your organization's needs
             </p>
           </motion.div>
 
@@ -121,7 +121,7 @@ const SapCorporateTraining = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Training <span className="text-accent">Services</span>
+              Workshop <span className="text-accent">Services</span>
             </h2>
           </motion.div>
 
@@ -153,15 +153,15 @@ const SapCorporateTraining = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-              Ready to Train Your Team?
+              Ready to Upskill Your Team?
             </h2>
             <p className="text-primary-foreground/70 mb-8 max-w-2xl mx-auto">
-              Contact us to discuss your training requirements and get a customized program.
+              Contact us to discuss your workshop requirements and get a customized program.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/contact">
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Request Training <ArrowRight className="ml-2 w-4 h-4" />
+                  Request Workshop <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
               <Link to="/solutions">
