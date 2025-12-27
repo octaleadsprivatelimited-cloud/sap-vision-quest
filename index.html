@@ -46,6 +46,53 @@
     <meta name="theme-color" content="#6B46C1" />
     <meta name="msapplication-TileColor" content="#6B46C1" />
     <meta name="msapplication-TileImage" content="/logo.png" />
+    
+    <!-- Google Analytics - loaded conditionally based on cookie consent -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      
+      // Check for analytics consent before loading GA
+      function initGA() {
+        var consent = localStorage.getItem('cookie-consent');
+        if (consent) {
+          try {
+            var parsed = JSON.parse(consent);
+            if (parsed.preferences && parsed.preferences.analytics) {
+              // Load Google Analytics script
+              var script = document.createElement('script');
+              script.async = true;
+              script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+              document.head.appendChild(script);
+              
+              script.onload = function() {
+                gtag('js', new Date());
+                gtag('config', 'G-XXXXXXXXXX', {
+                  'anonymize_ip': true,
+                  'cookie_flags': 'SameSite=None;Secure'
+                });
+              };
+            }
+          } catch (e) {
+            console.error('Error parsing cookie consent:', e);
+          }
+        }
+      }
+      
+      // Initialize GA on page load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGA);
+      } else {
+        initGA();
+      }
+      
+      // Listen for consent changes
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'cookie-consent') {
+          initGA();
+        }
+      });
+    </script>
   </head>
 
   <body>

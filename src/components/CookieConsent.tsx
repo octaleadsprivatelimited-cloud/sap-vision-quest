@@ -17,6 +17,19 @@ export const CookieConsent = () => {
     }
   }, []);
 
+  const initializeAnalytics = () => {
+    // Trigger storage event for GA initialization
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'cookie-consent',
+      newValue: localStorage.getItem('cookie-consent')
+    }));
+    
+    // Also try to initialize GA directly for same-tab updates
+    if (typeof window !== 'undefined' && (window as any).initGA) {
+      (window as any).initGA();
+    }
+  };
+
   const acceptAll = () => {
     localStorage.setItem("cookie-consent", JSON.stringify({ 
       accepted: true, 
@@ -24,6 +37,7 @@ export const CookieConsent = () => {
       timestamp: new Date().toISOString()
     }));
     setIsVisible(false);
+    initializeAnalytics();
   };
 
   const acceptEssential = () => {
