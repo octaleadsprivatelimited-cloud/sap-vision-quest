@@ -37,7 +37,7 @@ export const HeroSection = () => {
 
             {/* Main Heading with word-by-word animation */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-              {["Driving", "Intelligent", "Enterprises"].map((word, index) => (
+              {["Empowering", "Businesses"].map((word, index) => (
                 <motion.span
                   key={word}
                   initial={{ opacity: 0, y: 40 }}
@@ -52,10 +52,10 @@ export const HeroSection = () => {
               <motion.span
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.65 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
                 className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400"
               >
-                with SAP
+                with SAP Solutions
               </motion.span>
             </h1>
 
