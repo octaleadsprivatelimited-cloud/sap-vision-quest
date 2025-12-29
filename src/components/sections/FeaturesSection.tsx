@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Award, Shield, BarChart3, Headphones } from "lucide-react";
+import { ArrowRight, Award, Shield, BarChart3, Headphones, Database } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const features = [
@@ -13,27 +13,35 @@ const features = [
   },
   {
     icon: BarChart3,
-    title: "SAP Implementation",
-    description: "Orchestrate end-to-end SAP implementation across your enterprise systems, optimize processes, and boost operational ROI.",
-    link: "/solutions",
+    title: "S4 HANA IMPLEMENTATION",
+    description: "SAP S/4HANA implementation enables organizations to modernize their ERP landscape with real-time data processing, simplified architecture, and intelligent business insights. At Sangronyx Technologies, we deliver end-to-end S/4HANA implementations aligned with your business goals and industry best practices.",
+    link: "/services/sap-s4hana-implementation",
     linkText: "Explore Implementation",
     underlineColor: "bg-sprinklr-green",
   },
   {
     icon: Shield,
-    title: "SAP Security",
-    description: "Protect your enterprise data across all SAP modules and systems to maximize security, build trust and ensure compliance.",
-    link: "/solutions",
-    linkText: "Explore Security",
+    title: "AMS Projects",
+    description: "Reliable L1/L2/L3 support, system monitoring, issue resolution, enhancements, change request, service request, custom reports and continuous improvements.",
+    link: "/services/sap-support-maintenance",
+    linkText: "Explore AMS",
     underlineColor: "bg-sprinklr-purple",
   },
   {
     icon: Headphones,
-    title: "SAP Support",
-    description: "Give your teams the 24/7 support they need to connect with context, resolve issues quickly, and deliver delightful experiences consistently.",
-    link: "/solutions",
-    linkText: "Explore Support",
+    title: "HYPERCARE SUPPORT",
+    description: "SAP Hypercare Support is a critical post-implementation phase where we provide intensive, dedicated support immediately after system go-live. At Sangronyx Technologies, our hypercare services ensure business continuity, user confidence, and system stability during this crucial transition period.",
+    link: "/services/sap-support-maintenance",
+    linkText: "Explore Hypercare",
     underlineColor: "bg-accent",
+  },
+  {
+    icon: Database,
+    title: "S4 HANA MIGRATION PROJECTS",
+    description: "SAP S/4HANA migration enables organizations to move from legacy SAP ECC systems to a modern, real-time digital core. At Sangronyx Technologies, we deliver secure, structured, and business-focused S/4HANA migration services with minimal disruption and maximum value.",
+    link: "/services/sap-ecc-migration",
+    linkText: "Explore Migration",
+    underlineColor: "bg-sprinklr-blue",
   },
 ];
 
@@ -50,12 +58,12 @@ export const FeaturesSection = () => {
           className="text-center mb-12 md:mb-16 lg:mb-20"
         >
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight">
-            Four SAP-native service suites. One Unified Enterprise platform.
+            Delivering SAP Excellence Across the Enterprise.
           </h2>
         </motion.div>
 
-        {/* Features Grid - Sprinklr 4-column style */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+        {/* Features Grid - Responsive grid for 5 items */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 lg:gap-10">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
