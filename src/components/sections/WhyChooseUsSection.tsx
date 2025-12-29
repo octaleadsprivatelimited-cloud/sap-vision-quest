@@ -50,8 +50,7 @@ export const WhyChooseUsSection = () => {
               <span className="text-primary">SAP Excellence</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              With years of experience and a proven track record, Sangronyx delivers 
-              comprehensive SAP solutions that drive digital transformation and business growth.
+              We combine deep SAP expertise, structured delivery, and a business-first mindset to help organizations implement, migrate, and support SAP systems with confidence.
             </p>
 
             {/* Feature List */}
