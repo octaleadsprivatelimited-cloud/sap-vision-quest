@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, Building2, Users, Trophy, Zap } from "lucide-react";
+import { Building2, Users, Trophy, Zap } from "lucide-react";
 
 const reasons = [
   {
@@ -52,23 +52,6 @@ export const WhyChooseUsSection = () => {
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
               We combine deep SAP expertise, structured delivery, and a business-first mindset to help organizations implement, migrate, and support SAP systems with confidence.
             </p>
-
-            {/* Feature List */}
-            <div className="space-y-4">
-              {["End-to-end SAP implementation", "24/7 dedicated support", "Industry best practices", "Cost-effective solutions"].map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + index * 0.1 }}
-                  className="flex items-center gap-3"
-                >
-                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
-                  <span className="text-foreground font-medium">{item}</span>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
 
           {/* Right Content - Reasons Grid */}
