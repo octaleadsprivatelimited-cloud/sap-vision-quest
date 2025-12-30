@@ -42,7 +42,7 @@ const SapSupportMaintenance = () => {
         description="24/7 ongoing SAP support and maintenance for uninterrupted business operations. Keep your SAP systems running at peak performance."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Services", href: "/solutions" },
+          { label: "Services", href: "/services" },
           { label: "SAP Support & Maintenance" }
         ]}
         backgroundImage="/services hero background.jpg"
@@ -177,7 +177,7 @@ const SapSupportMaintenance = () => {
                   Get Support Quote <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link to="/solutions">
+              <Link to="/services">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                   View All Solutions
                 </Button>

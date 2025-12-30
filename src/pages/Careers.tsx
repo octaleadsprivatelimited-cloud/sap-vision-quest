@@ -125,8 +125,27 @@ const Careers = () => {
       </section>
 
       {/* Open Positions Section */}
-      <section id="openings" className="py-16 md:py-24 bg-muted/30">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section id="openings" className="relative py-16 md:py-24 overflow-hidden">
+        {/* Background Design */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-[#00c9a7]/5 to-[#f5a623]/5"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#0096d6]/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#00c9a7]/10 rounded-full blur-3xl"></div>
+        </div>
+        
+        {/* Subtle pattern overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(0,150,214,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0,150,214,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        ></div>
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

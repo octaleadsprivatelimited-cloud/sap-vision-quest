@@ -32,7 +32,7 @@ const SapCustomDevelopment = () => {
         description="Tailored SAP development and enhancements to meet your unique business requirements with modern technologies."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Services", href: "/solutions" },
+          { label: "Services", href: "/services" },
           { label: "SAP Custom Development" }
         ]}
         backgroundImage="/SAP CUSTOM DEVELOPMENT.jpg"
@@ -148,7 +148,7 @@ const SapCustomDevelopment = () => {
                   Start a Project <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link to="/solutions">
+              <Link to="/services">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                   View All Solutions
                 </Button>

@@ -7,7 +7,7 @@ const features = [
     icon: Award,
     title: "SAP Expertise",
     description: "Leverage our certified SAP consultants with extensive industry knowledge to build great solutions, drive efficiency, and deliver extraordinary business outcomes.",
-    link: "/solutions",
+    link: "/services",
     linkText: "Explore Expertise",
     underlineColor: "bg-sprinklr-blue",
   },
@@ -48,31 +48,16 @@ const features = [
 export const FeaturesSection = () => {
   return (
     <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
-      {/* Professional Background Design */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/20 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900"></div>
-      
-      {/* Elegant geometric shapes with better visibility */}
-      <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-20 left-10 w-[500px] h-[500px] bg-[#0096d6]/10 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-[#00c9a7]/10 rounded-full blur-[120px]"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#0096d6]/5 rounded-full blur-[100px]"></div>
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src="/sap-excellence-background.png" 
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
-      
-      {/* Subtle grid pattern - more visible */}
-      <div 
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(0,150,214,0.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,150,214,0.08) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px'
-        }}
-      ></div>
-      
-      {/* Professional border accents */}
-      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#0096d6]/30 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00c9a7]/30 to-transparent"></div>
       
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Header */}
@@ -83,13 +68,13 @@ export const FeaturesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16 lg:mb-20"
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
             Delivering SAP Excellence Across the Enterprise.
           </h2>
         </motion.div>
 
-        {/* Features Grid - Responsive grid for 5 items */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 lg:gap-10">
+        {/* Features Grid - 3 columns, 2 rows layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -99,32 +84,35 @@ export const FeaturesSection = () => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group"
             >
-              {/* Icon */}
-              <div className="mb-5">
-                <feature.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground" strokeWidth={1.5} />
+              {/* Card Container */}
+              <div className="h-full bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300">
+                {/* Icon */}
+                <div className="mb-4">
+                  <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
+                </div>
+                
+                {/* Title */}
+                <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-tight">
+                  {feature.title}
+                </h3>
+                
+                {/* Colored underline */}
+                <div className={`w-10 h-0.5 ${feature.underlineColor} mb-4`}></div>
+                
+                {/* Description */}
+                <p className="text-white/90 text-sm leading-relaxed mb-5 min-h-[80px]">
+                  {feature.description}
+                </p>
+                
+                {/* Explore link */}
+                <Link 
+                  to={feature.link}
+                  className="inline-flex items-center text-white font-medium text-sm hover:text-accent transition-colors group/link"
+                >
+                  <ArrowRight className="w-4 h-4 mr-2 group-hover/link:translate-x-1 transition-transform" />
+                  {feature.linkText}
+                </Link>
               </div>
-              
-              {/* Title with underline */}
-              <h3 className="text-lg md:text-xl font-bold text-foreground mb-2">
-                {feature.title}
-              </h3>
-              
-              {/* Colored underline */}
-              <div className={`w-10 h-1 ${feature.underlineColor} mb-5`}></div>
-              
-              {/* Description */}
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
-                {feature.description}
-              </p>
-              
-              {/* Explore link */}
-              <Link 
-                to={feature.link}
-                className="inline-flex items-center text-foreground font-semibold text-sm md:text-base hover:text-accent transition-colors group/link"
-              >
-                <ArrowRight className="w-4 h-4 mr-2 text-sprinklr-green group-hover/link:translate-x-1 transition-transform" />
-                {feature.linkText}
-              </Link>
             </motion.div>
           ))}
         </div>

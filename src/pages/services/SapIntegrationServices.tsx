@@ -34,7 +34,7 @@ const SapIntegrationServices = () => {
         description="Seamless SAP integration with your existing enterprise systems and applications. Connect your business ecosystem."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Services", href: "/solutions" },
+          { label: "Services", href: "/services" },
           { label: "SAP Integration Services" }
         ]}
       />
@@ -162,7 +162,7 @@ const SapIntegrationServices = () => {
                   Discuss Integration <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link to="/solutions">
+              <Link to="/services">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                   View All Solutions
                 </Button>

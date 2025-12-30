@@ -36,7 +36,7 @@ const SapEccMigration = () => {
         description="Seamless migration from ECC to S/4HANA with minimal downtime, comprehensive data integrity, and optimized business processes."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Services", href: "/solutions" },
+          { label: "Services", href: "/services" },
           { label: "ECC to S/4HANA Migration" }
         ]}
       />
@@ -169,7 +169,7 @@ const SapEccMigration = () => {
                   Get Free Assessment <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link to="/solutions">
+              <Link to="/services">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                   View All Solutions
                 </Button>

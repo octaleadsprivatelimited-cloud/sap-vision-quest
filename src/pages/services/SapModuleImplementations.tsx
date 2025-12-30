@@ -35,7 +35,7 @@ const SapModuleImplementations = () => {
         description="Expert implementation of all major SAP functional and technical modules to meet your specific business requirements."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Services", href: "/solutions" },
+          { label: "Services", href: "/services" },
           { label: "SAP Module Implementations" }
         ]}
       />
@@ -166,7 +166,7 @@ const SapModuleImplementations = () => {
                   Discuss Requirements <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link to="/solutions">
+              <Link to="/services">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                   View All Solutions
                 </Button>

@@ -373,21 +373,23 @@ const Training = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-24 bg-gradient-to-b from-background to-secondary/10">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <HelpCircle className="w-8 h-8 text-accent" />
+            <div className="inline-flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                <HelpCircle className="w-6 h-6 text-accent" />
+              </div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Frequently Asked <span className="text-accent">Questions</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               Find answers to common questions about our SAP workshop programs
             </p>
           </motion.div>
@@ -396,24 +398,36 @@ const Training = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
+            className="max-w-5xl mx-auto"
           >
-            <Accordion type="single" collapsible className="space-y-4">
+            <div className="grid md:grid-cols-2 gap-6">
               {faqs.map((faq, index) => (
-                <AccordionItem 
-                  key={index} 
-                  value={`item-${index}`}
-                  className="bg-card border border-border/50 rounded-lg px-6 data-[state=open]:border-accent/50"
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
                 >
-                  <AccordionTrigger className="text-left text-foreground hover:text-accent hover:no-underline py-4">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-4 leading-relaxed">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem 
+                      value={`item-${index}`}
+                      className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md data-[state=open]:border-accent data-[state=open]:shadow-lg transition-all duration-300"
+                    >
+                      <AccordionTrigger className="text-left text-foreground hover:text-accent hover:no-underline px-6 py-5 font-semibold text-base">
+                        <span className="flex items-start gap-3">
+                          <span className="text-accent font-bold mt-1">Q{index + 1}.</span>
+                          <span>{faq.question}</span>
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground px-6 pb-5 leading-relaxed text-sm">
+                        {faq.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </motion.div>
               ))}
-            </Accordion>
+            </div>
           </motion.div>
 
           <motion.div

@@ -7,7 +7,7 @@ import { ScrollToTop } from "./components/ScrollToTop";
 import { CookieConsent } from "./components/CookieConsent";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
-import Solutions from "./pages/Solutions";
+import Services from "./pages/Services";
 import Industries from "./pages/Industries";
 import Resources from "./pages/Resources";
 import Documentation from "./pages/resources/Documentation";
@@ -85,7 +85,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/solutions" element={<Services />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/industries/manufacturing" element={<Manufacturing />} />
           <Route path="/industries/retail" element={<Retail />} />

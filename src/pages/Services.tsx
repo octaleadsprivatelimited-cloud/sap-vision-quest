@@ -71,7 +71,7 @@ const sapOfferings = [
   },
 ];
 
-const Solutions = () => {
+const Services = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -127,7 +127,7 @@ const Solutions = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {sapOfferings.map((offering, index) => {
               // Match Sprinklr pattern: yellow for bottom-left cards in each 2x2 block (indices 2, 6, 10...)
               const isYellowBorder = index % 4 === 2;
@@ -253,4 +253,4 @@ const Solutions = () => {
   );
 };
 
-export default Solutions;
+export default Services;

@@ -35,7 +35,7 @@ const SapCorporateTraining = () => {
         description="Comprehensive SAP workshop programs for teams of all skill levels. Empower your workforce with expert-led workshop."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Services", href: "/solutions" },
+          { label: "Services", href: "/services" },
           { label: "SAP Corporate Workshop" }
         ]}
         backgroundImage="/sap-training-background.jpg"
@@ -165,7 +165,7 @@ const SapCorporateTraining = () => {
                   Request Workshop <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link to="/solutions">
+              <Link to="/services">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                   View All Solutions
                 </Button>

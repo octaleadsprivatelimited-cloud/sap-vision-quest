@@ -35,7 +35,7 @@ const SapLicensing = () => {
         description="Comprehensive SAP licensing solutions optimized for your business needs and budget. Navigate complex licensing models with expert guidance."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Services", href: "/solutions" },
+          { label: "Services", href: "/services" },
           { label: "SAP Licensing & Software" }
         ]}
       />
@@ -151,7 +151,7 @@ const SapLicensing = () => {
                   Get Licensing Advice <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
-              <Link to="/solutions">
+              <Link to="/services">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                   View All Solutions
                 </Button>

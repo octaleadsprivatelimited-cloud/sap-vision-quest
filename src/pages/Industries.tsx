@@ -12,6 +12,7 @@ const industries = [
     description: "SAP solutions for manufacturing to optimize production, quality, and supply chain operations.",
     color: "bg-accent",
     slug: "manufacturing",
+    image: "/manufacturing hero section background.jpg",
   },
   {
     icon: ShoppingCart,
@@ -19,6 +20,7 @@ const industries = [
     description: "SAP solutions for retail and FMCG to deliver seamless experiences and optimize inventory.",
     color: "bg-sprinklr-green",
     slug: "retail",
+    image: "/Retail and FMCG hero section background.jpg",
   },
   {
     icon: Heart,
@@ -26,6 +28,7 @@ const industries = [
     description: "SAP solutions for pharmaceutical companies to ensure compliance and streamline operations.",
     color: "bg-sprinklr-purple",
     slug: "pharma",
+    image: "/PHARMA hero section background.jpg",
   },
   {
     icon: Truck,
@@ -33,6 +36,7 @@ const industries = [
     description: "SAP solutions for logistics to build resilient supply chains with end-to-end visibility.",
     color: "bg-accent",
     slug: "logistics",
+    image: "/logistics and supply chain hero section background.jpg",
   },
   {
     icon: GraduationCap,
@@ -40,6 +44,7 @@ const industries = [
     description: "SAP solutions for educational institutions to transform operations and student experiences.",
     color: "bg-sprinklr-green",
     slug: "education",
+    image: "/EDUCATION hero section background.jpg",
   },
   {
     icon: Banknote,
@@ -47,6 +52,7 @@ const industries = [
     description: "SAP solutions for finance to modernize operations with real-time insights and compliance.",
     color: "bg-sprinklr-purple",
     slug: "finance",
+    image: "/FINANCE hero section background.jpg",
   },
   {
     icon: Building2,
@@ -54,6 +60,7 @@ const industries = [
     description: "Tailored SAP solutions for small and mid-sized businesses to drive growth and efficiency.",
     color: "bg-accent",
     slug: "small-business",
+    image: "/SMALL & MID BUSINESS.jpg",
   },
 ];
 
@@ -95,34 +102,47 @@ const Industries = () => {
                 transition={{ delay: index * 0.05, duration: 0.5 }}
                 className="group"
               >
-                <div className="flex flex-col">
-                  {/* Icon */}
-                  <div className="mb-6">
-                    <industry.icon className="w-12 h-12 text-foreground" strokeWidth={1.5} />
+                <Link to={`/industries/${industry.slug}`} className="block h-full">
+                  <div className="h-full bg-card rounded-lg overflow-hidden border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 group-hover:-translate-y-1">
+                    {/* Image */}
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={industry.image} 
+                        alt={industry.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                      {/* Icon overlay */}
+                      <div className="absolute top-4 left-4">
+                        <div className="w-12 h-12 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                          <industry.icon className="w-6 h-6 text-white" strokeWidth={1.5} />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="p-6">
+                      {/* Title with colored underline */}
+                      <div className="mb-4">
+                        <h3 className="text-lg font-bold text-foreground mb-2">
+                          {industry.title}
+                        </h3>
+                        <div className={`w-12 h-1 rounded-full ${industry.color}`}></div>
+                      </div>
+                      
+                      {/* Description */}
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-4 min-h-[60px]">
+                        {industry.description}
+                      </p>
+                      
+                      {/* Explore Link */}
+                      <div className="inline-flex items-center gap-2 text-foreground font-semibold text-sm group-hover:gap-3 transition-all duration-300">
+                        <ArrowRight className="w-4 h-4" />
+                        <span>Explore {industry.title}</span>
+                      </div>
+                    </div>
                   </div>
-                  
-                  {/* Title with colored underline */}
-                  <div className="mb-4">
-                    <h3 className="text-lg font-bold text-foreground mb-2">
-                      {industry.title}
-                    </h3>
-                    <div className={`w-12 h-1 rounded-full ${industry.color}`}></div>
-                  </div>
-                  
-                  {/* Description */}
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6 min-h-[80px]">
-                    {industry.description}
-                  </p>
-                  
-                  {/* Explore Link */}
-                  <Link 
-                    to={`/industries/${industry.slug}`} 
-                    className="inline-flex items-center gap-2 text-foreground font-semibold text-sm group-hover:gap-3 transition-all duration-300"
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                    <span>Explore {industry.title}</span>
-                  </Link>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Services", href: "/solutions", hasDropdown: false },
+  { label: "Services", href: "/services", hasDropdown: false },
   { label: "Industries", href: "/industries", hasDropdown: false },
   { label: "Resources", href: "/resources", hasDropdown: true },
   { label: "Workshop", href: "/resources/training", hasDropdown: false },
@@ -112,7 +112,7 @@ export const Navbar = () => {
     "/",
     "/partners",
     "/careers",
-    "/solutions",
+    "/services",
     "/about",
     "/contact",
     "/who-we-are",
