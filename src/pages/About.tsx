@@ -79,18 +79,58 @@ const About = () => {
       </section>
 
       {/* Values */}
-      <section className="py-16 md:py-24 bg-secondary/30">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#005a8a] via-[#0077b3] to-[#0096d6] z-0" />
+        
+        {/* Decorative Blur Circles */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-white/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="absolute bottom-0 left-0 w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-white/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, delay: 0.4 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] md:w-[300px] md:h-[300px] bg-white/5 rounded-full blur-3xl"
+          />
+        </div>
+        
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 z-0 opacity-10"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12 md:mb-16"
+            className="text-center mb-8 md:mb-10"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
               Our Values
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
               The principles that guide everything we do
             </p>
           </motion.div>
@@ -103,13 +143,13 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-card rounded-2xl p-6 md:p-8 border border-border text-center hover:shadow-lg hover:border-accent/30 transition-all duration-300"
+                className="bg-white/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/20 text-center hover:bg-white/20 hover:border-white/30 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                <div className="w-14 h-14 rounded-xl bg-accent/10 mx-auto mb-4 flex items-center justify-center">
-                  <value.icon className="w-7 h-7 text-accent" />
+                <div className="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm mx-auto mb-4 flex items-center justify-center border border-white/30">
+                  <value.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">{value.title}</h3>
-                <p className="text-muted-foreground">{value.description}</p>
+                <h3 className="text-xl font-bold text-white mb-2">{value.title}</h3>
+                <p className="text-white/90">{value.description}</p>
               </motion.div>
             ))}
           </div>

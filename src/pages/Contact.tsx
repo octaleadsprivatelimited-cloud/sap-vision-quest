@@ -18,13 +18,16 @@ const contactMethods = [
     description: "Send us an email anytime",
     contact: "info@sangronyx.com",
     action: "Send Email",
+    link: "mailto:info@sangronyx.com",
   },
   {
     icon: Phone,
     title: "Call Us",
     description: "Mon-Fri from 9am to 6pm",
-    contact: "+1 (555) 123-4567",
+    contact: "+91-7981999562",
+    contact2: "+91-7675070977",
     action: "Call Now",
+    link: "tel:+917981999562",
   },
   {
     icon: Headphones,
@@ -32,6 +35,7 @@ const contactMethods = [
     description: "24/7 technical support",
     contact: "support@sangronyx.com",
     action: "Get Support",
+    link: "mailto:support@sangronyx.com",
   },
 ];
 
@@ -104,10 +108,17 @@ const Contact = () => {
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-2">{method.title}</h3>
                 <p className="text-sm text-muted-foreground mb-3">{method.description}</p>
-                <p className="text-accent font-medium mb-4">{method.contact}</p>
-                <Button variant="outline" size="sm" className="w-full">
-                  {method.action}
-                </Button>
+                <div className="mb-4">
+                  <p className="text-accent font-medium">{method.contact}</p>
+                  {method.contact2 && (
+                    <p className="text-accent font-medium mt-1">{method.contact2}</p>
+                  )}
+                </div>
+                <a href={method.link || "#"}>
+                  <Button variant="outline" size="sm" className="w-full">
+                    {method.action}
+                  </Button>
+                </a>
               </motion.div>
             ))}
           </div>

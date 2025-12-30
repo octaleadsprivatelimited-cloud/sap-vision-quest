@@ -519,13 +519,22 @@ export const Navbar = () => {
                   <h3 className="text-sm font-semibold text-gray-900 mb-3">Get in Touch</h3>
                   <div className="space-y-3">
                     <a 
-                      href="tel:+919876543210" 
+                      href="tel:+917981999562" 
                       className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#0096d6] transition-colors"
                     >
                       <div className="w-8 h-8 rounded-full bg-[#0096d6]/10 flex items-center justify-center">
                         <Phone className="w-4 h-4 text-[#0096d6]" />
                       </div>
-                      <span>+91 98765 43210</span>
+                      <span>+91-7981999562</span>
+                    </a>
+                    <a 
+                      href="tel:+917675070977" 
+                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#0096d6] transition-colors"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-[#0096d6]/10 flex items-center justify-center">
+                        <Phone className="w-4 h-4 text-[#0096d6]" />
+                      </div>
+                      <span>+91-7675070977</span>
                     </a>
                     <a 
                       href="mailto:info@sangronyx.com" 
@@ -548,7 +557,7 @@ export const Navbar = () => {
                       <span className="leading-relaxed">Sangronyx Technologies, Business Park, Hyderabad, India · <span className="text-[#0096d6] font-medium">Maps</span></span>
                     </a>
                     <a 
-                      href="https://wa.me/919876543210" 
+                      href="https://wa.me/917981999562" 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#25D366] transition-colors"
