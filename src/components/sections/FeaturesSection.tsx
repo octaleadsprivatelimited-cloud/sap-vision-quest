@@ -47,8 +47,34 @@ const features = [
 
 export const FeaturesSection = () => {
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-background">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+      {/* Professional Background Design */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/20 dark:from-slate-900 dark:via-slate-800/50 dark:to-slate-900"></div>
+      
+      {/* Elegant geometric shapes with better visibility */}
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-20 left-10 w-[500px] h-[500px] bg-[#0096d6]/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-[#00c9a7]/10 rounded-full blur-[120px]"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#0096d6]/5 rounded-full blur-[100px]"></div>
+      </div>
+      
+      {/* Subtle grid pattern - more visible */}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(0,150,214,0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,150,214,0.08) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }}
+      ></div>
+      
+      {/* Professional border accents */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#0096d6]/30 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00c9a7]/30 to-transparent"></div>
+      
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
