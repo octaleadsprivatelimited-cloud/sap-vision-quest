@@ -39,6 +39,7 @@ const Education = () => {
           { label: "Industries", href: "/industries" },
           { label: "Education" }
         ]}
+        backgroundImage="/EDUCATION hero section background.jpg"
       />
 
       {/* Overview Section */}

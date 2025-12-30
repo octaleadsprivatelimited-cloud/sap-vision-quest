@@ -20,7 +20,7 @@ const trainingFeatures = [
     icon: Users,
     title: "Corporate Batch Training",
     description: "Customized training programs for enterprise teams with flexible scheduling and dedicated trainers.",
-    link: "/services/sap-corporate-training",
+    link: "/resources/training",
   },
   {
     icon: Briefcase,

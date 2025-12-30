@@ -39,6 +39,7 @@ const SmallBusiness = () => {
           { label: "Industries", href: "/industries" },
           { label: "Small & Mid Businesses" }
         ]}
+        backgroundImage="/SMALL & MID BUSINESS.jpg"
       />
 
       {/* Overview Section */}

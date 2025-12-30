@@ -39,6 +39,7 @@ const Finance = () => {
           { label: "Industries", href: "/industries" },
           { label: "Finance" }
         ]}
+        backgroundImage="/FINANCE hero section background.jpg"
       />
 
       {/* Overview Section */}

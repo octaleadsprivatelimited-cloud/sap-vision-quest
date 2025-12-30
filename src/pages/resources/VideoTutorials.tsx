@@ -53,6 +53,7 @@ const VideoTutorials = () => {
         description="Step-by-step video tutorials to help you get started with our services."
         label="LEARNING CENTER"
         breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Video Tutorials" }]}
+        backgroundImage="/hero-background-image.jpeg"
       />
 
       {/* Video Categories */}

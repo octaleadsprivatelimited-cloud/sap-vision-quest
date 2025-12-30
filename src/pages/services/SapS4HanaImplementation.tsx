@@ -34,9 +34,10 @@ const SapS4HanaImplementation = () => {
         description="Complete implementation services for SAP S/4HANA with cloud, on-premises, or hybrid deployment options tailored to your business needs."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Solutions", href: "/solutions" },
+          { label: "Services", href: "/solutions" },
           { label: "SAP S/4HANA Implementation" }
         ]}
+        backgroundImage="/sap-s4hana-implementation.webp"
       />
 
       {/* Overview Section */}
@@ -75,6 +76,13 @@ const SapS4HanaImplementation = () => {
               viewport={{ once: true }}
               className="relative"
             >
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="/sap-s4hana-implementation.webp" 
+                  alt="SAP S/4HANA Implementation"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
               <img 
                 src="/sap-s4hana-implementation.webp" 
                 alt="SAP S/4HANA Implementation"

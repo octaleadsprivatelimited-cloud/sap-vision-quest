@@ -74,8 +74,7 @@ export const HeroSection = () => {
               transition={{ duration: 0.6, delay: 1.1 }}
               className="mt-8 text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
             >
-              Transform your business operations with cutting-edge SAP implementations, 
-              migrations, and intelligent enterprise solutions.
+              We deliver reliable SAP consulting, implementation, and support services that help organizations streamline operations, improve efficiency, and grow with confidence.
             </motion.p>
           </div>
         </div>

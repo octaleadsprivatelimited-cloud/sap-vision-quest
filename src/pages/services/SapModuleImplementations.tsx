@@ -31,10 +31,11 @@ const SapModuleImplementations = () => {
       
       <PageHero 
         title="SAP Module Implementations"
+        backgroundImage="/SAP MODULE IMPLEMENTATION.png"
         description="Expert implementation of all major SAP functional and technical modules to meet your specific business requirements."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Solutions", href: "/solutions" },
+          { label: "Services", href: "/solutions" },
           { label: "SAP Module Implementations" }
         ]}
       />
@@ -42,19 +43,34 @@ const SapModuleImplementations = () => {
       {/* Overview Section */}
       <section className="py-16 md:py-24 bg-secondary/20">
         <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Complete <span className="text-accent">Module Coverage</span>
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Our certified consultants have deep expertise across all SAP modules. Whether you need a single module implementation or a full ERP rollout, we deliver solutions that drive business value.
-            </p>
-          </motion.div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Complete <span className="text-accent">Module Coverage</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Our certified consultants have deep expertise across all SAP modules. Whether you need a single module implementation or a full ERP rollout, we deliver solutions that drive business value.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="/SAP MODULE IMPLEMENTATION.png" 
+                  alt="SAP Module Implementation"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

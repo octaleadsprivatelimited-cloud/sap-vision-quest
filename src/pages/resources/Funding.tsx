@@ -23,6 +23,7 @@ const Funding = () => {
         breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Funding" }]}
         ctaText="Contact Us"
         ctaHref="/contact"
+        backgroundImage="/hero-background-image.jpeg"
       />
 
       <section className="py-16 md:py-24 bg-background">

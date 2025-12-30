@@ -32,10 +32,11 @@ const SapEccMigration = () => {
       
       <PageHero 
         title="SAP ECC to S/4HANA Migration"
+        backgroundImage="/SAP ECC TO S4 HANA MIGRANATION.png"
         description="Seamless migration from ECC to S/4HANA with minimal downtime, comprehensive data integrity, and optimized business processes."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Solutions", href: "/solutions" },
+          { label: "Services", href: "/solutions" },
           { label: "ECC to S/4HANA Migration" }
         ]}
       />
@@ -65,11 +66,13 @@ const SapEccMigration = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <img 
-                src="/sap-ecc-to-s4hana-migration.avif" 
-                alt="SAP ECC to S/4HANA Migration"
-                className="rounded-2xl shadow-2xl w-full"
-              />
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="/SAP ECC TO S4 HANA MIGRANATION.png" 
+                  alt="SAP ECC to S/4HANA Migration"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
             </motion.div>
           </div>
         </div>

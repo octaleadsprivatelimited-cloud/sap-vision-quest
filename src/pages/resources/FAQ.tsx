@@ -105,6 +105,7 @@ const FAQ = () => {
         description="Find answers to common questions about our services and how we can help you."
         label="FAQ"
         breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "FAQ" }]}
+        backgroundImage="/hero-background.jpg"
       />
 
       {/* Search Bar */}

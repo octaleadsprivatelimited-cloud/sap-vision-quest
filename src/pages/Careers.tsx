@@ -1,56 +1,16 @@
+import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { PageBackground } from "@/components/ui/page-background";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { MapPin, Clock, Users, Zap, Heart, GraduationCap, ArrowRight } from "lucide-react";
-
-const jobOpenings = [
-  {
-    title: "SAP S/4HANA Consultant",
-    location: "Remote / Hybrid",
-    type: "Full-time",
-    department: "Consulting",
-    description: "Lead SAP S/4HANA implementation projects and provide expert guidance to enterprise clients.",
-  },
-  {
-    title: "SAP ABAP Developer",
-    location: "Remote",
-    type: "Full-time",
-    department: "Development",
-    description: "Design and develop custom SAP solutions using ABAP programming language.",
-  },
-  {
-    title: "SAP Fiori/UI5 Developer",
-    location: "Remote / On-site",
-    type: "Full-time",
-    department: "Development",
-    description: "Create modern, responsive SAP Fiori applications and UI5 components.",
-  },
-  {
-    title: "SAP Basis Administrator",
-    location: "Remote",
-    type: "Full-time",
-    department: "Infrastructure",
-    description: "Manage and maintain SAP system landscapes, ensuring optimal performance and security.",
-  },
-  {
-    title: "Project Manager - SAP",
-    location: "Hybrid",
-    type: "Full-time",
-    department: "Management",
-    description: "Oversee SAP implementation projects from initiation to successful delivery.",
-  },
-  {
-    title: "SAP Training Specialist",
-    location: "Remote",
-    type: "Contract",
-    department: "Training",
-    description: "Develop and deliver comprehensive SAP training programs for clients and internal teams.",
-  },
-];
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Users, Zap, Heart, GraduationCap } from "lucide-react";
 
 const benefits = [
   {
@@ -76,6 +36,35 @@ const benefits = [
 ];
 
 const Careers = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    location: "",
+    region: "",
+    resume: null as File | null,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData(prev => ({ ...prev, resume: e.target.files![0] }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log("Form submitted:", formData);
+    // You can add API call here
+    setIsDialogOpen(false);
+  };
+
   return (
     <PageBackground>
       <Navbar />
@@ -89,6 +78,8 @@ const Careers = () => {
         ]}
         ctaText="View Open Positions"
         ctaHref="#openings"
+        backgroundImage="/carrer page background.jpg"
+        compact={true}
       />
 
       {/* Why Work With Us Section */}
@@ -149,78 +140,191 @@ const Careers = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Current Opportunities
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
               Explore our open positions and find the role that matches your skills and career goals.
             </p>
+            <Button 
+              onClick={() => setIsDialogOpen(true)}
+              className="bg-[#0099cc] hover:bg-[#00b3e6] text-white rounded-full px-8 py-3 h-auto text-base font-medium"
+            >
+              APPLY JOB
+            </Button>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {jobOpenings.map((job, index) => (
-              <motion.div
-                key={job.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-[#0099cc]/30 group"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <span className="text-xs font-medium text-[#0099cc] bg-[#0099cc]/10 px-2 py-1 rounded-full">
-                      {job.department}
-                    </span>
-                    <h3 className="text-xl font-semibold text-foreground mt-3">{job.title}</h3>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-[#0099cc] transition-colors" />
-                </div>
-                <p className="text-muted-foreground text-sm mb-4">{job.description}</p>
-                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <MapPin className="w-4 h-4" />
-                    {job.location}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                    {job.type}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+          {/* Our Culture & Our Principles Section */}
+          <div className="mt-16 grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-card border border-border rounded-xl p-8"
+            >
+              <h3 className="text-2xl font-bold text-foreground mb-4">Our Culture</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Step into a workplace defined by warmth, positivity, and collaboration. At Sangronyx, we balance focused work with moments to connect whether it's over a cup of coffee, a team activity, or shared successes. Our open-door and inclusive culture encourages ideas, teamwork, and continuous growth.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="bg-card border border-border rounded-xl p-8"
+            >
+              <h3 className="text-2xl font-bold text-foreground mb-4">Our Principles</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Sangronyx Technologies is proud to be an equal employment opportunity employer. We provide fair and equal opportunities to all individuals, regardless of race, religion, gender, age, national origin, disability, marital status, or any other characteristic protected by law.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Since our inception, we have grown organically by hiring the best talent and fostering a culture of excellence. We are always looking for skilled professionals to join our team. If you have relevant experience, we would love to hear from you. Please send your details to – <a href="mailto:admin@sangronyx.com" className="text-[#0099cc] hover:underline">admin@sangronyx.com</a>
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#0a1628] to-[#1a2942]">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Don't See the Right Role?
-            </h2>
-            <p className="text-white/70 mb-8">
-              We're always looking for talented individuals to join our team. Send us your resume and we'll reach out when a matching opportunity arises.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button className="bg-[#0099cc] hover:bg-[#00b3e6] text-white rounded-full px-8 py-3 h-auto text-base font-medium">
-                  Contact Us
-                </Button>
-              </Link>
-              <Link to="/about">
-                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full px-8 py-3 h-auto text-base font-medium">
-                  Learn About Us
-                </Button>
-              </Link>
+      {/* Resume Submission Dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-gray-900 border-b border-gray-200 pb-3">
+              SUBMIT RESUME
+            </DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="name" className="text-sm font-medium text-gray-700">
+                  Your Name <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Full Name"
+                  required
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="mt-2"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                  Email Address <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Email Address"
+                  required
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="mt-2"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
+                  Phone Number
+                </Label>
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="mt-2"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="location" className="text-sm font-medium text-gray-700">
+                  Preferred Job Location
+                </Label>
+                <Input
+                  id="location"
+                  name="location"
+                  type="text"
+                  placeholder="Preferred Job Location"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  className="mt-2"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="region" className="text-sm font-medium text-gray-700">
+                  Select Region/Country <span className="text-red-500">*</span>
+                </Label>
+                <Select required value={formData.region} onValueChange={(value) => setFormData(prev => ({ ...prev, region: value }))}>
+                  <SelectTrigger className="mt-2">
+                    <SelectValue placeholder="Select Region/Country" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="usa">USA</SelectItem>
+                    <SelectItem value="india">India</SelectItem>
+                    <SelectItem value="uk">UK</SelectItem>
+                    <SelectItem value="canada">Canada</SelectItem>
+                    <SelectItem value="australia">Australia</SelectItem>
+                    <SelectItem value="germany">Germany</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="resume" className="text-sm font-medium text-gray-700">
+                  Upload Your Resume <span className="text-red-500">*</span>
+                </Label>
+                <div className="mt-2 flex gap-2">
+                  <Input
+                    id="resume"
+                    name="resume"
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    required
+                    onChange={handleFileChange}
+                    className="flex-1"
+                  />
+                </div>
+                {formData.resume && (
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Selected: {formData.resume.name}
+                  </p>
+                )}
+              </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
+
+            <div className="flex items-start gap-3">
+              <Checkbox id="consent" required className="mt-1" />
+              <Label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                By filling this form you authorize us to contact you via Email, Phone or any other mode of communication for processing your application.
+              </Label>
+            </div>
+
+            <div className="flex justify-end gap-4 pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsDialogOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                className="bg-[#0099cc] hover:bg-[#00b3e6] text-white"
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </PageBackground>

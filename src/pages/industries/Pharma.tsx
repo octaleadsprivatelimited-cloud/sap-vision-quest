@@ -39,6 +39,7 @@ const Pharma = () => {
           { label: "Industries", href: "/industries" },
           { label: "Pharma" }
         ]}
+        backgroundImage="/PHARMA hero section background.jpg"
       />
 
       {/* Overview Section */}

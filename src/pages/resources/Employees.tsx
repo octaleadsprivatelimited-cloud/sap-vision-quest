@@ -23,6 +23,7 @@ const Employees = () => {
         breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Employees" }]}
         ctaText="Join Our Team"
         ctaHref="/careers"
+        backgroundImage="/hero-background-image.jpeg"
       />
 
       <section className="py-16 md:py-24 bg-background">

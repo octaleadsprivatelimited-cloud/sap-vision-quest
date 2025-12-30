@@ -64,6 +64,7 @@ const DeveloperResources = () => {
         description="Resources for developers including APIs, SDKs, and integration guides."
         label="DEVELOPER PORTAL"
         breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Developer Resources" }]}
+        backgroundImage="/hero-sap-background.jpg"
       />
 
       {/* Developer Resources */}

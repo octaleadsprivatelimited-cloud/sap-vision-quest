@@ -76,6 +76,7 @@ const Resources = () => {
         label="RESOURCE CENTER"
         breadcrumbs={[{ label: "Resources" }]}
         ctaText="Explore Resources"
+        backgroundImage="/hero-background.jpg"
         ctaHref="#resources"
       />
 

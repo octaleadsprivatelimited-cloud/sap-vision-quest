@@ -23,6 +23,7 @@ const QualityControl = () => {
         breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Quality Control" }]}
         ctaText="Our Standards"
         ctaHref="/about"
+        backgroundImage="/hero-background.jpg"
       />
 
       <section className="py-16 md:py-24 bg-background">

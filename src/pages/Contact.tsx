@@ -82,6 +82,7 @@ const Contact = () => {
         label="GET IN TOUCH"
         breadcrumbs={[{ label: "Contact" }]}
         ctaText="Send us a message"
+        backgroundImage="/hero-background-image.jpeg"
         ctaHref="#contact-form"
       />
 

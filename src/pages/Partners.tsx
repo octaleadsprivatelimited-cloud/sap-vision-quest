@@ -55,6 +55,7 @@ const Partners = () => {
         breadcrumbs={[{ label: "Partners" }]}
         ctaText="Become a Partner"
         ctaHref="/contact"
+        backgroundImage="/partners-hero-background.png"
       />
 
       <section className="py-16 md:py-24 bg-background">

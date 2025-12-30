@@ -30,10 +30,11 @@ const SapIntegrationServices = () => {
       
       <PageHero 
         title="SAP Integration Services"
+        backgroundImage="/SAP INTEGRATION SERVICES.png"
         description="Seamless SAP integration with your existing enterprise systems and applications. Connect your business ecosystem."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Solutions", href: "/solutions" },
+          { label: "Services", href: "/solutions" },
           { label: "SAP Integration Services" }
         ]}
       />
@@ -41,19 +42,34 @@ const SapIntegrationServices = () => {
       {/* Overview Section */}
       <section className="py-16 md:py-24 bg-secondary/20">
         <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Connect Your <span className="text-accent">Enterprise Ecosystem</span>
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              In today's connected world, your SAP system needs to communicate seamlessly with other applications, partners, and cloud services. Our integration services ensure smooth data flow across your entire technology landscape.
-            </p>
-          </motion.div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Connect Your <span className="text-accent">Enterprise Ecosystem</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                In today's connected world, your SAP system needs to communicate seamlessly with other applications, partners, and cloud services. Our integration services ensure smooth data flow across your entire technology landscape.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="/SAP INTEGRATION SERVICES.png" 
+                  alt="SAP Integration Services"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

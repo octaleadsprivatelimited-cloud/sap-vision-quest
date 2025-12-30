@@ -22,6 +22,7 @@ const Trademarks = () => {
         label="INTELLECTUAL RESOURCES"
         breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Trademarks" }]}
         ctaText="Contact Legal"
+        backgroundImage="/hero-background.jpg"
         ctaHref="/contact"
       />
 

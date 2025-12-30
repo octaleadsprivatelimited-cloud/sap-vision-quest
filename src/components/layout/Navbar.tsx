@@ -6,15 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Products", href: "/products", hasDropdown: false },
-  { label: "Solutions", href: "/solutions", hasDropdown: false },
+  { label: "Services", href: "/solutions", hasDropdown: false },
   { label: "Industries", href: "/industries", hasDropdown: false },
   { label: "Resources", href: "/resources", hasDropdown: true },
   { label: "Workshop", href: "/resources/training", hasDropdown: false },
   { label: "Careers", href: "/careers", hasDropdown: false },
   { label: "Partners", href: "/partners", hasDropdown: false },
   { label: "Who We Are", href: "/who-we-are", hasDropdown: false },
-  { label: "What We Do", href: "/what-we-do", hasDropdown: false },
 ];
 
 const resourceCategories = [
@@ -72,14 +70,6 @@ const resourceCategories = [
       { label: "Quality Control Systems", href: "/resources/quality-control" },
     ],
   },
-  {
-    id: "training",
-    label: "Workshop & Placements",
-    items: [
-      { label: "Workshop Programs", href: "/resources/training" },
-      { label: "Placement Assistance", href: "/resources/placements" },
-    ],
-  },
 ];
 
 const spotlightItems = [
@@ -88,12 +78,6 @@ const spotlightItems = [
     subtitle: "Complete migration roadmap for enterprises",
     cta: "Read guide",
     image: "/sap-ecc-to-s4hana-migration.avif",
-  },
-  {
-    title: "Enterprise Training Programs",
-    subtitle: "Upskill your team with expert-led courses",
-    cta: "Explore courses",
-    image: "/sap-corporate-training.avif",
   },
 ];
 
@@ -121,6 +105,66 @@ export const Navbar = () => {
   };
 
   const isHomePage = location.pathname === "/";
+  const isPartnersPage = location.pathname === "/partners";
+  
+  // Pages with background images that need white text
+  const pagesWithBackground = [
+    "/",
+    "/partners",
+    "/careers",
+    "/solutions",
+    "/about",
+    "/contact",
+    "/who-we-are",
+    "/resources",
+    "/industries",
+    "/industries/manufacturing",
+    "/industries/retail",
+    "/industries/pharma",
+    "/industries/logistics",
+    "/industries/education",
+    "/industries/finance",
+    "/industries/small-business",
+    "/services/sap-ecc-migration",
+    "/services/sap-custom-development",
+    "/services/sap-licensing",
+    "/services/sap-module-implementations",
+    "/services/sap-integration-services",
+    "/services/sap-s4hana-implementation",
+    "/services/sap-support-maintenance",
+    "/services/sap-corporate-training",
+    "/resources/training",
+    "/resources/placements",
+    "/resources/processes",
+    "/resources/trademarks",
+    "/resources/training-materials",
+    "/resources/video-tutorials",
+    "/resources/whitepapers",
+    "/resources/training-classes",
+    "/resources/supply-chain",
+    "/resources/skills",
+    "/resources/software",
+    "/resources/quality-control",
+    "/resources/research",
+    "/resources/revenue",
+    "/resources/patents",
+    "/resources/infrastructure",
+    "/resources/leadership",
+    "/resources/facilities",
+    "/resources/funding",
+    "/resources/equipment",
+    "/resources/employees",
+    "/resources/faq",
+    "/resources/downloads",
+    "/resources/documentation",
+    "/resources/distribution",
+    "/resources/developer-resources",
+    "/resources/capital",
+    "/resources/brand",
+  ];
+  
+  const hasBackgroundImage = pagesWithBackground.includes(location.pathname);
+  const shouldShowWhiteText = (isHomePage || hasBackgroundImage) && !isScrolled;
 
   const currentCategory = resourceCategories.find((cat) => cat.id === activeCategory);
 
@@ -130,7 +174,9 @@ export const Navbar = () => {
         "transition-all duration-300",
         isScrolled
           ? "bg-background/95 backdrop-blur-md shadow-sm" 
-          : "bg-transparent"
+          : shouldShowWhiteText
+            ? "bg-transparent"
+            : "bg-background/95 backdrop-blur-md shadow-sm"
       )}>
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
@@ -139,7 +185,10 @@ export const Navbar = () => {
               <img 
                 src="/logo.png" 
                 alt="Sangronyx Logo" 
-                className="h-10 lg:h-12 w-auto transition-all"
+                className={cn(
+                  "h-10 lg:h-12 w-auto transition-all",
+                  shouldShowWhiteText ? "brightness-0 invert" : ""
+                )}
               />
             </Link>
 
@@ -158,8 +207,10 @@ export const Navbar = () => {
                         className={cn(
                           "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
                           isActive(item.href) || isResourcesOpen
-                            ? "text-[#0096d6] bg-[#0096d6]/10"
-                            : isHomePage && !isScrolled
+                            ? shouldShowWhiteText
+                              ? "text-white bg-white/10"
+                              : "text-[#0096d6] bg-[#0096d6]/10"
+                            : shouldShowWhiteText
                               ? "text-white hover:text-white/80"
                               : "text-gray-700 hover:text-[#0096d6] hover:bg-[#0096d6]/5"
                         )}
@@ -180,8 +231,10 @@ export const Navbar = () => {
                     className={cn(
                       "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
                       isActive(item.href)
-                        ? "text-primary bg-primary/5"
-                        : isHomePage && !isScrolled
+                        ? shouldShowWhiteText
+                          ? "text-white bg-white/10"
+                          : "text-primary bg-primary/5"
+                        : shouldShowWhiteText
                           ? "text-white hover:text-white/80"
                           : "text-gray-700 hover:text-primary hover:bg-primary/5"
                     )}
@@ -198,7 +251,7 @@ export const Navbar = () => {
                 variant="ghost" 
                 size="icon"
                 className={cn(
-                  isHomePage && !isScrolled
+                  shouldShowWhiteText
                     ? "text-white hover:text-white/80"
                     : "text-gray-700 hover:text-primary"
                 )}
@@ -208,7 +261,12 @@ export const Navbar = () => {
               <Link to="/contact">
                 <Button 
                   size="sm"
-                  className="font-semibold bg-[#0096d6] text-white hover:bg-[#0077b3]"
+                  className={cn(
+                    "font-semibold",
+                    shouldShowWhiteText
+                      ? "bg-white text-[#0096d6] hover:bg-white/90"
+                      : "bg-[#0096d6] text-white hover:bg-[#0077b3]"
+                  )}
                 >
                   Contact Us
                 </Button>
@@ -221,7 +279,7 @@ export const Navbar = () => {
               size="icon"
               className={cn(
                 "lg:hidden",
-                isHomePage && !isScrolled ? "text-white" : "text-gray-700"
+                shouldShowWhiteText ? "text-white" : "text-gray-700"
               )}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >

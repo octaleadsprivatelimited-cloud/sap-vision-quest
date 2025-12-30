@@ -39,6 +39,7 @@ const Manufacturing = () => {
           { label: "Industries", href: "/industries" },
           { label: "Manufacturing" }
         ]}
+        backgroundImage="/manufacturing hero section background.jpg"
       />
 
       {/* Overview Section */}

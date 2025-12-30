@@ -39,6 +39,7 @@ const Logistics = () => {
           { label: "Industries", href: "/industries" },
           { label: "Logistics & Supply Chain" }
         ]}
+        backgroundImage="/logistics and supply chain hero section background.jpg"
       />
 
       {/* Overview Section */}

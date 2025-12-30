@@ -24,7 +24,6 @@ const footerLinks = {
   },
   Company: [
     { label: "Who We Are", href: "/who-we-are" },
-    { label: "What We Do", href: "/what-we-do" },
     { label: "Our Story", href: "/about" },
     { label: "Partners", href: "/partners" },
     { label: "Careers", href: "/careers" },
@@ -115,9 +114,9 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Solutions Column with subheaders */}
+          {/* Services Column with subheaders */}
           <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Solutions</h4>
+            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Services</h4>
             <ul className="space-y-2 mb-4">
               {footerLinks.Solutions.main.map((link) => (
                 <li key={link.label}>

@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 
 const Processes = () => {
   const features = [
-    { icon: Workflow, title: "Business Processes", description: "Refined business processes ensuring efficient and consistent service delivery.", color: "bg-blue-500", link: "/what-we-do" },
-    { icon: BookOpen, title: "Know-how", description: "Accumulated knowledge and expertise from years of industry experience.", color: "bg-orange-500", link: "/what-we-do" },
-    { icon: Cog, title: "Methodologies", description: "Proven methodologies for project management and implementation.", color: "bg-green-500", link: "/what-we-do" },
-    { icon: Lightbulb, title: "Best Practices", description: "Industry best practices integrated into all our operations.", color: "bg-purple-500", link: "/what-we-do" },
+    { icon: Workflow, title: "Business Processes", description: "Refined business processes ensuring efficient and consistent service delivery.", color: "bg-blue-500", link: "/solutions" },
+    { icon: BookOpen, title: "Know-how", description: "Accumulated knowledge and expertise from years of industry experience.", color: "bg-orange-500", link: "/solutions" },
+    { icon: Cog, title: "Methodologies", description: "Proven methodologies for project management and implementation.", color: "bg-green-500", link: "/solutions" },
+    { icon: Lightbulb, title: "Best Practices", description: "Industry best practices integrated into all our operations.", color: "bg-purple-500", link: "/solutions" },
   ];
 
   return (
@@ -22,7 +22,8 @@ const Processes = () => {
         label="INTELLECTUAL RESOURCES"
         breadcrumbs={[{ label: "Resources", href: "/resources" }, { label: "Processes" }]}
         ctaText="Our Approach"
-        ctaHref="/what-we-do"
+        ctaHref="/solutions"
+        backgroundImage="/hero-background.jpg"
       />
 
       <section className="py-16 md:py-24 bg-background">

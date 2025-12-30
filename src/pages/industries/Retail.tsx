@@ -39,6 +39,7 @@ const Retail = () => {
           { label: "Industries", href: "/industries" },
           { label: "Retail & FMCG" }
         ]}
+        backgroundImage="/Retail and FMCG hero section background.jpg"
       />
 
       {/* Overview Section */}

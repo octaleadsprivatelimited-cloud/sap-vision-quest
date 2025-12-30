@@ -27,16 +27,6 @@ const products = [
     color: "bg-sprinklr-green",
     image: "/sap-ecc-to-s4hana-migration.avif",
   },
-  {
-    id: "sap-training",
-    icon: Users,
-    title: "SAP Corporate Training",
-    subtitle: "Comprehensive Training",
-    description: "Functional and technical SAP training for all major modules. Online, offline, and corporate batches with hands-on project experience and certification assistance.",
-    features: ["Training Delivery Models", "Functional SAP Training", "Technical SAP Training", "S/4HANA-Focused Programs", "Hands-On & Practical Learning", "Corporate Enablement Programs", "Certification & Career Support", "Evaluation & Reporting", "Industry-Specific Training", "Post-Training Support"],
-    color: "bg-sprinklr-purple",
-    image: "/sap-corporate-training.avif",
-  },
 ];
 
 const Products = () => {
@@ -49,6 +39,7 @@ const Products = () => {
         description="Complete SAP solutions for implementation, migration, training, support, and custom development."
         label="SAP SERVICES"
         breadcrumbs={[{ label: "Products" }]}
+        backgroundImage="/hero-sap-background.jpg"
       />
 
       {/* Products Grid */}

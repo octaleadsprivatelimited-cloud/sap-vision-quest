@@ -71,6 +71,7 @@ const Placements = () => {
         title="Placement Assistance"
         description="Your gateway to a successful SAP career with dedicated placement support"
         label="WORKSHOP & PLACEMENTS"
+        backgroundImage="/sap-training-background.jpg"
         breadcrumbs={[
           { label: "Resources", href: "/resources" },
           { label: "Placements" },

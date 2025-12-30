@@ -35,9 +35,10 @@ const SapCorporateTraining = () => {
         description="Comprehensive SAP workshop programs for teams of all skill levels. Empower your workforce with expert-led workshop."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Solutions", href: "/solutions" },
+          { label: "Services", href: "/solutions" },
           { label: "SAP Corporate Workshop" }
         ]}
+        backgroundImage="/sap-training-background.jpg"
       />
 
       {/* Overview Section */}

@@ -2,7 +2,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, Factory, ShoppingCart, Building2, Heart, Truck, Leaf, Banknote, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -64,10 +63,11 @@ const Industries = () => {
       <Navbar />
       
       <PageHero 
-        title="Industries We Serve"
-        description="SAP solutions tailored for your industry's unique challenges and opportunities."
-        label="INDUSTRY SOLUTIONS"
+        title="Industry-Focused SAP Solutions That Deliver Business Value"
+        description="We design and deliver SAP solutions tailored to the unique processes and challenges of different industries."
+        label=""
         breadcrumbs={[{ label: "Industries" }]}
+        backgroundImage="/industries hero section background.png"
       />
 
       {/* Industries Grid */}
@@ -126,30 +126,6 @@ const Industries = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 md:py-24 bg-primary">
-        <div className="container mx-auto px-4 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
-              Ready to transform your industry?
-            </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/70 mb-8 max-w-2xl mx-auto">
-              Contact us to discuss how our SAP solutions can drive innovation and efficiency in your industry.
-            </p>
-            <Link to="/contact">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 px-8 py-6 h-auto text-base font-semibold group">
-                Get Started
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </motion.div>
         </div>
       </section>
 

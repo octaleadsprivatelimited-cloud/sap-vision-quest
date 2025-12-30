@@ -31,6 +31,7 @@ const About = () => {
         description="Sangronyx is a leading provider of IT services and SAP solutions, helping businesses transform and grow."
         label="ABOUT US"
         breadcrumbs={[{ label: "Company" }]}
+        backgroundImage="/hero-background.jpg"
       />
 
       {/* Mission */}

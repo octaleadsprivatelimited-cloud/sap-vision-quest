@@ -32,9 +32,10 @@ const SapCustomDevelopment = () => {
         description="Tailored SAP development and enhancements to meet your unique business requirements with modern technologies."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Solutions", href: "/solutions" },
+          { label: "Services", href: "/solutions" },
           { label: "SAP Custom Development" }
         ]}
+        backgroundImage="/SAP CUSTOM DEVELOPMENT.jpg"
       />
 
       {/* Overview Section */}
@@ -60,7 +61,15 @@ const SapCustomDevelopment = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              className="relative"
             >
+              <div className="relative rounded-2xl overflow-hidden shadow-xl mb-6">
+                <img 
+                  src="/SAP CUSTOM DEVELOPMENT.jpg" 
+                  alt="SAP Custom Development"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
               <div className="bg-card rounded-2xl p-8 border border-border/50">
                 <h3 className="text-xl font-bold text-foreground mb-6">Technologies We Use</h3>
                 <div className="flex flex-wrap gap-3">

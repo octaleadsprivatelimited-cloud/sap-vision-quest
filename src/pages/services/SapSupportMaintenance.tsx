@@ -42,27 +42,43 @@ const SapSupportMaintenance = () => {
         description="24/7 ongoing SAP support and maintenance for uninterrupted business operations. Keep your SAP systems running at peak performance."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Solutions", href: "/solutions" },
+          { label: "Services", href: "/solutions" },
           { label: "SAP Support & Maintenance" }
         ]}
+        backgroundImage="/services hero background.jpg"
       />
 
       {/* Overview Section */}
       <section className="py-16 md:py-24 bg-secondary/20">
         <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Keep Your SAP <span className="text-accent">Running Smoothly</span>
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Your SAP system is critical to your business operations. Our support and maintenance services ensure maximum uptime, optimal performance, and rapid issue resolution so you can focus on your business.
-            </p>
-          </motion.div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Keep Your SAP <span className="text-accent">Running Smoothly</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Your SAP system is critical to your business operations. Our support and maintenance services ensure maximum uptime, optimal performance, and rapid issue resolution so you can focus on your business.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="/services hero background.jpg" 
+                  alt="SAP Support & Maintenance"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

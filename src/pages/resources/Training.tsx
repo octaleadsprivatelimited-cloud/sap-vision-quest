@@ -149,6 +149,7 @@ const Training = () => {
         ]}
         ctaText="Enroll Now"
         ctaHref="/contact"
+        backgroundImage="/sap-training-background.jpg"
       />
 
       {/* Workshop Programs Section */}

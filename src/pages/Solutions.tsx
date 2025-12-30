@@ -2,8 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Cloud, Database, Settings, Code, GraduationCap, Wrench, Link2, Users, Star, Headphones, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Cloud, Database, Settings, Code, Wrench, Link2, Users, Star, Headphones, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const sapOfferings = [
@@ -22,7 +21,7 @@ const sapOfferings = [
     description: "Seamless migration from ECC to S/4HANA with minimal downtime and comprehensive data integrity.",
     features: ["Readiness check & assessment", "Database migration", "Custom code adaptation", "End-user training"],
     color: "bg-sprinklr-green",
-    image: "/sap-ecc-to-s4hana-migration.avif",
+    image: "/SAP ECC TO S4 HANA MIGRANATION.png",
     href: "/services/sap-ecc-migration",
   },
   {
@@ -31,6 +30,7 @@ const sapOfferings = [
     description: "Comprehensive SAP licensing solutions optimized for your business needs and budget.",
     features: ["SAP S/4HANA subscription", "Module-based licensing", "Cost optimisation guidance"],
     color: "bg-sprinklr-purple",
+    image: "/SAP LISENCING & SOFTWARE.jpg",
     href: "/services/sap-licensing",
   },
   {
@@ -39,6 +39,7 @@ const sapOfferings = [
     description: "Expert implementation of all major SAP functional and technical modules.",
     features: ["Functional: PP, MM, SD, FI, CO, QM, PM", "Technical: ABAP, BASIS, HANA, Fiori"],
     color: "bg-accent",
+    image: "/SAP MODULE IMPLEMENTATION.png",
     href: "/services/sap-module-implementations",
   },
   {
@@ -47,16 +48,8 @@ const sapOfferings = [
     description: "Tailored SAP development and enhancements to meet your unique business requirements.",
     features: ["ABAP reports & enhancements", "SmartForms / Adobe Forms", "Fiori UI apps"],
     color: "bg-sprinklr-green",
+    image: "/SAP CUSTOM DEVELOPMENT.jpg",
     href: "/services/sap-custom-development",
-  },
-  {
-    icon: GraduationCap,
-    title: "SAP Corporate Training",
-    description: "Comprehensive SAP training programs for teams of all skill levels.",
-    features: ["Functional + Technical training", "Online / Offline / Corporate batches", "Certification assistance"],
-    color: "bg-sprinklr-purple",
-    image: "/sap-corporate-training.avif",
-    href: "/services/sap-corporate-training",
   },
   {
     icon: Wrench,
@@ -64,6 +57,7 @@ const sapOfferings = [
     description: "24/7 ongoing SAP support and maintenance for uninterrupted business operations.",
     features: ["Functional & technical support", "Performance tuning", "Monthly health checks"],
     color: "bg-accent",
+    image: "/services hero background.jpg",
     href: "/services/sap-support-maintenance",
   },
   {
@@ -72,6 +66,7 @@ const sapOfferings = [
     description: "Seamless SAP integration with your existing enterprise systems and applications.",
     features: ["SAP ↔ ERP integration", "API / Middleware integrations", "Third-party app connections"],
     color: "bg-sprinklr-green",
+    image: "/SAP INTEGRATION SERVICES.png",
     href: "/services/sap-integration-services",
   },
 ];
@@ -82,10 +77,12 @@ const Solutions = () => {
       <Navbar />
       
       <PageHero 
-        title="Our SAP Offerings"
-        description="Complete SAP solutions for your business transformation"
-        label="SAP SOLUTIONS"
-        breadcrumbs={[{ label: "Solutions" }]}
+        title="SAP Solutions Designed for Real Business Outcomes"
+        description="We deliver industry-aligned and process-driven SAP solutions that help enterprises improve efficiency, visibility, and control."
+        label="SAP SERVICES"
+        breadcrumbs={[{ label: "Services" }]}
+        ctaText=""
+        backgroundImage="/services-background.webp"
       />
 
       {/* Stats Banner */}
@@ -93,10 +90,10 @@ const Solutions = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { value: "500+", label: "SAP Projects" },
-              { value: "15+", label: "Years Experience" },
-              { value: "200+", label: "SAP Consultants" },
-              { value: "98%", label: "Client Satisfaction" },
+              { value: "45+", label: "SAP Projects" },
+              { value: "10+", label: "Years of experience" },
+              { value: "30+", label: "SAP Consultants" },
+              { value: "98%", label: "Client satisfaction" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -146,7 +143,18 @@ const Solutions = () => {
                   className="group"
                 >
                   <Link to={offering.href}>
-                    <div className={`h-full bg-card rounded-lg border border-border/50 ${borderColor} border-l-4 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-accent/50 transition-all duration-300 cursor-pointer`}>
+                    <div className={`h-full bg-card rounded-lg border border-border/50 ${borderColor} border-l-4 p-6 md:p-8 shadow-sm hover:shadow-md hover:border-accent/50 transition-all duration-300 cursor-pointer overflow-hidden`}>
+                      {/* Image */}
+                      {offering.image && (
+                        <div className="mb-5 -mx-6 -mt-6 md:-mx-8 md:-mt-8 rounded-t-lg overflow-hidden">
+                          <img 
+                            src={offering.image} 
+                            alt={offering.title}
+                            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
+                      
                       {/* Large Icon */}
                       <div className="mb-5">
                         <offering.icon className="w-10 h-10 md:w-12 md:h-12 text-foreground group-hover:text-accent transition-colors" strokeWidth={1.5} />
@@ -188,13 +196,13 @@ const Solutions = () => {
                 Your Trusted <span className="text-accent">SAP Partner</span>
               </h2>
               <p className="text-muted-foreground mb-8 leading-relaxed">
-                With over 15 years of SAP expertise, we deliver end-to-end solutions that transform businesses and drive growth.
+                With over 10 years of SAP expertise, we deliver end-to-end solutions that transform businesses and drive growth.
               </p>
 
               <div className="grid sm:grid-cols-2 gap-6">
                 {[
-                  { icon: Users, title: "Expert Consultants", desc: "200+ certified SAP professionals" },
-                  { icon: Star, title: "Proven Track Record", desc: "500+ successful implementations" },
+                  { icon: Users, title: "Expert Consultants", desc: "30+ certified SAP professionals" },
+                  { icon: Star, title: "Proven Track Record", desc: "45+ successful implementations" },
                   { icon: Headphones, title: "24/7 Support", desc: "Round-the-clock assistance" },
                   { icon: CheckCircle2, title: "Quality Assured", desc: "98% client satisfaction rate" },
                 ].map((item, index) => (
@@ -232,35 +240,11 @@ const Solutions = () => {
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-card rounded-xl p-5 shadow-xl border border-border">
-                <div className="text-3xl font-bold text-accent mb-1">15+</div>
+                <div className="text-3xl font-bold text-accent mb-1">10+</div>
                 <div className="text-sm text-muted-foreground">Years of Excellence</div>
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 md:py-24 bg-primary">
-        <div className="container mx-auto px-4 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
-              Get a Free SAP Consultation
-            </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/70 mb-8 max-w-2xl mx-auto">
-              Our SAP experts will help you choose the right solution for your business.
-            </p>
-            <Link to="/contact">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 px-8 py-6 h-auto text-base font-semibold group">
-                Contact SAP Experts
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </motion.div>
         </div>
       </section>
 

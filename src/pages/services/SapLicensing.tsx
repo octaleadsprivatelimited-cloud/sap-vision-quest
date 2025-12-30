@@ -31,10 +31,11 @@ const SapLicensing = () => {
       
       <PageHero 
         title="SAP Licensing & Software"
+        backgroundImage="/SAP LISENCING & SOFTWARE.jpg"
         description="Comprehensive SAP licensing solutions optimized for your business needs and budget. Navigate complex licensing models with expert guidance."
         label="SAP SERVICES"
         breadcrumbs={[
-          { label: "Solutions", href: "/solutions" },
+          { label: "Services", href: "/solutions" },
           { label: "SAP Licensing & Software" }
         ]}
       />
@@ -62,8 +63,16 @@ const SapLicensing = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              className="relative"
             >
-              <div className="bg-card rounded-2xl p-8 border border-border/50">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="/SAP LISENCING & SOFTWARE.jpg" 
+                  alt="SAP Licensing & Software"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              <div className="mt-6 bg-card rounded-2xl p-8 border border-border/50">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Benefits</h3>
                 <ul className="space-y-4">
                   {benefits.map((benefit, index) => (

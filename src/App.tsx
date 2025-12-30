@@ -51,14 +51,12 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import WhoWeAre from "./pages/WhoWeAre";
-import WhatWeDo from "./pages/WhatWeDo";
 import NotFound from "./pages/NotFound";
 import SapS4HanaImplementation from "./pages/services/SapS4HanaImplementation";
 import SapEccMigration from "./pages/services/SapEccMigration";
 import SapLicensing from "./pages/services/SapLicensing";
 import SapModuleImplementations from "./pages/services/SapModuleImplementations";
 import SapCustomDevelopment from "./pages/services/SapCustomDevelopment";
-import SapCorporateTraining from "./pages/services/SapCorporateTraining";
 import SapSupportMaintenance from "./pages/services/SapSupportMaintenance";
 import SapIntegrationServices from "./pages/services/SapIntegrationServices";
 // Industry Pages
@@ -138,14 +136,12 @@ const App = () => (
           <Route path="/services/sap-licensing" element={<SapLicensing />} />
           <Route path="/services/sap-module-implementations" element={<SapModuleImplementations />} />
           <Route path="/services/sap-custom-development" element={<SapCustomDevelopment />} />
-          <Route path="/services/sap-corporate-training" element={<SapCorporateTraining />} />
           <Route path="/services/sap-support-maintenance" element={<SapSupportMaintenance />} />
           <Route path="/services/sap-integration-services" element={<SapIntegrationServices />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/who-we-are" element={<WhoWeAre />} />
-          <Route path="/what-we-do" element={<WhatWeDo />} />
           <Route path="/contact" element={<Contact />} />
           {/* Legal Pages */}
           <Route path="/privacy" element={<Privacy />} />
