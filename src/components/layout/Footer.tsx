@@ -28,6 +28,7 @@ const footerLinks = {
     { label: "Partners", href: "/partners" },
     { label: "Careers", href: "/careers" },
     { label: "Contact Us", href: "/contact" },
+    { label: "Sitemap", href: "/sitemap.xml", external: true },
   ],
   Resources: [
     { label: "Documentation", href: "/resources/documentation" },
@@ -151,12 +152,21 @@ export const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.Company.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

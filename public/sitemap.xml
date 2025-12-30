@@ -1,240 +1,308 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Main Pages -->
+  <!-- Homepage -->
   <url>
-    <loc>https://sangronyx.com/</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  <!-- Main Pages -->
   <url>
-    <loc>https://sangronyx.com/products</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/products</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/solutions</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://Sangronyx.com/services</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/industries</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://Sangronyx.com/industries</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/resources</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/resources</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Company Pages -->
+  <url>
+    <loc>https://Sangronyx.com/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/who-we-are</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/partners</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/careers</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/partners</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/careers</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/who-we-are</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/what-we-do</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/contact</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
+  
   <!-- Industry Pages -->
   <url>
-    <loc>https://sangronyx.com/industries/manufacturing</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/industries/manufacturing</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/industries/retail</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/industries/pharma</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/industries/logistics</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/industries/education</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/industries/finance</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/industries/small-business</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Service Pages -->
-  <url>
-    <loc>https://sangronyx.com/services/sap-s4hana-implementation</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/services/sap-ecc-migration</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/services/sap-licensing</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/services/sap-module-implementations</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/services/sap-custom-development</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/services/sap-corporate-training</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/services/sap-support-maintenance</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://sangronyx.com/services/sap-integration-services</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Resource Pages -->
-  <url>
-    <loc>https://sangronyx.com/resources/training</loc>
-    <lastmod>2025-12-26</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/resources/placements</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/industries/retail</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/industries/pharma</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/industries/logistics</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/industries/education</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/industries/finance</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/industries/small-business</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Service Pages -->
+  <url>
+    <loc>https://Sangronyx.com/services/sap-s4hana-implementation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/services/sap-ecc-migration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/services/sap-licensing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/services/sap-module-implementations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/services/sap-custom-development</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/services/sap-support-maintenance</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/services/sap-integration-services</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Resource Pages -->
+  <url>
+    <loc>https://Sangronyx.com/resources/documentation</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/resources/training-classes</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/resources/video-tutorials</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/resources/training-materials</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/resources/whitepapers</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/downloads</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/developer-resources</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/training-materials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/training-classes</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/training</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/placements</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Human Resources -->
+  <url>
+    <loc>https://Sangronyx.com/resources/employees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/resources/documentation</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/resources/skills</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/resources/video-tutorials</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/resources/leadership</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Physical Resources -->
+  <url>
+    <loc>https://Sangronyx.com/resources/facilities</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/resources/whitepapers</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/resources/equipment</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/resources/downloads</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/resources/infrastructure</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Financial Resources -->
+  <url>
+    <loc>https://Sangronyx.com/resources/capital</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/resources/faq</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/resources/revenue</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-
+  <url>
+    <loc>https://Sangronyx.com/resources/funding</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Technological Resources -->
+  <url>
+    <loc>https://Sangronyx.com/resources/software</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/patents</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/research</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Intellectual Resources -->
+  <url>
+    <loc>https://Sangronyx.com/resources/brand</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/trademarks</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/processes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Operational Resources -->
+  <url>
+    <loc>https://Sangronyx.com/resources/supply-chain</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/distribution</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://Sangronyx.com/resources/quality-control</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
   <!-- Legal Pages -->
   <url>
-    <loc>https://sangronyx.com/privacy</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/privacy</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/legal</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/legal</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/cookies</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/cookies</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://sangronyx.com/terms</loc>
-    <lastmod>2025-12-26</lastmod>
+    <loc>https://Sangronyx.com/terms</loc>
     <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.5</priority>
   </url>
 </urlset>
