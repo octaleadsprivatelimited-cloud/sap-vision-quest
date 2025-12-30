@@ -13,6 +13,7 @@ const Cookies = () => {
         description="How we use cookies and similar technologies"
         label="LEGAL"
         breadcrumbs={[{ label: "Cookie Policy" }]}
+        backgroundImage="/hero-background.jpg"
       />
 
       <section className="py-16 md:py-24">

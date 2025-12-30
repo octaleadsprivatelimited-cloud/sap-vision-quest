@@ -161,6 +161,10 @@ export const Navbar = () => {
     "/resources/developer-resources",
     "/resources/capital",
     "/resources/brand",
+    "/privacy",
+    "/legal",
+    "/cookies",
+    "/terms",
   ];
   
   const hasBackgroundImage = pagesWithBackground.includes(location.pathname);

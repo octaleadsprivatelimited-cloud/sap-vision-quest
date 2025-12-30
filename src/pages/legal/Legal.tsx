@@ -13,6 +13,7 @@ const Legal = () => {
         description="Important legal notices and disclaimers"
         label="LEGAL"
         breadcrumbs={[{ label: "Legal" }]}
+        backgroundImage="/hero-background-image.jpeg"
       />
 
       <section className="py-16 md:py-24">

@@ -13,6 +13,7 @@ const Terms = () => {
         description="Terms and conditions for using our services"
         label="LEGAL"
         breadcrumbs={[{ label: "Terms of Service" }]}
+        backgroundImage="/hero-background-image.jpeg"
       />
 
       <section className="py-16 md:py-24">

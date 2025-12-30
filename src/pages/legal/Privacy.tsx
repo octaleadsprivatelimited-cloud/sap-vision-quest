@@ -13,6 +13,7 @@ const Privacy = () => {
         description="How we collect, use, and protect your personal information"
         label="LEGAL"
         breadcrumbs={[{ label: "Privacy Policy" }]}
+        backgroundImage="/hero-background.jpg"
       />
 
       <section className="py-16 md:py-24">
