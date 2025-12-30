@@ -74,47 +74,94 @@ export const FeaturesSection = () => {
         </motion.div>
 
         {/* Features Grid - 3 columns, 2 rows layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group"
-            >
-              {/* Card Container */}
-              <div className="h-full bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300">
-                {/* Icon */}
-                <div className="mb-4">
-                  <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
+        <div className="max-w-6xl mx-auto">
+          {/* First 3 cards in a 3-column grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8 lg:mb-12">
+            {features.slice(0, 3).map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="group"
+              >
+                {/* Card Container */}
+                <div className="h-full bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300">
+                  {/* Icon */}
+                  <div className="mb-4">
+                    <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
+                  </div>
+                  
+                  {/* Title */}
+                  <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-tight">
+                    {feature.title}
+                  </h3>
+                  
+                  {/* Colored underline */}
+                  <div className={`w-10 h-0.5 ${feature.underlineColor} mb-4`}></div>
+                  
+                  {/* Description */}
+                  <p className="text-white/90 text-sm leading-relaxed mb-5 min-h-[80px]">
+                    {feature.description}
+                  </p>
+                  
+                  {/* Explore link */}
+                  <Link 
+                    to={feature.link}
+                    className="inline-flex items-center text-white font-medium text-sm hover:text-accent transition-colors group/link"
+                  >
+                    <ArrowRight className="w-4 h-4 mr-2 group-hover/link:translate-x-1 transition-transform" />
+                    {feature.linkText}
+                  </Link>
                 </div>
-                
-                {/* Title */}
-                <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-tight">
-                  {feature.title}
-                </h3>
-                
-                {/* Colored underline */}
-                <div className={`w-10 h-0.5 ${feature.underlineColor} mb-4`}></div>
-                
-                {/* Description */}
-                <p className="text-white/90 text-sm leading-relaxed mb-5 min-h-[80px]">
-                  {feature.description}
-                </p>
-                
-                {/* Explore link */}
-                <Link 
-                  to={feature.link}
-                  className="inline-flex items-center text-white font-medium text-sm hover:text-accent transition-colors group/link"
-                >
-                  <ArrowRight className="w-4 h-4 mr-2 group-hover/link:translate-x-1 transition-transform" />
-                  {feature.linkText}
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Last 2 cards centered */}
+          <div className="flex flex-col md:flex-row lg:justify-center gap-6 lg:gap-8">
+            {features.slice(3).map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (index + 3) * 0.1, duration: 0.5 }}
+                className="group w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-21.33px)] max-w-md mx-auto lg:mx-0"
+              >
+                {/* Card Container */}
+                <div className="h-full bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300">
+                  {/* Icon */}
+                  <div className="mb-4">
+                    <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
+                  </div>
+                  
+                  {/* Title */}
+                  <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-tight">
+                    {feature.title}
+                  </h3>
+                  
+                  {/* Colored underline */}
+                  <div className={`w-10 h-0.5 ${feature.underlineColor} mb-4`}></div>
+                  
+                  {/* Description */}
+                  <p className="text-white/90 text-sm leading-relaxed mb-5 min-h-[80px]">
+                    {feature.description}
+                  </p>
+                  
+                  {/* Explore link */}
+                  <Link 
+                    to={feature.link}
+                    className="inline-flex items-center text-white font-medium text-sm hover:text-accent transition-colors group/link"
+                  >
+                    <ArrowRight className="w-4 h-4 mr-2 group-hover/link:translate-x-1 transition-transform" />
+                    {feature.linkText}
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
