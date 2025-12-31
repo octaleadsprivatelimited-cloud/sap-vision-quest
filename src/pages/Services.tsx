@@ -111,8 +111,48 @@ const Services = () => {
       </section>
 
       {/* SAP Offerings Grid - Sprinklr Style */}
-      <section className="py-16 md:py-24 lg:py-32 bg-secondary/20">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
+        
+        {/* Decorative Blur Circles */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute -top-20 -right-20 md:top-10 md:right-10 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#0096d6]/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="absolute -bottom-20 -left-20 md:bottom-10 md:left-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#0077b3]/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, delay: 0.4 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-[#0096d6]/5 rounded-full blur-3xl"
+          />
+        </div>
+        
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 z-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #0096d6 1px, transparent 1px),
+              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -184,18 +224,55 @@ const Services = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 md:py-24 bg-secondary/30">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 z-0" />
+        
+        {/* Decorative Blur Circles */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-[#0096d6]/5 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="absolute bottom-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-[#0077b3]/5 rounded-full blur-3xl"
+          />
+        </div>
+        
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 z-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #0096d6 1px, transparent 1px),
+              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Your Trusted <span className="text-accent">SAP Partner</span>
+              <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
+                Why Choose Us
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Your Trusted <span className="text-[#0096d6]">SAP Partner</span>
               </h2>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 With over 10 years of SAP expertise, we deliver end-to-end solutions that transform businesses and drive growth.
               </p>
 
@@ -211,16 +288,14 @@ const Services = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-start gap-4"
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="group relative bg-white rounded-xl p-5 border border-gray-100 hover:border-[#0096d6]/30 hover:shadow-lg transition-all duration-300"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-accent" />
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0096d6] to-[#0077b3] flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform duration-300">
+                      <item.icon className="w-6 h-6 text-white" />
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
-                    </div>
+                    <h4 className="font-bold text-gray-900 mb-1 text-lg">{item.title}</h4>
+                    <p className="text-sm text-gray-600">{item.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -230,19 +305,27 @@ const Services = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
                 <img 
                   src="/why-choose-sangronyx-for-sap.avif" 
                   alt="Why Choose Sangronyx"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-card rounded-xl p-5 shadow-xl border border-border">
-                <div className="text-3xl font-bold text-accent mb-1">10+</div>
-                <div className="text-sm text-muted-foreground">Years of Excellence</div>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="absolute -bottom-6 -left-6 bg-gradient-to-br from-[#0096d6] to-[#0077b3] rounded-2xl p-6 shadow-2xl border-4 border-white"
+              >
+                <div className="text-4xl font-bold text-white mb-1">10+</div>
+                <div className="text-sm text-white/90 font-medium">Years of Excellence</div>
+              </motion.div>
             </motion.div>
           </div>
         </div>

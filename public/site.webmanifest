@@ -1,0 +1,25 @@
+{
+  "name": "Sangronyx - SAP Solutions",
+  "short_name": "Sangronyx",
+  "description": "Complete SAP Solutions - Implementation, Migration, Training, Support & Custom Development",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0096d6",
+  "orientation": "portrait-primary"
+}
+

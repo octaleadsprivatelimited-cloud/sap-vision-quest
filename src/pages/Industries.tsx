@@ -78,16 +78,60 @@ const Industries = () => {
       />
 
       {/* Industries Grid */}
-      <section className="py-16 md:py-24 lg:py-32 bg-white">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
+        
+        {/* Decorative Blur Circles */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute -top-20 -right-20 md:top-10 md:right-10 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#0096d6]/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="absolute -bottom-20 -left-20 md:bottom-10 md:left-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#0077b3]/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, delay: 0.4 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-[#0096d6]/5 rounded-full blur-3xl"
+          />
+        </div>
+        
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 z-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #0096d6 1px, transparent 1px),
+              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
+            <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
+              Industries We Serve
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900">
               Seven Industry Verticals. One Unified SAP Platform.
             </h2>
           </motion.div>

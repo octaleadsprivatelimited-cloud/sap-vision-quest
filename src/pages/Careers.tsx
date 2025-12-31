@@ -83,41 +83,89 @@ const Careers = () => {
       />
 
       {/* Why Work With Us Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
+        
+        {/* Decorative Blur Circles */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute -top-20 -right-20 md:top-10 md:right-10 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#0096d6]/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="absolute -bottom-20 -left-20 md:bottom-10 md:left-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#0077b3]/10 rounded-full blur-3xl"
+          />
+        </div>
+        
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 z-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #0096d6 1px, transparent 1px),
+              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-12 md:mb-16"
           >
-            <span className="text-[#0099cc] text-sm font-semibold tracking-wider uppercase mb-3 block">
+            <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
               Why Join Us
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Why Work at Sangronyx?
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               We offer more than just a job – we offer a career path filled with growth opportunities, meaningful work, and a supportive environment.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={benefit.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-[#0099cc]/30"
+                className="group relative bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#0096d6]/30 overflow-hidden"
               >
-                <div className="w-12 h-12 rounded-lg bg-[#0099cc]/10 flex items-center justify-center mb-4">
-                  <benefit.icon className="w-6 h-6 text-[#0099cc]" />
+                {/* Decorative gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Icon container with gradient background */}
+                <div className="relative z-10 w-14 h-14 bg-gradient-to-br from-[#0096d6] to-[#0077b3] rounded-xl flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <benefit.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{benefit.title}</h3>
-                <p className="text-muted-foreground text-sm">{benefit.description}</p>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#0096d6] transition-colors duration-300">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </div>
+                
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0096d6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.div>
             ))}
           </div>
@@ -125,80 +173,102 @@ const Careers = () => {
       </section>
 
       {/* Open Positions Section */}
-      <section id="openings" className="relative py-16 md:py-24 overflow-hidden">
-        {/* Background Design */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-[#00c9a7]/5 to-[#f5a623]/5"></div>
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#0096d6]/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#00c9a7]/10 rounded-full blur-3xl"></div>
+      <section id="openings" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
+        
+        {/* Decorative Blur Circles */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute -top-20 -right-20 md:top-10 md:right-10 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#0096d6]/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="absolute -bottom-20 -left-20 md:bottom-10 md:left-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#0077b3]/10 rounded-full blur-3xl"
+          />
         </div>
         
-        {/* Subtle pattern overlay */}
+        {/* Subtle Grid Pattern */}
         <div 
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 z-0 opacity-[0.03]"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(0,150,214,0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0,150,214,0.1) 1px, transparent 1px)
+              linear-gradient(to right, #0096d6 1px, transparent 1px),
+              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
             `,
             backgroundSize: '50px 50px'
           }}
-        ></div>
+        />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <span className="text-[#0099cc] text-sm font-semibold tracking-wider uppercase mb-3 block">
+            <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
               Open Positions
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Current Opportunities
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
               Explore our open positions and find the role that matches your skills and career goals.
             </p>
             <Button 
               onClick={() => setIsDialogOpen(true)}
-              className="bg-[#0099cc] hover:bg-[#00b3e6] text-white rounded-full px-8 py-3 h-auto text-base font-medium"
+              className="bg-gradient-to-r from-[#0096d6] to-[#0077b3] hover:from-[#0077b3] hover:to-[#005a8a] text-white rounded-lg px-8 py-6 h-auto text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             >
               APPLY JOB
             </Button>
           </motion.div>
 
           {/* Our Culture & Our Principles Section */}
-          <div className="mt-16 grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {/* Our Culture Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-card border border-border rounded-xl p-8"
+              className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
             >
-              <h3 className="text-2xl font-bold text-foreground mb-4">Our Culture</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Our Culture
+              </h3>
+              <p className="text-gray-600 leading-relaxed text-sm">
                 Step into a workplace defined by warmth, positivity, and collaboration. At Sangronyx, we balance focused work with moments to connect whether it's over a cup of coffee, a team activity, or shared successes. Our open-door and inclusive culture encourages ideas, teamwork, and continuous growth.
               </p>
             </motion.div>
 
+            {/* Our Principles Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="bg-card border border-border rounded-xl p-8"
+              className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
             >
-              <h3 className="text-2xl font-bold text-foreground mb-4">Our Principles</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Sangronyx Technologies is proud to be an equal employment opportunity employer. We provide fair and equal opportunities to all individuals, regardless of race, religion, gender, age, national origin, disability, marital status, or any other characteristic protected by law.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Since our inception, we have grown organically by hiring the best talent and fostering a culture of excellence. We are always looking for skilled professionals to join our team. If you have relevant experience, we would love to hear from you. Please send your details to – <a href="mailto:admin@sangronyx.com" className="text-[#0099cc] hover:underline">admin@sangronyx.com</a>
-              </p>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Our Principles
+              </h3>
+              <div className="space-y-3 text-sm">
+                <p className="text-gray-600 leading-relaxed">
+                  Sangronyx Technologies is proud to be an equal employment opportunity employer. We provide fair and equal opportunities to all individuals, regardless of race, religion, gender, age, national origin, disability, marital status, or any other characteristic protected by law.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  Since our inception, we have grown organically by hiring the best talent and fostering a culture of excellence. We are always looking for skilled professionals to join our team. If you have relevant experience, we would love to hear from you. Please send your details to – <a href="mailto:admin@sangronyx.com" className="text-[#0096d6] hover:underline">admin@sangronyx.com</a>
+                </p>
+              </div>
             </motion.div>
           </div>
         </div>

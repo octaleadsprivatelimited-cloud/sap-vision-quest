@@ -153,22 +153,59 @@ const Training = () => {
       />
 
       {/* Workshop Programs Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
+        
+        {/* Decorative Blur Circles */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute -top-20 -right-20 md:top-10 md:right-10 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#0096d6]/10 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="absolute -bottom-20 -left-20 md:bottom-10 md:left-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#0077b3]/10 rounded-full blur-3xl"
+          />
+        </div>
+        
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 z-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #0096d6 1px, transparent 1px),
+              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Our <span className="text-accent">Workshop Programs</span>
+              <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
+                Training Programs
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Our <span className="text-[#0096d6]">Workshop Programs</span>
               </h2>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 Choose from a wide range of SAP workshop programs designed to launch your career. Our expert-led courses combine theoretical knowledge with hands-on practice on live SAP systems.
               </p>
               <Link to="/contact">
-                <Button size="lg" className="gap-2">
+                <Button size="lg" className="gap-2 bg-gradient-to-r from-[#0096d6] to-[#0077b3] hover:from-[#0077b3] hover:to-[#005a8a] text-white border-0">
                   Enroll Now <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
@@ -177,41 +214,59 @@ const Training = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <img 
-                src={trainingClassroomImg} 
-                alt="SAP Workshop Classroom" 
-                className="rounded-2xl shadow-xl w-full"
-              />
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
+                <img 
+                  src={trainingClassroomImg} 
+                  alt="SAP Workshop Classroom" 
+                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {workshopPrograms.map((program, index) => (
               <motion.div
                 key={program.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group"
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group relative"
               >
-                <div className="mb-6">
-                  <program.icon className="w-16 h-16 text-foreground" strokeWidth={1.5} />
+                <div className="relative bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#0096d6]/30 h-full flex flex-col overflow-hidden">
+                  {/* Decorative gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Icon container with gradient background */}
+                  <div className="relative z-10 w-16 h-16 bg-gradient-to-br from-[#0096d6] to-[#0077b3] rounded-xl flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <program.icon className="w-8 h-8 text-white" strokeWidth={2} />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 flex-1">
+                    <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#0096d6] transition-colors duration-300">
+                      {program.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                      {program.description}
+                    </p>
+                    <Link 
+                      to={program.link}
+                      className="inline-flex items-center text-[#0096d6] font-semibold hover:gap-3 transition-all gap-2 group-hover:text-[#0077b3]"
+                    >
+                      Explore {program.title.split(' ')[1]}
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                  
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0096d6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-1">
-                  {program.title}
-                </h3>
-                <div className={`w-12 h-1 ${program.color} mb-4`}></div>
-                <p className="text-muted-foreground mb-6 leading-relaxed">{program.description}</p>
-                <Link 
-                  to={program.link}
-                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
-                >
-                  Explore {program.title.split(' ')[1]}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </motion.div>
             ))}
           </div>
@@ -257,56 +312,95 @@ const Training = () => {
       </section>
 
       {/* Workshop Process Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="order-2 lg:order-1"
-            >
-              <img 
-                src={trainingSuccessImg} 
-                alt="SAP Career Success Journey" 
-                className="rounded-2xl shadow-xl w-full max-w-md mx-auto"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="order-1 lg:order-2"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Your Journey to <span className="text-accent">SAP Success</span>
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                A structured approach to transform you from a beginner to a certified SAP professional
-              </p>
-            </motion.div>
-          </div>
+      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-[#0096d6]/5 rounded-full blur-3xl"
+          />
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="absolute bottom-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-[#0077b3]/5 rounded-full blur-3xl"
+          />
+        </div>
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          {/* Header Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
+              Training Process
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Your Journey to <span className="text-[#0096d6]">SAP Success</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              A structured approach to transform you from a beginner to a certified SAP professional
+            </p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-5 gap-6">
-            {workshopProcess.map((item, index) => (
-              <motion.div
-                key={item.step}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative text-center"
-              >
-                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-accent">{item.step}</span>
-                </div>
-                {index < workshopProcess.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-[60%] w-full h-0.5 bg-border" />
-                )}
-                <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </motion.div>
-            ))}
+          {/* Horizontal Timeline Layout */}
+          <div className="max-w-7xl mx-auto">
+            <div className="relative">
+              {/* Horizontal Timeline Line */}
+              <div className="hidden md:block absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-[#0096d6] via-[#0077b3] to-[#0096d6] opacity-20" />
+              
+              {/* Process Steps Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-2">
+                {workshopProcess.map((item, index) => (
+                  <motion.div
+                    key={item.step}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="relative group"
+                  >
+                    {/* Arrow Connector */}
+                    {index < workshopProcess.length - 1 && (
+                      <div className="hidden md:block absolute top-24 left-full w-full h-0.5 z-0">
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-l-[12px] border-l-[#0096d6] border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent opacity-30" />
+                      </div>
+                    )}
+                    
+                    {/* Step Card */}
+                    <div className="relative bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#0096d6]/30 h-full flex flex-col">
+                      {/* Step Number Badge */}
+                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#0096d6] to-[#0077b3] rounded-full flex items-center justify-center shadow-lg border-4 border-white group-hover:scale-110 transition-transform duration-300">
+                          <span className="text-lg font-bold text-white">{item.step}</span>
+                        </div>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="mt-8 flex-1">
+                        <h3 className="text-base md:text-lg font-bold text-gray-900 mb-3 group-hover:text-[#0096d6] transition-colors duration-300 text-center">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-gray-600 leading-relaxed text-center">
+                          {item.description}
+                        </p>
+                      </div>
+                      
+                      {/* Bottom accent line */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0096d6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl" />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -342,13 +436,7 @@ const Training = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="space-y-6"
             >
-              <img 
-                src={trainingCurriculumImg} 
-                alt="SAP Workshop Curriculum" 
-                className="rounded-2xl shadow-lg w-full max-w-sm mx-auto mb-6"
-              />
               <div className="bg-card rounded-2xl p-8 border border-border/50">
                 <h3 className="text-xl font-bold text-foreground mb-6">Key Topics Covered</h3>
                 <div className="grid gap-4">
