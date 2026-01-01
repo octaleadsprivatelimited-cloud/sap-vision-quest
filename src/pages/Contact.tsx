@@ -41,7 +41,7 @@ const contactMethods = [
 
 const officeHours = [
   { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM" },
-  { day: "Saturday", hours: "10:00 AM - 2:00 PM" },
+  { day: "Saturday", hours: "Closed" },
   { day: "Sunday", hours: "Closed" },
 ];
 
@@ -251,7 +251,7 @@ const Contact = () => {
                 </div>
                 
                 <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 h-auto">
-                  Send Message
+                  Submit
                 </Button>
               </form>
             </motion.div>
@@ -270,9 +270,11 @@ const Contact = () => {
                 </h3>
                 <div className="space-y-3 text-muted-foreground">
                   <p>Sangronyx Technologies</p>
-                  <p>123 Business Park, Suite 456</p>
-                  <p>Tech City, State 12345</p>
-                  <p>United States</p>
+                  <p>7-1-619/A/37,</p>
+                  <p>101, Revathi Apartments,</p>
+                  <p>Beside Maitrivanam outgate, opp Annapurna block gate no-2,</p>
+                  <p>Kumar Basti, Srinivas nagar, Ameerpet,</p>
+                  <p>Hyd, Telangana-500038</p>
                 </div>
               </div>
               

@@ -7,7 +7,6 @@ const footerLinks = {
     { label: "SAP S/4HANA", href: "/products" },
     { label: "SAP ECC", href: "/products" },
     { label: "SAP Fiori", href: "/products" },
-    { label: "SAP HANA", href: "/products" },
     { label: "SAP BTP", href: "/products" },
   ],
   Solutions: {
@@ -17,9 +16,10 @@ const footerLinks = {
       { label: "Custom Development", href: "/solutions" },
     ],
     Services: [
-      { label: "Workshop", href: "/solutions" },
-      { label: "Support", href: "/solutions" },
-      { label: "Consulting", href: "/solutions" },
+      { label: "Support", href: "/services" },
+      { label: "Consulting", href: "/services" },
+      { label: "Rollout", href: "/services" },
+      { label: "Hypercare support", href: "/services" },
     ],
   },
   Company: [
@@ -70,7 +70,7 @@ export const Footer = () => {
 
       <div className="container mx-auto px-4 lg:px-8 py-10 md:py-14 relative z-10">
         {/* Main footer content */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-5 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-5 mb-10">
           {/* Contact CTA Column */}
           <div className="col-span-2 md:col-span-1">
             <h4 className="text-white text-[13px] font-medium mb-3 tracking-wide">How can we help you?</h4>
@@ -172,23 +172,6 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources Column */}
-          <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Resources</h4>
-            <ul className="space-y-2">
-              {footerLinks.Resources.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Support Column */}
           <div>
             <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Support</h4>
@@ -211,6 +194,11 @@ export const Footer = () => {
               <li>
                 <Link to="/resources/developer-resources" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
                   Developer Portal
+                </Link>
+              </li>
+              <li>
+                <Link to="/resources/faq" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
+                  FAQ
                 </Link>
               </li>
             </ul>

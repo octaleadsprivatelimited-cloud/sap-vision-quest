@@ -81,10 +81,26 @@ const spotlightItems = [
   },
 ];
 
+const locations = [
+  {
+    city: "Hyderabad, India",
+    address: "7-1-619/A/37, 101, Revathi Apartments, Beside Maitrivanam outgate, opp Annapurna block gate no-2, Kumar Basti, Srinivas nagar, Ameerpet, Hyd, Telangana-500038",
+    phone: "+91-7981999562",
+    email: "info@sangronyx.com"
+  },
+  {
+    city: "Global Presence",
+    address: "Serving clients worldwide",
+    phone: "+91-7981999562",
+    email: "info@sangronyx.com"
+  }
+];
+
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isLocationsOpen, setIsLocationsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("human");
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const [mobileExpandedCategory, setMobileExpandedCategory] = useState<string | null>(null);
@@ -251,17 +267,71 @@ export const Navbar = () => {
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-3">
-              <Button 
-                variant="ghost" 
-                size="icon"
-                className={cn(
-                  shouldShowWhiteText
-                    ? "text-white hover:text-white/80"
-                    : "text-gray-700 hover:text-primary"
-                )}
+              <div
+                className="relative"
+                onMouseEnter={() => setIsLocationsOpen(true)}
+                onMouseLeave={() => setIsLocationsOpen(false)}
               >
-                <Globe className="w-5 h-5" />
-              </Button>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  className={cn(
+                    shouldShowWhiteText
+                      ? "text-white hover:text-white/80"
+                      : "text-gray-700 hover:text-primary"
+                  )}
+                >
+                  <Globe className="w-5 h-5" />
+                </Button>
+                
+                {/* Locations Dropdown */}
+                <AnimatePresence>
+                  {isLocationsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-50"
+                      onMouseEnter={() => setIsLocationsOpen(true)}
+                      onMouseLeave={() => setIsLocationsOpen(false)}
+                    >
+                      <div className="p-4">
+                        <h3 className="text-sm font-semibold text-gray-900 mb-3">Our Locations</h3>
+                        <div className="space-y-4">
+                          {locations.map((loc, index) => (
+                            <div key={index} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
+                              <div className="flex items-start gap-3">
+                                <MapPin className="w-4 h-4 text-[#0096d6] mt-1 flex-shrink-0" />
+                                <div className="flex-1">
+                                  <h4 className="text-sm font-semibold text-gray-900 mb-1">{loc.city}</h4>
+                                  <p className="text-xs text-gray-600 leading-relaxed mb-2">{loc.address}</p>
+                                  <div className="space-y-1">
+                                    <a 
+                                      href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}
+                                      className="flex items-center gap-2 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
+                                    >
+                                      <Phone className="w-3 h-3" />
+                                      {loc.phone}
+                                    </a>
+                                    <a 
+                                      href={`mailto:${loc.email}`}
+                                      className="flex items-center gap-2 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
+                                    >
+                                      <Mail className="w-3 h-3" />
+                                      {loc.email}
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <Link to="/contact">
                 <Button 
                   size="sm"
@@ -514,6 +584,44 @@ export const Navbar = () => {
                     </Link>
                   );
                 })}
+                
+                {/* Locations Section */}
+                <div className="mt-6 p-4 bg-white rounded-xl border border-gray-200">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Globe className="w-5 h-5 text-[#0096d6]" />
+                    <h3 className="text-sm font-semibold text-gray-900">Our Locations</h3>
+                  </div>
+                  <div className="space-y-4">
+                    {locations.map((loc, index) => (
+                      <div key={index} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
+                        <div className="flex items-start gap-3">
+                          <MapPin className="w-4 h-4 text-[#0096d6] mt-1 flex-shrink-0" />
+                          <div className="flex-1">
+                            <h4 className="text-sm font-semibold text-gray-900 mb-1">{loc.city}</h4>
+                            <p className="text-xs text-gray-600 leading-relaxed mb-2">{loc.address}</p>
+                            <div className="space-y-1">
+                              <a 
+                                href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}
+                                className="flex items-center gap-2 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
+                              >
+                                <Phone className="w-3 h-3" />
+                                {loc.phone}
+                              </a>
+                              <a 
+                                href={`mailto:${loc.email}`}
+                                className="flex items-center gap-2 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
+                              >
+                                <Mail className="w-3 h-3" />
+                                {loc.email}
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
                 {/* Contact Info Box */}
                 <div className="mt-6 p-4 bg-gradient-to-br from-[#0096d6]/10 to-[#0096d6]/5 rounded-xl border border-[#0096d6]/20">
                   <h3 className="text-sm font-semibold text-gray-900 mb-3">Get in Touch</h3>
