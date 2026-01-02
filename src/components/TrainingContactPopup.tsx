@@ -57,7 +57,7 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     const isNameValid = validateName(name);
@@ -69,20 +69,39 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
 
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setTimeout(() => {
-        onOpenChange(false);
-        // Reset form after closing
+    try {
+      const response = await fetch("https://formspree.io/f/maqwrdrv", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _subject: "Training Workshop Inquiry - Sangronyx",
+          name: name,
+          phone: `+91${phone}`,
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
         setTimeout(() => {
-          setName("");
-          setPhone("");
-          setIsSubmitted(false);
-        }, 300);
-      }, 2000);
-    }, 1000);
+          onOpenChange(false);
+          // Reset form after closing
+          setTimeout(() => {
+            setName("");
+            setPhone("");
+            setIsSubmitted(false);
+          }, 300);
+        }, 2000);
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      setIsSubmitting(false);
+      // You can add error handling here if needed
+      console.error("Error submitting form:", error);
+    }
   };
 
   const handleClose = () => {
@@ -122,7 +141,7 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
             <p className="text-muted-foreground">We'll contact you shortly with workshop details.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+          <form onSubmit={handleSubmit} action="https://formspree.io/f/maqwrdrv" method="POST" className="space-y-4 mt-4">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium">
                 Name <span className="text-red-500">*</span>

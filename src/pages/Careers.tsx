@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
+import { SEO } from "@/components/SEO";
+import { useSEO } from "@/hooks/useSEO";
 import { PageBackground } from "@/components/ui/page-background";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -36,6 +38,7 @@ const benefits = [
 ];
 
 const Careers = () => {
+  const seo = useSEO();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -57,16 +60,50 @@ const Careers = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    // You can add API call here
-    setIsDialogOpen(false);
+    
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("_subject", "Job Application - Sangronyx");
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("phone", formData.phone);
+      formDataToSend.append("location", formData.location);
+      formDataToSend.append("region", formData.region);
+      if (formData.resume) {
+        formDataToSend.append("resume", formData.resume);
+      }
+
+      const response = await fetch("https://formspree.io/f/maqwrdrv", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          location: "",
+          region: "",
+          resume: null,
+        });
+        setIsDialogOpen(false);
+        // You can add a success toast here if needed
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      // You can add an error toast here if needed
+    }
   };
 
   return (
     <PageBackground>
+      <SEO {...seo} />
       <Navbar />
       <PageHero
         title="Join Our Team"
@@ -282,7 +319,7 @@ const Careers = () => {
               SUBMIT RESUME
             </DialogTitle>
           </DialogHeader>
-          <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+          <form onSubmit={handleSubmit} action="https://formspree.io/f/maqwrdrv" method="POST" encType="multipart/form-data" className="mt-6 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <Label htmlFor="name" className="text-sm font-medium text-gray-700">

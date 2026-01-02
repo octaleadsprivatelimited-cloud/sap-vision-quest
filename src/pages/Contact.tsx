@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
+import { SEO } from "@/components/SEO";
+import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -46,6 +48,7 @@ const officeHours = [
 ];
 
 const Contact = () => {
+  const seo = useSEO();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -58,26 +61,58 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent",
-      description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-    });
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      company: "",
-      jobTitle: "",
-      country: "",
-      interest: "",
-      message: "",
-    });
+    
+    try {
+      const response = await fetch("https://formspree.io/f/maqwrdrv", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _subject: "Contact Form Submission - Sangronyx",
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          company: formData.company,
+          jobTitle: formData.jobTitle,
+          country: formData.country,
+          interest: formData.interest,
+          message: formData.message,
+        }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent",
+          description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+        });
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          company: "",
+          jobTitle: "",
+          country: "",
+          interest: "",
+          message: "",
+        });
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...seo} />
       <Navbar />
       
       <PageHero 
@@ -140,7 +175,7 @@ const Contact = () => {
                 Fill out the form below or email us at info@sangronyx.com. We'll get back to you within 24 hours.
               </p>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} action="https://formspree.io/f/maqwrdrv" method="POST" className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name *</Label>
