@@ -585,8 +585,8 @@ export const Navbar = () => {
                   );
                 })}
                 
-                {/* Locations Section */}
-                <div className="mt-6 p-4 bg-white rounded-xl border border-gray-200">
+                {/* Locations Section - Hidden on mobile */}
+                <div className="hidden mt-6 p-4 bg-white rounded-xl border border-gray-200">
                   <div className="flex items-center gap-2 mb-3">
                     <Globe className="w-5 h-5 text-[#0096d6]" />
                     <h3 className="text-sm font-semibold text-gray-900">Our Locations</h3>

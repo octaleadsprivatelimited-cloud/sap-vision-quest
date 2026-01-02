@@ -7,8 +7,8 @@ export const seoData: Record<string, {
 }> = {
   // Homepage
   "/": {
-    title: "SAP Solutions – Complete SAP Implementation, Training & Support Services",
-    description: "Sangronyx provides comprehensive SAP S/4HANA implementation, ECC to S/4HANA migration, corporate SAP training, 24/7 support, and custom development services. Expert SAP consultants delivering end-to-end digital solutions for business transformation. Trusted SAP partner for manufacturing, retail, pharma, logistics, education, finance, and small businesses.",
+    title: "SAP Solutions – Complete SAP Implementation & Support Services",
+    description: "Sangronyx provides comprehensive SAP S/4HANA implementation, ECC to S/4HANA migration, 24/7 support, and custom development services. Expert SAP consultants delivering end-to-end digital solutions for business transformation. Trusted SAP partner for manufacturing, retail, pharma, logistics, education, finance, and small businesses.",
     keywords: "SAP S/4HANA, SAP implementation, SAP migration, SAP training, SAP support, SAP consulting, SAP ECC to S/4HANA, SAP corporate training, SAP AMC, SAP custom development, SAP integration services, SAP module implementation, SAP licensing, SAP hypercare support, SAP workshop, SAP solutions, SAP services, SAP consulting company, SAP implementation partner, SAP migration services, SAP S/4HANA implementation, SAP ECC migration, SAP support and maintenance, SAP custom development services, SAP integration, SAP corporate training programs, SAP consulting services, digital transformation, ERP implementation, business transformation, enterprise resource planning, SAP Fiori, SAP HANA, SAP BTP, cloud ERP, on-premise SAP, hybrid SAP solutions",
     canonical: "https://Sangronyx.com",
   },
@@ -23,8 +23,8 @@ export const seoData: Record<string, {
 
   // Services
   "/services": {
-    title: "SAP Services – Implementation, Migration, Training & Support",
-    description: "Comprehensive SAP services including S/4HANA implementation, ECC to S/4HANA migration, SAP module implementations, custom development, integration services, 24/7 support & maintenance, corporate training, and licensing solutions. Expert SAP consultants delivering excellence.",
+    title: "SAP Services – Implementation, Migration & Support",
+    description: "Comprehensive SAP services including S/4HANA implementation, ECC to S/4HANA migration, SAP module implementations, custom development, integration services, 24/7 support & maintenance, and licensing solutions. Expert SAP consultants delivering excellence.",
     keywords: "SAP services, SAP implementation services, SAP migration services, SAP training services, SAP support services, SAP consulting services, SAP S/4HANA implementation, SAP ECC migration, SAP module implementation, SAP custom development, SAP integration services, SAP support and maintenance, SAP corporate training, SAP licensing, SAP AMC, SAP hypercare support, SAP rollout services",
     canonical: "https://Sangronyx.com/services",
   },
@@ -81,7 +81,7 @@ export const seoData: Record<string, {
 
   "/industries/small-business": {
     title: "SAP Solutions for Small Business – SAP Business One & Affordable ERP",
-    description: "Affordable SAP solutions for small businesses including SAP Business One, simplified SAP implementations, cost-effective SAP support, and tailored SAP training. Expert SAP consulting for small and medium enterprises.",
+    description: "Affordable SAP solutions for small businesses including SAP Business One, simplified SAP implementations, cost-effective SAP support, and tailored solutions. Expert SAP consulting for small and medium enterprises.",
     keywords: "SAP for small business, SAP Business One, SAP for SMEs, small business ERP, affordable SAP solutions, SAP small business implementation, SAP Business One implementation, SME SAP solutions, SAP for startups, cost-effective SAP, SAP small business modules",
     canonical: "https://Sangronyx.com/industries/small-business",
   },
@@ -96,7 +96,7 @@ export const seoData: Record<string, {
 
   "/services/sap-ecc-migration": {
     title: "SAP ECC to S/4HANA Migration Services – Seamless Migration",
-    description: "Expert SAP ECC to S/4HANA migration services with minimal downtime. Comprehensive migration including readiness check, database migration, custom code adaptation, data migration, and end-user training. Trusted SAP migration partner.",
+    description: "Expert SAP ECC to S/4HANA migration services with minimal downtime. Comprehensive migration including readiness check, database migration, custom code adaptation, and data migration. Trusted SAP migration partner.",
     keywords: "SAP ECC to S/4HANA migration, SAP ECC migration, SAP migration services, SAP S/4HANA migration, SAP system migration, SAP database migration, SAP custom code migration, SAP data migration, SAP migration partner, SAP migration consultants, SAP ECC upgrade, SAP migration project",
     canonical: "https://Sangronyx.com/services/sap-ecc-migration",
   },
@@ -139,14 +139,14 @@ export const seoData: Record<string, {
   // Resources
   "/resources": {
     title: "SAP Resources – Documentation, Training & Support",
-    description: "Comprehensive SAP resources including documentation, video tutorials, whitepapers, downloads, FAQ, developer resources, training materials, and training classes. Access valuable SAP knowledge and resources.",
+    description: "Comprehensive SAP resources including documentation, video tutorials, whitepapers, downloads, FAQ, and developer resources. Access valuable SAP knowledge and resources.",
     keywords: "SAP resources, SAP documentation, SAP tutorials, SAP whitepapers, SAP downloads, SAP FAQ, SAP developer resources, SAP training materials, SAP training classes, SAP knowledge base, SAP learning resources",
     canonical: "https://Sangronyx.com/resources",
   },
 
   "/resources/training": {
     title: "SAP Training Programs – Corporate Training & Certification Prep",
-    description: "Comprehensive SAP training programs including functional workshops (MM, SD, FICO, HR), technical workshops (ABAP, BASIS, HANA), SAP certification preparation, and corporate training batches. Expert SAP trainers.",
+    description: "Comprehensive SAP programs including functional workshops (MM, SD, FICO, HR), technical workshops (ABAP, BASIS, HANA), and SAP certification preparation. Expert SAP professionals.",
     keywords: "SAP training, SAP corporate training, SAP functional training, SAP technical training, SAP certification prep, SAP workshop, SAP training programs, SAP training classes, SAP online training, SAP training courses, SAP certification training, SAP skill development",
     canonical: "https://Sangronyx.com/resources/training",
   },
@@ -184,7 +184,7 @@ export const seoData: Record<string, {
   // Contact
   "/contact": {
     title: "Contact Us – Get in Touch with Sangronyx SAP Experts",
-    description: "Contact Sangronyx Technologies for SAP consultation, implementation, training, and support services. Reach out via phone, email, or contact form. Located in Hyderabad, India. Office hours: Monday-Friday 9 AM - 6 PM.",
+    description: "Contact Sangronyx Technologies for SAP consultation, implementation, and support services. Reach out via phone, email, or contact form. Located in Hyderabad, India. Office hours: Monday-Friday 9 AM - 6 PM.",
     keywords: "contact Sangronyx, SAP contact, SAP consultation, SAP inquiry, contact SAP experts, SAP support contact, SAP services contact, Sangronyx contact information, SAP company contact",
     canonical: "https://Sangronyx.com/contact",
   },
