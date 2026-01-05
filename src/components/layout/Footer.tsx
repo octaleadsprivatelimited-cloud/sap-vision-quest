@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Youtube, Facebook, Instagram } from "lucide-react";
+import { Youtube, Facebook, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const footerLinks = {
@@ -41,10 +41,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Youtube, href: "#", label: "YouTube" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Youtube, href: "https://www.youtube.com/@SangronyxTechnologies", label: "YouTube" },
+  { icon: Instagram, href: "https://www.instagram.com/sangronyxtech?igsh=aXVnbDVmOG9nejJj", label: "Instagram" },
+  { icon: Facebook, href: "https://www.facebook.com/share/1C8oFpvEpG/", label: "Facebook" },
 ];
 
 const legalLinks = [
@@ -89,6 +88,8 @@ export const Footer = () => {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center hover:bg-white/10 transition-colors"
                 >
