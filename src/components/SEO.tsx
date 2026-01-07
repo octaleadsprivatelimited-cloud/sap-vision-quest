@@ -16,14 +16,14 @@ export const SEO = ({
   description,
   keywords,
   canonical,
-  ogImage = "https://Sangronyx.com/logo.png",
+  ogImage = "https://sangronyx.com/logo.png",
   ogType = "website",
   noindex = false,
   structuredData,
 }: SEOProps) => {
   const fullTitle = `${title} | Sangronyx Technologies`;
-  const canonicalUrl = canonical || `https://Sangronyx.com${window.location.pathname}`;
-  const ogUrl = `https://Sangronyx.com${window.location.pathname}`;
+  const canonicalUrl = canonical || `https://sangronyx.com${window.location.pathname}`;
+  const ogUrl = `https://sangronyx.com${window.location.pathname}`;
 
   return (
     <Helmet>
