@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Youtube, Facebook, Instagram } from "lucide-react";
+import { Youtube, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const footerLinks = {
@@ -44,6 +44,7 @@ const socialLinks = [
   { icon: Youtube, href: "https://www.youtube.com/@SangronyxTechnologies", label: "YouTube" },
   { icon: Instagram, href: "https://www.instagram.com/sangronyxtech?igsh=aXVnbDVmOG9nejJj", label: "Instagram" },
   { icon: Facebook, href: "https://www.facebook.com/share/1C8oFpvEpG/", label: "Facebook" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/sangronyx/", label: "LinkedIn" },
 ];
 
 const legalLinks = [
