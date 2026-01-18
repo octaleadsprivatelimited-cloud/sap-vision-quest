@@ -184,7 +184,7 @@ export const seoData: Record<string, {
   // Contact
   "/contact": {
     title: "Contact Us – Get in Touch with Sangronyx SAP Experts",
-    description: "Contact Sangronyx Technologies for SAP consultation, implementation, and support services. Reach out via phone, email, or contact form. Located in Hyderabad, India. Office hours: Monday-Friday 9 AM - 6 PM.",
+    description: "Contact Sangronyx Technologies for SAP consultation, implementation, and support services. Reach out via phone, email, or contact form. Located in Hyderabad, India.",
     keywords: "contact Sangronyx, SAP contact, SAP consultation, SAP inquiry, contact SAP experts, SAP support contact, SAP services contact, Sangronyx contact information, SAP company contact",
     canonical: "https://sangronyx.com/contact",
   },

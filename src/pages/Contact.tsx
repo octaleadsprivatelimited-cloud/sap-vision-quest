@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Clock, Headphones, Globe } from "lucide-react";
+import { Mail, Phone, MapPin, Headphones, Globe } from "lucide-react";
 
 const contactMethods = [
   {
@@ -26,10 +26,9 @@ const contactMethods = [
     icon: Phone,
     title: "Call Us",
     description: "Mon-Fri from 9am to 6pm",
-    contact: "+91-7981999562",
-    contact2: "+91-7675070977",
+    contact: "+91 7032110762",
     action: "Call Now",
-    link: "tel:+917981999562",
+    link: "tel:+917032110762",
   },
   {
     icon: Headphones,
@@ -39,12 +38,6 @@ const contactMethods = [
     action: "Get Support",
     link: "mailto:support@sangronyx.com",
   },
-];
-
-const officeHours = [
-  { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM" },
-  { day: "Saturday", hours: "Closed" },
-  { day: "Sunday", hours: "Closed" },
 ];
 
 const Contact = () => {
@@ -120,9 +113,7 @@ const Contact = () => {
         description="Get in touch with our team to discuss how we can help transform your business."
         label="GET IN TOUCH"
         breadcrumbs={[{ label: "Contact" }]}
-        ctaText="Send us a message"
         backgroundImage="/hero-background-image.jpeg"
-        ctaHref="#contact-form"
       />
 
       {/* Contact Methods */}
@@ -315,21 +306,6 @@ const Contact = () => {
               
               <div className="bg-card rounded-2xl p-6 md:p-8 border border-border">
                 <h3 className="text-xl font-bold text-foreground mb-6 flex items-center gap-3">
-                  <Clock className="w-6 h-6 text-accent" />
-                  Office Hours
-                </h3>
-                <div className="space-y-3">
-                  {officeHours.map((item) => (
-                    <div key={item.day} className="flex justify-between">
-                      <span className="text-muted-foreground">{item.day}</span>
-                      <span className="font-medium text-foreground">{item.hours}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="bg-card rounded-2xl p-6 md:p-8 border border-border">
-                <h3 className="text-xl font-bold text-foreground mb-6 flex items-center gap-3">
                   <Globe className="w-6 h-6 text-accent" />
                   Global Presence
                 </h3>
@@ -337,7 +313,7 @@ const Contact = () => {
                   We serve clients globally with offices and partners across multiple regions.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {["North America", "Europe", "Asia Pacific", "India"].map((region) => (
+                  {["UNITED STATES", "UNITED KINGDOM", "EUROPE", "Asia-Pacific"].map((region) => (
                     <span 
                       key={region} 
                       className="px-3 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-medium"
