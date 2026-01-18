@@ -35,7 +35,6 @@ const footerLinks = {
     { label: "Whitepapers", href: "/resources/whitepapers" },
     { label: "Downloads", href: "/resources/downloads" },
     { label: "FAQ", href: "/resources/faq" },
-    { label: "Workshop", href: "/resources/training-classes" },
   ],
 };
 

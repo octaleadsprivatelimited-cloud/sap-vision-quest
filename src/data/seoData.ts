@@ -144,13 +144,6 @@ export const seoData: Record<string, {
     canonical: "https://sangronyx.com/resources",
   },
 
-  "/resources/training": {
-    title: "SAP Training Programs – Corporate Training & Certification Prep",
-    description: "Comprehensive SAP programs including functional workshops (MM, SD, FICO, HR), technical workshops (ABAP, BASIS, HANA), and SAP certification preparation. Expert SAP professionals.",
-    keywords: "SAP training, SAP corporate training, SAP functional training, SAP technical training, SAP certification prep, SAP workshop, SAP training programs, SAP training classes, SAP online training, SAP training courses, SAP certification training, SAP skill development",
-    canonical: "https://sangronyx.com/resources/training",
-  },
-
   "/resources/faq": {
     title: "SAP FAQ – Frequently Asked Questions",
     description: "Find answers to frequently asked questions about SAP solutions, implementation, migration, training, support, licensing, and more. Comprehensive SAP FAQ section with expert answers.",

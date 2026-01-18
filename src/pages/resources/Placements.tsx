@@ -196,9 +196,9 @@ const Placements = () => {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link to="/resources/training">
+            <Link to="/resources/training-classes">
               <Button size="lg" variant="outline" className="font-semibold bg-transparent text-white border-white hover:bg-white hover:text-primary">
-                View Workshop Programs
+                View Training Programs
               </Button>
             </Link>
           </div>

@@ -8,7 +8,7 @@ const trainingFeatures = [
     icon: GraduationCap,
     title: "SAP Certification Programs",
     description: "Industry-recognized certifications across all major SAP modules including S/4HANA, FICO, MM, SD, and more.",
-    link: "/resources/training",
+    link: "/resources/training-classes",
   },
   {
     icon: Monitor,
@@ -20,7 +20,7 @@ const trainingFeatures = [
     icon: Users,
     title: "Corporate Batch Training",
     description: "Customized training programs for enterprise teams with flexible scheduling and dedicated trainers.",
-    link: "/resources/training",
+    link: "/resources/training-classes",
   },
   {
     icon: Briefcase,
@@ -38,7 +38,7 @@ const trainingFeatures = [
     icon: Award,
     title: "Expert Instructors",
     description: "Learn from certified SAP consultants with 10+ years of implementation experience.",
-    link: "/resources/training",
+    link: "/resources/training-classes",
   },
 ];
 
@@ -122,7 +122,7 @@ export const TrainingHighlightsSection = () => {
           className="text-center"
         >
           <div className="inline-flex flex-col sm:flex-row gap-4">
-            <Link to="/resources/training">
+            <Link to="/resources/training-classes">
               <Button size="lg" className="px-8 py-6 h-auto text-base font-semibold group">
                 <GraduationCap className="w-5 h-5 mr-2" />
                 Explore Training Programs

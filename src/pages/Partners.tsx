@@ -4,8 +4,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { SEO } from "@/components/SEO";
 import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
-import { Handshake, Users, Award, TrendingUp, Shield, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Handshake, Users, Award, TrendingUp, Shield } from "lucide-react";
 
 const partnerBenefits = [
   {
@@ -142,13 +141,6 @@ const Partners = () => {
                   <p className="text-gray-600 leading-relaxed text-sm mb-6">
                     {benefit.description}
                   </p>
-                  <Link 
-                    to={benefit.link}
-                    className="inline-flex items-center text-[#0096d6] font-semibold hover:gap-3 transition-all gap-2 group-hover:text-[#0077b3]"
-                  >
-                    Explore {benefit.title.split(' ')[0]}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
                 </div>
                 
                 {/* Bottom accent line */}
