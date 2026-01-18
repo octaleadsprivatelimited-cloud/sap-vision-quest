@@ -23,11 +23,11 @@ const faqCategories = [
       },
       {
         question: "How do I get started with Sangronyx?",
-        answer: "You can get started by contacting us at info@sangronyx.com or filling out our contact form. Our team will get back to you within 24 hours to discuss your needs and provide a customized solution.",
+        answer: "You can get started by contacting us at contact@sangronyx.com or filling out our contact form. Our team will get back to you within 24 hours to discuss your needs and provide a customized solution.",
       },
       {
         question: "Where is Sangronyx located?",
-        answer: "Sangronyx is a modern IT and SAP service company. For specific location details and to discuss your requirements, please contact us at info@sangronyx.com.",
+        answer: "Sangronyx is a modern IT and SAP service company. For specific location details and to discuss your requirements, please contact us at contact@sangronyx.com.",
       },
     ],
   },

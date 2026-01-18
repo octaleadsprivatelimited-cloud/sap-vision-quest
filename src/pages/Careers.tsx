@@ -113,8 +113,6 @@ const Careers = () => {
           { label: "Home", href: "/" },
           { label: "Careers", href: "/careers" },
         ]}
-        ctaText="View Open Positions"
-        ctaHref="#openings"
         backgroundImage="/carrer page background.jpg"
         compact={true}
       />
@@ -303,7 +301,7 @@ const Careers = () => {
                   Sangronyx Technologies is proud to be an equal employment opportunity employer. We provide fair and equal opportunities to all individuals, regardless of race, religion, gender, age, national origin, disability, marital status, or any other characteristic protected by law.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
-                  Since our inception, we have grown organically by hiring the best talent and fostering a culture of excellence. We are always looking for skilled professionals to join our team. If you have relevant experience, we would love to hear from you. Please send your details to – <a href="mailto:admin@sangronyx.com" className="text-[#0096d6] hover:underline">admin@sangronyx.com</a>
+                  Since our inception, we have grown organically by hiring the best talent and fostering a culture of excellence. We are always looking for skilled professionals to join our team. If you have relevant experience, we would love to hear from you. Please send your details to – <a href="mailto:careers@sangronyx.com" className="text-[#0096d6] hover:underline">careers@sangronyx.com</a>
                 </p>
               </div>
             </motion.div>

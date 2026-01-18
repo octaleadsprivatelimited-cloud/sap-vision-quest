@@ -156,55 +156,6 @@ const Partners = () => {
               </motion.div>
             ))}
           </div>
-
-          {/* Support & Training Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="relative bg-gradient-to-br from-[#0096d6] to-[#0077b3] rounded-2xl p-8 lg:p-12 shadow-2xl overflow-hidden group">
-              {/* Decorative pattern overlay */}
-              <div className="absolute inset-0 opacity-10">
-                <div 
-                  className="w-full h-full"
-                  style={{
-                    backgroundImage: `
-                      linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '30px 30px'
-                  }}
-                />
-              </div>
-              
-              <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-                {/* Icon */}
-                <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <Shield className="w-10 h-10 text-white" strokeWidth={2} />
-                </div>
-                
-                {/* Content */}
-                <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3">
-                    Support & Training
-                  </h3>
-                  <p className="text-white/90 text-lg mb-6 leading-relaxed">
-                    Receive ongoing support and training to help you succeed. Access exclusive resources, training materials, and expert guidance.
-                  </p>
-                  <Link 
-                    to="/contact"
-                    className="inline-flex items-center bg-white text-[#0096d6] font-semibold px-6 py-3 rounded-lg hover:bg-gray-50 transition-all gap-2 shadow-lg hover:shadow-xl"
-                  >
-                    Explore Support
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 

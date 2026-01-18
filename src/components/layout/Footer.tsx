@@ -28,7 +28,6 @@ const footerLinks = {
     { label: "Partners", href: "/partners" },
     { label: "Careers", href: "/careers" },
     { label: "Contact Us", href: "/contact" },
-    { label: "Sitemap", href: "/sitemap.xml", external: true },
   ],
   Resources: [
     { label: "Documentation", href: "/resources/documentation" },

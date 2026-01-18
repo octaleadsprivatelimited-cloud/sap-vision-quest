@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, ChevronRight, Globe, ArrowRight, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, Globe, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -69,15 +69,6 @@ const resourceCategories = [
       { label: "Distribution Channels", href: "/resources/distribution" },
       { label: "Quality Control Systems", href: "/resources/quality-control" },
     ],
-  },
-];
-
-const spotlightItems = [
-  {
-    title: "SAP S/4HANA Migration Guide",
-    subtitle: "Complete migration roadmap for enterprises",
-    cta: "Read guide",
-    image: "/sap-ecc-to-s4hana-migration.avif",
   },
 ];
 
@@ -398,8 +389,8 @@ export const Navbar = () => {
                   </div>
 
                   {/* Middle Links */}
-                  <div className="col-span-4 px-8">
-                    <div className="grid grid-cols-2 gap-x-6 gap-y-4">
+                  <div className="col-span-10 px-8">
+                    <div className="grid grid-cols-3 gap-x-8 gap-y-4">
                       {currentCategory?.items.map((item) => (
                         <Link
                           key={item.label}
@@ -410,42 +401,6 @@ export const Navbar = () => {
                           {item.label}
                         </Link>
                       ))}
-                    </div>
-                  </div>
-
-                  {/* Right Spotlight */}
-                  <div className="col-span-6 pl-8 border-l border-gray-100">
-                    <div className="bg-[#e6f7fc] rounded-lg p-6">
-                      <span className="inline-block px-3 py-1 text-xs font-semibold text-[#0096d6] border border-[#0096d6] rounded-full mb-4">
-                        SPOTLIGHT
-                      </span>
-                      <div className="grid grid-cols-2 gap-6">
-                        {spotlightItems.map((item, index) => (
-                          <div key={index} className="group">
-                            <div className="aspect-video rounded-lg overflow-hidden mb-3 bg-gray-200">
-                              <img
-                                src={item.image}
-                                alt={item.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              />
-                            </div>
-                            <h4 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-2">
-                              {item.title}
-                            </h4>
-                            <p className="text-xs text-gray-600 mb-2 line-clamp-2">
-                              {item.subtitle}
-                            </p>
-                            <Link
-                              to="/resources"
-                              onClick={() => setIsResourcesOpen(false)}
-                              className="inline-flex items-center gap-1 text-sm font-medium text-[#0096d6] hover:gap-2 transition-all"
-                            >
-                              <ArrowRight className="w-4 h-4" />
-                              {item.cta}
-                            </Link>
-                          </div>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 </div>
