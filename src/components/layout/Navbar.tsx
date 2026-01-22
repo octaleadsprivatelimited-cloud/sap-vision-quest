@@ -30,7 +30,6 @@ const resourceCategories = [
     items: [
       { label: "Office Buildings, Factories, Warehouses", href: "/resources/facilities" },
       { label: "Machinery, Equipment, Tools", href: "/resources/equipment" },
-      { label: "Vehicles and Other Infrastructure", href: "/resources/infrastructure" },
     ],
   },
   {
@@ -153,7 +152,6 @@ export const Navbar = () => {
     "/resources/research",
     "/resources/revenue",
     "/resources/patents",
-    "/resources/infrastructure",
     "/resources/leadership",
     "/resources/facilities",
     "/resources/funding",
@@ -195,7 +193,7 @@ export const Navbar = () => {
                 src="/logo.png" 
                 alt="Sangronyx Logo" 
                 className={cn(
-                  "h-10 lg:h-12 w-auto transition-all",
+                  "h-16 lg:h-20 w-auto transition-all",
                   shouldShowWhiteText ? "brightness-0 invert" : ""
                 )}
               />
@@ -423,7 +421,7 @@ export const Navbar = () => {
                   <img 
                     src="/logo.png" 
                     alt="Sangronyx Logo" 
-                    className="h-10 w-auto"
+                    className="h-16 w-auto"
                   />
                 </Link>
                 <Button

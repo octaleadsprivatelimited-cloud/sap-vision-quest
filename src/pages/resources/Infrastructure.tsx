@@ -2,8 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { Truck, Globe, Wifi, Shield, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Truck, Globe, Wifi, Shield } from "lucide-react";
 
 const Infrastructure = () => {
   const infrastructure = [
@@ -46,13 +45,6 @@ const Infrastructure = () => {
                 </h3>
                 <div className={`w-12 h-1 ${item.color} mb-4`}></div>
                 <p className="text-muted-foreground mb-6 leading-relaxed">{item.description}</p>
-                <Link 
-                  to={item.link}
-                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
-                >
-                  Explore {item.title.split(' ')[0]}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </motion.div>
             ))}
           </div>

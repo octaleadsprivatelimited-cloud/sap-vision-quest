@@ -2,15 +2,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { Monitor, Server, Cpu, Wrench, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Monitor, Server, Cpu, Wrench } from "lucide-react";
 
 const Equipment = () => {
   const equipment = [
-    { icon: Monitor, title: "Computing Equipment", description: "High-performance workstations and laptops for development and consulting teams.", color: "bg-blue-500", link: "/solutions" },
-    { icon: Server, title: "Server Infrastructure", description: "Enterprise-grade servers supporting critical business applications and services.", color: "bg-orange-500", link: "/solutions" },
-    { icon: Cpu, title: "Hardware Resources", description: "Advanced hardware components ensuring optimal system performance.", color: "bg-green-500", link: "/solutions" },
-    { icon: Wrench, title: "Specialized Tools", description: "Industry-specific tools and equipment for testing and deployment.", color: "bg-purple-500", link: "/solutions" },
+    { icon: Monitor, title: "Computing Equipment", description: "Development and consulting teams are equipped with high-performance workstations and laptops, enabling efficient software development, SAP consulting, and solution delivery.", color: "bg-blue-500", link: "/solutions" },
+    { icon: Server, title: "Server Infrastructure", description: "Enterprise-grade servers support critical business applications and services, ensuring high availability, reliability, and seamless performance for all client operations.", color: "bg-orange-500", link: "/solutions" },
+    { icon: Cpu, title: "Hardware Resources", description: "Advanced hardware components ensure optimal system performance, supporting efficient development, consulting, and enterprise solution delivery.", color: "bg-green-500", link: "/solutions" },
+    { icon: Wrench, title: "Specialized Tools", description: "We use industry-specific tools and equipment to ensure precise testing, seamless deployment, and high-quality solution delivery.", color: "bg-purple-500", link: "/solutions" },
   ];
 
   return (
@@ -46,13 +45,6 @@ const Equipment = () => {
                 </h3>
                 <div className={`w-12 h-1 ${item.color} mb-4`}></div>
                 <p className="text-muted-foreground mb-6 leading-relaxed">{item.description}</p>
-                <Link 
-                  to={item.link}
-                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
-                >
-                  Explore {item.title.split(' ')[0]}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </motion.div>
             ))}
           </div>

@@ -5,7 +5,7 @@ import { SEO } from "@/components/SEO";
 import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Cloud, Database, Users, CheckCircle } from "lucide-react";
+import { ArrowRight, Cloud, Database, Users, CheckCircle, Settings, Smartphone, Code } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const products = [
@@ -18,6 +18,7 @@ const products = [
     features: ["Implementation Strategy & Planning", "Business Process & Blueprinting", "Fit–Gap Analysis", "Functional Implementation", "Technical & System Configuration", "SAP BTP Integration", "Data Migration & Management", "Custom Development & Enhancements", "Analytics & Reporting", "Testing & Quality Assurance", "Security & Authorizations", "Training & Change Management", "Go-Live & Hypercare", "Post Go-Live Support (AMC)", "SAP Analytics Cloud Integration"],
     color: "bg-accent",
     image: "/sap-s4hana-implementation.webp",
+    link: "/solutions",
   },
   {
     id: "sap-migration",
@@ -28,6 +29,40 @@ const products = [
     features: ["Assessment & Planning", "Technical Migration Services", "Custom Code & Development", "Functional Migration & Optimization", "Data Management", "Testing & Quality Assurance", "Security & Authorizations", "Change Management & Training", "Go-Live & Post Go-Live Support", "AMS & Managed Services"],
     color: "bg-sprinklr-green",
     image: "/sap-ecc-to-s4hana-migration.avif",
+    link: "/products/sap-ecc",
+  },
+  {
+    id: "sap-ecc",
+    icon: Settings,
+    title: "SAP ECC",
+    subtitle: "Enterprise Resource Planning",
+    description: "Comprehensive SAP ERP Central Component solutions for enterprise resource planning and business process management. Complete implementation, customization, and support services.",
+    features: ["Financial Accounting (FI)", "Controlling (CO)", "Materials Management (MM)", "Sales & Distribution (SD)", "Production Planning (PP)", "Human Capital Management (HCM)", "Custom Development", "Integration Services", "System Administration", "User Training"],
+    color: "bg-blue-500",
+    image: "/SAP ECC TO S4 HANA MIGRANATION.png",
+    link: "/products/sap-ecc",
+  },
+  {
+    id: "sap-fiori",
+    icon: Smartphone,
+    title: "SAP Fiori",
+    subtitle: "Modern User Experience",
+    description: "Modern, intuitive user experience platform for SAP applications with responsive design and mobile-first approach. Custom app development and UX optimization.",
+    features: ["Responsive Design", "Mobile-First Approach", "Role-Based Apps", "Custom Fiori Apps", "UI5 Development", "Fiori Launchpad", "Analytical Apps", "Integration Services", "Theme Customization", "User Training"],
+    color: "bg-purple-500",
+    image: "/sap-s4hana-implementation.webp",
+    link: "/products/sap-fiori",
+  },
+  {
+    id: "sap-btp",
+    icon: Code,
+    title: "SAP BTP",
+    subtitle: "Business Technology Platform",
+    description: "SAP Business Technology Platform - A unified platform for application development, integration, and analytics in the cloud. Build, extend, and integrate applications seamlessly.",
+    features: ["Application Development", "Integration Services", "Data & Analytics", "AI & Machine Learning", "API Management", "Mobile Services", "Workflow Management", "Cloud Integration", "Multi-Cloud Deployment", "DevOps & CI/CD"],
+    color: "bg-green-500",
+    image: "/sap-s4hana-implementation.webp",
+    link: "/products/sap-btp",
   },
 ];
 
@@ -78,7 +113,7 @@ const Products = () => {
                       </li>
                     ))}
                   </ul>
-                  <Link to="/solutions">
+                  <Link to={product.link || "/solutions"}>
                     <Button className="bg-primary text-primary-foreground hover:bg-primary/90 group">
                       Learn More
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

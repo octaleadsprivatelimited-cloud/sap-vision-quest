@@ -61,13 +61,13 @@ const WhoWeAre = () => {
                 Building the Future of Enterprise Solutions
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Sangronyx Technologies was founded with a clear vision to help businesses simplify complexity and unlock real value from their SAP investments.
+                Sangronyx Technologies was founded with a clear vision: to help businesses simplify complexity and unlock real value from their SAP investments.
               </p>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                What began as a focused initiative by SAP professionals with hands-on enterprise experience has grown into a trusted SAP services partner for organizations seeking reliable implementation, migration, and support services. We recognized a common challenge across businesses: powerful SAP systems were often underutilized due to lack of clarity, alignment, and ongoing support. Sangronyx was created to change that.
+                What began as a focused initiative by SAP professionals with hands-on enterprise experience has grown into a trusted SAP services partner for organizations seeking reliable implementation, migration, and support services. We identified a common challenge across businesses: powerful SAP systems were often underutilized due to lack of clarity, alignment, and ongoing support. Sangronyx was created to change that.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                From SAP S/4HANA implementations and migrations to AMS and Hypercare support, we deliver solutions that are practical, scalable, and aligned with real business needs. Our approach combines deep SAP expertise, structured delivery, and a strong commitment to client success.
+                From SAP S/4HANA implementations and migrations to AMS and Hypercare support, we deliver solutions that are practical, scalable, and aligned with real business needs. Our approach combines deep SAP expertise, structured delivery, and an unwavering commitment to client success.
               </p>
             </motion.div>
             

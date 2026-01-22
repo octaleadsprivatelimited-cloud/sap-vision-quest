@@ -2,15 +2,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { Crown, Network, Building, TrendingUp, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Crown, Network, Building, TrendingUp } from "lucide-react";
 
 const Leadership = () => {
   const features = [
-    { icon: Crown, title: "Executive Leadership", description: "Visionary leaders guiding strategic direction and company growth.", color: "bg-blue-500", link: "/about" },
-    { icon: Network, title: "Organizational Structure", description: "Well-defined hierarchy ensuring efficient communication and decision-making.", color: "bg-orange-500", link: "/about" },
-    { icon: Building, title: "Department Heads", description: "Experienced managers leading specialized departments and teams.", color: "bg-green-500", link: "/about" },
-    { icon: TrendingUp, title: "Strategic Planning", description: "Leadership focused on long-term growth and market positioning.", color: "bg-purple-500", link: "/about" },
+    { icon: Crown, title: "Executive Leadership", description: "Our visionary leaders guide strategic direction and drive sustainable growth, ensuring strong governance, innovation, and long-term value for our clients and partners.", color: "bg-blue-500", link: "/about" },
+    { icon: Network, title: "Organizational Structure", description: "Our well-defined organizational structure ensures clear roles, efficient communication, and effective decision-making, enabling seamless coordination and consistent delivery across all levels.", color: "bg-orange-500", link: "/about" },
+    { icon: Building, title: "Department Heads", description: "Our experienced department heads lead specialized teams with strong domain expertise, ensuring effective execution, operational excellence, and consistent alignment with business and client objectives.", color: "bg-green-500", link: "/about" },
+    { icon: TrendingUp, title: "Strategic Planning", description: "Our leadership team focuses on long-term growth and strong market positioning through clear strategy, informed decision-making, and continuous innovation.", color: "bg-purple-500", link: "/about" },
   ];
 
   return (
@@ -46,13 +45,6 @@ const Leadership = () => {
                 </h3>
                 <div className={`w-12 h-1 ${feature.color} mb-4`}></div>
                 <p className="text-muted-foreground mb-6 leading-relaxed">{feature.description}</p>
-                <Link 
-                  to={feature.link}
-                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
-                >
-                  Explore {feature.title.split(' ')[0]}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </motion.div>
             ))}
           </div>

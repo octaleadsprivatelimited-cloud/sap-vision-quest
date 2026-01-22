@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 const footerLinks = {
   Products: [
     { label: "SAP S/4HANA", href: "/products" },
-    { label: "SAP ECC", href: "/products" },
-    { label: "SAP Fiori", href: "/products" },
-    { label: "SAP BTP", href: "/products" },
+    { label: "SAP ECC", href: "/products/sap-ecc" },
+    { label: "SAP Fiori", href: "/products/sap-fiori" },
+    { label: "SAP BTP", href: "/products/sap-btp" },
   ],
   Solutions: {
     main: [
@@ -212,7 +212,7 @@ export const Footer = () => {
                 <img 
                   src="/logo.png" 
                   alt="Sangronyx Logo" 
-                  className="h-6 w-auto brightness-0 invert"
+                  className="h-12 w-auto brightness-0 invert"
                 />
               </Link>
               <p className="text-white/40 text-[11px]">

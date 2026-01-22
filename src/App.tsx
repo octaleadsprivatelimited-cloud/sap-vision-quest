@@ -8,6 +8,10 @@ import { ScrollToTop } from "./components/ScrollToTop";
 import { CookieConsent } from "./components/CookieConsent";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
+// Product Pages
+import SapEcc from "./pages/products/SapEcc";
+import SapFiori from "./pages/products/SapFiori";
+import SapBtp from "./pages/products/SapBtp";
 import Services from "./pages/Services";
 import Industries from "./pages/Industries";
 import Resources from "./pages/Resources";
@@ -26,7 +30,6 @@ import Leadership from "./pages/resources/Leadership";
 // Physical Resources
 import Facilities from "./pages/resources/Facilities";
 import Equipment from "./pages/resources/Equipment";
-import Infrastructure from "./pages/resources/Infrastructure";
 // Financial Resources
 import Capital from "./pages/resources/Capital";
 import Revenue from "./pages/resources/Revenue";
@@ -86,6 +89,9 @@ const App = () => (
           <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/sap-ecc" element={<SapEcc />} />
+          <Route path="/products/sap-fiori" element={<SapFiori />} />
+          <Route path="/products/sap-btp" element={<SapBtp />} />
           <Route path="/services" element={<Services />} />
           <Route path="/solutions" element={<Services />} />
           <Route path="/industries" element={<Industries />} />
@@ -112,7 +118,6 @@ const App = () => (
           {/* Physical Resources */}
           <Route path="/resources/facilities" element={<Facilities />} />
           <Route path="/resources/equipment" element={<Equipment />} />
-          <Route path="/resources/infrastructure" element={<Infrastructure />} />
           {/* Financial Resources */}
           <Route path="/resources/capital" element={<Capital />} />
           <Route path="/resources/revenue" element={<Revenue />} />

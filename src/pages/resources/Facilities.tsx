@@ -2,15 +2,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { Building2, Factory, Warehouse, MapPin, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Building2, Factory, Warehouse, MapPin } from "lucide-react";
 
 const Facilities = () => {
   const facilities = [
-    { icon: Building2, title: "Office Buildings", description: "Modern office spaces equipped with state-of-the-art facilities for productive work environments.", color: "bg-blue-500", link: "/contact" },
-    { icon: Factory, title: "Development Centers", description: "Dedicated development centers for software engineering and solution delivery.", color: "bg-orange-500", link: "/contact" },
-    { icon: Warehouse, title: "Data Centers", description: "Secure data centers ensuring reliable hosting and infrastructure services.", color: "bg-green-500", link: "/contact" },
-    { icon: MapPin, title: "Global Presence", description: "Strategic locations across multiple regions for better client accessibility.", color: "bg-purple-500", link: "/contact" },
+    { icon: Building2, title: "Office Buildings", description: "Modern office spaces are equipped with state-of-the-art facilities that foster productivity, collaboration, and a professional work environment.", color: "bg-blue-500", link: "/contact" },
+    { icon: Factory, title: "Development Centers", description: "Dedicated development centers are equipped to support software engineering, SAP consulting, and end-to-end solution delivery with efficiency and scalability.", color: "bg-orange-500", link: "/contact" },
+    { icon: Warehouse, title: "Data Centers", description: "Secure data centers provide reliable hosting and robust infrastructure services, ensuring high availability, data protection, and operational continuity for our clients.", color: "bg-green-500", link: "/contact" },
+    { icon: MapPin, title: "Global Presence", description: "Strategic locations across multiple regions ensure seamless client accessibility, efficient collaboration, and timely delivery of solutions worldwide.", color: "bg-purple-500", link: "/contact" },
   ];
 
   return (
@@ -46,13 +45,6 @@ const Facilities = () => {
                 </h3>
                 <div className={`w-12 h-1 ${facility.color} mb-4`}></div>
                 <p className="text-muted-foreground mb-6 leading-relaxed">{facility.description}</p>
-                <Link 
-                  to={facility.link}
-                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
-                >
-                  Explore {facility.title.split(' ')[0]}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </motion.div>
             ))}
           </div>

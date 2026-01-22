@@ -2,15 +2,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { Users, Award, Briefcase, Target, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Users, Award, Briefcase, Target } from "lucide-react";
 
 const Employees = () => {
   const features = [
-    { icon: Users, title: "Dedicated Teams", description: "Our employees are organized into specialized teams focused on delivering excellence in every project.", color: "bg-blue-500", link: "/careers" },
-    { icon: Award, title: "Expert Professionals", description: "Highly qualified professionals with extensive experience in SAP and IT consulting.", color: "bg-orange-500", link: "/careers" },
-    { icon: Briefcase, title: "Management Excellence", description: "Strong management team driving strategic initiatives and operational efficiency.", color: "bg-green-500", link: "/careers" },
-    { icon: Target, title: "Goal-Oriented", description: "Every team member is aligned with organizational goals and client success.", color: "bg-purple-500", link: "/careers" },
+    { icon: Users, title: "Dedicated Teams", description: "Our employees are organized into specialized, project-focused teams that deliver consistent quality and measurable results. Each team brings deep domain expertise, clear ownership, and seamless collaboration to ensure timely, scalable, and client-centric solutions for every engagement.", color: "bg-blue-500", link: "/careers" },
+    { icon: Award, title: "Expert Professionals", description: "Our certified SAP and IT professionals work in dedicated, project-focused teams, combining deep technical expertise, strong domain knowledge, and clear accountability to deliver reliable, scalable, and high-quality solutions that align with our clients' business goals.", color: "bg-orange-500", link: "/careers" },
+    { icon: Briefcase, title: "Management Excellence", description: "Our experienced management team drives strategic vision and operational excellence, ensuring efficient execution, strong governance, and consistent value delivery across all engagements.", color: "bg-green-500", link: "/careers" },
+    { icon: Target, title: "Goal-Oriented", description: "Every team member is aligned with organizational objectives and client success, ensuring focused execution, measurable outcomes, and long-term value delivery.", color: "bg-purple-500", link: "/careers" },
   ];
 
   return (
@@ -46,13 +45,6 @@ const Employees = () => {
                 </h3>
                 <div className={`w-12 h-1 ${feature.color} mb-4`}></div>
                 <p className="text-muted-foreground mb-6 leading-relaxed">{feature.description}</p>
-                <Link 
-                  to={feature.link}
-                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
-                >
-                  Explore {feature.title.split(' ')[0]}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </motion.div>
             ))}
           </div>

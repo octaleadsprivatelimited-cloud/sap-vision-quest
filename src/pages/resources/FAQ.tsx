@@ -49,23 +49,6 @@ const faqCategories = [
     ],
   },
   {
-    title: "SAP Workshop Services",
-    questions: [
-      {
-        question: "Which SAP modules do you provide workshop for?",
-        answer: "We provide corporate SAP workshop for all major modules including SAP FICO (Financial Accounting and Controlling), SAP MM (Materials Management), SAP SD (Sales and Distribution), SAP HCM (Human Capital Management), and more.",
-      },
-      {
-        question: "Do you offer customized SAP workshop programs?",
-        answer: "Yes, we offer customized SAP workshop programs tailored to your organization's needs. Our expert instructors work with you to develop workshop programs that align with your business objectives.",
-      },
-      {
-        question: "Can workshop be conducted on-site?",
-        answer: "Yes, we can conduct workshop on-site at your location or provide virtual workshop sessions. We work with you to determine the best delivery method for your team.",
-      },
-    ],
-  },
-  {
     title: "Software Solutions",
     questions: [
       {
@@ -176,7 +159,7 @@ const FAQ = () => {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/contact">
-                <Button variant="cta" size="lg" className="group">
+                <Button variant="cta" size="lg" className="group text-black">
                   Contact Us
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>

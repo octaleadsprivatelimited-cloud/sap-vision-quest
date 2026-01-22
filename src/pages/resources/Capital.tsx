@@ -2,8 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { motion } from "framer-motion";
-import { DollarSign, PiggyBank, TrendingUp, BarChart3, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { DollarSign, PiggyBank, TrendingUp, BarChart3 } from "lucide-react";
 
 const Capital = () => {
   const features = [
@@ -46,13 +45,6 @@ const Capital = () => {
                 </h3>
                 <div className={`w-12 h-1 ${feature.color} mb-4`}></div>
                 <p className="text-muted-foreground mb-6 leading-relaxed">{feature.description}</p>
-                <Link 
-                  to={feature.link}
-                  className="inline-flex items-center text-foreground font-medium hover:gap-3 transition-all gap-2"
-                >
-                  Explore {feature.title.split(' ')[0]}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </motion.div>
             ))}
           </div>
