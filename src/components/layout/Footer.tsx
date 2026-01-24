@@ -215,17 +215,19 @@ export const Footer = () => {
                   className="h-12 w-auto brightness-0 invert"
                 />
               </Link>
-              <p className="text-white/40 text-[11px]">
-                © 2025 Sangronyx. All rights reserved.{" "}
+              <div className="flex flex-col md:flex-row items-center gap-1 md:gap-0">
+                <p className="text-white/40 text-[11px]">
+                  © 2025 Sangronyx. All rights reserved.
+                </p>
                 <a 
                   href="https://octaleads.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="hover:text-white/70 transition-colors"
+                  className="text-white/40 text-[11px] hover:text-white/70 transition-colors md:ml-1"
                 >
                   Developed by Octaleads Pvt Ltd.
                 </a>
-              </p>
+              </div>
             </div>
             
             {/* Legal links with separators */}
