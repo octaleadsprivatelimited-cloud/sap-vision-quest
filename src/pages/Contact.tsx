@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Headphones, Globe } from "lucide-react";
+import { Mail, Phone, Headphones, ExternalLink } from "lucide-react";
 
 const contactMethods = [
   {
@@ -247,88 +247,105 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form */}
-      <section className="py-10 sm:py-14 md:py-20 lg:py-24 bg-secondary/30">
+      {/* Contact Form - Dell-style, compact on mobile */}
+      <section className="py-6 sm:py-14 md:py-20 lg:py-24 bg-neutral-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16">
-            {/* Form - first on mobile */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-10 lg:gap-16">
+            {/* Form - Dell-style: white card, clean inputs, blue button */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="order-1"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">Get in Touch</h2>
-              <p className="text-muted-foreground text-sm sm:text-base mb-6 sm:mb-8">
-                Fill out the form below or email us at info@sangronyx.com. We'll get back to you within 24 hours.
+              <h2 className="text-xl sm:text-3xl font-bold text-neutral-900 mb-1 sm:mb-2">Contact Us</h2>
+              <p className="text-neutral-600 text-xs sm:text-base mb-3 sm:mb-6">
+                Fill out the form below and we&apos;ll get back to you within 24 hours.
               </p>
               
-              <form onSubmit={handleSubmit} action="https://formspree.io/f/maqwrdrv" method="POST" className="space-y-4 sm:space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName" className="text-sm sm:text-base">First Name *</Label>
+              <form
+                onSubmit={handleSubmit}
+                action="https://formspree.io/f/maqwrdrv"
+                method="POST"
+                className="bg-white rounded-lg border border-neutral-200 shadow-sm p-4 sm:p-8 space-y-3 sm:space-y-5"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+                  <div className="space-y-1 sm:space-y-1.5">
+                    <Label htmlFor="firstName" className="text-xs sm:text-sm font-medium text-neutral-800">
+                      First Name <span className="text-red-600">*</span>
+                    </Label>
                     <Input
                       id="firstName"
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                       required
-                      className="bg-background h-10 sm:h-11 text-base"
+                      className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName" className="text-sm sm:text-base">Last Name *</Label>
+                  <div className="space-y-1 sm:space-y-1.5">
+                    <Label htmlFor="lastName" className="text-xs sm:text-sm font-medium text-neutral-800">
+                      Last Name <span className="text-red-600">*</span>
+                    </Label>
                     <Input
                       id="lastName"
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                       required
-                      className="bg-background h-10 sm:h-11 text-base"
+                      className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
                     />
                   </div>
                 </div>
                 
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm sm:text-base">Business Email *</Label>
+                <div className="space-y-1 sm:space-y-1.5">
+                  <Label htmlFor="email" className="text-xs sm:text-sm font-medium text-neutral-800">
+                    Business Email <span className="text-red-600">*</span>
+                  </Label>
                   <Input
                     id="email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="bg-background h-10 sm:h-11 text-base"
+                    className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
                   />
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="company" className="text-sm sm:text-base">Company *</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+                  <div className="space-y-1 sm:space-y-1.5">
+                    <Label htmlFor="company" className="text-xs sm:text-sm font-medium text-neutral-800">
+                      Company <span className="text-red-600">*</span>
+                    </Label>
                     <Input
                       id="company"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       required
-                      className="bg-background h-10 sm:h-11 text-base"
+                      className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="jobTitle" className="text-sm sm:text-base">Job Title</Label>
+                  <div className="space-y-1 sm:space-y-1.5">
+                    <Label htmlFor="jobTitle" className="text-xs sm:text-sm font-medium text-neutral-800">
+                      Job Title
+                    </Label>
                     <Input
                       id="jobTitle"
                       value={formData.jobTitle}
                       onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                      className="bg-background h-10 sm:h-11 text-base"
+                      className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
                     />
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="country" className="text-sm sm:text-base">Country *</Label>
-                    <Select 
-                      value={formData.country} 
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+                  <div className="space-y-1 sm:space-y-1.5">
+                    <Label htmlFor="country" className="text-xs sm:text-sm font-medium text-neutral-800">
+                      Country <span className="text-red-600">*</span>
+                    </Label>
+                    <Select
+                      value={formData.country}
                       onValueChange={(value) => setFormData({ ...formData, country: value })}
                     >
-                      <SelectTrigger className="bg-background h-10 sm:h-11 text-base">
+                      <SelectTrigger className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus:ring-[#007DB8] focus:ring-2 py-2">
                         <SelectValue placeholder="Select country" />
                       </SelectTrigger>
                       <SelectContent>
@@ -340,13 +357,15 @@ const Contact = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="interest" className="text-sm sm:text-base">Area of Interest</Label>
-                    <Select 
-                      value={formData.interest} 
+                  <div className="space-y-1 sm:space-y-1.5">
+                    <Label htmlFor="interest" className="text-xs sm:text-sm font-medium text-neutral-800">
+                      Area of Interest
+                    </Label>
+                    <Select
+                      value={formData.interest}
                       onValueChange={(value) => setFormData({ ...formData, interest: value })}
                     >
-                      <SelectTrigger className="bg-background h-10 sm:h-11 text-base">
+                      <SelectTrigger className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus:ring-[#007DB8] focus:ring-2 py-2">
                         <SelectValue placeholder="Select interest" />
                       </SelectTrigger>
                       <SelectContent>
@@ -359,62 +378,76 @@ const Contact = () => {
                   </div>
                 </div>
                 
-                <div className="space-y-2">
-                  <Label htmlFor="message" className="text-sm sm:text-base">Message *</Label>
+                <div className="space-y-1 sm:space-y-1.5">
+                  <Label htmlFor="message" className="text-xs sm:text-sm font-medium text-neutral-800">
+                    Message <span className="text-red-600">*</span>
+                  </Label>
                   <Textarea
                     id="message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     required
-                    rows={4}
+                    rows={3}
                     placeholder="Tell us about your project or requirements..."
-                    className="bg-background resize-none min-h-[100px] sm:min-h-[120px] text-base"
+                    className="bg-white border-neutral-300 resize-none min-h-[80px] sm:min-h-[100px] text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
                   />
                 </div>
                 
-                <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-5 sm:py-6 h-auto text-base font-semibold min-h-[48px]">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full h-10 sm:h-12 bg-[#007DB8] hover:bg-[#006BB3] text-white font-medium text-sm sm:text-base rounded"
+                >
                   Submit
                 </Button>
               </form>
             </motion.div>
             
-            {/* Contact Info - compact on mobile */}
+            {/* Contact Info - Dell-style: Corporate Address & links */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="space-y-4 sm:space-y-6 order-2"
             >
-              <div className="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-border">
-                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" />
-                  Our Office
-                </h3>
-                <div className="space-y-1.5 sm:space-y-2 text-muted-foreground text-sm sm:text-base leading-relaxed">
-                  <p>Sangronyx Technologies</p>
-                  <p>7-1-619/A/37, 101, Revathi Apartments,</p>
-                  <p>Beside Maitrivanam outgate, opp Annapurna block gate no-2,</p>
-                  <p>Kumar Basti, Srinivas nagar, Ameerpet, Hyd, Telangana-500038</p>
-                </div>
+              {/* Our Office - Dell "Corporate Address" style */}
+              <div className="bg-white rounded-lg border border-neutral-200 shadow-sm p-4 sm:p-8">
+                <h3 className="text-base sm:text-lg font-semibold text-neutral-900 mb-2 sm:mb-4">Where to find us</h3>
+                <p className="text-sm sm:text-base font-semibold text-neutral-900 mb-1 sm:mb-2">Corporate Address</p>
+                <p className="text-neutral-700 text-xs sm:text-base leading-relaxed mb-1">Sangronyx Technologies</p>
+                <address className="not-italic text-neutral-600 text-xs sm:text-base leading-relaxed space-y-0.5 mb-2 sm:mb-4">
+                  <span className="block">7-1-619/A/37, 101, Revathi Apartments,</span>
+                  <span className="block">Beside Maitrivanam outgate, opp Annapurna block gate no-2,</span>
+                  <span className="block">Kumar Basti, Srinivas nagar, Ameerpet,</span>
+                  <span className="block">Hyderabad, Telangana 500038</span>
+                </address>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=7-1-619%2FA%2F37%2C+Revathi+Apartments%2C+Ameerpet%2C+Hyderabad%2C+Telangana+500038"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[#007DB8] hover:underline text-xs sm:text-sm font-medium"
+                >
+                  Get directions
+                  <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </a>
               </div>
               
-              <div className="bg-card rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-border">
-                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-                  <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" />
-                  Global Presence
-                </h3>
-                <p className="text-muted-foreground text-sm sm:text-base mb-3 sm:mb-4">
-                  We serve clients globally with offices and partners across multiple regions.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {["UNITED STATES", "UNITED KINGDOM", "EUROPE", "Asia-Pacific"].map((region) => (
-                    <span 
-                      key={region} 
-                      className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium"
-                    >
-                      {region}
-                    </span>
-                  ))}
+              {/* Support / Quick links - Dell-style */}
+              <div className="bg-white rounded-lg border border-neutral-200 shadow-sm p-4 sm:p-8">
+                <h3 className="text-base sm:text-lg font-semibold text-neutral-900 mb-2 sm:mb-4">Support</h3>
+                <div className="space-y-2 sm:space-y-3">
+                  <a href="mailto:info@sangronyx.com" className="flex items-center gap-1.5 sm:gap-2 text-[#007DB8] hover:underline text-xs sm:text-sm font-medium break-all">
+                    <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                    info@sangronyx.com
+                  </a>
+                  <a href="tel:+917032110762" className="flex items-center gap-1.5 sm:gap-2 text-[#007DB8] hover:underline text-xs sm:text-sm font-medium">
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                    +91 7032110762
+                  </a>
+                  <a href="mailto:support@sangronyx.com" className="flex items-center gap-1.5 sm:gap-2 text-[#007DB8] hover:underline text-xs sm:text-sm font-medium break-all">
+                    <Headphones className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                    support@sangronyx.com
+                  </a>
                 </div>
               </div>
             </motion.div>
