@@ -119,10 +119,10 @@ const Contact = () => {
         backgroundImage="/hero-background-image.jpeg"
       />
 
-      {/* Contact Methods - Compact, Creative & Responsive */}
+      {/* Contact Methods - Enhanced UI Design */}
       <section className="py-6 sm:py-8 md:py-10 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-          {/* Mobile: 2×1 layout - Compact full color blocks */}
+          {/* Mobile: 2×1 layout - Enhanced design */}
           <div className="grid grid-cols-2 gap-3 sm:hidden">
             {contactMethods
               .filter((m) => m.title === "Email Us" || m.title === "Support")
@@ -132,18 +132,29 @@ const Contact = () => {
                   href={method.link || "#"}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05, type: "spring", stiffness: 200 }}
-                  className="rounded-xl p-3 text-center hover:opacity-95 transition-all flex flex-col items-center justify-center min-h-[85px] shadow-md"
+                  className="group relative rounded-2xl p-4 text-center overflow-hidden flex flex-col items-center justify-center min-h-[95px] shadow-lg hover:shadow-xl transition-all duration-300"
                   style={{ backgroundColor: method.color }}
                 >
-                  <div className="w-8 h-8 rounded-lg bg-white/25 flex items-center justify-center mx-auto mb-1.5 flex-shrink-0">
-                    <method.icon className="w-4 h-4 text-white" />
+                  {/* Subtle gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Icon container with enhanced styling */}
+                  <div className="relative z-10 w-10 h-10 rounded-xl bg-white/30 backdrop-blur-sm flex items-center justify-center mx-auto mb-2 flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                    <method.icon className="w-5 h-5 text-white" strokeWidth={2.5} />
                   </div>
-                  <h3 className="text-xs font-bold text-white mb-0.5 leading-tight">{method.title}</h3>
-                  <p className="text-white/95 font-medium text-[10px] break-all leading-tight line-clamp-2">{method.contact}</p>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 w-full">
+                    <h3 className="text-xs font-bold text-white mb-1 leading-tight drop-shadow-sm">{method.title}</h3>
+                    <p className="text-white/95 font-medium text-[10px] break-all leading-tight line-clamp-2 drop-shadow-sm">{method.contact}</p>
+                  </div>
+                  
+                  {/* Decorative corner accent */}
+                  <div className="absolute top-0 right-0 w-12 h-12 bg-white/10 rounded-bl-full opacity-50" />
                 </motion.a>
               ))}
             {(() => {
@@ -153,26 +164,42 @@ const Contact = () => {
                   href={callUs?.link || "#"}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
-                  className="col-span-2 rounded-xl p-3 text-center hover:opacity-95 transition-all flex flex-row items-center justify-center gap-3 min-h-[70px] shadow-md"
+                  className="group relative col-span-2 rounded-2xl p-4 overflow-hidden flex flex-row items-center gap-4 min-h-[75px] shadow-lg hover:shadow-xl transition-all duration-300"
                   style={{ backgroundColor: callUs?.color }}
                 >
-                  <div className="w-10 h-10 rounded-lg bg-white/25 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-white" />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Icon */}
+                  <div className="relative z-10 w-12 h-12 rounded-xl bg-white/30 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                    <Phone className="w-6 h-6 text-white" strokeWidth={2.5} />
                   </div>
-                  <div className="flex flex-col items-start flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-white mb-0.5">Call Us</h3>
-                    <p className="text-white/95 font-medium text-xs">{callUs?.contact}</p>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col items-start flex-1 min-w-0">
+                    <h3 className="text-sm font-bold text-white mb-0.5 drop-shadow-sm">Call Us</h3>
+                    <p className="text-white/95 font-medium text-xs drop-shadow-sm">{callUs?.contact}</p>
                   </div>
+                  
+                  {/* Arrow indicator */}
+                  <div className="relative z-10 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-300">
+                    <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                  
+                  {/* Decorative accent */}
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-bl-full opacity-50" />
                 </motion.a>
               );
             })()}
           </div>
 
-          {/* Desktop: Compact 3-column layout */}
+          {/* Desktop: Enhanced 3-column layout */}
           <div className="hidden sm:grid grid-cols-3 gap-4 md:gap-5">
             {contactMethods.map((method, index) => (
               <motion.a
@@ -180,23 +207,40 @@ const Contact = () => {
                 href={method.link || "#"}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -4, scale: 1.02 }}
+                whileHover={{ y: -6, scale: 1.03 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
-                className="rounded-xl md:rounded-2xl p-4 md:p-5 text-center hover:opacity-95 transition-all flex flex-col items-center justify-center shadow-lg hover:shadow-xl"
+                className="group relative rounded-2xl md:rounded-3xl p-5 md:p-6 text-center overflow-hidden flex flex-col items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-300"
                 style={{ backgroundColor: method.color }}
               >
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-white/25 flex items-center justify-center mx-auto mb-3 flex-shrink-0">
-                  <method.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/15 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Icon container with enhanced design */}
+                <div className="relative z-10 w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white/30 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
+                  <method.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={2.5} />
                 </div>
-                <h3 className="text-base md:text-lg font-bold text-white mb-1">{method.title}</h3>
-                <p className="text-xs md:text-sm text-white/90 mb-2 hidden md:block">{method.description}</p>
-                <div className="mb-2 md:mb-3">
-                  <p className="text-white font-medium text-xs md:text-sm break-all">{method.contact}</p>
+                
+                {/* Content */}
+                <div className="relative z-10 w-full">
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-2 drop-shadow-md">{method.title}</h3>
+                  <p className="text-xs md:text-sm text-white/90 mb-3 hidden md:block leading-relaxed">{method.description}</p>
+                  <div className="mb-4">
+                    <p className="text-white font-semibold text-sm md:text-base break-all drop-shadow-sm">{method.contact}</p>
+                  </div>
+                  
+                  {/* Enhanced action button */}
+                  <span className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold rounded-xl bg-white/25 backdrop-blur-sm text-white hover:bg-white/35 transition-all duration-300 group-hover:shadow-lg">
+                    {method.action}
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
                 </div>
-                <span className="inline-flex items-center justify-center w-full px-3 py-1.5 md:py-2 text-xs md:text-sm font-semibold rounded-lg bg-white/20 text-white hover:bg-white/30 transition-colors">
-                  {method.action}
-                </span>
+                
+                {/* Decorative corner elements */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-bl-full opacity-50" />
+                <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-tr-full opacity-30" />
               </motion.a>
             ))}
           </div>
