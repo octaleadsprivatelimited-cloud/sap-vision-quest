@@ -47,8 +47,7 @@ const Contact = () => {
   const seo = useSEO();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     company: "",
     jobTitle: "",
@@ -68,8 +67,7 @@ const Contact = () => {
         },
         body: JSON.stringify({
           _subject: "Contact Form Submission - Sangronyx",
-          firstName: formData.firstName,
-          lastName: formData.lastName,
+          name: formData.name,
           email: formData.email,
           company: formData.company,
           jobTitle: formData.jobTitle,
@@ -85,8 +83,7 @@ const Contact = () => {
           description: "Thank you for contacting us. We'll get back to you within 24 hours.",
         });
         setFormData({
-          firstName: "",
-          lastName: "",
+          name: "",
           email: "",
           company: "",
           jobTitle: "",
@@ -269,31 +266,17 @@ const Contact = () => {
                 method="POST"
                 className="bg-white rounded-lg border border-neutral-200 shadow-sm p-4 sm:p-8 space-y-3 sm:space-y-5"
               >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
-                  <div className="space-y-1 sm:space-y-1.5">
-                    <Label htmlFor="firstName" className="text-xs sm:text-sm font-medium text-neutral-800">
-                      First Name <span className="text-red-600">*</span>
-                    </Label>
-                    <Input
-                      id="firstName"
-                      value={formData.firstName}
-                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      required
-                      className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
-                    />
-                  </div>
-                  <div className="space-y-1 sm:space-y-1.5">
-                    <Label htmlFor="lastName" className="text-xs sm:text-sm font-medium text-neutral-800">
-                      Last Name <span className="text-red-600">*</span>
-                    </Label>
-                    <Input
-                      id="lastName"
-                      value={formData.lastName}
-                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                      required
-                      className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
-                    />
-                  </div>
+                <div className="space-y-1 sm:space-y-1.5">
+                  <Label htmlFor="name" className="text-xs sm:text-sm font-medium text-neutral-800">
+                    Name <span className="text-red-600">*</span>
+                  </Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
+                    className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
+                  />
                 </div>
                 
                 <div className="space-y-1 sm:space-y-1.5">
