@@ -6,7 +6,7 @@ const footerLinks = {
   Products: [
     { label: "SAP S/4HANA", href: "/products" },
     { label: "SAP ECC", href: "/products/sap-ecc" },
-    { label: "SAP Fiori", href: "/products/sap-fiori" },
+    { label: "SAP FIORI", href: "/products/sap-fiori" },
     { label: "SAP BTP", href: "/products/sap-btp" },
   ],
   Solutions: {

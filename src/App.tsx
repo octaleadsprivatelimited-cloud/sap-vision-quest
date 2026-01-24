@@ -33,7 +33,6 @@ import Equipment from "./pages/resources/Equipment";
 // Financial Resources
 import Capital from "./pages/resources/Capital";
 import Revenue from "./pages/resources/Revenue";
-import Funding from "./pages/resources/Funding";
 // Technological Resources
 import Software from "./pages/resources/Software";
 import Patents from "./pages/resources/Patents";
@@ -121,7 +120,6 @@ const App = () => (
           {/* Financial Resources */}
           <Route path="/resources/capital" element={<Capital />} />
           <Route path="/resources/revenue" element={<Revenue />} />
-          <Route path="/resources/funding" element={<Funding />} />
           {/* Technological Resources */}
           <Route path="/resources/software" element={<Software />} />
           <Route path="/resources/patents" element={<Patents />} />

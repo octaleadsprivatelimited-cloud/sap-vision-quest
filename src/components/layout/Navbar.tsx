@@ -38,7 +38,6 @@ const resourceCategories = [
     items: [
       { label: "Capital and Investments", href: "/resources/capital" },
       { label: "Revenue and Profits", href: "/resources/revenue" },
-      { label: "Loans, Funding, and Cash Flow", href: "/resources/funding" },
     ],
   },
   {
@@ -154,7 +153,6 @@ export const Navbar = () => {
     "/resources/patents",
     "/resources/leadership",
     "/resources/facilities",
-    "/resources/funding",
     "/resources/equipment",
     "/resources/employees",
     "/resources/faq",
