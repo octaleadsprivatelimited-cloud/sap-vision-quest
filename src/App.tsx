@@ -61,6 +61,7 @@ import SapModuleImplementations from "./pages/services/SapModuleImplementations"
 import SapCustomDevelopment from "./pages/services/SapCustomDevelopment";
 import SapSupportMaintenance from "./pages/services/SapSupportMaintenance";
 import SapIntegrationServices from "./pages/services/SapIntegrationServices";
+import SapCorporateTraining from "./pages/services/SapCorporateTraining";
 // Industry Pages
 import Manufacturing from "./pages/industries/Manufacturing";
 import Retail from "./pages/industries/Retail";
@@ -142,6 +143,7 @@ const App = () => (
           <Route path="/services/sap-custom-development" element={<SapCustomDevelopment />} />
           <Route path="/services/sap-support-maintenance" element={<SapSupportMaintenance />} />
           <Route path="/services/sap-integration-services" element={<SapIntegrationServices />} />
+          <Route path="/services/sap-corporate-training" element={<SapCorporateTraining />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Careers />} />
