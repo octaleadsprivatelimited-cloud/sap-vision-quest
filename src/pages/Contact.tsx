@@ -253,10 +253,9 @@ const Contact = () => {
                         <SelectValue placeholder="Select interest" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="implementation">SAP Implementation</SelectItem>
-                        <SelectItem value="migration">SAP Migration</SelectItem>
-                        <SelectItem value="training">SAP Training</SelectItem>
-                        <SelectItem value="support">SAP Support</SelectItem>
+                        <SelectItem value="rollout">ROLL-OUT</SelectItem>
+                        <SelectItem value="hypercare">HyperCare Support</SelectItem>
+                        <SelectItem value="support">AMS</SelectItem>
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>

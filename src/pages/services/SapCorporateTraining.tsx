@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
+import { SEO } from "@/components/SEO";
+import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, GraduationCap, Users, Monitor, Building, Award, BookOpen, BarChart3, Headphones, Factory } from "lucide-react";
@@ -26,8 +28,11 @@ const deliveryModes = [
 ];
 
 const SapCorporateTraining = () => {
+  const seo = useSEO();
+  
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...seo} />
       <Navbar />
       
       <PageHero 

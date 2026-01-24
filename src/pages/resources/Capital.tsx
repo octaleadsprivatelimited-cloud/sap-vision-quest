@@ -1,10 +1,13 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
+import { SEO } from "@/components/SEO";
+import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { DollarSign, PiggyBank, TrendingUp, BarChart3 } from "lucide-react";
 
 const Capital = () => {
+  const seo = useSEO();
   const features = [
     { icon: DollarSign, title: "Capital Reserves", description: "Strong capital base ensuring financial stability and growth opportunities.", color: "bg-blue-500", link: "/partners" },
     { icon: PiggyBank, title: "Investment Portfolio", description: "Diversified investments supporting long-term business sustainability.", color: "bg-orange-500", link: "/partners" },
@@ -14,6 +17,7 @@ const Capital = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...seo} />
       <Navbar />
       <PageHero 
         title="Capital and Investments"

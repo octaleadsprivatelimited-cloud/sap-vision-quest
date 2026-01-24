@@ -14,6 +14,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://sangronyx.com/products/sap-ecc</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sangronyx.com/products/sap-fiori</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sangronyx.com/products/sap-btp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sangronyx.com/services</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -129,6 +144,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://sangronyx.com/services/sap-corporate-training</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   
   <!-- Resource Pages -->
   <url>
@@ -171,22 +191,22 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-<url>
+  <url>
     <loc>https://sangronyx.com/resources/placements</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   
   <!-- Human Resources -->
   <url>
     <loc>https://sangronyx.com/resources/employees</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sangronyx.com/resources/skills</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sangronyx.com/resources/leadership</loc>
@@ -210,7 +230,7 @@
   <url>
     <loc>https://sangronyx.com/resources/capital</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sangronyx.com/resources/revenue</loc>

@@ -21,8 +21,36 @@ export const seoData: Record<string, {
     canonical: "https://sangronyx.com/products",
   },
 
+  "/products/sap-ecc": {
+    title: "SAP ECC (ERP Central Component) – Enterprise Resource Planning Solution",
+    description: "Comprehensive SAP ECC implementation, support, and migration services. SAP ECC is the proven ERP solution for large enterprises. Expert SAP ECC consultants helping businesses optimize their ERP operations.",
+    keywords: "SAP ECC, SAP ERP Central Component, SAP ECC implementation, SAP ECC support, SAP ECC migration, SAP ECC to S/4HANA, SAP ECC consulting, SAP ECC modules, SAP ECC solutions, enterprise ERP",
+    canonical: "https://sangronyx.com/products/sap-ecc",
+  },
+
+  "/products/sap-fiori": {
+    title: "SAP Fiori – Modern User Experience & UI Framework",
+    description: "SAP Fiori implementation and development services. Transform your SAP user experience with modern, responsive SAP Fiori apps. Expert SAP Fiori consultants delivering intuitive user interfaces for SAP systems.",
+    keywords: "SAP Fiori, SAP Fiori apps, SAP Fiori implementation, SAP Fiori development, SAP Fiori UX, SAP Fiori UI, SAP Fiori consulting, SAP Fiori design, SAP user experience, SAP Fiori solutions",
+    canonical: "https://sangronyx.com/products/sap-fiori",
+  },
+
+  "/products/sap-btp": {
+    title: "SAP BTP (Business Technology Platform) – Cloud Platform Services",
+    description: "SAP Business Technology Platform implementation and integration services. Leverage SAP BTP for application development, integration, analytics, and AI capabilities. Expert SAP BTP consultants.",
+    keywords: "SAP BTP, SAP Business Technology Platform, SAP BTP implementation, SAP BTP integration, SAP cloud platform, SAP BTP services, SAP BTP consulting, SAP BTP development, SAP cloud solutions",
+    canonical: "https://sangronyx.com/products/sap-btp",
+  },
+
   // Services
   "/services": {
+    title: "SAP Services – Sangronyx | Implementation, Migration & Support",
+    description: "Comprehensive SAP services including S/4HANA implementation, ECC to S/4HANA migration, SAP module implementations, custom development, integration services, 24/7 support & maintenance, and licensing solutions. Expert SAP consultants delivering excellence.",
+    keywords: "Sangronyx, SAP services, SAP implementation services, SAP migration services, SAP training services, SAP support services, SAP consulting services, SAP S/4HANA implementation, SAP ECC migration, SAP module implementation, SAP custom development, SAP integration services, SAP support and maintenance, SAP corporate training, SAP licensing, SAP AMC, SAP hypercare support, SAP rollout services",
+    canonical: "https://sangronyx.com/services",
+  },
+
+  "/solutions": {
     title: "SAP Services – Sangronyx | Implementation, Migration & Support",
     description: "Comprehensive SAP services including S/4HANA implementation, ECC to S/4HANA migration, SAP module implementations, custom development, integration services, 24/7 support & maintenance, and licensing solutions. Expert SAP consultants delivering excellence.",
     keywords: "Sangronyx, SAP services, SAP implementation services, SAP migration services, SAP training services, SAP support services, SAP consulting services, SAP S/4HANA implementation, SAP ECC migration, SAP module implementation, SAP custom development, SAP integration services, SAP support and maintenance, SAP corporate training, SAP licensing, SAP AMC, SAP hypercare support, SAP rollout services",
@@ -92,6 +120,22 @@ export const seoData: Record<string, {
     description: "Complete SAP S/4HANA implementation services including cloud, on-premise, and hybrid deployment options. Expert SAP S/4HANA consultants providing end-to-end implementation, business process mapping, module configuration, UAT, and go-live support.",
     keywords: "Sangronyx, SAP S/4HANA implementation, SAP S/4HANA cloud, SAP S/4HANA on-premise, SAP S/4HANA hybrid, SAP S/4HANA consultants, SAP S/4HANA implementation services, SAP S/4HANA deployment, SAP S/4HANA migration, SAP S/4HANA setup, SAP S/4HANA configuration, SAP S/4HANA go-live, SAP S/4HANA implementation partner",
     canonical: "https://sangronyx.com/services/sap-s4hana-implementation",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "SAP S/4HANA Implementation",
+      "provider": {
+        "@type": "Organization",
+        "name": "Sangronyx Technologies",
+        "url": "https://sangronyx.com"
+      },
+      "areaServed": "Worldwide",
+      "description": "Complete SAP S/4HANA implementation services including cloud, on-premise, and hybrid deployment options.",
+      "offers": {
+        "@type": "Offer",
+        "name": "SAP S/4HANA Implementation Services"
+      }
+    },
   },
 
   "/services/sap-ecc-migration": {
@@ -136,6 +180,13 @@ export const seoData: Record<string, {
     canonical: "https://sangronyx.com/services/sap-integration-services",
   },
 
+  "/services/sap-corporate-training": {
+    title: "SAP Corporate Training & Workshop Programs – Expert-Led SAP Training",
+    description: "Comprehensive SAP corporate training and workshop programs for teams. Functional and technical SAP training including FI, CO, MM, SD, PP, ABAP, BASIS, and S/4HANA. Expert-led SAP workshops with hands-on learning.",
+    keywords: "SAP corporate training, SAP workshop, SAP training programs, SAP functional training, SAP technical training, SAP ABAP training, SAP BASIS training, SAP S/4HANA training, SAP certification training, SAP corporate workshops",
+    canonical: "https://sangronyx.com/services/sap-corporate-training",
+  },
+
   // Resources
   "/resources": {
     title: "SAP Resources – Sangronyx | Documentation, Training & Support",
@@ -149,6 +200,34 @@ export const seoData: Record<string, {
     description: "Find answers to frequently asked questions about SAP solutions, implementation, migration, training, support, licensing, and more. Comprehensive SAP FAQ section with expert answers.",
     keywords: "SAP FAQ, SAP frequently asked questions, SAP questions, SAP answers, SAP help, SAP information, SAP queries, SAP common questions, SAP FAQ section",
     canonical: "https://sangronyx.com/resources/faq",
+  },
+
+  "/resources/employees": {
+    title: "Employees & Management Team – Sangronyx Technologies",
+    description: "Meet our dedicated workforce and experienced management team at Sangronyx Technologies. Expert SAP consultants, project-focused teams, and leadership driving innovation and client success.",
+    keywords: "SAP consultants, SAP team, SAP professionals, SAP management, SAP workforce, SAP experts, Sangronyx team, SAP consulting team",
+    canonical: "https://sangronyx.com/resources/employees",
+  },
+
+  "/resources/skills": {
+    title: "Skills, Expertise & Experience – SAP Technical Capabilities",
+    description: "Discover the comprehensive skill sets and expertise at Sangronyx. Technical expertise in SAP modules, development skills in ABAP and Fiori, data management, and system integration capabilities.",
+    keywords: "SAP skills, SAP expertise, SAP technical skills, SAP ABAP skills, SAP Fiori skills, SAP consulting expertise, SAP technical capabilities, SAP development skills",
+    canonical: "https://sangronyx.com/resources/skills",
+  },
+
+  "/resources/capital": {
+    title: "Capital & Investments – Financial Foundation",
+    description: "Understanding Sangronyx Technologies' financial foundation and investment strategies. Strong capital base, diversified investment portfolio, and growth capital supporting long-term business sustainability.",
+    keywords: "SAP company capital, SAP business investments, SAP company financials, business capital, investment portfolio",
+    canonical: "https://sangronyx.com/resources/capital",
+  },
+
+  "/resources/placements": {
+    title: "SAP Training Placement Assistance – Career Support & Job Placement",
+    description: "Comprehensive placement assistance for SAP training graduates. 95% placement rate with 200+ hiring partners including TCS, Infosys, Wipro, Accenture. Get placed in leading IT companies with competitive salary packages.",
+    keywords: "SAP placement, SAP job placement, SAP training placement, SAP career support, SAP job assistance, SAP placement assistance, SAP training jobs, SAP consultant jobs",
+    canonical: "https://sangronyx.com/resources/placements",
   },
 
   // Partners

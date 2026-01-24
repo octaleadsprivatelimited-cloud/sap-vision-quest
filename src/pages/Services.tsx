@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { SEO } from "@/components/SEO";
 import { useSEO } from "@/hooks/useSEO";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Cloud, Database, Settings, Code, Wrench, Link2, Users, Star, Headphones, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -75,10 +76,16 @@ const sapOfferings = [
 
 const Services = () => {
   const seo = useSEO();
+  const location = useLocation();
+  
+  // Fix canonical for /solutions route - should point to /services
+  const seoWithCanonical = location.pathname === '/solutions' 
+    ? { ...seo, canonical: 'https://sangronyx.com/services' }
+    : seo;
   
   return (
     <div className="min-h-screen bg-background">
-      <SEO {...seo} />
+      <SEO {...seoWithCanonical} />
       <Navbar />
       
       <PageHero 

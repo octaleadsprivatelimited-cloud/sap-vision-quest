@@ -1,10 +1,13 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
+import { SEO } from "@/components/SEO";
+import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Users, Award, Briefcase, Target } from "lucide-react";
 
 const Employees = () => {
+  const seo = useSEO();
   const features = [
     { icon: Users, title: "Dedicated Teams", description: "Our employees are organized into specialized, project-focused teams that deliver consistent quality and measurable results. Each team brings deep domain expertise, clear ownership, and seamless collaboration to ensure timely, scalable, and client-centric solutions for every engagement.", color: "bg-blue-500", link: "/careers" },
     { icon: Award, title: "Expert Professionals", description: "Our certified SAP and IT professionals work in dedicated, project-focused teams, combining deep technical expertise, strong domain knowledge, and clear accountability to deliver reliable, scalable, and high-quality solutions that align with our clients' business goals.", color: "bg-orange-500", link: "/careers" },
@@ -14,6 +17,7 @@ const Employees = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...seo} />
       <Navbar />
       <PageHero 
         title="Employees and Management Team"

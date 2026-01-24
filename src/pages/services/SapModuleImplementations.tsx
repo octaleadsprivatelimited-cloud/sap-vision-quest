@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
+import { SEO } from "@/components/SEO";
+import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, DollarSign, Package, ShoppingCart, Factory, CheckSquare, Wrench, Code, Database, Smartphone, Warehouse } from "lucide-react";
@@ -25,8 +27,11 @@ const technicalModules = [
 ];
 
 const SapModuleImplementations = () => {
+  const seo = useSEO();
+  
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...seo} />
       <Navbar />
       
       <PageHero 

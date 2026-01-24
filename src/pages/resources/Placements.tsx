@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
+import { SEO } from "@/components/SEO";
+import { useSEO } from "@/hooks/useSEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Briefcase, TrendingUp, Users, Building2, ArrowRight, Star } from "lucide-react";
@@ -63,8 +65,11 @@ const testimonials = [
 ];
 
 const Placements = () => {
+  const seo = useSEO();
+  
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...seo} />
       <Navbar />
       
       <PageHero

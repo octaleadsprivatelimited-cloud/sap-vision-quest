@@ -1,11 +1,14 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
+import { SEO } from "@/components/SEO";
+import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Brain, Code, Database, Settings, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Skills = () => {
+  const seo = useSEO();
   const skills = [
     { icon: Brain, title: "Technical Expertise", description: "Deep knowledge in SAP modules, cloud technologies, and enterprise solutions.", color: "bg-blue-500", link: "/solutions" },
     { icon: Code, title: "Development Skills", description: "Proficiency in ABAP, Fiori, UI5, and modern programming languages.", color: "bg-orange-500", link: "/solutions" },
@@ -15,6 +18,7 @@ const Skills = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...seo} />
       <Navbar />
       <PageHero 
         title="Skills, Expertise, and Experience"

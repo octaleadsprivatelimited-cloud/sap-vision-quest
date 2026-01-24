@@ -118,7 +118,7 @@ const Careers = () => {
       />
 
       {/* Why Work With Us Section */}
-      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+      <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
         
@@ -158,7 +158,7 @@ const Careers = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12 md:mb-16"
+            className="text-center mb-8"
           >
             <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
               Why Join Us
@@ -208,7 +208,7 @@ const Careers = () => {
       </section>
 
       {/* Open Positions Section */}
-      <section id="openings" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+      <section id="openings" className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
         
@@ -248,7 +248,7 @@ const Careers = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-8"
           >
             <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
               Open Positions
@@ -260,7 +260,7 @@ const Careers = () => {
               Explore our open positions and find the role that matches your skills and career goals.
             </p>
             <Button 
-              onClick={() => setIsDialogOpen(true)}
+              onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLScj1iZ_iiFouE8kZgsvr-qPkdQFJ9SJreSgADFUSN0HpftGaw/viewform?usp=publish-editor", "_blank", "noopener,noreferrer")}
               className="bg-gradient-to-r from-[#0096d6] to-[#0077b3] hover:from-[#0077b3] hover:to-[#005a8a] text-white rounded-lg px-8 py-6 h-auto text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             >
               APPLY JOB

@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
+import { SEO } from "@/components/SEO";
+import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, Database, Code, TestTube, Shield, Users, Wrench, FileSearch, RefreshCw, Headphones } from "lucide-react";
@@ -26,8 +28,11 @@ const migrationPaths = [
 ];
 
 const SapEccMigration = () => {
+  const seo = useSEO();
+  
   return (
     <div className="min-h-screen bg-background">
+      <SEO {...seo} />
       <Navbar />
       
       <PageHero 

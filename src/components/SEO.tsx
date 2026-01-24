@@ -22,8 +22,10 @@ export const SEO = ({
   structuredData,
 }: SEOProps) => {
   const fullTitle = `${title} | Sangronyx Technologies`;
-  const canonicalUrl = canonical || `https://sangronyx.com${window.location.pathname}`;
-  const ogUrl = `https://sangronyx.com${window.location.pathname}`;
+  // Ensure canonical URL is always absolute
+  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+  const canonicalUrl = canonical || `https://sangronyx.com${currentPath}`;
+  const ogUrl = `https://sangronyx.com${currentPath}`;
 
   return (
     <Helmet>
