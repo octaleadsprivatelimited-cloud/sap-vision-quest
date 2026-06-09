@@ -14,7 +14,7 @@ export const HeroSection = () => {
       >
         <source src="/hero-video-bg.mp4" type="video/mp4" />
       </video>
-      
+
       {/* Overlay for better contrast */}
       <div className="absolute inset-0 bg-black/40" />
 

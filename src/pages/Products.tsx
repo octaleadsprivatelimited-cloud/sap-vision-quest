@@ -68,13 +68,13 @@ const products = [
 
 const Products = () => {
   const seo = useSEO();
-  
+
   return (
     <div className="min-h-screen bg-background">
       <SEO {...seo} />
       <Navbar />
-      
-      <PageHero 
+
+      <PageHero
         title="Our SAP Services"
         description="Complete SAP solutions for implementation, migration, training, support, and custom development."
         label="SAP SERVICES"
@@ -120,11 +120,11 @@ const Products = () => {
                     </Button>
                   </Link>
                 </div>
-                
+
                 <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
                   <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                    <img 
-                      src={product.image} 
+                    <img
+                      src={product.image}
                       alt={product.title}
                       className="w-full h-auto object-cover"
                     />

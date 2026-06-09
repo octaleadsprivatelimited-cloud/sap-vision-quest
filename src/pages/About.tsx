@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Target, Users, Lightbulb, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { getWebsiteContent } from "@/data/pageContentData";
+
 const values = [
   { icon: Target, title: "Excellence", description: "We strive for excellence in every project we deliver." },
   { icon: Users, title: "Collaboration", description: "We believe in the power of teamwork and collaboration." },
@@ -25,6 +27,23 @@ const milestones = [
 
 const About = () => {
   const seo = useSEO();
+  const { pageTexts } = getWebsiteContent();
+  const textContent = pageTexts?.whoWeAre || {
+    heroTitle: "Who We Are",
+    heroDescription: "Sangronyx is a leading provider of IT services and SAP solutions, helping businesses transform and grow.",
+    heroLabel: "ABOUT US",
+    sectionTag: "Our Journey",
+    storyTitle: "Building the Future of Enterprise Solutions",
+    storyParagraphs: [
+      "At Sangronyx, we are committed to delivering exceptional IT services and SAP solutions that drive business transformation. Our team of experts combines deep technical knowledge with industry experience to help organizations achieve their digital goals.",
+      "We believe in building long-term partnerships with our clients, understanding their unique challenges, and delivering tailored solutions that create lasting value."
+    ],
+    sectionTitle: "Our Values",
+    sectionDescription: "The principles that guide everything we do",
+    stats: [
+      { value: "10+", label: "Years" }
+    ]
+  };
   
   return (
     <div className="min-h-screen bg-background">
@@ -32,9 +51,9 @@ const About = () => {
       <Navbar />
       
       <PageHero 
-        title="Who We Are"
-        description="Sangronyx is a leading provider of IT services and SAP solutions, helping businesses transform and grow."
-        label="ABOUT US"
+        title={textContent.heroTitle}
+        description={textContent.heroDescription}
+        label={textContent.heroLabel || "ABOUT US"}
         breadcrumbs={[{ label: "Company" }]}
         backgroundImage="/hero-background.jpg"
       />
@@ -48,15 +67,19 @@ const About = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
+              {textContent.sectionTag && (
+                <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
+                  {textContent.sectionTag}
+                </span>
+              )}
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-                Our Mission
+                {textContent.storyTitle}
               </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                At Sangronyx, we are committed to delivering exceptional IT services and SAP solutions that drive business transformation. Our team of experts combines deep technical knowledge with industry experience to help organizations achieve their digital goals.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                We believe in building long-term partnerships with our clients, understanding their unique challenges, and delivering tailored solutions that create lasting value.
-              </p>
+              {(textContent.storyParagraphs || []).map((para, idx) => (
+                <p key={idx} className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                  {para}
+                </p>
+              ))}
             </motion.div>
             
             <motion.div
@@ -72,12 +95,14 @@ const About = () => {
                   className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-primary rounded-xl p-6 shadow-xl">
-                <div className="text-center text-primary-foreground">
-                  <div className="text-3xl md:text-4xl font-bold">10+</div>
-                  <div className="text-sm">Years</div>
+              {textContent.stats && textContent.stats.length > 0 && (
+                <div className="absolute -bottom-6 -right-6 bg-primary rounded-xl p-6 shadow-xl">
+                  <div className="text-center text-primary-foreground">
+                    <div className="text-3xl md:text-4xl font-bold">{textContent.stats[0].value}</div>
+                    <div className="text-sm">{textContent.stats[0].label}</div>
+                  </div>
                 </div>
-              </div>
+              )}
             </motion.div>
           </div>
         </div>
@@ -133,10 +158,10 @@ const About = () => {
             className="text-center mb-8 md:mb-10"
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Our Values
+              {textContent.sectionTitle}
             </h2>
             <p className="text-lg text-white/90 max-w-2xl mx-auto">
-              The principles that guide everything we do
+              {textContent.sectionDescription}
             </p>
           </motion.div>
 

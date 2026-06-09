@@ -54,6 +54,7 @@ import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import WhoWeAre from "./pages/WhoWeAre";
 import NotFound from "./pages/NotFound";
+import Admin from "./pages/Admin";
 import SapS4HanaImplementation from "./pages/services/SapS4HanaImplementation";
 import SapEccMigration from "./pages/services/SapEccMigration";
 import SapLicensing from "./pages/services/SapLicensing";
@@ -155,6 +156,7 @@ const App = () => (
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/terms" element={<Terms />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <CookieConsent />

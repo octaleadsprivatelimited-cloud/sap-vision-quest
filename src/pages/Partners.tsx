@@ -4,48 +4,21 @@ import { PageHero } from "@/components/sections/PageHero";
 import { SEO } from "@/components/SEO";
 import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
-import { Handshake, Users, Award, TrendingUp, Shield } from "lucide-react";
-
-const partnerBenefits = [
-  {
-    icon: Handshake,
-    title: "Partnership Opportunities",
-    description: "Join our partner network and grow your business with Sangronyx.",
-    color: "bg-blue-500",
-    link: "/contact",
-  },
-  {
-    icon: Users,
-    title: "Collaborative Approach",
-    description: "Work together to deliver exceptional solutions to clients.",
-    color: "bg-orange-500",
-    link: "/contact",
-  },
-  {
-    icon: Award,
-    title: "Certified Partners",
-    description: "Become a certified partner and gain access to exclusive resources.",
-    color: "bg-green-500",
-    link: "/contact",
-  },
-  {
-    icon: TrendingUp,
-    title: "Business Growth",
-    description: "Expand your business with our comprehensive partner program.",
-    color: "bg-purple-500",
-    link: "/contact",
-  },
-  {
-    icon: Shield,
-    title: "Support & Training",
-    description: "Receive ongoing support and training to help you succeed.",
-    color: "bg-red-500",
-    link: "/contact",
-  },
-];
+import * as LucideIcons from "lucide-react";
+import { getWebsiteContent } from "@/data/pageContentData";
 
 const Partners = () => {
   const seo = useSEO();
+  const { partnerBenefits, pageTexts } = getWebsiteContent();
+  const textContent = pageTexts?.partners || {
+    heroTitle: "Partners",
+    heroDescription: "Join our partner network and grow your business with Sangronyx.",
+    heroLabel: "PARTNER PROGRAM",
+    ctaButtonText: "Become a Partner",
+    sectionTag: "Partnership Opportunities",
+    sectionTitle: "Grow Your Business With Us",
+    sectionDescription: "Join our partner network and unlock new opportunities for growth and success."
+  };
   
   return (
     <div className="min-h-screen bg-background">
@@ -53,11 +26,11 @@ const Partners = () => {
       <Navbar />
       
       <PageHero 
-        title="Partners"
-        description="Join our partner network and grow your business with Sangronyx."
-        label="PARTNER PROGRAM"
+        title={textContent.heroTitle}
+        description={textContent.heroDescription}
+        label={textContent.heroLabel || "PARTNER PROGRAM"}
         breadcrumbs={[{ label: "Partners" }]}
-        ctaText="Become a Partner"
+        ctaText={textContent.ctaButtonText || "Become a Partner"}
         ctaHref="/contact"
         backgroundImage="/partners-hero-background.png"
       />
@@ -105,48 +78,55 @@ const Partners = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12 md:mb-16"
           >
-            <span className="text-[#0096d6] text-sm font-semibold uppercase tracking-wider mb-4 block">
-              Partnership Opportunities
-            </span>
+            {textContent.sectionTag && (
+              <span className="text-[#0096d6] text-sm font-semibold uppercase tracking-wider mb-4 block">
+                {textContent.sectionTag}
+              </span>
+            )}
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Grow Your Business With Us
+              {textContent.sectionTitle}
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Join our partner network and unlock new opportunities for growth and success.
-            </p>
+            {textContent.sectionDescription && (
+              <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                {textContent.sectionDescription}
+              </p>
+            )}
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto mb-12">
-            {partnerBenefits.slice(0, 4).map((benefit, index) => (
-              <motion.div
-                key={benefit.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative bg-white rounded-2xl p-6 lg:p-8 shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#0096d6]/30 overflow-hidden"
-              >
-                {/* Decorative gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                {/* Icon container with gradient background */}
-                <div className={`relative z-10 w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br ${benefit.color} rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  <benefit.icon className="w-7 h-7 lg:w-8 lg:h-8 text-white" strokeWidth={2} />
-                </div>
-                
-                <div className="relative z-10">
-                  <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-2 group-hover:text-[#0096d6] transition-colors duration-300">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed text-sm mb-6">
-                    {benefit.description}
-                  </p>
-                </div>
-                
-                {/* Bottom accent line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0096d6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.div>
-            ))}
+           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto mb-12">
+            {partnerBenefits.slice(0, 4).map((benefit, index) => {
+              const Icon = (LucideIcons as any)[benefit.iconName] || LucideIcons.Handshake;
+              return (
+                <motion.div
+                  key={benefit.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="group relative bg-white rounded-2xl p-6 lg:p-8 shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#0096d6]/30 overflow-hidden"
+                >
+                  {/* Decorative gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Icon container with gradient background */}
+                  <div className={`relative z-10 w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br ${benefit.color} rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <Icon className="w-7 h-7 lg:w-8 lg:h-8 text-white" strokeWidth={2} />
+                  </div>
+                  
+                  <div className="relative z-10">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-2 group-hover:text-[#0096d6] transition-colors duration-300">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed text-sm mb-6">
+                      {benefit.description}
+                    </p>
+                  </div>
+                  
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0096d6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

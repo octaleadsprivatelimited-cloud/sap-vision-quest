@@ -58,7 +58,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const response = await fetch("https://formspree.io/f/maqwrdrv", {
         method: "POST",
@@ -107,8 +107,8 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <SEO {...seo} />
       <Navbar />
-      
-      <PageHero 
+
+      <PageHero
         title="Contact Us"
         description="Get in touch with our team to discuss how we can help transform your business."
         label="GET IN TOUCH"
@@ -138,18 +138,18 @@ const Contact = () => {
                 >
                   {/* Subtle gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
+
                   {/* Icon container with enhanced styling */}
                   <div className="relative z-10 w-10 h-10 rounded-xl bg-white/30 backdrop-blur-sm flex items-center justify-center mx-auto mb-2 flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
                     <method.icon className="w-5 h-5 text-white" strokeWidth={2.5} />
                   </div>
-                  
+
                   {/* Content */}
                   <div className="relative z-10 w-full">
                     <h3 className="text-xs font-bold text-white mb-1 leading-tight drop-shadow-sm">{method.title}</h3>
                     <p className="text-white/95 font-medium text-[10px] break-all leading-tight line-clamp-2 drop-shadow-sm">{method.contact}</p>
                   </div>
-                  
+
                   {/* Decorative corner accent */}
                   <div className="absolute top-0 right-0 w-12 h-12 bg-white/10 rounded-bl-full opacity-50" />
                 </motion.a>
@@ -170,25 +170,25 @@ const Contact = () => {
                 >
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
+
                   {/* Icon */}
                   <div className="relative z-10 w-12 h-12 rounded-xl bg-white/30 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
                     <Phone className="w-6 h-6 text-white" strokeWidth={2.5} />
                   </div>
-                  
+
                   {/* Content */}
                   <div className="relative z-10 flex flex-col items-start flex-1 min-w-0">
                     <h3 className="text-sm font-bold text-white mb-0.5 drop-shadow-sm">Call Us</h3>
                     <p className="text-white/95 font-medium text-xs drop-shadow-sm">{callUs?.contact}</p>
                   </div>
-                  
+
                   {/* Arrow indicator */}
                   <div className="relative z-10 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-300">
                     <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                  
+
                   {/* Decorative accent */}
                   <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-bl-full opacity-50" />
                 </motion.a>
@@ -212,12 +212,12 @@ const Contact = () => {
               >
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/15 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
+
                 {/* Icon container with enhanced design */}
                 <div className="relative z-10 w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white/30 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
                   <method.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={2.5} />
                 </div>
-                
+
                 {/* Content */}
                 <div className="relative z-10 w-full">
                   <h3 className="text-lg md:text-xl font-bold text-white mb-2 drop-shadow-md">{method.title}</h3>
@@ -225,7 +225,7 @@ const Contact = () => {
                   <div className="mb-4">
                     <p className="text-white font-semibold text-sm md:text-base break-all drop-shadow-sm">{method.contact}</p>
                   </div>
-                  
+
                   {/* Enhanced action button */}
                   <span className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold rounded-xl bg-white/25 backdrop-blur-sm text-white hover:bg-white/35 transition-all duration-300 group-hover:shadow-lg">
                     {method.action}
@@ -234,7 +234,7 @@ const Contact = () => {
                     </svg>
                   </span>
                 </div>
-                
+
                 {/* Decorative corner elements */}
                 <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-bl-full opacity-50" />
                 <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-tr-full opacity-30" />
@@ -259,7 +259,7 @@ const Contact = () => {
               <p className="text-neutral-600 text-xs sm:text-base mb-3 sm:mb-6">
                 Fill out the form below and we&apos;ll get back to you within 24 hours.
               </p>
-              
+
               <form
                 onSubmit={handleSubmit}
                 action="https://formspree.io/f/maqwrdrv"
@@ -278,7 +278,7 @@ const Contact = () => {
                     className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
                   />
                 </div>
-                
+
                 <div className="space-y-1 sm:space-y-1.5">
                   <Label htmlFor="email" className="text-xs sm:text-sm font-medium text-neutral-800">
                     Business Email <span className="text-red-600">*</span>
@@ -292,7 +292,7 @@ const Contact = () => {
                     className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
                   />
                 </div>
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
                   <div className="space-y-1 sm:space-y-1.5">
                     <Label htmlFor="company" className="text-xs sm:text-sm font-medium text-neutral-800">
@@ -318,7 +318,7 @@ const Contact = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
                   <div className="space-y-1 sm:space-y-1.5">
                     <Label htmlFor="country" className="text-xs sm:text-sm font-medium text-neutral-800">
@@ -360,7 +360,7 @@ const Contact = () => {
                     </Select>
                   </div>
                 </div>
-                
+
                 <div className="space-y-1 sm:space-y-1.5">
                   <Label htmlFor="message" className="text-xs sm:text-sm font-medium text-neutral-800">
                     Message <span className="text-red-600">*</span>
@@ -375,7 +375,7 @@ const Contact = () => {
                     className="bg-white border-neutral-300 resize-none min-h-[80px] sm:min-h-[100px] text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
                   />
                 </div>
-                
+
                 <Button
                   type="submit"
                   size="lg"
@@ -385,7 +385,7 @@ const Contact = () => {
                 </Button>
               </form>
             </motion.div>
-            
+
             {/* Contact Info - Dell-style: Corporate Address & links */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -414,7 +414,7 @@ const Contact = () => {
                   <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </a>
               </div>
-              
+
               {/* Support / Quick links - Dell-style */}
               <div className="bg-white rounded-lg border border-neutral-200 shadow-sm p-4 sm:p-8">
                 <h3 className="text-base sm:text-lg font-semibold text-neutral-900 mb-2 sm:mb-4">Support</h3>

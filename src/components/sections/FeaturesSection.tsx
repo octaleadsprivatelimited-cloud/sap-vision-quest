@@ -50,15 +50,15 @@ export const FeaturesSection = () => {
     <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img 
-          src="/sap-excellence-background.png" 
+        <img
+          src="/sap-excellence-background.png"
           alt=""
           className="w-full h-full object-cover"
         />
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
-      
+
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
@@ -92,22 +92,22 @@ export const FeaturesSection = () => {
                   <div className="mb-4">
                     <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
                   </div>
-                  
+
                   {/* Title */}
                   <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-tight">
                     {feature.title}
                   </h3>
-                  
+
                   {/* Colored underline */}
                   <div className={`w-10 h-0.5 ${feature.underlineColor} mb-4`}></div>
-                  
+
                   {/* Description */}
                   <p className="text-white/90 text-sm leading-relaxed mb-5 min-h-[80px]">
                     {feature.description}
                   </p>
-                  
+
                   {/* Explore link */}
-                  <Link 
+                  <Link
                     to={feature.link}
                     className="inline-flex items-center text-white font-medium text-sm hover:text-accent transition-colors group/link"
                   >
@@ -118,7 +118,7 @@ export const FeaturesSection = () => {
               </motion.div>
             ))}
           </div>
-          
+
           {/* Last 2 cards centered */}
           <div className="flex flex-col md:flex-row lg:justify-center gap-6 lg:gap-8">
             {features.slice(3).map((feature, index) => (
@@ -136,22 +136,22 @@ export const FeaturesSection = () => {
                   <div className="mb-4">
                     <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
                   </div>
-                  
+
                   {/* Title */}
                   <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-tight">
                     {feature.title}
                   </h3>
-                  
+
                   {/* Colored underline */}
                   <div className={`w-10 h-0.5 ${feature.underlineColor} mb-4`}></div>
-                  
+
                   {/* Description */}
                   <p className="text-white/90 text-sm leading-relaxed mb-5 min-h-[80px]">
                     {feature.description}
                   </p>
-                  
+
                   {/* Explore link */}
-                  <Link 
+                  <Link
                     to={feature.link}
                     className="inline-flex items-center text-white font-medium text-sm hover:text-accent transition-colors group/link"
                   >

@@ -12,33 +12,25 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Users, Zap, Heart, GraduationCap } from "lucide-react";
-
-const benefits = [
-  {
-    icon: Zap,
-    title: "Innovation First",
-    description: "Work with cutting-edge SAP technologies and shape the future of enterprise solutions.",
-  },
-  {
-    icon: Users,
-    title: "Collaborative Culture",
-    description: "Join a team of passionate experts who support and learn from each other.",
-  },
-  {
-    icon: GraduationCap,
-    title: "Continuous Learning",
-    description: "Access to SAP certifications, training programs, and professional development.",
-  },
-  {
-    icon: Heart,
-    title: "Work-Life Balance",
-    description: "Flexible work arrangements and comprehensive wellness programs.",
-  },
-];
+import * as LucideIcons from "lucide-react";
+import { getWebsiteContent } from "@/data/pageContentData";
 
 const Careers = () => {
   const seo = useSEO();
+  const { benefits, pageTexts } = getWebsiteContent();
+  const textContent = pageTexts?.careers || {
+    heroTitle: "Join Our Team",
+    heroDescription: "Build your career with Sangronyx and help transform businesses through innovative SAP solutions. We're looking for talented individuals who share our passion for excellence.",
+    heroLabel: "CAREERS",
+    sectionTag: "Why Join Us",
+    sectionTitle: "Why Work at Sangronyx?",
+    sectionDescription: "We offer more than just a job – we offer a career path filled with growth opportunities, meaningful work, and a supportive environment.",
+    cultureTitle: "Our Culture",
+    cultureDescription: "Step into a workplace defined by warmth, positivity, and collaboration. At Sangronyx, we balance focused work with moments to connect whether it's over a cup of coffee, a team activity, or shared successes. Our open-door and inclusive culture encourages ideas, teamwork, and continuous growth.",
+    principlesTitle: "Our Principles",
+    principlesDescription: "Sangronyx Technologies is proud to be an equal employment opportunity employer. We provide fair and equal opportunities to all individuals, regardless of race, religion, gender, age, national origin, disability, marital status, or any other characteristic protected by law."
+  };
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -49,7 +41,7 @@ const Careers = () => {
     resume: null as File | null,
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -91,13 +83,11 @@ const Careers = () => {
           resume: null,
         });
         setIsDialogOpen(false);
-        // You can add a success toast here if needed
       } else {
         throw new Error("Form submission failed");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      // You can add an error toast here if needed
     }
   };
 
@@ -106,9 +96,9 @@ const Careers = () => {
       <SEO {...seo} />
       <Navbar />
       <PageHero
-        title="Join Our Team"
-        description="Build your career with Sangronyx and help transform businesses through innovative SAP solutions. We're looking for talented individuals who share our passion for excellence."
-        label="CAREERS"
+        title={textContent.heroTitle}
+        description={textContent.heroDescription}
+        label={textContent.heroLabel || "CAREERS"}
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Careers", href: "/careers" },
@@ -160,49 +150,54 @@ const Careers = () => {
             viewport={{ once: true }}
             className="text-center mb-8"
           >
-            <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
-              Why Join Us
-            </span>
+            {textContent.sectionTag && (
+              <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
+                {textContent.sectionTag}
+              </span>
+            )}
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Why Work at Sangronyx?
+              {textContent.sectionTitle}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We offer more than just a job – we offer a career path filled with growth opportunities, meaningful work, and a supportive environment.
+              {textContent.sectionDescription}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={benefit.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group relative bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#0096d6]/30 overflow-hidden"
-              >
-                {/* Decorative gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {benefits.map((benefit, index) => {
+              const Icon = (LucideIcons as any)[benefit.iconName] || LucideIcons.Zap;
+              return (
+                <motion.div
+                  key={benefit.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05, duration: 0.5 }}
+                  className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-[#0096d6]/30 overflow-hidden"
+                >
+                  {/* Decorative background circle */}
+                  <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-[#0096d6]/5 rounded-full group-hover:scale-110 transition-transform duration-300" />
+                  
+                  {/* Icon */}
+                  <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-[#0096d6] to-[#0077b3] rounded-lg flex items-center justify-center mb-6 shadow-md shadow-[#0096d6]/10">
+                    <Icon className="w-7 h-7 text-white" />
+                  </div>
                 
-                {/* Icon container with gradient background */}
-                <div className="relative z-10 w-14 h-14 bg-gradient-to-br from-[#0096d6] to-[#0077b3] rounded-xl flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <benefit.icon className="w-7 h-7 text-white" />
-                </div>
-                
-                {/* Content */}
-                <div className="relative z-10">
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#0096d6] transition-colors duration-300">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </div>
-                
-                {/* Bottom accent line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0096d6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.div>
-            ))}
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#0096d6] transition-colors duration-300">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {benefit.description}
+                    </p>
+                  </div>
+                  
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0096d6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -260,7 +255,7 @@ const Careers = () => {
               Explore our open positions and find the role that matches your skills and career goals.
             </p>
             <Button 
-              onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLScj1iZ_iiFouE8kZgsvr-qPkdQFJ9SJreSgADFUSN0HpftGaw/viewform?usp=publish-editor", "_blank", "noopener,noreferrer")}
+              onClick={() => setIsDialogOpen(true)}
               className="bg-gradient-to-r from-[#0096d6] to-[#0077b3] hover:from-[#0077b3] hover:to-[#005a8a] text-white rounded-lg px-8 py-6 h-auto text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
             >
               APPLY JOB
@@ -278,10 +273,10 @@ const Careers = () => {
               className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
             >
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Our Culture
+                {textContent.cultureTitle || "Our Culture"}
               </h3>
               <p className="text-gray-600 leading-relaxed text-sm">
-                Step into a workplace defined by warmth, positivity, and collaboration. At Sangronyx, we balance focused work with moments to connect whether it's over a cup of coffee, a team activity, or shared successes. Our open-door and inclusive culture encourages ideas, teamwork, and continuous growth.
+                {textContent.cultureDescription}
               </p>
             </motion.div>
 
@@ -294,11 +289,11 @@ const Careers = () => {
               className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
             >
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Our Principles
+                {textContent.principlesTitle || "Our Principles"}
               </h3>
               <div className="space-y-3 text-sm">
                 <p className="text-gray-600 leading-relaxed">
-                  Sangronyx Technologies is proud to be an equal employment opportunity employer. We provide fair and equal opportunities to all individuals, regardless of race, religion, gender, age, national origin, disability, marital status, or any other characteristic protected by law.
+                  {textContent.principlesDescription}
                 </p>
                 <p className="text-gray-600 leading-relaxed">
                   Since our inception, we have grown organically by hiring the best talent and fostering a culture of excellence. We are always looking for skilled professionals to join our team. If you have relevant experience, we would love to hear from you. Please send your details to – <a href="mailto:careers@sangronyx.com" className="text-[#0096d6] hover:underline">careers@sangronyx.com</a>

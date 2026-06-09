@@ -199,6 +199,11 @@ export const Footer = () => {
                   FAQ
                 </Link>
               </li>
+              <li>
+                <Link to="/admin" className="text-white/30 text-[12px] hover:text-white transition-colors leading-relaxed font-semibold">
+                  Admin Panel
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

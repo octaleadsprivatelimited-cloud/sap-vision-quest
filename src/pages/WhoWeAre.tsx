@@ -5,27 +5,28 @@ import { SEO } from "@/components/SEO";
 import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Users } from "lucide-react";
-
-const leadershipTeam = [
-  {
-    name: "Leadership Excellence",
-    role: "Strategic Vision",
-    description: "Our leadership team brings decades of combined experience in enterprise software and SAP implementations.",
-  },
-  {
-    name: "Technical Expertise",
-    role: "Innovation Hub",
-    description: "A dedicated team of certified SAP consultants and developers driving technical excellence.",
-  },
-  {
-    name: "Client Success",
-    role: "Partnership Focus",
-    description: "Dedicated client success managers ensuring every engagement exceeds expectations.",
-  },
-];
+import { getWebsiteContent } from "@/data/pageContentData";
 
 const WhoWeAre = () => {
   const seo = useSEO();
+  const { leadership: leadershipTeam, pageTexts } = getWebsiteContent();
+  const textContent = pageTexts?.whoWeAre || {
+    heroTitle: "Who We Are",
+    heroDescription: "A team of passionate professionals dedicated to transforming enterprises through innovative SAP solutions and exceptional service.",
+    heroLabel: "About Sangronyx",
+    sectionTag: "Our Story",
+    storyTitle: "Building the Future of Enterprise Solutions",
+    storyParagraphs: [
+      "Sangronyx Technologies was founded with a clear vision: to help businesses simplify complexity and unlock real value from their SAP investments.",
+      "What began as a focused initiative by SAP professionals with hands-on enterprise experience has grown into a trusted SAP services partner for organizations seeking reliable implementation, migration, and support services. We identified a common challenge across businesses: powerful SAP systems were often underutilized due to lack of clarity, alignment, and ongoing support. Sangronyx was created to change that.",
+      "From SAP S/4HANA implementations and migrations to AMS and Hypercare support, we deliver solutions that are practical, scalable, and aligned with real business needs. Our approach combines deep SAP expertise, structured delivery, and an unwavering commitment to client success."
+    ],
+    sectionTitle: "Powered by Expertise",
+    sectionDescription: "Our diverse team of experts brings together deep industry knowledge and technical excellence.",
+    stats: [
+      { value: "10+", label: "Years of Excellence" }
+    ]
+  };
   
   return (
     <div className="min-h-screen bg-background">
@@ -33,9 +34,9 @@ const WhoWeAre = () => {
       <Navbar />
       
       <PageHero
-        title="Who We Are"
-        description="A team of passionate professionals dedicated to transforming enterprises through innovative SAP solutions and exceptional service."
-        label="About Sangronyx"
+        title={textContent.heroTitle}
+        description={textContent.heroDescription}
+        label={textContent.heroLabel || "About Sangronyx"}
         backgroundImage="/hero-slide-2.jpg"
         breadcrumbs={[
           { label: "Home", href: "/" },
@@ -54,21 +55,19 @@ const WhoWeAre = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-[#0096d6] text-sm font-semibold uppercase tracking-wider mb-4 block">
-                Our Story
-              </span>
+              {textContent.sectionTag && (
+                <span className="text-[#0096d6] text-sm font-semibold uppercase tracking-wider mb-4 block">
+                  {textContent.sectionTag}
+                </span>
+              )}
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Building the Future of Enterprise Solutions
+                {textContent.storyTitle}
               </h2>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Sangronyx Technologies was founded with a clear vision: to help businesses simplify complexity and unlock real value from their SAP investments.
-              </p>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                What began as a focused initiative by SAP professionals with hands-on enterprise experience has grown into a trusted SAP services partner for organizations seeking reliable implementation, migration, and support services. We identified a common challenge across businesses: powerful SAP systems were often underutilized due to lack of clarity, alignment, and ongoing support. Sangronyx was created to change that.
-              </p>
-              <p className="text-gray-600 leading-relaxed">
-                From SAP S/4HANA implementations and migrations to AMS and Hypercare support, we deliver solutions that are practical, scalable, and aligned with real business needs. Our approach combines deep SAP expertise, structured delivery, and an unwavering commitment to client success.
-              </p>
+              {textContent.storyParagraphs && textContent.storyParagraphs.map((para, i) => (
+                <p key={i} className="text-gray-600 mb-6 leading-relaxed">
+                  {para}
+                </p>
+              ))}
             </motion.div>
             
             <motion.div
@@ -80,15 +79,17 @@ const WhoWeAre = () => {
             >
               <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="/why-choose-us.avif" 
+                   src="/why-choose-us.avif" 
                   alt="Sangronyx Team" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-[#0096d6] text-white p-6 rounded-xl shadow-lg">
-                <div className="text-4xl font-bold">10+</div>
-                <div className="text-sm opacity-90">Years of Excellence</div>
-              </div>
+              {textContent.stats && textContent.stats.length > 0 && (
+                <div className="absolute -bottom-6 -left-6 bg-[#0096d6] text-white p-6 rounded-xl shadow-lg">
+                  <div className="text-4xl font-bold">{textContent.stats[0].value}</div>
+                  <div className="text-sm opacity-90">{textContent.stats[0].label}</div>
+                </div>
+              )}
             </motion.div>
           </div>
         </div>
@@ -148,10 +149,10 @@ const WhoWeAre = () => {
               Our Team
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Powered by Expertise
+              {textContent.sectionTitle}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Our diverse team of experts brings together deep industry knowledge and technical excellence.
+              {textContent.sectionDescription}
             </p>
           </motion.div>
 

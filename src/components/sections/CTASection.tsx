@@ -8,7 +8,7 @@ export const CTASection = () => {
     <section className="relative py-12 md:py-20 lg:py-24 overflow-hidden">
       {/* Dark Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-primary/95 to-primary/90 z-0" />
-      
+
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 z-0 opacity-5" style={{
         backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)`,
@@ -26,7 +26,7 @@ export const CTASection = () => {
             className="space-y-6"
           >
             {/* Main Heading */}
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -35,9 +35,9 @@ export const CTASection = () => {
             >
               Ready to transform your business?
             </motion.h2>
-            
+
             {/* Descriptive Text */}
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -48,7 +48,7 @@ export const CTASection = () => {
             </motion.p>
 
             {/* Two CTA Buttons Side by Side */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -56,8 +56,8 @@ export const CTASection = () => {
               className="flex flex-wrap gap-4 pt-4"
             >
               <Link to="/contact">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-white text-primary hover:bg-white/90 px-8 py-6 h-auto text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   Contact Us Now
@@ -65,9 +65,9 @@ export const CTASection = () => {
                 </Button>
               </Link>
               <Link to="/services">
-                <Button 
-                  variant="outline" 
-                  size="lg" 
+                <Button
+                  variant="outline"
+                  size="lg"
                   className="bg-transparent border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-8 py-6 h-auto text-base font-semibold rounded-lg transition-all duration-300"
                 >
                   Explore Services
@@ -89,7 +89,7 @@ export const CTASection = () => {
             <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl p-6 md:p-8 border border-white/20 shadow-2xl">
               {/* Decorative Gradient Accent */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/30 to-sprinklr-blue/20 rounded-bl-full blur-2xl" />
-              
+
               <div className="relative space-y-4">
                 {/* Icon Badge */}
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-accent to-sprinklr-blue shadow-lg mb-4">
