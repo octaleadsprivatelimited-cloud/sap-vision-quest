@@ -72,8 +72,8 @@ const WhoWeAre = () => {
             <div className="relative">
               <div className="border border-neutral-300 bg-neutral-250 p-2 overflow-hidden shadow-sm rounded-none">
                 <img 
-                  src="/why-choose-us.avif" 
-                  alt="Sangronyx Team" 
+                  src="/sap-whoweare-story.svg" 
+                  alt="Sangronyx Enterprise Transformation Process" 
                   className="w-full h-auto object-cover rounded-none"
                 />
               </div>
