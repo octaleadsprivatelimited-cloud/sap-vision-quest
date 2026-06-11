@@ -31,7 +31,7 @@ export const defaultFallbackContent: WebsiteContent = {
       description: "Scale your business with the ultimate cloud ERP solution, designed to run mission-critical processes in a secure, dedicated environment.",
       features: ["Custom extensions allowed", "Dedicated infrastructure", "Flexible upgrade schedule", "Premium SAP support"],
       color: "bg-accent",
-      image: "/sap-cloud-solutions.webp",
+      image: "/sap-s4hana-implementation.webp",
       link: "/products/sap-s4hana"
     },
     {

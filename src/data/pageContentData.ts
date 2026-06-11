@@ -188,7 +188,7 @@ export const initialServices: ServiceItem[] = [
       "User Training",
       "Go-Live Support"
     ],
-    image: "/sap-cloud-solutions.webp",
+    image: "/sap-s4hana-implementation.webp",
     href: "/services/sap-s4hana-implementation"
   },
   {
@@ -249,7 +249,7 @@ export const initialServices: ServiceItem[] = [
       "Cloud Foundry",
       "REST APIs"
     ],
-    image: "/sap-cloud-solutions.webp",
+    image: "/SAP CUSTOM DEVELOPMENT.jpg",
     href: "/services/sap-cap-development"
   },
   {
@@ -263,7 +263,7 @@ export const initialServices: ServiceItem[] = [
       "Workflow Applications",
       "Mobile Enablement"
     ],
-    image: "/sap-cloud-solutions.webp",
+    image: "/SAP CUSTOM DEVELOPMENT.jpg",
     href: "/services/sap-fiori-development"
   },
   {
@@ -277,7 +277,7 @@ export const initialServices: ServiceItem[] = [
       "SAP Integration",
       "Responsive Design"
     ],
-    image: "/sap-cloud-solutions.webp",
+    image: "/SAP CUSTOM DEVELOPMENT.jpg",
     href: "/services/sap-ui5-development"
   },
   {
@@ -291,7 +291,7 @@ export const initialServices: ServiceItem[] = [
       "Process Automation",
       "Intelligent Recommendations"
     ],
-    image: "/sap-cloud-solutions.webp",
+    image: "/sap-excellence-background.jpg",
     href: "/services/sap-joule-ai"
   },
   {
@@ -320,7 +320,7 @@ export const initialServices: ServiceItem[] = [
       "Training",
       "Deployment Support"
     ],
-    image: "/sap-cloud-solutions.webp",
+    image: "/SAP MODULE IMPLEMENTATION.png",
     href: "/services/sap-rollout-services"
   },
   {
@@ -335,7 +335,7 @@ export const initialServices: ServiceItem[] = [
       "Forms",
       "Workflow Development"
     ],
-    image: "/sap-cloud-solutions.webp",
+    image: "/SAP CUSTOM DEVELOPMENT.jpg",
     href: "/services/sap-abap-development"
   },
   {
@@ -378,7 +378,7 @@ export const initialIndustries: IndustryItem[] = [
     iconName: "Car",
     color: "bg-sprinklr-purple",
     slug: "automotive",
-    image: "/sap-cloud-solutions.webp",
+    image: "/sap-excellence-background.jpg",
     features: [
       "Supplier Collaboration",
       "Production Optimization",

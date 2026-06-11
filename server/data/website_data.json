@@ -13,7 +13,7 @@
         "User Training",
         "Go-Live Support"
       ],
-      "image": "/sap-cloud-solutions.webp",
+      "image": "/sap-s4hana-implementation.webp",
       "href": "/services/sap-s4hana-implementation"
     },
     {
@@ -74,7 +74,7 @@
         "Cloud Foundry",
         "REST APIs"
       ],
-      "image": "/sap-cloud-solutions.webp",
+      "image": "/SAP CUSTOM DEVELOPMENT.jpg",
       "href": "/services/sap-cap-development"
     },
     {
@@ -88,7 +88,7 @@
         "Workflow Applications",
         "Mobile Enablement"
       ],
-      "image": "/sap-cloud-solutions.webp",
+      "image": "/SAP CUSTOM DEVELOPMENT.jpg",
       "href": "/services/sap-fiori-development"
     },
     {
@@ -102,7 +102,7 @@
         "SAP Integration",
         "Responsive Design"
       ],
-      "image": "/sap-cloud-solutions.webp",
+      "image": "/SAP CUSTOM DEVELOPMENT.jpg",
       "href": "/services/sap-ui5-development"
     },
     {
@@ -116,7 +116,7 @@
         "Process Automation",
         "Intelligent Recommendations"
       ],
-      "image": "/sap-cloud-solutions.webp",
+      "image": "/sap-excellence-background.jpg",
       "href": "/services/sap-joule-ai"
     },
     {
@@ -145,7 +145,7 @@
         "Training",
         "Deployment Support"
       ],
-      "image": "/sap-cloud-solutions.webp",
+      "image": "/SAP MODULE IMPLEMENTATION.png",
       "href": "/services/sap-rollout-services"
     },
     {
@@ -160,7 +160,7 @@
         "Forms",
         "Workflow Development"
       ],
-      "image": "/sap-cloud-solutions.webp",
+      "image": "/SAP CUSTOM DEVELOPMENT.jpg",
       "href": "/services/sap-abap-development"
     },
     {
@@ -202,7 +202,7 @@
       "iconName": "Car",
       "color": "bg-sprinklr-purple",
       "slug": "automotive",
-      "image": "/sap-cloud-solutions.webp",
+      "image": "/sap-excellence-background.jpg",
       "features": [
         "Supplier Collaboration",
         "Production Optimization",
@@ -324,7 +324,7 @@
         "Premium SAP support"
       ],
       "color": "bg-accent",
-      "image": "/sap-cloud-solutions.webp",
+      "image": "/sap-s4hana-implementation.webp",
       "link": "/products/sap-s4hana"
     },
     {
