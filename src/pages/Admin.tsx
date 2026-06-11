@@ -1235,6 +1235,8 @@ export default function AdminPanel() {
     );
   }
 
+  const isAdmin = user && (user.email === 'anitha.gunthala1999@gmail.com' || user.email === 'admin@sangronyx.com');
+
   if (!user) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center font-sans antialiased p-4 relative overflow-hidden">
@@ -1294,6 +1296,48 @@ export default function AdminPanel() {
               <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold block">
                 Protected by Google Identity Service
               </span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center font-sans antialiased p-4 relative overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
+        
+        <Card className="w-full max-w-md bg-slate-900/80 border-slate-800 backdrop-blur-xl shadow-2xl rounded-none relative z-10 overflow-hidden">
+          <div className="h-1 bg-rose-500" />
+          
+          <CardHeader className="text-center pt-8 pb-6">
+            <div className="mx-auto w-12 h-12 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mb-4">
+              <ShieldAlert className="w-6 h-6 text-rose-400" />
+            </div>
+            <CardTitle className="text-2xl font-bold text-white tracking-tight">Access Denied</CardTitle>
+            <CardDescription className="text-rose-400 text-xs mt-1.5 uppercase tracking-wider font-semibold">
+              Unauthorized Admin
+            </CardDescription>
+          </CardHeader>
+          
+          <CardContent className="space-y-6 pb-8">
+            <div className="text-center px-4">
+              <p className="text-sm text-slate-300 leading-relaxed">
+                The account <strong className="text-white">{user.email}</strong> is not configured as an administrator for sangronyx.com.
+              </p>
+              <p className="text-xs text-slate-400 mt-3">
+                Please log out and sign in with the authorized administrator email: <strong className="text-slate-300">anitha.gunthala1999@gmail.com</strong>.
+              </p>
+            </div>
+            
+            <div className="space-y-3 pt-2">
+              <Button
+                onClick={logout}
+                className="w-full bg-rose-600 hover:bg-rose-500 text-white py-6 font-semibold flex items-center justify-center gap-3 transition-all rounded-none hover:shadow-lg active:scale-[0.99]"
+              >
+                Sign In with Different Account
+              </Button>
             </div>
           </CardContent>
         </Card>
