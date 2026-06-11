@@ -57,6 +57,7 @@ import Careers from "./pages/Careers";
 import WhoWeAre from "./pages/WhoWeAre";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
+import { AuthProvider } from "./context/AuthContext";
 // Legal Pages
 import Privacy from "./pages/legal/Privacy";
 import Legal from "./pages/legal/Legal";
@@ -72,11 +73,12 @@ const queryClient = new QueryClient();
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
-      <DataProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
+      <AuthProvider>
+        <DataProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
           <ScrollToTop />
           <Routes>
           <Route path="/" element={<Index />} />
@@ -138,12 +140,13 @@ const App = () => (
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <CookieConsent />
+      <CookieConsent />
       </BrowserRouter>
     </TooltipProvider>
    </DataProvider>
-  </QueryClientProvider>
-  </HelmetProvider>
+  </AuthProvider>
+ </QueryClientProvider>
+ </HelmetProvider>
 );
 
 export default App;
