@@ -11,6 +11,7 @@ import {
   initialLeadership,
   initialPageTexts
 } from "@/data/pageContentData";
+import { seoData as initialSeoData } from "@/data/seoData";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
@@ -183,7 +184,8 @@ export const defaultFallbackContent: WebsiteContent = {
     }
   ],
   pageTexts: initialPageTexts,
-  customPages: []
+  customPages: [],
+  seoData: initialSeoData
 };
 
 interface DataContextType {

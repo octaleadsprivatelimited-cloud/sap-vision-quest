@@ -80,6 +80,7 @@ export interface WebsiteContent {
   benefits: BenefitItem[];
   partnerBenefits: PartnerBenefitItem[];
   leadership: LeadershipItem[];
+  seoData?: Record<string, { title: string; description: string; keywords: string; canonical?: string; structuredData?: object }>;
   products?: {
     id: string;
     iconName: string;
