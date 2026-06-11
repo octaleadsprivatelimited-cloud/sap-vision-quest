@@ -286,31 +286,32 @@
 
 /* Sidebar navigation */
 .fluent-admin-theme .md\:w-64 {
-  background-color: #f3f2f1 !important;
-  border-right: 1px solid #edebe9 !important;
+  background-color: #0076d6 !important;
+  border-right: 1px solid #005ba3 !important;
   border-bottom: none !important;
 }
 
 .fluent-admin-theme .md\:w-64 button,
 .fluent-admin-theme .md\:w-64 [role="tab"] {
   background-color: transparent !important;
-  color: #323130 !important;
+  color: #000000 !important;
   border-left: 4px solid transparent !important;
   transition: all 0.15s ease-in-out !important;
+  font-weight: 600 !important;
 }
 
 .fluent-admin-theme .md\:w-64 button:hover,
 .fluent-admin-theme .md\:w-64 [role="tab"]:hover {
-  background-color: #edebe9 !important;
-  color: #201f1e !important;
+  background-color: #006ec7 !important;
+  color: #000000 !important;
 }
 
 .fluent-admin-theme .md\:w-64 [data-state="active"],
 .fluent-admin-theme .md\:w-64 button[data-state="active"] {
   background-color: #ffffff !important;
-  color: #0067b8 !important;
-  border-left: 4px solid #0067b8 !important;
-  font-weight: 600 !important;
+  color: #000000 !important;
+  border-left: 4px solid #000000 !important;
+  font-weight: 700 !important;
 }
 
 /* Main workspace */
