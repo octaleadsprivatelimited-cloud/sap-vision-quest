@@ -480,7 +480,7 @@
   "pageTexts": {
     "home": {
       "heroLabel": "SAP Solutions Partner",
-      "heroTitle": "Transforming Businesses Through SAP Innovation",
+      "heroTitle": "Intelligent SAP Solutions",
       "heroDescription": "Sangronyx Technologies Pvt Ltd helps organizations modernize their enterprise landscape through SAP S/4HANA, SAP BTP, SAP Fiori, SAP RAP, SAP CAP, SAP Joule, Implementation, Migration, Rollout, and Application Support Services.",
       "sectionTitle": "We deliver intelligent, scalable, and future-ready SAP solutions that drive operational excellence, innovation, and business growth.",
       "whyChooseTitle": "Your Trusted Partner for SAP Excellence",
@@ -572,93 +572,15 @@
   },
   "customPages": [
     {
-      "title": "title",
+      "title": "test",
       "slug": "test",
-      "description": "hello",
+      "description": "This is a test page",
       "sections": [
         {
-          "id": "sec-1781168095638-1",
+          "id": "sec-1781186404418",
           "type": "hero",
-          "title": "title",
-          "subtitle": "hello"
-        },
-        {
-          "id": "sec-1781168095638-2",
-          "type": "features",
-          "title": "Key Capabilities",
-          "subtitle": "Everything you need to succeed",
-          "items": [
-            {
-              "title": "Real-time Monitoring",
-              "description": "Keep track of active workloads and metrics in real-time.",
-              "iconName": "Activity"
-            },
-            {
-              "title": "Enterprise Security",
-              "description": "Hardened cloud hosting and full encryption protocols.",
-              "iconName": "Shield"
-            },
-            {
-              "title": "Seamless Integration",
-              "description": "Connect with existing SAP ecosystems instantly.",
-              "iconName": "Zap"
-            }
-          ]
-        },
-        {
-          "id": "sec-1781168095638-3",
-          "type": "stats",
-          "title": "Proven Performance Milestones",
-          "items": [
-            {
-              "title": "99.99%",
-              "description": "Guaranteed Uptime SLA"
-            },
-            {
-              "title": "50+",
-              "description": "Active Enterprise Integrations"
-            },
-            {
-              "title": "2.4x",
-              "description": "Faster Data Migration Speed"
-            },
-            {
-              "title": "100%",
-              "description": "GDPR & SOC2 Compliance"
-            }
-          ]
-        },
-        {
-          "id": "sec-1781168095638-4",
-          "type": "cta",
-          "title": "Elevate Your Enterprise Architecture Today",
-          "subtitle": "Speak with our leading SAP architects to schedule a custom system assessment."
-        }
-      ]
-    },
-    {
-      "title": "new",
-      "slug": "new",
-      "description": "new",
-      "sections": [
-        {
-          "id": "sec-1781168192018",
-          "type": "hero",
-          "title": "new",
-          "subtitle": "new"
-        }
-      ]
-    },
-    {
-      "title": "Test Page",
-      "slug": "test-delete",
-      "description": "",
-      "sections": [
-        {
-          "id": "sec-1781184038220",
-          "type": "hero",
-          "title": "Test Page",
-          "subtitle": "Welcome to our custom page"
+          "title": "test",
+          "subtitle": "This is a test page"
         }
       ]
     }

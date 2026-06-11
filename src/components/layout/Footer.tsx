@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Youtube, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { useData } from "@/context/DataContext";
+
 interface FooterLink {
   label: string;
   href: string;
@@ -65,6 +67,16 @@ const legalLinks = [
 ];
 
 export const Footer = () => {
+  const { content } = useData();
+  const customPages = content?.customPages || [];
+
+  const companyLinks = [
+    ...footerLinks.Company,
+    ...customPages.map((page) => ({
+      label: page.title,
+      href: `/p/${page.slug}`,
+    })),
+  ];
   return (
     <footer className="relative bg-[#f5f5f5] text-[#1d1d1d] font-sans antialiased border-t border-[#d2d2d2] text-xs">
       <div className="container mx-auto px-4 lg:px-8 py-12">
@@ -116,7 +128,7 @@ export const Footer = () => {
           <div>
             <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Company</h4>
             <ul className="space-y-2.5">
-              {footerLinks.Company.map((link) => (
+              {companyLinks.map((link) => (
                 <li key={link.label}>
                   <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}

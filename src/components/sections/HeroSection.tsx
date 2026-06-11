@@ -1,8 +1,16 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { useData } from "@/context/DataContext";
+import { initialPageTexts } from "@/data/pageContentData";
 
 export const HeroSection = () => {
+  const { content } = useData();
+  const homeTexts = content?.pageTexts?.home || initialPageTexts.home || {};
+
+  const heroLabel = homeTexts.heroLabel || "Empowering Intelligent Enterprises";
+  const heroTitle = homeTexts.heroTitle || "Smartest Path to SAP Success";
+  const heroDescription = homeTexts.heroDescription || "Unlock the full potential of your organization. Sangronyx provides industry-leading SAP consulting, S/4HANA migration, custom integrations, and rollout support designed to deliver measurable results.";
 
   return (
     <section className="relative bg-white pt-[75px] md:pt-[127px] pb-12 font-sans antialiased text-[#1d1d1d]">
@@ -13,15 +21,15 @@ export const HeroSection = () => {
           <div className="lg:col-span-5 bg-[#f4f6f8] p-8 md:p-12 flex flex-col justify-center text-left space-y-6">
             <span className="text-[11px] font-bold tracking-widest text-[#0076d6] uppercase flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" />
-              Empowering Intelligent Enterprises
+              {heroLabel}
             </span>
             
             <h2 className="text-3xl md:text-4xl font-light tracking-tight text-[#1d1d1d] leading-tight">
-              Smartest Path to <strong className="font-semibold text-[#0076d6]">SAP Success</strong>
+              {heroTitle}
             </h2>
             
             <p className="text-xs md:text-sm text-[#555555] leading-relaxed">
-              Unlock the full potential of your organization. Sangronyx provides industry-leading SAP consulting, S/4HANA migration, custom integrations, and rollout support designed to deliver measurable results.
+              {heroDescription}
             </p>
             
             <div className="flex flex-wrap gap-3 pt-4">

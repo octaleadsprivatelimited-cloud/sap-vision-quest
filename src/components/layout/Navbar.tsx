@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, ChevronRight, Globe, Phone, Mail, MapPin, MessageCircle, User, Sparkles, Briefcase, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useData } from "@/context/DataContext";
 
 const navItems = [
   { label: "Services", href: "/services", hasDropdown: false },
@@ -86,16 +87,32 @@ const locations = [
 ];
 
 export const Navbar = () => {
+  const { content } = useData();
+  const customPages = content?.customPages || [];
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isCustomPagesOpen, setIsCustomPagesOpen] = useState(false);
   const [isLocationsOpen, setIsLocationsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("human");
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
+  const [mobileCustomPagesOpen, setMobileCustomPagesOpen] = useState(false);
   const [mobileExpandedCategory, setMobileExpandedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const dynamicNavItems = [
+    { label: "Services", href: "/services", hasDropdown: false },
+    { label: "Industries", href: "/industries", hasDropdown: false },
+    { label: "Resources", href: "/resources", hasDropdown: true },
+    ...(customPages.length > 0 ? [{ label: "Custom Pages", href: "#", hasDropdown: true, isCustomPages: true }] : []),
+    { label: "Careers", href: "/careers", hasDropdown: false },
+    { label: "Partners", href: "/partners", hasDropdown: false },
+    { label: "Who We Are", href: "/who-we-are", hasDropdown: false },
+    { label: "Products", href: "/products", hasDropdown: false },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -262,8 +279,59 @@ export const Navbar = () => {
                 )}
               </AnimatePresence>
               <nav className="flex items-center gap-1">
-                {navItems.map((item) => {
+                {dynamicNavItems.map((item) => {
                   if (item.hasDropdown) {
+                    if ((item as any).isCustomPages) {
+                      return (
+                        <div
+                          key={item.label}
+                          className="relative"
+                          onMouseEnter={() => setIsCustomPagesOpen(true)}
+                          onMouseLeave={() => setIsCustomPagesOpen(false)}
+                        >
+                          <button
+                            className={cn(
+                              "flex items-center gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-colors rounded-none",
+                              isCustomPagesOpen
+                                ? "text-[#0076d6]"
+                                : "text-[#1d1d1d] hover:text-[#0076d6]"
+                            )}
+                          >
+                            {item.label}
+                            <ChevronDown className="w-3 h-3" />
+                          </button>
+
+                          <AnimatePresence>
+                            {isCustomPagesOpen && (
+                              <motion.div
+                                initial={{ opacity: 0, y: -5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -5 }}
+                                transition={{ duration: 0.15 }}
+                                className="absolute left-0 top-full w-56 bg-white shadow-2xl border border-[#d2d2d2] z-50 rounded-none p-4 text-left"
+                              >
+                                <h4 className="text-xs font-bold uppercase tracking-wider text-[#1d1d1d] mb-3 pb-2 border-b border-[#f5f5f5]">
+                                  Custom Pages
+                                </h4>
+                                <div className="flex flex-col gap-2.5">
+                                  {customPages.map((page) => (
+                                    <Link
+                                      key={page.slug}
+                                      to={`/p/${page.slug}`}
+                                      onClick={() => setIsCustomPagesOpen(false)}
+                                      className="text-xs text-[#555555] hover:text-[#0076d6] hover:underline transition-colors"
+                                    >
+                                      {page.title}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      );
+                    }
+
                     return (
                       <div
                         key={item.label}
@@ -394,8 +462,43 @@ export const Navbar = () => {
             </div>
 
             <div className="p-4 space-y-2">
-              {navItems.map((item) => {
+              {dynamicNavItems.map((item) => {
                 if (item.hasDropdown) {
+                  if ((item as any).isCustomPages) {
+                    return (
+                      <div key={item.label} className="border-b border-[#f5f5f5] pb-2">
+                        <button
+                          onClick={() => setMobileCustomPagesOpen(!mobileCustomPagesOpen)}
+                          className="flex items-center justify-between w-full py-2.5 text-xs font-bold uppercase tracking-wider text-[#1d1d1d]"
+                        >
+                          {item.label}
+                          <ChevronDown className={cn("w-4 h-4 transition-transform", mobileCustomPagesOpen && "rotate-180")} />
+                        </button>
+                        <AnimatePresence>
+                          {mobileCustomPagesOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              className="pl-3 py-1 space-y-2.5 border-l border-[#e5e5e5]"
+                            >
+                              {customPages.map((page) => (
+                                <Link
+                                  key={page.slug}
+                                  to={`/p/${page.slug}`}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="block text-xs text-[#555555] hover:text-[#0076d6] py-1"
+                                >
+                                  {page.title}
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  }
+
                   return (
                     <div key={item.label} className="border-b border-[#f5f5f5] pb-2">
                       <button

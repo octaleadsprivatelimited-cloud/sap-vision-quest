@@ -1255,16 +1255,6 @@ export default function AdminPanel() {
 
           {/* Left Vertical Navigation Menu */}
           <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-slate-800 bg-slate-900/20 p-4 shrink-0">
-            <div className="mb-4 px-2 py-3 bg-slate-900/60 border border-slate-800 rounded-lg flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-sky-500/15 flex items-center justify-center text-sky-400 font-bold border border-sky-500/20">
-                SA
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-white">System Admin</p>
-                <p className="text-[10px] text-slate-400">Role: Root Administrator</p>
-              </div>
-            </div>
-
             <TabsList className="flex flex-row md:flex-col items-stretch justify-start bg-transparent p-0 gap-1 space-y-0 md:space-y-1 w-full overflow-x-auto md:overflow-x-visible h-auto">
               <div className="hidden md:block text-[9px] font-bold text-slate-500 uppercase tracking-wider px-3 pt-2 pb-1 text-left">Portal Operations</div>
               <TabsTrigger
