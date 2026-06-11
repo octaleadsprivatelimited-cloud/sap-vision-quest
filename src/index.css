@@ -252,15 +252,18 @@
   }
 }
 
-/* Amazon-style Admin Theme overrides */
+/* Microsoft-style crisp Admin Theme overrides */
 .fluent-admin-theme {
   background-color: #eaeded !important;
-  color: #0f1111 !important;
-  font-family: "Amazon Ember", Arial, sans-serif !important;
+  color: #242424 !important;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
 .fluent-admin-theme * {
   border-radius: 4px !important;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
 }
 
 /* Header */
@@ -342,14 +345,15 @@
 .fluent-admin-theme h2,
 .fluent-admin-theme h3,
 .fluent-admin-theme h4 {
-  color: #0f1111 !important;
+  color: #111111 !important;
+  font-weight: 600 !important;
 }
 
 .fluent-admin-theme .card-description,
 .fluent-admin-theme p,
 .fluent-admin-theme .text-slate-400,
 .fluent-admin-theme .text-slate-500 {
-  color: #565959 !important;
+  color: #242424 !important;
 }
 
 /* Inputs & Form Fields */
