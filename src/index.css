@@ -252,23 +252,23 @@
   }
 }
 
-/* Microsoft Fluent Admin Theme overrides */
+/* Amazon-style Admin Theme overrides */
 .fluent-admin-theme {
-  background-color: #f3f2f1 !important;
-  color: #323130 !important;
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif !important;
+  background-color: #eaeded !important;
+  color: #0f1111 !important;
+  font-family: "Amazon Ember", Arial, sans-serif !important;
 }
 
 .fluent-admin-theme * {
-  border-radius: 0px !important;
+  border-radius: 4px !important;
 }
 
 /* Header */
 .fluent-admin-theme header {
-  background-color: #ffffff !important;
-  border-bottom: 1px solid #edebe9 !important;
-  color: #323130 !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  background-color: #131921 !important;
+  border-bottom: 1px solid #19222d !important;
+  color: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
 }
 
 .fluent-admin-theme header h1,
@@ -276,47 +276,49 @@
 .fluent-admin-theme header strong,
 .fluent-admin-theme header span,
 .fluent-admin-theme header div {
-  color: #323130 !important;
+  color: #ffffff !important;
 }
 
 .fluent-admin-theme header .bg-sky-600 {
-  background-color: #0067b8 !important;
-  color: #ffffff !important;
+  background-color: #ffd814 !important;
+  background-image: linear-gradient(to bottom, #ffe054, #ffd814) !important;
+  color: #0f1111 !important;
+  border: 1px solid #a88734 !important;
 }
 
 /* Sidebar navigation */
 .fluent-admin-theme .md\:w-64 {
-  background-color: #0076d6 !important;
-  border-right: 1px solid #005ba3 !important;
+  background-color: #232f3e !important;
+  border-right: 1px solid #19222d !important;
   border-bottom: none !important;
 }
 
 .fluent-admin-theme .md\:w-64 button,
 .fluent-admin-theme .md\:w-64 [role="tab"] {
   background-color: transparent !important;
-  color: #000000 !important;
+  color: #d5dbdb !important;
   border-left: 4px solid transparent !important;
   transition: all 0.15s ease-in-out !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 }
 
 .fluent-admin-theme .md\:w-64 button:hover,
 .fluent-admin-theme .md\:w-64 [role="tab"]:hover {
-  background-color: #006ec7 !important;
-  color: #000000 !important;
+  background-color: #19222d !important;
+  color: #ffffff !important;
 }
 
 .fluent-admin-theme .md\:w-64 [data-state="active"],
 .fluent-admin-theme .md\:w-64 button[data-state="active"] {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border-left: 4px solid #000000 !important;
+  background-color: #19222d !important;
+  color: #ff9900 !important;
+  border-left: 4px solid #ff9900 !important;
   font-weight: 700 !important;
 }
 
 /* Main workspace */
 .fluent-admin-theme main {
-  background-color: #faf9f8 !important;
+  background-color: #eaeded !important;
 }
 
 /* Cards */
@@ -324,23 +326,23 @@
 .fluent-admin-theme .card,
 .fluent-admin-theme [class*="bg-card"] {
   background-color: #ffffff !important;
-  border: 1px solid #edebe9 !important;
-  color: #323130 !important;
-  box-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.033), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.027) !important;
+  border: 1px solid #d5dbdb !important;
+  color: #0f1111 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
 .fluent-admin-theme .card-title,
 .fluent-admin-theme h2,
 .fluent-admin-theme h3,
 .fluent-admin-theme h4 {
-  color: #201f1e !important;
+  color: #0f1111 !important;
 }
 
 .fluent-admin-theme .card-description,
 .fluent-admin-theme p,
 .fluent-admin-theme .text-slate-400,
 .fluent-admin-theme .text-slate-500 {
-  color: #605e5c !important;
+  color: #565959 !important;
 }
 
 /* Inputs & Form Fields */
@@ -348,36 +350,39 @@
 .fluent-admin-theme textarea,
 .fluent-admin-theme select {
   background-color: #ffffff !important;
-  border: 1px solid #8a8886 !important;
-  color: #323130 !important;
+  border: 1px solid #888c8c !important;
+  color: #0f1111 !important;
 }
 
 .fluent-admin-theme input:focus,
 .fluent-admin-theme textarea:focus,
 .fluent-admin-theme select:focus {
-  border-color: #0067b8 !important;
+  border-color: #e77600 !important;
   outline: none !important;
-  box-shadow: 0 0 0 1px #0067b8 !important;
+  box-shadow: 0 0 3px 2px rgba(228, 121, 17, 0.5) !important;
 }
 
 .fluent-admin-theme input::placeholder,
 .fluent-admin-theme textarea::placeholder {
-  color: #a19f9d !important;
+  color: #767676 !important;
 }
 
 /* Buttons */
 .fluent-admin-theme button.bg-sky-600,
 .fluent-admin-theme button.bg-primary,
 .fluent-admin-theme .bg-sky-600 {
-  background-color: #0067b8 !important;
-  color: #ffffff !important;
-  border: none !important;
+  background-color: #ffd814 !important;
+  background-image: linear-gradient(to bottom, #ffe054, #ffd814) !important;
+  color: #0f1111 !important;
+  border: 1px solid #a88734 !important;
+  box-shadow: 0 2px 5px 0 rgba(213,217,217,.5) !important;
 }
 
 .fluent-admin-theme button.bg-sky-600:hover,
 .fluent-admin-theme button.bg-primary:hover,
 .fluent-admin-theme .bg-sky-600:hover {
-  background-color: #005a9e !important;
+  background-image: linear-gradient(to bottom, #f5c71a, #eeb933) !important;
+  border-color: #846a29 !important;
 }
 
 .fluent-admin-theme button.bg-slate-800,
@@ -385,16 +390,18 @@
 .fluent-admin-theme button[class*="variant-ghost"],
 .fluent-admin-theme button[class*="variant-outline"] {
   background-color: #ffffff !important;
-  border: 1px solid #8a8886 !important;
-  color: #323130 !important;
+  border: 1px solid #d5dbdb !important;
+  color: #0f1111 !important;
+  box-shadow: 0 2px 5px 0 rgba(213,217,217,.5) !important;
 }
 
 .fluent-admin-theme button.bg-slate-800:hover,
 .fluent-admin-theme button.border-slate-800:hover,
 .fluent-admin-theme button[class*="variant-ghost"]:hover,
 .fluent-admin-theme button[class*="variant-outline"]:hover {
-  background-color: #f3f2f1 !important;
-  color: #201f1e !important;
+  background-color: #f7fafa !important;
+  border-color: #bdc4c4 !important;
+  color: #0f1111 !important;
 }
 
 /* Tables */
@@ -405,32 +412,32 @@
 }
 
 .fluent-admin-theme tr {
-  border-bottom: 1px solid #edebe9 !important;
+  border-bottom: 1px solid #e7e7e7 !important;
 }
 
 .fluent-admin-theme tr:hover {
-  background-color: #f3f2f1 !important;
+  background-color: #f7fafa !important;
 }
 
 .fluent-admin-theme th,
 .fluent-admin-theme thead,
 .fluent-admin-theme [role="columnheader"] {
-  background-color: #f3f2f1 !important;
-  color: #323130 !important;
+  background-color: #f0f2f2 !important;
+  color: #0f1111 !important;
   font-weight: 600 !important;
-  border-bottom: 1px solid #edebe9 !important;
+  border-bottom: 1px solid #e7e7e7 !important;
 }
 
 .fluent-admin-theme td,
 .fluent-admin-theme [role="gridcell"] {
-  color: #323130 !important;
-  border-bottom: 1px solid #edebe9 !important;
+  color: #0f1111 !important;
+  border-bottom: 1px solid #e7e7e7 !important;
 }
 
 /* Badges */
 .fluent-admin-theme .badge,
 .fluent-admin-theme [class*="Badge"] {
-  border-radius: 0px !important;
+  border-radius: 2px !important;
   font-size: 11px !important;
   font-weight: 600 !important;
   padding: 2px 6px !important;
@@ -438,55 +445,55 @@
   letter-spacing: 0.5px !important;
 }
 
-/* Reviewed / Active / Pass status */
+/* Positive / Success status */
 .fluent-admin-theme .badge.bg-emerald-500\/5,
 .fluent-admin-theme .badge[class*="Reviewed"],
 .fluent-admin-theme .bg-emerald-500\/5,
 .fluent-admin-theme [data-status="pass"] {
-  background-color: #dff6dd !important;
-  color: #107c41 !important;
-  border: 1px solid #dff6dd !important;
+  background-color: #e7f4e4 !important;
+  color: #007600 !important;
+  border: 1px solid #c8e1c3 !important;
 }
 
-/* New / Warning / Warn status */
+/* New / Warning status */
 .fluent-admin-theme .badge.bg-amber-500,
 .fluent-admin-theme .badge[class*="New"],
 .fluent-admin-theme .bg-amber-500\/5,
 .fluent-admin-theme [data-status="warn"] {
   background-color: #fff4ce !important;
-  color: #797673 !important;
-  border: 1px solid #fff4ce !important;
+  color: #b12704 !important;
+  border: 1px solid #f5d7a0 !important;
 }
 
 /* Archived / Info status */
 .fluent-admin-theme .badge.bg-slate-800,
 .fluent-admin-theme .badge[class*="Archived"] {
-  background-color: #f3f2f1 !important;
-  color: #323130 !important;
-  border: 1px solid #edebe9 !important;
+  background-color: #f0f2f2 !important;
+  color: #565959 !important;
+  border: 1px solid #d5dbdb !important;
 }
 
 /* Progress bar */
 .fluent-admin-theme .progress,
 .fluent-admin-theme [role="progressbar"] {
-  background-color: #edebe9 !important;
+  background-color: #f0f2f2 !important;
 }
 
 .fluent-admin-theme .progress-bar,
 .fluent-admin-theme [role="progressbar"] > div {
-  background-color: #0067b8 !important;
+  background-color: #e47911 !important;
 }
 
 /* Dialogs & Modals */
 .fluent-admin-theme [role="dialog"],
 .fluent-admin-theme [class*="DialogContent"] {
   background-color: #ffffff !important;
-  border: 1px solid #edebe9 !important;
-  box-shadow: 0 25.6px 57.6px 0 rgba(0, 0, 0, 0.22), 0 4.8px 14.4px 0 rgba(0, 0, 0, 0.18) !important;
+  border: 1px solid #d5dbdb !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
 }
 
 .fluent-admin-theme [class*="DialogOverlay"] {
-  background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: rgba(15, 17, 17, 0.6) !important;
 }
 
 /* Charts / Weekly Lead Acquisition */
@@ -495,11 +502,11 @@
 .fluent-admin-theme .bg-sky-600\/80,
 .fluent-admin-theme .bg-sky-600,
 .fluent-admin-theme .bg-gradient-to-t {
-  background: #0078d4 !important;
+  background: #e47911 !important;
 }
 
 .fluent-admin-theme .border-slate-100 {
-  border-color: #edebe9 !important;
+  border-color: #e7e7e7 !important;
 }
 
 /* Scrollbar override for console log */
@@ -508,18 +515,18 @@
   height: 6px !important;
 }
 .fluent-admin-theme .scrollbar-thin::-webkit-scrollbar-track {
-  background: #faf9f8 !important;
+  background: #f7fafa !important;
 }
 .fluent-admin-theme .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #c8c6c4 !important;
+  background: #bdc4c4 !important;
 }
 .fluent-admin-theme .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: #a19f9d !important;
+  background: #888c8c !important;
 }
 
 /* Console log list background */
 .fluent-admin-theme .bg-slate-950 {
-  background-color: #faf9f8 !important;
-  border-color: #edebe9 !important;
-  color: #323130 !important;
+  background-color: #f7fafa !important;
+  border-color: #d5dbdb !important;
+  color: #0f1111 !important;
 }
