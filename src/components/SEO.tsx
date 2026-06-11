@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 interface SEOProps {
   title: string;
   description: string;
-  keywords: string;
+  keywords?: string;
   canonical?: string;
   ogImage?: string;
   ogType?: string;
@@ -78,7 +78,7 @@ export const SEO = ({
       <meta name="twitter:creator" content="@Sangronyx" />
       
       {/* Additional SEO Meta Tags */}
-      <meta name="subject" content={keywords.split(", ").slice(0, 5).join(", ")} />
+      {keywords && <meta name="subject" content={keywords.split(", ").slice(0, 5).join(", ")} />}
       <meta name="classification" content="Business, Technology, Software, Enterprise Solutions, SAP Services" />
       <meta name="category" content="Technology, Business Software, Enterprise Solutions" />
       <meta name="topic" content={title} />

@@ -5,158 +5,124 @@ import { SEO } from "@/components/SEO";
 import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Cloud, Database, Users, CheckCircle, Settings, Smartphone, Code } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
+import * as Icons from "lucide-react";
 import { Link } from "react-router-dom";
-
-const products = [
-  {
-    id: "sap-implementation",
-    icon: Cloud,
-    title: "SAP S/4HANA Implementation",
-    subtitle: "Complete Implementation",
-    description: "Complete SAP S/4HANA implementation with cloud, on-prem, or hybrid setup. Business process mapping, module configuration, UAT & go-live support, and post-go-live AMC.",
-    features: ["Implementation Strategy & Planning", "Business Process & Blueprinting", "Fit–Gap Analysis", "Functional Implementation", "Technical & System Configuration", "SAP BTP Integration", "Data Migration & Management", "Custom Development & Enhancements", "Analytics & Reporting", "Testing & Quality Assurance", "Security & Authorizations", "Training & Change Management", "Go-Live & Hypercare", "Post Go-Live Support (AMC)", "SAP Analytics Cloud Integration"],
-    color: "bg-accent",
-    image: "/sap-s4hana-implementation.webp",
-    link: "/solutions",
-  },
-  {
-    id: "sap-migration",
-    icon: Database,
-    title: "SAP ECC to S/4HANA Migration",
-    subtitle: "Seamless Migration",
-    description: "Seamless migration from ECC to S/4HANA with readiness check, database migration, custom code adaptation, master data cleansing, and end-user training.",
-    features: ["Assessment & Planning", "Technical Migration Services", "Custom Code & Development", "Functional Migration & Optimization", "Data Management", "Testing & Quality Assurance", "Security & Authorizations", "Change Management & Training", "Go-Live & Post Go-Live Support", "AMS & Managed Services"],
-    color: "bg-sprinklr-green",
-    image: "/sap-ecc-to-s4hana-migration.avif",
-    link: "/products/sap-ecc",
-  },
-  {
-    id: "sap-ecc",
-    icon: Settings,
-    title: "SAP ECC",
-    subtitle: "Enterprise Resource Planning",
-    description: "Comprehensive SAP ERP Central Component solutions for enterprise resource planning and business process management. Complete implementation, customization, and support services.",
-    features: ["Financial Accounting (FI)", "Controlling (CO)", "Materials Management (MM)", "Sales & Distribution (SD)", "Production Planning (PP)", "Human Capital Management (HCM)", "Custom Development", "Integration Services", "System Administration", "User Training"],
-    color: "bg-blue-500",
-    image: "/SAP ECC TO S4 HANA MIGRANATION.png",
-    link: "/products/sap-ecc",
-  },
-  {
-    id: "sap-fiori",
-    icon: Smartphone,
-    title: "SAP Fiori",
-    subtitle: "Modern User Experience",
-    description: "Modern, intuitive user experience platform for SAP applications with responsive design and mobile-first approach. Custom app development and UX optimization.",
-    features: ["Responsive Design", "Mobile-First Approach", "Role-Based Apps", "Custom Fiori Apps", "UI5 Development", "Fiori Launchpad", "Analytical Apps", "Integration Services", "Theme Customization", "User Training"],
-    color: "bg-purple-500",
-    image: "/sap-s4hana-implementation.webp",
-    link: "/products/sap-fiori",
-  },
-  {
-    id: "sap-btp",
-    icon: Code,
-    title: "SAP BTP",
-    subtitle: "Business Technology Platform",
-    description: "SAP Business Technology Platform - A unified platform for application development, integration, and analytics in the cloud. Build, extend, and integrate applications seamlessly.",
-    features: ["Application Development", "Integration Services", "Data & Analytics", "AI & Machine Learning", "API Management", "Mobile Services", "Workflow Management", "Cloud Integration", "Multi-Cloud Deployment", "DevOps & CI/CD"],
-    color: "bg-green-500",
-    image: "/sap-s4hana-implementation.webp",
-    link: "/products/sap-btp",
-  },
-];
+import { useData } from "@/context/DataContext";
 
 const Products = () => {
   const seo = useSEO();
+  const { content } = useData();
+
+  const productsPageText = content.pageTexts?.productsPage || {};
+  const productsList = content.products || [];
+
+  const heroLabel = productsPageText.heroLabel || "SAP PRODUCTS";
+  const heroTitle = productsPageText.heroTitle || "Our SAP Products";
+  const heroDescription = productsPageText.heroDescription || "Explore our suite of industry-leading SAP products and solutions to power your business growth.";
+  
+  const ctaTitle = productsPageText.ctaTitle || "Ready to Get Started?";
+  const ctaDescription = productsPageText.ctaDescription || "Contact our SAP experts to discuss your requirements and get a personalized solution.";
+  const ctaButtonText = productsPageText.ctaButtonText || "Contact SAP Experts";
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white font-sans antialiased text-neutral-900 selection:bg-[#0067b8] selection:text-white">
       <SEO {...seo} />
       <Navbar />
 
-      <PageHero
-        title="Our SAP Services"
-        description="Complete SAP solutions for implementation, migration, training, support, and custom development."
-        label="SAP SERVICES"
-        breadcrumbs={[{ label: "Products" }]}
+      {/* Dell-inspired Page Hero Section */}
+      <PageHero 
+        title={heroTitle}
+        description={heroDescription}
+        label={heroLabel}
+        breadcrumbs={[
+          { label: "Products" }
+        ]}
         backgroundImage="/hero-sap-background.jpg"
       />
 
       {/* Products Grid */}
-      <section className="py-16 md:py-24 lg:py-32 bg-background">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="py-16 md:py-20 lg:py-24 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="space-y-16 md:space-y-24">
-            {products.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center`}
-              >
-                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <p className="text-accent font-semibold mb-3 text-sm uppercase tracking-wide">{product.subtitle}</p>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight">
-                    {product.title}
-                  </h2>
-                  <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                    {product.description}
-                  </p>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                    {product.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-3 text-foreground">
-                        <div className={`w-5 h-5 rounded-full ${product.color} flex items-center justify-center flex-shrink-0`}>
-                          <CheckCircle className="w-3 h-3 text-white" />
-                        </div>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link to={product.link || "/solutions"}>
-                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90 group">
-                      Learn More
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </div>
+            {productsList.map((product, index) => {
+              // Map icon component if specified, default to CheckCircle
+              const IconComponent = (Icons as any)[product.iconName] || Icons.CheckCircle;
+              return (
+                <div
+                  key={product.id || product.title}
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center border-b border-neutral-100 pb-16 last:border-0 last:pb-0 text-left"
+                >
+                  <div className={`lg:col-span-7 space-y-6 ${index % 2 === 1 ? "lg:order-2" : ""}`}>
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-neutral-100 flex items-center justify-center text-[#0076d6] rounded-none">
+                        <IconComponent className="w-4 h-4" strokeWidth={1.5} />
+                      </div>
+                      <p className="text-[#0076d6] font-bold text-xs uppercase tracking-wider">{product.subtitle}</p>
+                    </div>
+                    
+                    <h2 className="text-2xl md:text-3xl font-light text-[#1d1d1d] tracking-tight">
+                      {product.title}
+                    </h2>
+                    
+                    <p className="text-xs md:text-sm text-[#555555] leading-relaxed">
+                      {product.description}
+                    </p>
+                    
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {product.features?.map((feature: string) => (
+                        <li key={feature} className="flex items-center gap-3 text-[#555555] text-xs">
+                          <CheckCircle className="w-4 h-4 text-[#0076d6] shrink-0 rounded-none" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <div className="pt-2">
+                      <Link 
+                        to={product.link || "/solutions"}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-[#0076d6] hover:text-[#005ba3] hover:underline uppercase tracking-wider"
+                      >
+                        <span>Learn more</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                  </div>
 
-                <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="w-full h-auto object-cover"
-                    />
+                  <div className={`lg:col-span-5 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                    <div className="relative aspect-[16/10] overflow-hidden border border-neutral-350 bg-neutral-250 p-2 shadow-md rounded-none">
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="w-full h-full object-cover object-center rounded-none"
+                      />
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 md:py-24 bg-primary">
-        <div className="container mx-auto px-4 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
-              Ready to Get Started?
+      {/* Corporate CTA */}
+      <section className="py-16 md:py-20 bg-[#f5f5f5] border-t border-neutral-200">
+        <div className="container mx-auto px-4 lg:px-8 text-center max-w-3xl">
+          <div className="space-y-4">
+            <h2 className="text-2xl md:text-3xl font-light text-neutral-900 tracking-tight">
+              {ctaTitle}
             </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/70 mb-8 max-w-2xl mx-auto">
-              Contact our SAP experts to discuss your requirements and get a personalized solution.
+            <p className="text-xs md:text-sm text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+              {ctaDescription}
             </p>
-            <Link to="/contact">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 px-8 py-6 h-auto text-base font-semibold group">
-                Contact SAP Experts
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </motion.div>
+            <div className="pt-4">
+              <Link to="/contact">
+                <Button className="bg-[#1d1d1d] text-white hover:bg-[#333333] px-6 py-3 h-auto text-xs font-semibold rounded-none uppercase tracking-wider">
+                  {ctaButtonText}
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

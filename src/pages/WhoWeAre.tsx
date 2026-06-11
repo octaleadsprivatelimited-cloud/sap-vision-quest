@@ -5,11 +5,14 @@ import { SEO } from "@/components/SEO";
 import { useSEO } from "@/hooks/useSEO";
 import { motion } from "framer-motion";
 import { Users } from "lucide-react";
-import { getWebsiteContent } from "@/data/pageContentData";
+import { useData } from "@/context/DataContext";
+import { Link } from "react-router-dom";
 
 const WhoWeAre = () => {
   const seo = useSEO();
-  const { leadership: leadershipTeam, pageTexts } = getWebsiteContent();
+  const { content } = useData();
+  const leadershipTeam = content.leadership || [];
+  const pageTexts = content.pageTexts;
   const textContent = pageTexts?.whoWeAre || {
     heroTitle: "Who We Are",
     heroDescription: "A team of passionate professionals dedicated to transforming enterprises through innovative SAP solutions and exceptional service.",
@@ -29,166 +32,103 @@ const WhoWeAre = () => {
   };
   
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white font-sans antialiased text-neutral-900 selection:bg-[#0067b8] selection:text-white">
       <SEO {...seo} />
       <Navbar />
       
-      <PageHero
+      {/* Dell-inspired Page Hero Section */}
+      <PageHero 
         title={textContent.heroTitle}
         description={textContent.heroDescription}
-        label={textContent.heroLabel || "About Sangronyx"}
-        backgroundImage="/hero-slide-2.jpg"
+        label={textContent.heroLabel}
         breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Who We Are", href: "/who-we-are" },
+          { label: "Who We Are" }
         ]}
-        ctaText=""
+        backgroundImage="/hero-slide-2.jpg"
       />
 
       {/* Our Story Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="py-16 md:py-20 lg:py-24 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+            <div className="space-y-6 text-left">
               {textContent.sectionTag && (
-                <span className="text-[#0096d6] text-sm font-semibold uppercase tracking-wider mb-4 block">
+                <span className="text-xs font-bold tracking-wider text-[#0076d6] uppercase block">
                   {textContent.sectionTag}
                 </span>
               )}
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-3xl font-light text-neutral-900 tracking-tight leading-tight">
                 {textContent.storyTitle}
               </h2>
-              {textContent.storyParagraphs && textContent.storyParagraphs.map((para, i) => (
-                <p key={i} className="text-gray-600 mb-6 leading-relaxed">
-                  {para}
-                </p>
-              ))}
-            </motion.div>
+              <div className="space-y-4 text-neutral-600 text-xs md:text-sm leading-relaxed">
+                {textContent.storyParagraphs && textContent.storyParagraphs.map((para, i) => (
+                  <p key={i}>
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </div>
             
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative">
+              <div className="border border-neutral-300 bg-neutral-250 p-2 overflow-hidden shadow-sm rounded-none">
                 <img 
-                   src="/why-choose-us.avif" 
+                  src="/why-choose-us.avif" 
                   alt="Sangronyx Team" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-cover rounded-none"
                 />
               </div>
               {textContent.stats && textContent.stats.length > 0 && (
-                <div className="absolute -bottom-6 -left-6 bg-[#0096d6] text-white p-6 rounded-xl shadow-lg">
-                  <div className="text-4xl font-bold">{textContent.stats[0].value}</div>
-                  <div className="text-sm opacity-90">{textContent.stats[0].label}</div>
+                <div className="absolute -bottom-4 -left-4 bg-[#0076d6] text-white p-4 rounded-none">
+                  <div className="text-2xl font-bold">{textContent.stats[0].value}</div>
+                  <div className="text-xs font-medium text-neutral-100">{textContent.stats[0].label}</div>
                 </div>
               )}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Leadership Section */}
-      <section className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
-        {/* Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
-        
-        {/* Decorative Blur Circles */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2 }}
-            className="absolute -top-20 -right-20 md:top-10 md:right-10 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#0096d6]/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2 }}
-            className="absolute -bottom-20 -left-20 md:bottom-10 md:left-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#0077b3]/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, delay: 0.4 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-[#0096d6]/5 rounded-full blur-3xl"
-          />
-        </div>
-        
-        {/* Subtle Grid Pattern */}
-        <div 
-          className="absolute inset-0 z-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, #0096d6 1px, transparent 1px),
-              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-        
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 md:mb-16"
-          >
-            <span className="text-[#0096d6] text-sm font-semibold uppercase tracking-wider mb-4 block">
+      <section className="py-16 md:py-20 bg-[#f5f5f5] border-t border-b border-neutral-200">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="text-center mb-12 max-w-2xl mx-auto space-y-3">
+            <span className="text-xs font-bold tracking-wider text-[#0076d6] uppercase block">
               Our Team
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl md:text-3xl font-light text-neutral-900 tracking-tight">
               {textContent.sectionTitle}
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className="text-xs md:text-sm text-neutral-600 leading-relaxed">
               {textContent.sectionDescription}
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {leadershipTeam.map((member, index) => (
-              <motion.div
+              <div
                 key={member.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="group relative bg-white rounded-2xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#0096d6]/30 overflow-hidden backdrop-blur-sm"
+                className="flex flex-col justify-between p-6 border border-neutral-200 bg-white hover:border-neutral-350 hover:shadow-md transition-all rounded-none text-left"
               >
-                {/* Decorative gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                {/* Icon container with gradient background */}
-                <div className="relative z-10 w-16 h-16 bg-gradient-to-br from-[#0096d6] to-[#0077b3] rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                
-                <div className="relative z-10 text-center">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#0096d6] transition-colors duration-300">
-                    {member.name}
-                  </h3>
-                  <p className="text-[#0096d6] text-sm font-semibold uppercase tracking-wide mb-4">
-                    {member.role}
-                  </p>
-                  <p className="text-gray-600 leading-relaxed text-sm">
+                <div className="space-y-4">
+                  {/* Icon container */}
+                  <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-[#0076d6] rounded-none">
+                    <Users className="w-5 h-5" strokeWidth={1.5} />
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-sm font-semibold text-neutral-900">
+                      {member.name}
+                    </h3>
+                    <p className="text-[10px] font-bold text-[#0076d6] uppercase tracking-wider mt-1">
+                      {member.role}
+                    </p>
+                  </div>
+                  
+                  <p className="text-xs text-neutral-600 leading-relaxed">
                     {member.description}
                   </p>
                 </div>
-                
-                {/* Bottom accent line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0096d6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

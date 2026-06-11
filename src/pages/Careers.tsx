@@ -4,7 +4,6 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { SEO } from "@/components/SEO";
 import { useSEO } from "@/hooks/useSEO";
-import { PageBackground } from "@/components/ui/page-background";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,11 +12,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import * as LucideIcons from "lucide-react";
-import { getWebsiteContent } from "@/data/pageContentData";
+import { useData } from "@/context/DataContext";
+import { Link } from "react-router-dom";
 
 const Careers = () => {
   const seo = useSEO();
-  const { benefits, pageTexts } = getWebsiteContent();
+  const { content } = useData();
+  const benefits = content.benefits || [];
+  const pageTexts = content.pageTexts;
   const textContent = pageTexts?.careers || {
     heroTitle: "Join Our Team",
     heroDescription: "Build your career with Sangronyx and help transform businesses through innovative SAP solutions. We're looking for talented individuals who share our passion for excellence.",
@@ -92,110 +94,66 @@ const Careers = () => {
   };
 
   return (
-    <PageBackground>
+    <div className="min-h-screen bg-white font-sans antialiased text-neutral-900 selection:bg-[#0067b8] selection:text-white">
       <SEO {...seo} />
       <Navbar />
-      <PageHero
+
+      {/* Dell-inspired Page Hero Section */}
+      <PageHero 
         title={textContent.heroTitle}
         description={textContent.heroDescription}
-        label={textContent.heroLabel || "CAREERS"}
+        label={textContent.heroLabel}
         breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Careers", href: "/careers" },
+          { label: "Careers" }
         ]}
-        backgroundImage="/carrer page background.jpg"
-        compact={true}
+        backgroundImage="/sangronyx_careers.jpg"
+        backgroundPosition="center 25%"
+        mobileBackgroundPosition="center 85%"
+        mobileBackgroundSize="auto 120%"
       />
 
       {/* Why Work With Us Section */}
-      <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
-        {/* Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
-        
-        {/* Decorative Blur Circles */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2 }}
-            className="absolute -top-20 -right-20 md:top-10 md:right-10 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#0096d6]/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2 }}
-            className="absolute -bottom-20 -left-20 md:bottom-10 md:left-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#0077b3]/10 rounded-full blur-3xl"
-          />
-        </div>
-        
-        {/* Subtle Grid Pattern */}
-        <div 
-          className="absolute inset-0 z-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, #0096d6 1px, transparent 1px),
-              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-        
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-8"
-          >
+      <section className="py-16 md:py-20 lg:py-24 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="border-b border-neutral-200 pb-4 mb-12 text-left">
             {textContent.sectionTag && (
-              <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
+              <span className="text-xs font-bold tracking-wider text-[#0076d6] uppercase block mb-1">
                 {textContent.sectionTag}
               </span>
             )}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-xl md:text-2xl font-light text-neutral-900 tracking-tight">
               {textContent.sectionTitle}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xs md:text-sm text-neutral-650 max-w-2xl mt-1 leading-relaxed">
               {textContent.sectionDescription}
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {benefits.map((benefit, index) => {
               const Icon = (LucideIcons as any)[benefit.iconName] || LucideIcons.Zap;
               return (
-                <motion.div
+                <div
                   key={benefit.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05, duration: 0.5 }}
-                  className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-[#0096d6]/30 overflow-hidden"
+                  className="group flex flex-col justify-between p-6 border border-neutral-200 bg-white hover:border-neutral-350 hover:shadow-md transition-all rounded-none"
                 >
-                  {/* Decorative background circle */}
-                  <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-[#0096d6]/5 rounded-full group-hover:scale-110 transition-transform duration-300" />
-                  
-                  {/* Icon */}
-                  <div className="relative z-10 w-12 h-12 bg-gradient-to-br from-[#0096d6] to-[#0077b3] rounded-lg flex items-center justify-center mb-6 shadow-md shadow-[#0096d6]/10">
-                    <Icon className="w-7 h-7 text-white" />
-                  </div>
-                
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#0096d6] transition-colors duration-300">
+                  <div className="space-y-4">
+                    {/* Icon */}
+                    <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-[#0076d6] rounded-none">
+                      <Icon className="w-5 h-5" strokeWidth={1.5} />
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-sm font-semibold text-neutral-900">
                       {benefit.title}
                     </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
+                    
+                    {/* Description */}
+                    <p className="text-xs text-neutral-600 leading-relaxed">
                       {benefit.description}
                     </p>
                   </div>
-                  
-                  {/* Bottom accent line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0096d6] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -203,119 +161,70 @@ const Careers = () => {
       </section>
 
       {/* Open Positions Section */}
-      <section id="openings" className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
-        {/* Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
-        
-        {/* Decorative Blur Circles */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2 }}
-            className="absolute -top-20 -right-20 md:top-10 md:right-10 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#0096d6]/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2 }}
-            className="absolute -bottom-20 -left-20 md:bottom-10 md:left-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#0077b3]/10 rounded-full blur-3xl"
-          />
-        </div>
-        
-        {/* Subtle Grid Pattern */}
-        <div 
-          className="absolute inset-0 z-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, #0096d6 1px, transparent 1px),
-              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-        
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-8"
-          >
-            <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
+      <section id="openings" className="py-16 md:py-20 bg-[#f5f5f5] border-t border-b border-neutral-200">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+            <span className="text-xs font-bold tracking-wider text-[#0076d6] uppercase block">
               Open Positions
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl md:text-3xl font-light text-neutral-900 tracking-tight">
               Current Opportunities
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            <p className="text-xs md:text-sm text-neutral-600 leading-relaxed max-w-2xl mx-auto">
               Explore our open positions and find the role that matches your skills and career goals.
             </p>
-            <Button 
-              onClick={() => setIsDialogOpen(true)}
-              className="bg-gradient-to-r from-[#0096d6] to-[#0077b3] hover:from-[#0077b3] hover:to-[#005a8a] text-white rounded-lg px-8 py-6 h-auto text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              APPLY JOB
-            </Button>
-          </motion.div>
+            <div className="pt-2">
+              <Button 
+                onClick={() => setIsDialogOpen(true)}
+                className="bg-[#1d1d1d] text-white hover:bg-[#333333] px-6 py-3 h-auto text-xs font-bold uppercase tracking-wider rounded-none"
+              >
+                APPLY JOB
+              </Button>
+            </div>
+          </div>
 
           {/* Our Culture & Our Principles Section */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left">
             {/* Our Culture Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
-            >
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+            <div className="p-6 border border-neutral-200 bg-white rounded-none">
+              <h3 className="text-sm font-semibold text-neutral-900 mb-3 border-b border-neutral-150 pb-2">
                 {textContent.cultureTitle || "Our Culture"}
               </h3>
-              <p className="text-gray-600 leading-relaxed text-sm">
+              <p className="text-xs text-neutral-600 leading-relaxed">
                 {textContent.cultureDescription}
               </p>
-            </motion.div>
+            </div>
 
             {/* Our Principles Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200"
-            >
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+            <div className="p-6 border border-neutral-200 bg-white rounded-none">
+              <h3 className="text-sm font-semibold text-neutral-900 mb-3 border-b border-neutral-150 pb-2">
                 {textContent.principlesTitle || "Our Principles"}
               </h3>
-              <div className="space-y-3 text-sm">
-                <p className="text-gray-600 leading-relaxed">
+              <div className="space-y-3 text-xs text-neutral-600">
+                <p className="leading-relaxed">
                   {textContent.principlesDescription}
                 </p>
-                <p className="text-gray-600 leading-relaxed">
-                  Since our inception, we have grown organically by hiring the best talent and fostering a culture of excellence. We are always looking for skilled professionals to join our team. If you have relevant experience, we would love to hear from you. Please send your details to – <a href="mailto:careers@sangronyx.com" className="text-[#0096d6] hover:underline">careers@sangronyx.com</a>
+                <p className="leading-relaxed">
+                  Since our inception, we have grown organically by hiring the best talent and fostering a culture of excellence. We are always looking for skilled professionals to join our team. If you have relevant experience, we would love to hear from you. Please send your details to – <a href="mailto:careers@sangronyx.com" className="text-[#0076d6] hover:underline font-semibold">careers@sangronyx.com</a>
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Resume Submission Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-none">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-gray-900 border-b border-gray-200 pb-3">
+            <DialogTitle className="text-xl font-light text-[#1d1d1d] border-b border-[#e5e5e5] pb-3 text-left">
               SUBMIT RESUME
             </DialogTitle>
           </DialogHeader>
-          <form onSubmit={handleSubmit} action="https://formspree.io/f/maqwrdrv" method="POST" encType="multipart/form-data" className="mt-6 space-y-6">
+          <form onSubmit={handleSubmit} action="https://formspree.io/f/maqwrdrv" method="POST" encType="multipart/form-data" className="mt-6 space-y-6 text-left">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <Label htmlFor="name" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="name" className="text-xs font-semibold text-[#555555]">
                   Your Name <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -326,12 +235,12 @@ const Careers = () => {
                   required
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="mt-2"
+                  className="mt-2 rounded-none"
                 />
               </div>
 
               <div>
-                <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="email" className="text-xs font-semibold text-[#555555]">
                   Email Address <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -342,12 +251,12 @@ const Careers = () => {
                   required
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="mt-2"
+                  className="mt-2 rounded-none"
                 />
               </div>
 
               <div>
-                <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="phone" className="text-xs font-semibold text-[#555555]">
                   Phone Number
                 </Label>
                 <Input
@@ -357,12 +266,12 @@ const Careers = () => {
                   placeholder="Phone Number"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="mt-2"
+                  className="mt-2 rounded-none"
                 />
               </div>
 
               <div>
-                <Label htmlFor="location" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="location" className="text-xs font-semibold text-[#555555]">
                   Preferred Job Location
                 </Label>
                 <Input
@@ -372,19 +281,19 @@ const Careers = () => {
                   placeholder="Preferred Job Location"
                   value={formData.location}
                   onChange={handleInputChange}
-                  className="mt-2"
+                  className="mt-2 rounded-none"
                 />
               </div>
 
               <div>
-                <Label htmlFor="region" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="region" className="text-xs font-semibold text-[#555555]">
                   Select Region/Country <span className="text-red-500">*</span>
                 </Label>
                 <Select required value={formData.region} onValueChange={(value) => setFormData(prev => ({ ...prev, region: value }))}>
-                  <SelectTrigger className="mt-2">
+                  <SelectTrigger className="mt-2 rounded-none">
                     <SelectValue placeholder="Select Region/Country" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="rounded-none">
                     <SelectItem value="usa">USA</SelectItem>
                     <SelectItem value="india">India</SelectItem>
                     <SelectItem value="uk">UK</SelectItem>
@@ -397,7 +306,7 @@ const Careers = () => {
               </div>
 
               <div>
-                <Label htmlFor="resume" className="text-sm font-medium text-gray-700">
+                <Label htmlFor="resume" className="text-xs font-semibold text-[#555555]">
                   Upload Your Resume <span className="text-red-500">*</span>
                 </Label>
                 <div className="mt-2 flex gap-2">
@@ -408,11 +317,11 @@ const Careers = () => {
                     accept=".pdf,.doc,.docx"
                     required
                     onChange={handleFileChange}
-                    className="flex-1"
+                    className="flex-1 rounded-none file:rounded-none file:border-0 file:bg-[#e3e8ed] file:text-xs file:font-semibold"
                   />
                 </div>
                 {formData.resume && (
-                  <p className="text-sm text-muted-foreground mt-2">
+                  <p className="text-xs text-muted-foreground mt-2">
                     Selected: {formData.resume.name}
                   </p>
                 )}
@@ -420,8 +329,8 @@ const Careers = () => {
             </div>
 
             <div className="flex items-start gap-3">
-              <Checkbox id="consent" required className="mt-1" />
-              <Label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+              <Checkbox id="consent" required className="mt-1 rounded-none" />
+              <Label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
                 By filling this form you authorize us to contact you via Email, Phone or any other mode of communication for processing your application.
               </Label>
             </div>
@@ -431,12 +340,13 @@ const Careers = () => {
                 type="button"
                 variant="outline"
                 onClick={() => setIsDialogOpen(false)}
+                className="rounded-none"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
-                className="bg-[#0099cc] hover:bg-[#00b3e6] text-white"
+                className="bg-[#0076d6] hover:bg-[#005ba3] text-white rounded-none"
               >
                 Submit
               </Button>
@@ -446,7 +356,7 @@ const Careers = () => {
       </Dialog>
 
       <Footer />
-    </PageBackground>
+    </div>
   );
 };
 

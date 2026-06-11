@@ -1,81 +1,74 @@
+import { Link } from "react-router-dom";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
 
 export const HeroSection = () => {
+
   return (
-    <section className="relative min-h-screen overflow-hidden pt-20">
-      {/* Video background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/hero-video-bg.mp4" type="video/mp4" />
-      </video>
+    <section className="relative bg-white pt-[75px] md:pt-[127px] pb-12 font-sans antialiased text-[#1d1d1d]">
+      <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+        {/* Promo Banner Split Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 border border-[#e5e5e5] rounded-none overflow-hidden min-h-[440px]">
+          {/* Left Side: Light Gray Promo Information */}
+          <div className="lg:col-span-5 bg-[#f4f6f8] p-8 md:p-12 flex flex-col justify-center text-left space-y-6">
+            <span className="text-[11px] font-bold tracking-widest text-[#0076d6] uppercase flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              Empowering Intelligent Enterprises
+            </span>
+            
+            <h2 className="text-3xl md:text-4xl font-light tracking-tight text-[#1d1d1d] leading-tight">
+              Smartest Path to <strong className="font-semibold text-[#0076d6]">SAP Success</strong>
+            </h2>
+            
+            <p className="text-xs md:text-sm text-[#555555] leading-relaxed">
+              Unlock the full potential of your organization. Sangronyx provides industry-leading SAP consulting, S/4HANA migration, custom integrations, and rollout support designed to deliver measurable results.
+            </p>
+            
+            <div className="flex flex-wrap gap-3 pt-4">
+              <Link to="/products">
+                <button className="bg-[#1d1d1d] hover:bg-[#333333] text-white text-xs font-semibold uppercase tracking-wider py-3.5 px-6 rounded-none transition-colors">
+                  Explore Products
+                </button>
+              </Link>
+              <Link to="/contact">
+                <button className="bg-transparent hover:bg-black/5 text-[#1d1d1d] border border-[#1d1d1d] text-xs font-semibold uppercase tracking-wider py-3.5 px-6 rounded-none transition-colors">
+                  Book Consultation
+                </button>
+              </Link>
+            </div>
+          </div>
 
-      {/* Overlay for better contrast */}
-      <div className="absolute inset-0 bg-black/40" />
-
-      <div className="container mx-auto px-4 lg:px-8 relative z-20">
-        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-5rem)] py-12">
-          {/* Enterprise-level Heading */}
-          <div className="text-center max-w-6xl">
-            {/* Accent label */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-6"
+          {/* Right Side: Dell Blue & Tech Presentation */}
+          <div className="lg:col-span-7 bg-[#0076d6] relative flex items-center justify-center min-h-[300px] lg:min-h-auto overflow-hidden">
+            {/* Visual background pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-blue-900/60 pointer-events-none z-0" />
+            
+            {/* Tech Plexus Background video inside the promo banner right column */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover opacity-60 z-0"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-medium tracking-wider uppercase">
-                <Sparkles className="w-4 h-4" />
-                SAP Solutions Partner
-              </span>
-            </motion.div>
-
-            {/* Main Heading with word-by-word animation */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-              {["Empowering", "Businesses"].map((word, index) => (
-                <motion.span
-                  key={word}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-                  className="inline-block mr-4 text-white"
-                >
-                  {word}
-                </motion.span>
-              ))}
-              <br className="hidden md:block" />
-              <motion.span
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400"
-              >
-                with SAP Solutions
-              </motion.span>
-            </h1>
-
-            {/* Animated underline */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1, delay: 0.9 }}
-              className="h-1 w-32 md:w-48 mx-auto mt-8 bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 rounded-full origin-center"
-            />
-
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.1 }}
-              className="mt-8 text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
-            >
-              We deliver reliable SAP consulting, implementation, and support services that help organizations streamline operations, improve efficiency, and grow with confidence.
-            </motion.p>
+              <source src="/hero-video-bg.mp4" type="video/mp4" />
+            </video>
+            
+            {/* White overlay border and text tag */}
+            <div className="relative z-10 p-8 text-center text-white space-y-3">
+              <div className="border-2 border-white/30 backdrop-blur-sm bg-black/20 p-6 md:p-8 max-w-md mx-auto space-y-4">
+                <h3 className="text-xl md:text-2xl font-light uppercase tracking-wider">
+                  Next-Gen SAP Services
+                </h3>
+                <p className="text-xs text-white/80 leading-relaxed">
+                  Discover how our certified SAP architects deliver robust, secure enterprise systems tailored to your workflows.
+                </p>
+                <Link to="/services" className="inline-flex items-center gap-1.5 text-xs font-bold text-white hover:underline uppercase tracking-wider">
+                  <span>View Services Catalog</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

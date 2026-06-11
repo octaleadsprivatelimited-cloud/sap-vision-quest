@@ -11,41 +11,28 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { Mail, Phone, Headphones, ExternalLink } from "lucide-react";
-
-const contactMethods = [
-  {
-    icon: Mail,
-    title: "Email Us",
-    description: "Send us an email anytime",
-    contact: "info@sangronyx.com",
-    action: "Send Email",
-    link: "mailto:info@sangronyx.com",
-    color: "#F6921E", // Orange
-  },
-  {
-    icon: Phone,
-    title: "Call Us",
-    description: "Mon-Fri from 9am to 6pm",
-    contact: "+91 7032110762",
-    action: "Call Now",
-    link: "tel:+917032110762",
-    color: "#39B54A", // Green
-  },
-  {
-    icon: Headphones,
-    title: "Support",
-    description: "24/7 technical support",
-    contact: "support@sangronyx.com",
-    action: "Get Support",
-    link: "mailto:support@sangronyx.com",
-    color: "#8843F8", // Purple
-  },
-];
+import * as Icons from "lucide-react";
+import { useData } from "@/context/DataContext";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const seo = useSEO();
   const { toast } = useToast();
+  const { content } = useData();
+
+  const contactText = content.pageTexts?.contact || {};
+  const methods = content.contactMethods || [];
+
+  const heroLabel = contactText.heroLabel || "GET IN TOUCH";
+  const heroTitle = contactText.heroTitle || "Contact Us";
+  const heroDescription = contactText.heroDescription || "Get in touch with our team to discuss how we can help transform your business.";
+  
+  const sectionTitle = contactText.sectionTitle || "Contact Us";
+  const sectionDescription = contactText.sectionDescription || "Fill out the form below and we'll get back to you within 24 hours.";
+  
+  const addressTitle = contactText.ctaTitle || "Where to find us";
+  const addressDescription = contactText.ctaDescription || "7-1-619/A/37, 101, Revathi Apartments, Beside Maitrivanam outgate, opp Annapurna block gate no-2, Kumar Basti, Srinivas nagar, Ameerpet, Hyderabad, Telangana 500038";
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -60,20 +47,17 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://formspree.io/f/maqwrdrv", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          _subject: "Contact Form Submission - Sangronyx",
           name: formData.name,
           email: formData.email,
           company: formData.company,
-          jobTitle: formData.jobTitle,
-          country: formData.country,
-          interest: formData.interest,
-          message: formData.message,
+          source: "Contact Form",
+          message: `${formData.message}\nJob Title: ${formData.jobTitle || 'N/A'}\nCountry: ${formData.country || 'N/A'}\nInterest: ${formData.interest || 'N/A'}`
         }),
       });
 
@@ -92,7 +76,40 @@ const Contact = () => {
           message: "",
         });
       } else {
-        throw new Error("Form submission failed");
+        // Fallback to Formspree if Express backend is down
+        const fsResponse = await fetch("https://formspree.io/f/maqwrdrv", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            _subject: "Contact Form Submission - Sangronyx (Fallback)",
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            jobTitle: formData.jobTitle,
+            country: formData.country,
+            interest: formData.interest,
+            message: formData.message,
+          }),
+        });
+        if (fsResponse.ok) {
+          toast({
+            title: "Message Sent (Formspree)",
+            description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+          });
+          setFormData({
+            name: "",
+            email: "",
+            company: "",
+            jobTitle: "",
+            country: "",
+            interest: "",
+            message: "",
+          });
+        } else {
+          throw new Error("Form submission failed");
+        }
       }
     } catch (error) {
       toast({
@@ -103,185 +120,101 @@ const Contact = () => {
     }
   };
 
+  const getIconComponent = (iconName: string) => {
+    return (Icons as any)[iconName] || Icons.Mail;
+  };
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white font-sans antialiased text-neutral-900 selection:bg-[#0067b8] selection:text-white">
       <SEO {...seo} />
       <Navbar />
 
-      <PageHero
-        title="Contact Us"
-        description="Get in touch with our team to discuss how we can help transform your business."
-        label="GET IN TOUCH"
-        breadcrumbs={[{ label: "Contact" }]}
-        backgroundImage="/hero-background-image.jpeg"
+      {/* Dell-inspired Page Hero Section */}
+      <PageHero 
+        title={heroTitle}
+        description={heroDescription}
+        label={heroLabel}
+        breadcrumbs={[
+          { label: "Contact" }
+        ]}
+        backgroundImage="/sangronyx-sap.jpg"
+        fullBackground={true}
+        textBgWhite={true}
+        extraPadding={true}
       />
 
-      {/* Contact Methods - Enhanced UI Design */}
-      <section className="py-6 sm:py-8 md:py-10 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-          {/* Mobile: 2×1 layout - Enhanced design */}
-          <div className="grid grid-cols-2 gap-3 sm:hidden">
-            {contactMethods
-              .filter((m) => m.title === "Email Us" || m.title === "Support")
-              .map((method, index) => (
-                <motion.a
-                  key={method.title}
-                  href={method.link || "#"}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05, type: "spring", stiffness: 200 }}
-                  className="group relative rounded-2xl p-4 text-center overflow-hidden flex flex-col items-center justify-center min-h-[95px] shadow-lg hover:shadow-xl transition-all duration-300"
-                  style={{ backgroundColor: method.color }}
-                >
-                  {/* Subtle gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                  {/* Icon container with enhanced styling */}
-                  <div className="relative z-10 w-10 h-10 rounded-xl bg-white/30 backdrop-blur-sm flex items-center justify-center mx-auto mb-2 flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
-                    <method.icon className="w-5 h-5 text-white" strokeWidth={2.5} />
-                  </div>
-
-                  {/* Content */}
-                  <div className="relative z-10 w-full">
-                    <h3 className="text-xs font-bold text-white mb-1 leading-tight drop-shadow-sm">{method.title}</h3>
-                    <p className="text-white/95 font-medium text-[10px] break-all leading-tight line-clamp-2 drop-shadow-sm">{method.contact}</p>
-                  </div>
-
-                  {/* Decorative corner accent */}
-                  <div className="absolute top-0 right-0 w-12 h-12 bg-white/10 rounded-bl-full opacity-50" />
-                </motion.a>
-              ))}
-            {(() => {
-              const callUs = contactMethods.find((m) => m.title === "Call Us");
+      {/* Corporate Contact Methods Grid */}
+      <section className="py-12 bg-white border-b border-neutral-200">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+            {methods.map((method, index) => {
+              const IconComponent = getIconComponent(method.iconName);
               return (
-                <motion.a
-                  href={callUs?.link || "#"}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
-                  className="group relative col-span-2 rounded-2xl p-4 overflow-hidden flex flex-row items-center gap-4 min-h-[75px] shadow-lg hover:shadow-xl transition-all duration-300"
-                  style={{ backgroundColor: callUs?.color }}
+                <div 
+                  key={method.title || index}
+                  className="border border-neutral-200 bg-white p-6 flex flex-col justify-between min-h-[220px] rounded-none"
                 >
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                  {/* Icon */}
-                  <div className="relative z-10 w-12 h-12 rounded-xl bg-white/30 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
-                    <Phone className="w-6 h-6 text-white" strokeWidth={2.5} />
+                  <div className="space-y-4">
+                    <div className="text-[#0076d6] w-8 h-8 flex items-center justify-center bg-neutral-100 rounded-none">
+                      <IconComponent className="w-5 h-5" strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold text-neutral-900">{method.title}</h3>
+                      <p className="text-xs text-neutral-600 mt-1 leading-relaxed">{method.description}</p>
+                    </div>
                   </div>
-
-                  {/* Content */}
-                  <div className="relative z-10 flex flex-col items-start flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-white mb-0.5 drop-shadow-sm">Call Us</h3>
-                    <p className="text-white/95 font-medium text-xs drop-shadow-sm">{callUs?.contact}</p>
+                  
+                  <div className="mt-6 pt-4 border-t border-neutral-100 flex flex-col gap-1">
+                    <span className="text-xs font-semibold text-neutral-950">{method.contact}</span>
+                    <a 
+                      href={method.link || "#"}
+                      className="inline-flex items-center gap-1 text-xs font-bold text-[#0076d6] hover:text-[#005ba3] hover:underline uppercase tracking-wider mt-1 group"
+                    >
+                      {method.action || "Get support"}
+                      <span className="inline-block transform transition-transform group-hover:translate-x-0.5">→</span>
+                    </a>
                   </div>
-
-                  {/* Arrow indicator */}
-                  <div className="relative z-10 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-300">
-                    <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-
-                  {/* Decorative accent */}
-                  <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-bl-full opacity-50" />
-                </motion.a>
+                </div>
               );
-            })()}
-          </div>
-
-          {/* Desktop: Enhanced 3-column layout */}
-          <div className="hidden sm:grid grid-cols-3 gap-4 md:gap-5">
-            {contactMethods.map((method, index) => (
-              <motion.a
-                key={method.title}
-                href={method.link || "#"}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -6, scale: 1.03 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
-                className="group relative rounded-2xl md:rounded-3xl p-5 md:p-6 text-center overflow-hidden flex flex-col items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-300"
-                style={{ backgroundColor: method.color }}
-              >
-                {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/15 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Icon container with enhanced design */}
-                <div className="relative z-10 w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white/30 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
-                  <method.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={2.5} />
-                </div>
-
-                {/* Content */}
-                <div className="relative z-10 w-full">
-                  <h3 className="text-lg md:text-xl font-bold text-white mb-2 drop-shadow-md">{method.title}</h3>
-                  <p className="text-xs md:text-sm text-white/90 mb-3 hidden md:block leading-relaxed">{method.description}</p>
-                  <div className="mb-4">
-                    <p className="text-white font-semibold text-sm md:text-base break-all drop-shadow-sm">{method.contact}</p>
-                  </div>
-
-                  {/* Enhanced action button */}
-                  <span className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold rounded-xl bg-white/25 backdrop-blur-sm text-white hover:bg-white/35 transition-all duration-300 group-hover:shadow-lg">
-                    {method.action}
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </div>
-
-                {/* Decorative corner elements */}
-                <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-bl-full opacity-50" />
-                <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-tr-full opacity-30" />
-              </motion.a>
-            ))}
+            })}
           </div>
         </div>
       </section>
 
-      {/* Contact Form - Dell-style, compact on mobile */}
-      <section className="py-6 sm:py-14 md:py-20 lg:py-24 bg-neutral-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-10 lg:gap-16">
-            {/* Form - Dell-style: white card, clean inputs, blue button */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="order-1"
-            >
-              <h2 className="text-xl sm:text-3xl font-bold text-neutral-900 mb-1 sm:mb-2">Contact Us</h2>
-              <p className="text-neutral-600 text-xs sm:text-base mb-3 sm:mb-6">
-                Fill out the form below and we&apos;ll get back to you within 24 hours.
-              </p>
-
+      {/* Form & Address Split Section */}
+      <section className="py-12 md:py-16 bg-[#f5f5f5]">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 text-left">
+            
+            {/* Left Column: Form Card */}
+            <div className="lg:col-span-7 space-y-6">
+              <div>
+                <h2 className="text-2xl font-light text-neutral-900 tracking-tight">{sectionTitle}</h2>
+                <p className="text-xs text-neutral-650 mt-2">{sectionDescription}</p>
+              </div>
+              
               <form
                 onSubmit={handleSubmit}
                 action="https://formspree.io/f/maqwrdrv"
                 method="POST"
-                className="bg-white rounded-lg border border-neutral-200 shadow-sm p-4 sm:p-8 space-y-3 sm:space-y-5"
+                className="bg-white border border-neutral-200 p-6 md:p-8 space-y-6 shadow-sm rounded-none"
               >
-                <div className="space-y-1 sm:space-y-1.5">
-                  <Label htmlFor="name" className="text-xs sm:text-sm font-medium text-neutral-800">
-                    Name <span className="text-red-600">*</span>
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-xs font-semibold text-neutral-800">
+                    Full name <span className="text-red-600">*</span>
                   </Label>
                   <Input
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
+                    className="rounded-none border-neutral-300 h-10 text-neutral-900 focus-visible:ring-[#0076d6] focus-visible:border-[#0076d6] focus-visible:ring-1"
                   />
                 </div>
 
-                <div className="space-y-1 sm:space-y-1.5">
-                  <Label htmlFor="email" className="text-xs sm:text-sm font-medium text-neutral-800">
-                    Business Email <span className="text-red-600">*</span>
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-xs font-semibold text-neutral-800">
+                    Business email <span className="text-red-600">*</span>
                   </Label>
                   <Input
                     id="email"
@@ -289,13 +222,13 @@ const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
+                    className="rounded-none border-neutral-300 h-10 text-neutral-900 focus-visible:ring-[#0076d6] focus-visible:border-[#0076d6] focus-visible:ring-1"
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
-                  <div className="space-y-1 sm:space-y-1.5">
-                    <Label htmlFor="company" className="text-xs sm:text-sm font-medium text-neutral-800">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="company" className="text-xs font-semibold text-neutral-800">
                       Company <span className="text-red-600">*</span>
                     </Label>
                     <Input
@@ -303,35 +236,35 @@ const Contact = () => {
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       required
-                      className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
+                      className="rounded-none border-neutral-300 h-10 text-neutral-900 focus-visible:ring-[#0076d6] focus-visible:border-[#0076d6] focus-visible:ring-1"
                     />
                   </div>
-                  <div className="space-y-1 sm:space-y-1.5">
-                    <Label htmlFor="jobTitle" className="text-xs sm:text-sm font-medium text-neutral-800">
-                      Job Title
+                  <div className="space-y-2">
+                    <Label htmlFor="jobTitle" className="text-xs font-semibold text-neutral-800">
+                      Job title
                     </Label>
                     <Input
                       id="jobTitle"
                       value={formData.jobTitle}
                       onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                      className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
+                      className="rounded-none border-neutral-300 h-10 text-neutral-900 focus-visible:ring-[#0076d6] focus-visible:border-[#0076d6] focus-visible:ring-1"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
-                  <div className="space-y-1 sm:space-y-1.5">
-                    <Label htmlFor="country" className="text-xs sm:text-sm font-medium text-neutral-800">
-                      Country <span className="text-red-600">*</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="country" className="text-xs font-semibold text-neutral-800">
+                      Country/Region <span className="text-red-600">*</span>
                     </Label>
                     <Select
                       value={formData.country}
                       onValueChange={(value) => setFormData({ ...formData, country: value })}
                     >
-                      <SelectTrigger className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus:ring-[#007DB8] focus:ring-2 py-2">
-                        <SelectValue placeholder="Select country" />
+                      <SelectTrigger className="rounded-none border-neutral-300 h-10 text-neutral-900 focus:ring-[#0076d6]">
+                        <SelectValue placeholder="Select country/region" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="rounded-none">
                         <SelectItem value="us">United States</SelectItem>
                         <SelectItem value="uk">United Kingdom</SelectItem>
                         <SelectItem value="de">Germany</SelectItem>
@@ -340,18 +273,18 @@ const Contact = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="space-y-1 sm:space-y-1.5">
-                    <Label htmlFor="interest" className="text-xs sm:text-sm font-medium text-neutral-800">
-                      Area of Interest
+                  <div className="space-y-2">
+                    <Label htmlFor="interest" className="text-xs font-semibold text-neutral-800">
+                      Area of interest
                     </Label>
                     <Select
                       value={formData.interest}
                       onValueChange={(value) => setFormData({ ...formData, interest: value })}
                     >
-                      <SelectTrigger className="h-9 sm:h-11 bg-white border-neutral-300 text-sm sm:text-base focus:ring-[#007DB8] focus:ring-2 py-2">
-                        <SelectValue placeholder="Select interest" />
+                      <SelectTrigger className="rounded-none border-neutral-300 h-10 text-neutral-900 focus:ring-[#0076d6]">
+                        <SelectValue placeholder="Select interest area" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="rounded-none">
                         <SelectItem value="rollout">ROLL-OUT</SelectItem>
                         <SelectItem value="hypercare">HyperCare Support</SelectItem>
                         <SelectItem value="support">AMS</SelectItem>
@@ -361,79 +294,75 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="space-y-1 sm:space-y-1.5">
-                  <Label htmlFor="message" className="text-xs sm:text-sm font-medium text-neutral-800">
-                    Message <span className="text-red-600">*</span>
+                <div className="space-y-2">
+                  <Label htmlFor="message" className="text-xs font-semibold text-neutral-800">
+                    Tell us about your requirements <span className="text-red-600">*</span>
                   </Label>
                   <Textarea
                     id="message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     required
-                    rows={3}
-                    placeholder="Tell us about your project or requirements..."
-                    className="bg-white border-neutral-300 resize-none min-h-[80px] sm:min-h-[100px] text-sm sm:text-base focus-visible:ring-[#007DB8] focus-visible:ring-2 py-2"
+                    rows={4}
+                    placeholder="Provide details about your project, timeline, or support request..."
+                    className="rounded-none border-neutral-300 text-neutral-900 focus-visible:ring-[#0076d6] focus-visible:border-[#0076d6] focus-visible:ring-1 resize-none"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  size="lg"
-                  className="w-full h-10 sm:h-12 bg-[#007DB8] hover:bg-[#006BB3] text-white font-medium text-sm sm:text-base rounded"
+                  className="rounded-none w-full h-11 bg-[#1d1d1d] hover:bg-[#333333] text-white font-bold uppercase tracking-wider text-xs transition-colors duration-150"
                 >
-                  Submit
+                  Submit request
                 </Button>
               </form>
-            </motion.div>
+            </div>
 
-            {/* Contact Info - Dell-style: Corporate Address & links */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-4 sm:space-y-6 order-2"
-            >
-              {/* Our Office - Dell "Corporate Address" style */}
-              <div className="bg-white rounded-lg border border-neutral-200 shadow-sm p-4 sm:p-8">
-                <h3 className="text-base sm:text-lg font-semibold text-neutral-900 mb-2 sm:mb-4">Where to find us</h3>
-                <p className="text-sm sm:text-base font-semibold text-neutral-900 mb-1 sm:mb-2">Corporate Address</p>
-                <p className="text-neutral-700 text-xs sm:text-base leading-relaxed mb-1">Sangronyx Technologies</p>
-                <address className="not-italic text-neutral-600 text-xs sm:text-base leading-relaxed space-y-0.5 mb-2 sm:mb-4">
-                  <span className="block">7-1-619/A/37, 101, Revathi Apartments,</span>
-                  <span className="block">Beside Maitrivanam outgate, opp Annapurna block gate no-2,</span>
-                  <span className="block">Kumar Basti, Srinivas nagar, Ameerpet,</span>
-                  <span className="block">Hyderabad, Telangana 500038</span>
-                </address>
-                <a
-                  href="https://www.google.com/maps/search/?api=1&query=7-1-619%2FA%2F37%2C+Revathi+Apartments%2C+Ameerpet%2C+Hyderabad%2C+Telangana+500038"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[#007DB8] hover:underline text-xs sm:text-sm font-medium"
-                >
-                  Get directions
-                  <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                </a>
-              </div>
-
-              {/* Support / Quick links - Dell-style */}
-              <div className="bg-white rounded-lg border border-neutral-200 shadow-sm p-4 sm:p-8">
-                <h3 className="text-base sm:text-lg font-semibold text-neutral-900 mb-2 sm:mb-4">Support</h3>
-                <div className="space-y-2 sm:space-y-3">
-                  <a href="mailto:info@sangronyx.com" className="flex items-center gap-1.5 sm:gap-2 text-[#007DB8] hover:underline text-xs sm:text-sm font-medium break-all">
-                    <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                    info@sangronyx.com
-                  </a>
-                  <a href="tel:+917032110762" className="flex items-center gap-1.5 sm:gap-2 text-[#007DB8] hover:underline text-xs sm:text-sm font-medium">
-                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                    +91 7032110762
-                  </a>
-                  <a href="mailto:support@sangronyx.com" className="flex items-center gap-1.5 sm:gap-2 text-[#007DB8] hover:underline text-xs sm:text-sm font-medium break-all">
-                    <Headphones className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                    support@sangronyx.com
+            {/* Right Column: Office Card & Resources */}
+            <div className="lg:col-span-5 space-y-6">
+              {/* Office Address Card */}
+              <div className="bg-white border border-neutral-200 p-6 md:p-8 space-y-4 shadow-sm rounded-none">
+                <h3 className="text-sm font-semibold text-neutral-900">{addressTitle}</h3>
+                <div className="border-t border-neutral-100 pt-4 space-y-2">
+                  <h4 className="text-xs font-semibold text-neutral-800">Corporate headquarters</h4>
+                  <p className="text-xs text-neutral-900 font-bold">Sangronyx Technologies</p>
+                  <address className="not-italic text-xs text-neutral-600 leading-relaxed space-y-1">
+                    {addressDescription.split(",").map((line, lidx) => (
+                      <span key={lidx} className="block">{line.trim()}</span>
+                    ))}
+                  </address>
+                </div>
+                <div className="pt-2">
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressDescription)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#0076d6] hover:text-[#005ba3] hover:underline uppercase tracking-wider"
+                  >
+                    <span>Get directions</span>
+                    <span>→</span>
                   </a>
                 </div>
               </div>
-            </motion.div>
+
+              {/* Resource Portal Card */}
+              <div className="bg-white border border-neutral-200 p-6 md:p-8 space-y-4 shadow-sm rounded-none">
+                <h3 className="text-sm font-semibold text-neutral-900">Looking for support?</h3>
+                <p className="text-xs text-neutral-600 leading-relaxed">
+                  If you are an existing customer needing immediate assistance, please log in to our customer service portal or contact your account manager directly.
+                </p>
+                <div>
+                  <Link 
+                    to="/careers" 
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#0076d6] hover:text-[#005ba3] hover:underline uppercase tracking-wider"
+                  >
+                    <span>Explore career opportunities</span>
+                    <span>→</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </section>

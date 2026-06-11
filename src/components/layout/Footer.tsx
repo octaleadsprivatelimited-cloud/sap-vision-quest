@@ -2,7 +2,21 @@ import { Link } from "react-router-dom";
 import { Youtube, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const footerLinks = {
+interface FooterLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+const footerLinks: {
+  Products: FooterLink[];
+  Solutions: {
+    main: FooterLink[];
+    Services: FooterLink[];
+  };
+  Company: FooterLink[];
+  Resources: FooterLink[];
+} = {
   Products: [
     { label: "SAP S/4HANA", href: "/products" },
     { label: "SAP ECC", href: "/products/sap-ecc" },
@@ -19,7 +33,7 @@ const footerLinks = {
       { label: "Support", href: "/services" },
       { label: "Consulting", href: "/services" },
       { label: "Rollout", href: "/services" },
-      { label: "Hypercare support", href: "/services" },
+      { label: "Hypercare Support", href: "/services" },
     ],
   },
   Company: [
@@ -44,68 +58,25 @@ const socialLinks = [
 ];
 
 const legalLinks = [
-  { label: "Privacy", href: "/privacy" },
-  { label: "Legal", href: "/legal" },
-  { label: "Cookies", href: "/cookies" },
-  { label: "Terms", href: "/terms" },
+  { label: "Privacy Statement", href: "/privacy" },
+  { label: "Legal & Regulatory", href: "/legal" },
+  { label: "Cookie Consent", href: "/cookies" },
+  { label: "Terms of Sale", href: "/terms" },
 ];
 
 export const Footer = () => {
   return (
-    <footer 
-      className="relative text-white font-['Inter',sans-serif]"
-      style={{
-        backgroundImage: 'url(/footer-bg.jpeg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      {/* Background overlay for text readability */}
-      <div className="absolute inset-0 bg-[#0a1628]/40"></div>
-
-      <div className="container mx-auto px-4 lg:px-8 py-10 md:py-14 relative z-10">
-        {/* Main footer content */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-5 mb-10">
-          {/* Contact CTA Column */}
-          <div className="col-span-2 md:col-span-1">
-            <h4 className="text-white text-[13px] font-medium mb-3 tracking-wide">How can we help you?</h4>
-            <Link to="/contact">
-              <Button className="bg-[#0099cc] hover:bg-[#00b3e6] text-white text-[13px] font-medium rounded-full px-5 py-2 h-auto mb-5">
-                Contact Us
-              </Button>
-            </Link>
-            
-            {/* Divider */}
-            <div className="border-t border-white/20 my-5 w-28"></div>
-            
-            {/* Social Icons */}
-            <div className="flex flex-wrap gap-2">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center hover:bg-white/10 transition-colors"
-                >
-                  <social.icon className="w-[14px] h-[14px]" />
-                </a>
-              ))}
-            </div>
-          </div>
-
+    <footer className="relative bg-[#f5f5f5] text-[#1d1d1d] font-sans antialiased border-t border-[#d2d2d2] text-xs">
+      <div className="container mx-auto px-4 lg:px-8 py-12">
+        {/* Main Footer Directory */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           {/* Products Column */}
           <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Products</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Products</h4>
+            <ul className="space-y-2.5">
               {footerLinks.Products.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                  >
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -113,30 +84,27 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Services Column with subheaders */}
+          {/* Solutions Column */}
           <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Services</h4>
-            <ul className="space-y-2 mb-4">
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Solutions</h4>
+            <ul className="space-y-2.5">
               {footerLinks.Solutions.main.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                  >
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            
-            <h5 className="text-[11px] font-semibold mb-2 text-[#00b3e6] uppercase tracking-wider">Services</h5>
-            <ul className="space-y-2">
+          </div>
+
+          {/* Services Column */}
+          <div>
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Services</h4>
+            <ul className="space-y-2.5">
               {footerLinks.Solutions.Services.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                  >
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -146,107 +114,79 @@ export const Footer = () => {
 
           {/* Company Column */}
           <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Company</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Company</h4>
+            <ul className="space-y-2.5">
               {footerLinks.Company.map((link) => (
                 <li key={link.label}>
-                  {link.external ? (
-                    <a
-                      href={link.href}
-                      className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link
-                      to={link.href}
-                      className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                    >
-                      {link.label}
-                    </Link>
-                  )}
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Support Column */}
-          <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Support</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/contact" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
+          {/* Contact & Social Column */}
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">How can we help?</h4>
+            <div className="space-y-4">
+              <Link to="/contact">
+                <Button className="w-full bg-[#0076d6] hover:bg-[#005ba3] text-white font-bold rounded-none px-4 py-2.5 h-auto text-xs uppercase tracking-wider">
                   Contact Us
+                </Button>
+              </Link>
+              
+              <div className="flex items-center gap-3 pt-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="w-8 h-8 border border-[#d2d2d2] flex items-center justify-center hover:bg-white transition-colors"
+                  >
+                    <social.icon className="w-4 h-4 text-[#555555] hover:text-[#0076d6]" />
+                  </a>
+                ))}
+              </div>
+
+              <div>
+                <Link to="/admin" className="text-[#777777] hover:text-[#0076d6] hover:underline font-semibold block text-[11px]">
+                  System Administrator Panel
                 </Link>
-              </li>
-              <li>
-                <a href="mailto:info@sangronyx.com" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
-                  Email Support
-                </a>
-              </li>
-              <li>
-                <Link to="/resources/developer-resources" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
-                  Developer Portal
-                </Link>
-              </li>
-              <li>
-                <Link to="/resources/faq" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin" className="text-white/30 text-[12px] hover:text-white transition-colors leading-relaxed font-semibold">
-                  Admin Panel
-                </Link>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/10 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-3">
-            {/* Logo and copyright */}
-            <div className="flex flex-col md:flex-row items-center gap-3">
-              <Link to="/">
-                <img 
-                  src="/logo.png" 
-                  alt="Sangronyx Logo" 
-                  className="h-12 w-auto brightness-0 invert"
-                />
-              </Link>
-              <div className="flex flex-col md:flex-row items-center gap-1 md:gap-0">
-                <p className="text-white/40 text-[11px]">
-                  © 2025 Sangronyx. All rights reserved.
-                </p>
-                <a 
-                  href="https://octaleads.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white/40 text-[11px] hover:text-white/70 transition-colors md:ml-1"
-                >
-                  Developed by Octaleads Pvt Ltd.
-                </a>
-              </div>
+        {/* Bottom copyright & legal bar */}
+        <div className="border-t border-[#d2d2d2] pt-8 mt-8">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-4 text-[11px] text-[#666666]">
+            {/* Left copyright info */}
+            <div className="flex flex-wrap items-center gap-1 md:gap-2 justify-center lg:justify-start">
+              <span className="font-bold text-[#1d1d1d] uppercase tracking-wider mr-2 text-[12px]">Sangronyx</span>
+              <span>© 2026 Sangronyx Technologies. All rights reserved.</span>
+              <span className="hidden md:inline text-[#d2d2d2]">|</span>
+              <a 
+                href="https://octaleads.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-[#0076d6] hover:underline"
+              >
+                Developed by Octaleads Pvt Ltd
+              </a>
             </div>
             
-            {/* Legal links with separators */}
-            <div className="flex items-center gap-0 text-[11px]">
+            {/* Right legal links */}
+            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1.5">
               {legalLinks.map((link, index) => (
-                <span key={link.label} className="flex items-center">
-                  <Link 
-                    to={link.href} 
-                    className="text-white/40 hover:text-white/70 transition-colors px-2"
-                  >
+                <span key={link.label} className="flex items-center gap-3">
+                  <Link to={link.href} className="hover:text-[#0076d6] hover:underline">
                     {link.label}
                   </Link>
                   {index < legalLinks.length - 1 && (
-                    <span className="text-white/25">|</span>
+                    <span className="text-[#d2d2d2]">|</span>
                   )}
                 </span>
               ))}

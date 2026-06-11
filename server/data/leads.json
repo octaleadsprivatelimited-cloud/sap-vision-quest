@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "name": "Suresh Kumar",
+    "email": "suresh.k@manufacturing-india.com",
+    "company": "Sun Metals Private Limited",
+    "source": "Contact Form",
+    "message": "Interested in SAP S/4HANA implementation for our two manufacturing facilities in Hyderabad. We want a detailed quote and consulting roadmap.",
+    "status": "New",
+    "date": "2026-06-08 14:32"
+  },
+  {
+    "id": "2",
+    "name": "Anjali Sharma",
+    "email": "anjali.sharma@gmail.com",
+    "company": "N/A (Candidate)",
+    "source": "Careers Form",
+    "message": "Applying for Senior SAP ABAP Developer position. 6 years of experience in custom code migration and Fiori applications. Resume attached.",
+    "status": "New",
+    "date": "2026-06-08 10:15"
+  },
+  {
+    "id": "3",
+    "name": "Jonathan Doe",
+    "email": "j.doe@apextech-global.com",
+    "company": "Apex Tech Global Inc",
+    "source": "Contact Form",
+    "message": "Requesting audit of our current SAP ECC licensing. We are looking to consolidate licenses and optimize our budget before migration.",
+    "status": "Reviewed",
+    "date": "2026-06-07 18:45"
+  },
+  {
+    "id": "4",
+    "name": "Priya Patel",
+    "email": "priya.patel@pharmatech.in",
+    "company": "PharmaTech Labs",
+    "source": "Training Popup",
+    "message": "Would like to enroll 15 team members in the SAP Fiori & UX corporate training workshop scheduled next month. Please share details.",
+    "status": "Reviewed",
+    "date": "2026-06-06 11:20"
+  },
+  {
+    "id": "5",
+    "name": "Arun Yadav",
+    "email": "arun.yadav@college-placement.org",
+    "company": "Vignan Institute of Tech",
+    "source": "Careers Form",
+    "message": "Requesting SAP training placement collaboration details for our passing-out batch of engineering students.",
+    "status": "Archived",
+    "date": "2026-06-05 09:00"
+  }
+]

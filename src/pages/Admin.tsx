@@ -37,7 +37,9 @@ import {
   Zap,
   Handshake,
   Users,
-  X
+  X,
+  Phone,
+  MapPin
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -53,9 +55,8 @@ import { toast } from "sonner";
 import { seoData as initialSeoData } from "@/data/seoData";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useData, defaultFallbackContent } from "@/context/DataContext";
 import {
-  getWebsiteContent,
-  saveWebsiteContent,
   WebsiteContent,
   ServiceItem,
   IndustryItem,
@@ -71,6 +72,7 @@ import {
   initialLeadership,
   initialPageTexts
 } from "@/data/pageContentData";
+
 
 // Mock lead interface
 interface Lead {
@@ -144,6 +146,22 @@ export default function AdminPanel() {
   const [searchQuery, setSearchQuery] = useState("");
   const [leadSearchQuery, setLeadSearchQuery] = useState("");
   const [leadFilter, setLeadFilter] = useState<string>("All");
+
+  // Fetch leads from Express backend
+  useEffect(() => {
+    const fetchLeads = async () => {
+      try {
+        const res = await fetch("/api/leads");
+        if (res.ok) {
+          const data = await res.json();
+          setLeads(data);
+        }
+      } catch (err) {
+        console.warn("Failed to fetch leads from backend, using initial mock leads:", err);
+      }
+    };
+    fetchLeads();
+  }, []);
 
   // SEO Scanner States
   const [isScanning, setIsScanning] = useState(false);
@@ -230,23 +248,50 @@ export default function AdminPanel() {
   });
 
   // Handlers
-  const handleAddLead = (e: React.FormEvent) => {
+  const handleAddLead = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newLeadName || !newLeadEmail) {
       toast.error("Please fill in Name and Email");
       return;
     }
-    const newLead: Lead = {
-      id: (leads.length + 1).toString(),
+    const leadBody = {
       name: newLeadName,
       email: newLeadEmail,
       company: newLeadCompany || "N/A",
       source: newLeadSource,
       message: newLeadMessage,
-      status: "New",
-      date: new Date().toISOString().replace('T', ' ').substring(0, 16)
     };
-    setLeads([newLead, ...leads]);
+
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(leadBody),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setLeads([data.lead, ...leads]);
+        toast.success("Lead added to database!");
+      } else {
+        throw new Error("Server error");
+      }
+    } catch (err) {
+      const newLead: Lead = {
+        id: (leads.length + 1).toString(),
+        name: newLeadName,
+        email: newLeadEmail,
+        company: newLeadCompany || "N/A",
+        source: newLeadSource,
+        message: newLeadMessage,
+        status: "New",
+        date: new Date().toISOString().replace('T', ' ').substring(0, 16)
+      };
+      setLeads([newLead, ...leads]);
+      toast.success("Mock lead added successfully!");
+    }
+    
     setIsAddLeadOpen(false);
     // Reset Form
     setNewLeadName("");
@@ -254,17 +299,44 @@ export default function AdminPanel() {
     setNewLeadCompany("");
     setNewLeadSource("Contact Form");
     setNewLeadMessage("");
-    toast.success("Mock lead added successfully!");
   };
 
-  const handleDeleteLead = (id: string) => {
-    setLeads(leads.filter(l => l.id !== id));
-    toast.success("Lead entry deleted");
+  const handleDeleteLead = async (id: string) => {
+    try {
+      const res = await fetch(`/api/leads/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        setLeads(leads.filter(l => l.id !== id));
+        toast.success("Lead entry deleted from database");
+      } else {
+        throw new Error("Failed to delete lead from server");
+      }
+    } catch (err) {
+      setLeads(leads.filter(l => l.id !== id));
+      toast.success("Lead entry deleted (Local state)");
+    }
   };
 
-  const handleUpdateLeadStatus = (id: string, newStatus: Lead["status"]) => {
-    setLeads(leads.map(l => l.id === id ? { ...l, status: newStatus } : l));
-    toast.success(`Lead status updated to ${newStatus}`);
+  const handleUpdateLeadStatus = async (id: string, newStatus: Lead["status"]) => {
+    try {
+      const res = await fetch(`/api/leads/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      if (res.ok) {
+        setLeads(leads.map(l => l.id === id ? { ...l, status: newStatus } : l));
+        toast.success(`Lead status updated to ${newStatus} on server`);
+      } else {
+        throw new Error("Failed to update status on server");
+      }
+    } catch (err) {
+      setLeads(leads.map(l => l.id === id ? { ...l, status: newStatus } : l));
+      toast.success(`Lead status updated to ${newStatus}`);
+    }
   };
 
   const handleOpenEditSeo = (path: string) => {
@@ -360,20 +432,32 @@ export default function AdminPanel() {
   };
 
   // Page Content Management States
-  const [webContent, setWebContent] = useState<WebsiteContent>(() => getWebsiteContent());
+  const { content, updateContent } = useData();
+  const [webContent, setWebContent] = useState<WebsiteContent>(content || defaultFallbackContent);
+
+  useEffect(() => {
+    if (content) {
+      setWebContent(content);
+    }
+  }, [content]);
+
   const [showServicesTexts, setShowServicesTexts] = useState(false);
   const [showIndustriesTexts, setShowIndustriesTexts] = useState(false);
   const [showResourcesTexts, setShowResourcesTexts] = useState(false);
   const [showCareersTexts, setShowCareersTexts] = useState(false);
   const [showPartnersTexts, setShowPartnersTexts] = useState(false);
   const [showWhoWeAreTexts, setShowWhoWeAreTexts] = useState(false);
+  const [showHomeTexts, setShowHomeTexts] = useState(false);
+  const [showProductsTexts, setShowProductsTexts] = useState(false);
+  const [showContactTexts, setShowContactTexts] = useState(false);
 
   // Selection list for icons and colors
   const AVAILABLE_ICONS = [
     "Cloud", "Database", "Settings", "Code", "Wrench", "Link2", "Users", "Star",
     "Headphones", "CheckCircle2", "Factory", "ShoppingCart", "Building2", "Heart",
     "Truck", "Leaf", "Banknote", "GraduationCap", "Book", "Video", "FileText",
-    "Download", "HelpCircle", "Zap", "Handshake", "Award", "TrendingUp", "Shield"
+    "Download", "HelpCircle", "Zap", "Handshake", "Award", "TrendingUp", "Shield",
+    "Phone", "Mail", "ExternalLink", "MapPin"
   ];
 
   const AVAILABLE_COLORS = [
@@ -412,11 +496,46 @@ export default function AdminPanel() {
     name: "", role: "", description: ""
   });
 
+  // Home Feature states
+  const [editingHomeFeature, setEditingHomeFeature] = useState<any | null>(null);
+  const [newHomeFeature, setNewHomeFeature] = useState<any>({
+    title: "", description: "", link: "", linkText: "", underlineColor: "border-sky-500", iconName: "Settings"
+  });
+
+  // Home Reason states
+  const [editingHomeReason, setEditingHomeReason] = useState<any | null>(null);
+  const [newHomeReason, setNewHomeReason] = useState<any>({
+    title: "", description: "", iconName: "CheckCircle"
+  });
+
+  // Contact Method states
+  const [editingContactMethod, setEditingContactMethod] = useState<any | null>(null);
+  const [newContactMethod, setNewContactMethod] = useState<any>({
+    title: "", contact: "", description: "", action: "", link: "", iconName: "Mail", color: "#007DB8"
+  });
+
+  // Product states
+  const [editingProduct, setEditingProduct] = useState<any | null>(null);
+  const [newProduct, setNewProduct] = useState<any>({
+    title: "", subtitle: "", description: "", link: "", iconName: "Cloud", color: "bg-accent", image: "", features: []
+  });
+
+  // Custom Page states
+  const [selectedCustomPageSlug, setSelectedCustomPageSlug] = useState<string>("");
+  const [newCustomPage, setNewCustomPage] = useState<any>({
+    title: "", slug: "", description: "", template: "blank"
+  });
+  const [newSectionType, setNewSectionType] = useState<string>("hero");
+
   // Handlers
-  const handleSaveContentChange = (updatedContent: WebsiteContent) => {
+  const handleSaveContentChange = async (updatedContent: WebsiteContent) => {
     setWebContent(updatedContent);
-    saveWebsiteContent(updatedContent);
-    toast.success("Page content updated and saved!");
+    const success = await updateContent(updatedContent);
+    if (success) {
+      toast.success("Page content updated and saved!");
+    } else {
+      toast.error("Failed to save to database.");
+    }
   };
 
   const handleUpdatePageTexts = (pageKey: string, updatedFields: any) => {
@@ -434,33 +553,425 @@ export default function AdminPanel() {
     });
   };
 
-  const handleResetContentDefaults = () => {
+  const handleResetContentDefaults = async () => {
     if (confirm("Reset all page content to defaults? This will overwrite your modifications.")) {
-      const defaultContent: WebsiteContent = {
-        services: initialServices,
-        industries: initialIndustries,
-        resources: initialResources,
-        benefits: initialBenefits,
-        partnerBenefits: initialPartnerBenefits,
-        leadership: initialLeadership,
-        pageTexts: initialPageTexts
-      };
+      const defaultContent: WebsiteContent = defaultFallbackContent;
       setWebContent(defaultContent);
-      saveWebsiteContent(defaultContent);
-      toast.success("All page content reset to defaults!");
+      const success = await updateContent(defaultContent);
+      if (success) {
+        toast.success("All page content reset to defaults!");
+      } else {
+        toast.error("Failed to reset content.");
+      }
     }
   };
+
+  // Home Feature Actions
+  const saveHomeFeatureEdit = () => {
+    if (!editingHomeFeature?.title) return toast.error("Title is required");
+    const list = webContent.homeFeatures || [];
+    const updated = list.map((item: any, idx: number) => idx === editingHomeFeature._index ? { ...editingHomeFeature } : item);
+    handleSaveContentChange({ ...webContent, homeFeatures: updated });
+    setEditingHomeFeature(null);
+  };
+  const deleteHomeFeature = (index: number) => {
+    if (confirm("Delete this feature?")) {
+      const list = webContent.homeFeatures || [];
+      const updated = list.filter((_: any, idx: number) => idx !== index);
+      handleSaveContentChange({ ...webContent, homeFeatures: updated });
+    }
+  };
+  const addHomeFeature = () => {
+    if (!newHomeFeature.title) return toast.error("Title is required");
+    const list = webContent.homeFeatures || [];
+    handleSaveContentChange({ ...webContent, homeFeatures: [...list, newHomeFeature] });
+    setNewHomeFeature({ title: "", description: "", link: "", linkText: "", underlineColor: "border-sky-500", iconName: "Settings" });
+  };
+  const moveHomeFeature = (index: number, direction: 'up' | 'down') => {
+    const list = [...(webContent.homeFeatures || [])];
+    if (direction === 'up' && index > 0) {
+      [list[index - 1], list[index]] = [list[index], list[index - 1]];
+    } else if (direction === 'down' && index < list.length - 1) {
+      [list[index + 1], list[index]] = [list[index], list[index + 1]];
+    }
+    handleSaveContentChange({ ...webContent, homeFeatures: list });
+  };
+
+  // Home Reason Actions
+  const saveHomeReasonEdit = () => {
+    if (!editingHomeReason?.title) return toast.error("Title is required");
+    const list = webContent.homeReasons || [];
+    const updated = list.map((item: any, idx: number) => idx === editingHomeReason._index ? { ...editingHomeReason } : item);
+    handleSaveContentChange({ ...webContent, homeReasons: updated });
+    setEditingHomeReason(null);
+  };
+  const deleteHomeReason = (index: number) => {
+    if (confirm("Delete this reason?")) {
+      const list = webContent.homeReasons || [];
+      const updated = list.filter((_: any, idx: number) => idx !== index);
+      handleSaveContentChange({ ...webContent, homeReasons: updated });
+    }
+  };
+  const addHomeReason = () => {
+    if (!newHomeReason.title) return toast.error("Title is required");
+    const list = webContent.homeReasons || [];
+    handleSaveContentChange({ ...webContent, homeReasons: [...list, newHomeReason] });
+    setNewHomeReason({ title: "", description: "", iconName: "CheckCircle" });
+  };
+  const moveHomeReason = (index: number, direction: 'up' | 'down') => {
+    const list = [...(webContent.homeReasons || [])];
+    if (direction === 'up' && index > 0) {
+      [list[index - 1], list[index]] = [list[index], list[index - 1]];
+    } else if (direction === 'down' && index < list.length - 1) {
+      [list[index + 1], list[index]] = [list[index], list[index + 1]];
+    }
+    handleSaveContentChange({ ...webContent, homeReasons: list });
+  };
+
+  // Contact Method Actions
+  const saveContactMethodEdit = () => {
+    if (!editingContactMethod?.title) return toast.error("Title is required");
+    const list = webContent.contactMethods || [];
+    const updated = list.map((item: any, idx: number) => idx === editingContactMethod._index ? { ...editingContactMethod } : item);
+    handleSaveContentChange({ ...webContent, contactMethods: updated });
+    setEditingContactMethod(null);
+  };
+  const deleteContactMethod = (index: number) => {
+    if (confirm("Delete this contact method?")) {
+      const list = webContent.contactMethods || [];
+      const updated = list.filter((_: any, idx: number) => idx !== index);
+      handleSaveContentChange({ ...webContent, contactMethods: updated });
+    }
+  };
+  const addContactMethod = () => {
+    if (!newContactMethod.title) return toast.error("Title is required");
+    const list = webContent.contactMethods || [];
+    handleSaveContentChange({ ...webContent, contactMethods: [...list, newContactMethod] });
+    setNewContactMethod({ title: "", contact: "", description: "", action: "", link: "", iconName: "Mail", color: "#007DB8" });
+  };
+  const moveContactMethod = (index: number, direction: 'up' | 'down') => {
+    const list = [...(webContent.contactMethods || [])];
+    if (direction === 'up' && index > 0) {
+      [list[index - 1], list[index]] = [list[index], list[index - 1]];
+    } else if (direction === 'down' && index < list.length - 1) {
+      [list[index + 1], list[index]] = [list[index], list[index + 1]];
+    }
+    handleSaveContentChange({ ...webContent, contactMethods: list });
+  };
+
+  // Product Actions
+  const saveProductEdit = () => {
+    if (!editingProduct?.title) return toast.error("Title is required");
+    const list = webContent.products || [];
+    const updated = list.map((item: any) => item.id === editingProduct.id ? editingProduct : item);
+    handleSaveContentChange({ ...webContent, products: updated });
+    setEditingProduct(null);
+  };
+  const deleteProduct = (id: string) => {
+    if (confirm("Delete this product?")) {
+      const list = webContent.products || [];
+      const updated = list.filter((item: any) => item.id !== id);
+      handleSaveContentChange({ ...webContent, products: updated });
+    }
+  };
+  const addProduct = () => {
+    if (!newProduct.title) return toast.error("Title is required");
+    const list = webContent.products || [];
+    const item = {
+      ...newProduct,
+      id: `prod-${Date.now()}`
+    };
+    handleSaveContentChange({ ...webContent, products: [...list, item] });
+    setNewProduct({ title: "", subtitle: "", description: "", link: "", iconName: "Cloud", color: "bg-accent", image: "", features: [] });
+  };
+  const moveProduct = (index: number, direction: 'up' | 'down') => {
+    const list = [...(webContent.products || [])];
+    if (direction === 'up' && index > 0) {
+      [list[index - 1], list[index]] = [list[index], list[index - 1]];
+    } else if (direction === 'down' && index < list.length - 1) {
+      [list[index + 1], list[index]] = [list[index], list[index + 1]];
+    }
+    handleSaveContentChange({ ...webContent, products: list });
+  };
+
+  // Custom Page Actions
+  const addCustomPage = () => {
+    if (!newCustomPage.title || !newCustomPage.slug) {
+      return toast.error("Title and Slug are required");
+    }
+    const cleanSlug = newCustomPage.slug.trim().toLowerCase().replace(/^\/+/, '').replace(/\s+/g, '-');
+    const pages = webContent.customPages || [];
+    if (pages.some((p: any) => p.slug === cleanSlug)) {
+      return toast.error("A page with this slug already exists");
+    }
+
+    let pageSections: any[] = [];
+    const template = newCustomPage.template || "blank";
+
+    if (template === "service") {
+      pageSections = [
+        {
+          id: `sec-${Date.now()}-1`,
+          type: "hero",
+          title: newCustomPage.title,
+          subtitle: newCustomPage.description || "Empower your business processes with enterprise solutions built for scale."
+        },
+        {
+          id: `sec-${Date.now()}-2`,
+          type: "features",
+          title: "Key Capabilities",
+          subtitle: "Everything you need to succeed",
+          items: [
+            { title: "Real-time Monitoring", description: "Keep track of active workloads and metrics in real-time.", iconName: "Activity" },
+            { title: "Enterprise Security", description: "Hardened cloud hosting and full encryption protocols.", iconName: "Shield" },
+            { title: "Seamless Integration", description: "Connect with existing SAP ecosystems instantly.", iconName: "Zap" }
+          ]
+        },
+        {
+          id: `sec-${Date.now()}-3`,
+          type: "stats",
+          title: "Proven Performance Milestones",
+          items: [
+            { title: "99.99%", description: "Guaranteed Uptime SLA" },
+            { title: "50+", description: "Active Enterprise Integrations" },
+            { title: "2.4x", description: "Faster Data Migration Speed" },
+            { title: "100%", description: "GDPR & SOC2 Compliance" }
+          ]
+        },
+        {
+          id: `sec-${Date.now()}-4`,
+          type: "cta",
+          title: "Elevate Your Enterprise Architecture Today",
+          subtitle: "Speak with our leading SAP architects to schedule a custom system assessment."
+        }
+      ];
+    } else if (template === "product") {
+      pageSections = [
+        {
+          id: `sec-${Date.now()}-1`,
+          type: "hero",
+          title: newCustomPage.title,
+          subtitle: newCustomPage.description || "The next-generation product platform for high-performance SAP operations."
+        },
+        {
+          id: `sec-${Date.now()}-2`,
+          type: "text",
+          title: "Core Value Proposition",
+          content: "Our solution simplifies the complex transition to modern database frameworks. By decoupling non-essential modules and caching frequently accessed relational queries, we achieve optimal transaction speeds.\n\nBuilt natively on the latest enterprise cloud frameworks, it delivers microsecond latencies for analytics pipelines and guarantees absolute transaction safety even during network degradation."
+        },
+        {
+          id: `sec-${Date.now()}-3`,
+          type: "features",
+          title: "Core Modules & Add-Ons",
+          subtitle: "Discover the power of customized system plugins",
+          items: [
+            { title: "Automated Sync", description: "Direct bidirectional background synchronization with SAP BTP.", iconName: "RefreshCw" },
+            { title: "Predictive Analytics", description: "Leverage ML models to forecast inventory demands and stockouts.", iconName: "TrendingUp" },
+            { title: "Audit Logs", description: "Complete tracking of user actions and admin operations.", iconName: "FileText" }
+          ]
+        },
+        {
+          id: `sec-${Date.now()}-4`,
+          type: "cta",
+          title: "Ready to Experience the Difference?",
+          subtitle: "Start your free 30-day proof-of-concept trial."
+        }
+      ];
+    } else if (template === "about") {
+      pageSections = [
+        {
+          id: `sec-${Date.now()}-1`,
+          type: "hero",
+          title: newCustomPage.title,
+          subtitle: newCustomPage.description || "Pioneering digital transformation for global enterprises."
+        },
+        {
+          id: `sec-${Date.now()}-2`,
+          type: "text",
+          title: "Mission & Philosophy",
+          content: "Founded by a team of dedicated system architects, our goal has always been to build software that removes friction from business workflows. We believe in absolute clarity, high engineering quality, and putting client success first.\n\nEvery day, we help organizations automate repetitive processes so their teams can focus on innovation and strategy."
+        },
+        {
+          id: `sec-${Date.now()}-3`,
+          type: "stats",
+          title: "Our Global Impact",
+          items: [
+            { title: "15+", description: "Years of Experience" },
+            { title: "500+", description: "Successful Projects" },
+            { title: "40+", description: "Certified Experts" },
+            { title: "12", description: "Global Offices" }
+          ]
+        },
+        {
+          id: `sec-${Date.now()}-4`,
+          type: "cta",
+          title: "Join Us On Our Journey",
+          subtitle: "We are always looking for passionate creators. Explore our current career opportunities."
+        }
+      ];
+    } else {
+      pageSections = [
+        {
+          id: `sec-${Date.now()}`,
+          type: "hero",
+          title: newCustomPage.title,
+          subtitle: newCustomPage.description || "Welcome to our custom page"
+        }
+      ];
+    }
+
+    const newPage = {
+      title: newCustomPage.title,
+      slug: cleanSlug,
+      description: newCustomPage.description,
+      sections: pageSections
+    };
+
+    handleSaveContentChange({
+      ...webContent,
+      customPages: [...pages, newPage]
+    });
+    setSelectedCustomPageSlug(cleanSlug);
+    setNewCustomPage({ title: "", slug: "", description: "", template: "blank" });
+    toast.success("Custom page created successfully!");
+  };
+
+  const deleteCustomPage = (slug: string) => {
+    if (confirm("Delete this custom page entirely?")) {
+      const pages = webContent.customPages || [];
+      const updated = pages.filter((p: any) => p.slug !== slug);
+      handleSaveContentChange({
+        ...webContent,
+        customPages: updated
+      });
+      if (selectedCustomPageSlug === slug) {
+        setSelectedCustomPageSlug("");
+      }
+      toast.success("Custom page deleted");
+    }
+  };
+
+  const addSectionToCustomPage = (slug: string) => {
+    const pages = webContent.customPages || [];
+    const pageIndex = pages.findIndex((p: any) => p.slug === slug);
+    if (pageIndex === -1) return;
+
+    const page = pages[pageIndex];
+    const newSection = {
+      id: `sec-${Date.now()}`,
+      type: newSectionType,
+      title: `New ${newSectionType.toUpperCase()} Section`,
+      subtitle: "Customize this section",
+      content: newSectionType === "text" ? "Enter your text content here..." : undefined,
+      items: (newSectionType === "features" || newSectionType === "stats") ? [] : undefined
+    };
+
+    const updatedPage = {
+      ...page,
+      sections: [...(page.sections || []), newSection]
+    };
+
+    const updatedPages = [...pages];
+    updatedPages[pageIndex] = updatedPage;
+
+    handleSaveContentChange({
+      ...webContent,
+      customPages: updatedPages
+    });
+    toast.success(`Added ${newSectionType} section!`);
+  };
+
+  const deleteSectionFromCustomPage = (slug: string, sectionId: string) => {
+    const pages = webContent.customPages || [];
+    const pageIndex = pages.findIndex((p: any) => p.slug === slug);
+    if (pageIndex === -1) return;
+
+    const page = pages[pageIndex];
+    const updatedSections = (page.sections || []).filter((s: any) => s.id !== sectionId);
+
+    const updatedPage = {
+      ...page,
+      sections: updatedSections
+    };
+
+    const updatedPages = [...pages];
+    updatedPages[pageIndex] = updatedPage;
+
+    handleSaveContentChange({
+      ...webContent,
+      customPages: updatedPages
+    });
+    toast.success("Section removed");
+  };
+
+  const moveCustomSection = (slug: string, sectionIndex: number, direction: 'up' | 'down') => {
+    const pages = webContent.customPages || [];
+    const pageIndex = pages.findIndex((p: any) => p.slug === slug);
+    if (pageIndex === -1) return;
+
+    const page = pages[pageIndex];
+    const sections = [...(page.sections || [])];
+
+    if (direction === 'up' && sectionIndex > 0) {
+      [sections[sectionIndex - 1], sections[sectionIndex]] = [sections[sectionIndex], sections[sectionIndex - 1]];
+    } else if (direction === 'down' && sectionIndex < sections.length - 1) {
+      [sections[sectionIndex + 1], sections[sectionIndex]] = [sections[sectionIndex], sections[sectionIndex + 1]];
+    }
+
+    const updatedPage = {
+      ...page,
+      sections
+    };
+
+    const updatedPages = [...pages];
+    updatedPages[pageIndex] = updatedPage;
+
+    handleSaveContentChange({
+      ...webContent,
+      customPages: updatedPages
+    });
+  };
+
+  const updateCustomSectionFields = (slug: string, sectionId: string, fields: any) => {
+    const pages = webContent.customPages || [];
+    const pageIndex = pages.findIndex((p: any) => p.slug === slug);
+    if (pageIndex === -1) return;
+
+    const page = pages[pageIndex];
+    const updatedSections = (page.sections || []).map((s: any) => {
+      if (s.id === sectionId) {
+        return { ...s, ...fields };
+      }
+      return s;
+    });
+
+    const updatedPage = {
+      ...page,
+      sections: updatedSections
+    };
+
+    const updatedPages = [...pages];
+    updatedPages[pageIndex] = updatedPage;
+
+    setWebContent({
+      ...webContent,
+      customPages: updatedPages
+    });
+  };
+
 
   // Service Actions
   const saveServiceEdit = () => {
     if (!editingService?.title) return toast.error("Title is required");
-    const updated = webContent.services.map(s => s.id === editingService.id ? editingService : s);
+    const services = webContent.services || [];
+    const updated = services.map(s => s.id === editingService.id ? editingService : s);
     handleSaveContentChange({ ...webContent, services: updated });
     setEditingService(null);
   };
   const deleteService = (id: string) => {
     if (confirm("Delete this service?")) {
-      const updated = webContent.services.filter(s => s.id !== id);
+      const services = webContent.services || [];
+      const updated = services.filter(s => s.id !== id);
       handleSaveContentChange({ ...webContent, services: updated });
     }
   };
@@ -475,20 +986,23 @@ export default function AdminPanel() {
       image: newService.image || "",
       href: newService.href || ""
     };
-    handleSaveContentChange({ ...webContent, services: [...webContent.services, item] });
+    const services = webContent.services || [];
+    handleSaveContentChange({ ...webContent, services: [...services, item] });
     setNewService({ title: "", description: "", iconName: "Settings", features: [], image: "", href: "" });
   };
 
   // Industry Actions
   const saveIndustryEdit = () => {
     if (!editingIndustry?.title) return toast.error("Title is required");
-    const updated = webContent.industries.map(i => i.id === editingIndustry.id ? editingIndustry : i);
+    const industries = webContent.industries || [];
+    const updated = industries.map(i => i.id === editingIndustry.id ? editingIndustry : i);
     handleSaveContentChange({ ...webContent, industries: updated });
     setEditingIndustry(null);
   };
   const deleteIndustry = (id: string) => {
     if (confirm("Delete this industry?")) {
-      const updated = webContent.industries.filter(i => i.id !== id);
+      const industries = webContent.industries || [];
+      const updated = industries.filter(i => i.id !== id);
       handleSaveContentChange({ ...webContent, industries: updated });
     }
   };
@@ -503,20 +1017,23 @@ export default function AdminPanel() {
       slug: newIndustry.slug || "",
       image: newIndustry.image || ""
     };
-    handleSaveContentChange({ ...webContent, industries: [...webContent.industries, item] });
+    const industries = webContent.industries || [];
+    handleSaveContentChange({ ...webContent, industries: [...industries, item] });
     setNewIndustry({ title: "", description: "", iconName: "Building2", color: "bg-accent", slug: "", image: "" });
   };
 
   // Resource Actions
   const saveResourceEdit = () => {
     if (!editingResource?.title) return toast.error("Title is required");
-    const updated = webContent.resources.map(r => r.id === editingResource.id ? editingResource : r);
+    const resources = webContent.resources || [];
+    const updated = resources.map(r => r.id === editingResource.id ? editingResource : r);
     handleSaveContentChange({ ...webContent, resources: updated });
     setEditingResource(null);
   };
   const deleteResource = (id: string) => {
     if (confirm("Delete this resource?")) {
-      const updated = webContent.resources.filter(r => r.id !== id);
+      const resources = webContent.resources || [];
+      const updated = resources.filter(r => r.id !== id);
       handleSaveContentChange({ ...webContent, resources: updated });
     }
   };
@@ -530,20 +1047,23 @@ export default function AdminPanel() {
       link: newResource.link || "",
       color: newResource.color || "bg-accent"
     };
-    handleSaveContentChange({ ...webContent, resources: [...webContent.resources, item] });
+    const resources = webContent.resources || [];
+    handleSaveContentChange({ ...webContent, resources: [...resources, item] });
     setNewResource({ title: "", description: "", iconName: "Book", link: "", color: "bg-accent" });
   };
 
   // Benefit Actions
   const saveBenefitEdit = () => {
     if (!editingBenefit?.title) return toast.error("Title is required");
-    const updated = webContent.benefits.map(b => b.id === editingBenefit.id ? editingBenefit : b);
+    const benefits = webContent.benefits || [];
+    const updated = benefits.map(b => b.id === editingBenefit.id ? editingBenefit : b);
     handleSaveContentChange({ ...webContent, benefits: updated });
     setEditingBenefit(null);
   };
   const deleteBenefit = (id: string) => {
     if (confirm("Delete this benefit?")) {
-      const updated = webContent.benefits.filter(b => b.id !== id);
+      const benefits = webContent.benefits || [];
+      const updated = benefits.filter(b => b.id !== id);
       handleSaveContentChange({ ...webContent, benefits: updated });
     }
   };
@@ -555,20 +1075,23 @@ export default function AdminPanel() {
       description: newBenefit.description || "",
       iconName: newBenefit.iconName || "Zap"
     };
-    handleSaveContentChange({ ...webContent, benefits: [...webContent.benefits, item] });
+    const benefits = webContent.benefits || [];
+    handleSaveContentChange({ ...webContent, benefits: [...benefits, item] });
     setNewBenefit({ title: "", description: "", iconName: "Zap" });
   };
 
   // Partner Benefit Actions
   const savePartnerBenefitEdit = () => {
     if (!editingPartnerBenefit?.title) return toast.error("Title is required");
-    const updated = webContent.partnerBenefits.map(pb => pb.id === editingPartnerBenefit.id ? editingPartnerBenefit : pb);
+    const partnerBenefits = webContent.partnerBenefits || [];
+    const updated = partnerBenefits.map(pb => pb.id === editingPartnerBenefit.id ? editingPartnerBenefit : pb);
     handleSaveContentChange({ ...webContent, partnerBenefits: updated });
     setEditingPartnerBenefit(null);
   };
   const deletePartnerBenefit = (id: string) => {
     if (confirm("Delete this benefit?")) {
-      const updated = webContent.partnerBenefits.filter(pb => pb.id !== id);
+      const partnerBenefits = webContent.partnerBenefits || [];
+      const updated = partnerBenefits.filter(pb => pb.id !== id);
       handleSaveContentChange({ ...webContent, partnerBenefits: updated });
     }
   };
@@ -582,20 +1105,23 @@ export default function AdminPanel() {
       color: newPartnerBenefit.color || "bg-blue-500",
       link: newPartnerBenefit.link || "/contact"
     };
-    handleSaveContentChange({ ...webContent, partnerBenefits: [...webContent.partnerBenefits, item] });
+    const partnerBenefits = webContent.partnerBenefits || [];
+    handleSaveContentChange({ ...webContent, partnerBenefits: [...partnerBenefits, item] });
     setNewPartnerBenefit({ title: "", description: "", iconName: "Handshake", color: "bg-blue-500", link: "/contact" });
   };
 
   // Leadership Actions
   const saveLeadershipEdit = () => {
     if (!editingLeadership?.name) return toast.error("Name is required");
-    const updated = webContent.leadership.map(l => l.id === editingLeadership.id ? editingLeadership : l);
+    const leadership = webContent.leadership || [];
+    const updated = leadership.map(l => l.id === editingLeadership.id ? editingLeadership : l);
     handleSaveContentChange({ ...webContent, leadership: updated });
     setEditingLeadership(null);
   };
   const deleteLeadership = (id: string) => {
     if (confirm("Delete this leadership member?")) {
-      const updated = webContent.leadership.filter(l => l.id !== id);
+      const leadership = webContent.leadership || [];
+      const updated = leadership.filter(l => l.id !== id);
       handleSaveContentChange({ ...webContent, leadership: updated });
     }
   };
@@ -607,7 +1133,8 @@ export default function AdminPanel() {
       role: newLeadership.role || "",
       description: newLeadership.description || ""
     };
-    handleSaveContentChange({ ...webContent, leadership: [...webContent.leadership, item] });
+    const leadership = webContent.leadership || [];
+    handleSaveContentChange({ ...webContent, leadership: [...leadership, item] });
     setNewLeadership({ name: "", role: "", description: "" });
   };
 
@@ -683,18 +1210,25 @@ export default function AdminPanel() {
                 <span className="hidden md:inline">Dashboard Overview</span>
               </TabsTrigger>
               <TabsTrigger
-                value="pages"
+                value="page-home"
                 className="justify-start gap-2.5 px-3 py-2.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
               >
                 <Globe className="w-4.5 h-4.5 shrink-0" />
-                <span className="hidden md:inline">Pages & SEO Metadata</span>
+                <span className="hidden md:inline">Home Page Editor</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="page-products"
+                className="justify-start gap-2.5 px-3 py-2.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+              >
+                <Sparkles className="w-4.5 h-4.5 shrink-0" />
+                <span className="hidden md:inline">Products Offerings</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-services"
                 className="justify-start gap-2.5 px-3 py-2.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
               >
                 <Briefcase className="w-4.5 h-4.5 shrink-0" />
-                <span className="hidden md:inline">Services Offerings</span>
+                <span className="hidden md:inline">Services page</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-industries"
@@ -732,6 +1266,27 @@ export default function AdminPanel() {
                 <span className="hidden md:inline">Who We Are</span>
               </TabsTrigger>
               <TabsTrigger
+                value="page-contact"
+                className="justify-start gap-2.5 px-3 py-2.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+              >
+                <Phone className="w-4.5 h-4.5 shrink-0" />
+                <span className="hidden md:inline">Contact Config</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="custom-pages"
+                className="justify-start gap-2.5 px-3 py-2.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+              >
+                <FileText className="w-4.5 h-4.5 shrink-0" />
+                <span className="hidden md:inline">Custom Pages Builder</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="pages"
+                className="justify-start gap-2.5 px-3 py-2.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+              >
+                <Sliders className="w-4.5 h-4.5 shrink-0" />
+                <span className="hidden md:inline">SEO Metadata</span>
+              </TabsTrigger>
+              <TabsTrigger
                 value="leads"
                 className="justify-start gap-2.5 px-3 py-2.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
               >
@@ -747,8 +1302,8 @@ export default function AdminPanel() {
                 value="seo-auditor"
                 className="justify-start gap-2.5 px-3 py-2.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
               >
-                <FileText className="w-4.5 h-4.5 shrink-0" />
-                <span className="hidden md:inline">SEO Audit & Compliance</span>
+                <Activity className="w-4.5 h-4.5 shrink-0" />
+                <span className="hidden md:inline">SEO Audit</span>
               </TabsTrigger>
               <TabsTrigger
                 value="settings"
@@ -1852,7 +2407,7 @@ export default function AdminPanel() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {webContent.services.map((service) => (
+                  {(webContent.services || []).map((service) => (
                     <Card key={service.id} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-bold text-white flex items-center justify-between">
@@ -2061,7 +2616,7 @@ export default function AdminPanel() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {webContent.industries.map((ind) => (
+                  {(webContent.industries || []).map((ind) => (
                     <Card key={ind.id} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-bold text-white flex items-center justify-between">
@@ -2286,7 +2841,7 @@ export default function AdminPanel() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {webContent.resources.map((res) => (
+                  {(webContent.resources || []).map((res) => (
                     <Card key={res.id} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-bold text-white flex items-center justify-between">
@@ -2526,7 +3081,7 @@ export default function AdminPanel() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {webContent.benefits.map((ben) => (
+                  {(webContent.benefits || []).map((ben) => (
                     <Card key={ben.id} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-bold text-white flex items-center justify-between">
@@ -2733,7 +3288,7 @@ export default function AdminPanel() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {webContent.partnerBenefits.map((pb) => (
+                  {(webContent.partnerBenefits || []).map((pb) => (
                     <Card key={pb.id} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-bold text-white flex items-center justify-between">
@@ -2999,7 +3554,7 @@ export default function AdminPanel() {
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {webContent.leadership.map((lead) => (
+                  {(webContent.leadership || []).map((lead) => (
                     <Card key={lead.id} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-bold text-white flex flex-col gap-0.5">
@@ -3046,6 +3601,911 @@ export default function AdminPanel() {
                     <Button onClick={addLeadership} className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs w-full">Add Team Member</Button>
                   </CardContent>
                 </Card>
+              </div>
+            </TabsContent>
+
+            {/* Home Page Config Tab */}
+            <TabsContent value="page-home" className="space-y-6 mt-0">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4">
+                <div>
+                  <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Globe className="w-5 h-5 text-sky-400" />
+                    Manage Home Page Content
+                  </h2>
+                  <p className="text-xs text-slate-400">Configure hero copy, key features grid, why choose us reasons list, and call-to-actions</p>
+                </div>
+              </div>
+
+              {/* Home Hero Settings Card */}
+              {(() => {
+                const homeTexts = webContent.pageTexts?.home || {};
+                return (
+                  <Card className="bg-slate-900 border-slate-800">
+                    <CardHeader className="cursor-pointer select-none pb-3 flex flex-row items-center justify-between" onClick={() => setShowHomeTexts(!showHomeTexts)}>
+                      <div>
+                        <CardTitle className="text-sm font-bold text-sky-400 flex items-center gap-2">
+                          <Sliders className="w-4 h-4" />
+                          Hero, Features Title & CTA Copy Settings
+                        </CardTitle>
+                        <CardDescription className="text-xs text-slate-400">Manage titles, subtitles, labels, and CTA buttons on the Home Page</CardDescription>
+                      </div>
+                      <Button variant="ghost" size="sm" className="text-slate-400 text-xs">
+                        {showHomeTexts ? "Hide" : "Show"}
+                      </Button>
+                    </CardHeader>
+                    {showHomeTexts && (
+                      <CardContent className="space-y-4 pt-3 border-t border-slate-800/60">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Hero Label</label>
+                            <Input value={homeTexts.heroLabel || ""} onChange={(e) => handleUpdatePageTexts("home", { heroLabel: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5 md:col-span-2">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Hero Title</label>
+                            <Input value={homeTexts.heroTitle || ""} onChange={(e) => handleUpdatePageTexts("home", { heroTitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] uppercase font-bold text-slate-400">Hero Description</label>
+                          <Textarea value={homeTexts.heroDescription || ""} onChange={(e) => handleUpdatePageTexts("home", { heroDescription: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white h-20" />
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-slate-800/40 pt-4">
+                          <div className="space-y-1.5 col-span-3">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Features Section Title</label>
+                            <Input value={homeTexts.sectionTitle || ""} onChange={(e) => handleUpdatePageTexts("home", { sectionTitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Why Choose Title</label>
+                            <Input value={homeTexts.whyChooseTitle || ""} onChange={(e) => handleUpdatePageTexts("home", { whyChooseTitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5 md:col-span-2">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Why Choose Description</label>
+                            <Input value={homeTexts.whyChooseDescription || ""} onChange={(e) => handleUpdatePageTexts("home", { whyChooseDescription: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-slate-800/40 pt-4">
+                          <div className="space-y-1.5 md:col-span-2">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">CTA Title</label>
+                            <Input value={homeTexts.ctaTitle || ""} onChange={(e) => handleUpdatePageTexts("home", { ctaTitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">CTA Button Text</label>
+                            <Input value={homeTexts.ctaButtonText || ""} onChange={(e) => handleUpdatePageTexts("home", { ctaButtonText: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5 col-span-3">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">CTA Description</label>
+                            <Textarea value={homeTexts.ctaDescription || ""} onChange={(e) => handleUpdatePageTexts("home", { ctaDescription: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white h-16" />
+                          </div>
+                        </div>
+                      </CardContent>
+                    )}
+                  </Card>
+                );
+              })()}
+
+              {/* Home Features (Card Blocks) Editor */}
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-sm font-bold text-slate-200">Key Features List (Managed and Ordered)</h3>
+                  <span className="text-[10px] text-slate-500 font-medium">Re-order blocks to set position in live site</span>
+                </div>
+
+                {editingHomeFeature && (
+                  <Card className="bg-slate-900 border-sky-950 p-4 space-y-4">
+                    <h4 className="text-xs font-bold text-sky-400">Editing Home Feature: {editingHomeFeature.title}</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Title</label>
+                        <Input value={editingHomeFeature.title} onChange={(e) => setEditingHomeFeature({ ...editingHomeFeature, title: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Icon Component Name</label>
+                        <select value={editingHomeFeature.iconName} onChange={(e) => setEditingHomeFeature({ ...editingHomeFeature, iconName: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-9 w-full rounded-md px-3 text-white border">
+                          {AVAILABLE_ICONS.map(i => <option key={i} value={i}>{i}</option>)}
+                        </select>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Link URL</label>
+                        <Input value={editingHomeFeature.link} onChange={(e) => setEditingHomeFeature({ ...editingHomeFeature, link: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Link Action Text</label>
+                        <Input value={editingHomeFeature.linkText} onChange={(e) => setEditingHomeFeature({ ...editingHomeFeature, linkText: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] uppercase font-bold text-slate-400">Description</label>
+                      <Textarea value={editingHomeFeature.description} onChange={(e) => setEditingHomeFeature({ ...editingHomeFeature, description: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-16" />
+                    </div>
+                    <div className="flex justify-end gap-2">
+                      <Button onClick={() => setEditingHomeFeature(null)} variant="ghost" className="text-xs text-slate-400">Cancel</Button>
+                      <Button onClick={saveHomeFeatureEdit} className="bg-sky-600 hover:bg-sky-500 text-white text-xs">Save Changes</Button>
+                    </div>
+                  </Card>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {(webContent.homeFeatures || []).map((feat, index) => (
+                    <Card key={index} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
+                      <CardHeader className="pb-2">
+                        <div className="flex justify-between items-start">
+                          <CardTitle className="text-sm font-bold text-white flex items-center gap-2">
+                            <span className="w-5 h-5 rounded-md bg-sky-500/10 flex items-center justify-center text-sky-400 text-xs">#{index+1}</span>
+                            {feat.title}
+                          </CardTitle>
+                          <div className="flex items-center gap-1">
+                            <Button onClick={() => moveHomeFeature(index, 'up')} disabled={index === 0} size="icon" variant="ghost" className="h-6.5 w-6.5 text-slate-400 hover:text-white disabled:opacity-30">▲</Button>
+                            <Button onClick={() => moveHomeFeature(index, 'down')} disabled={index === (webContent.homeFeatures?.length || 0) - 1} size="icon" variant="ghost" className="h-6.5 w-6.5 text-slate-400 hover:text-white disabled:opacity-30">▼</Button>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-3 flex-1 flex flex-col justify-between">
+                        <p className="text-xs text-slate-400 leading-relaxed">{feat.description}</p>
+                        <div className="text-[10px] text-slate-500 font-medium">Link: {feat.link} · Action: {feat.linkText} · Icon: {feat.iconName}</div>
+                        <div className="flex justify-end gap-2 pt-4 border-t border-slate-800/55 mt-4">
+                          <Button onClick={() => setEditingHomeFeature({ ...feat, _index: index })} variant="ghost" className="h-8 text-[11px] text-sky-400 hover:text-white flex gap-1">
+                            <Edit className="w-3.5 h-3.5" /> Edit
+                          </Button>
+                          <Button onClick={() => deleteHomeFeature(index)} variant="ghost" className="h-8 text-[11px] text-red-400 hover:text-white flex gap-1">
+                            <Trash2 className="w-3.5 h-3.5" /> Delete
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <Card className="bg-slate-900/40 border-slate-800 border-dashed">
+                  <CardHeader>
+                    <CardTitle className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                      <Plus className="w-4 h-4 text-emerald-400" /> Add New Key Feature Card
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Title</label>
+                        <Input value={newHomeFeature.title} onChange={(e) => setNewHomeFeature({ ...newHomeFeature, title: e.target.value })} placeholder="e.g. Real-Time Analytics" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Icon Component</label>
+                        <select value={newHomeFeature.iconName} onChange={(e) => setNewHomeFeature({ ...newHomeFeature, iconName: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-9 w-full rounded-md px-3 text-white border">
+                          {AVAILABLE_ICONS.map(i => <option key={i} value={i}>{i}</option>)}
+                        </select>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Link URL</label>
+                        <Input value={newHomeFeature.link} onChange={(e) => setNewHomeFeature({ ...newHomeFeature, link: e.target.value })} placeholder="e.g. /solutions" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Link Text</label>
+                        <Input value={newHomeFeature.linkText} onChange={(e) => setNewHomeFeature({ ...newHomeFeature, linkText: e.target.value })} placeholder="e.g. Explore" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] uppercase font-bold text-slate-400">Description</label>
+                      <Textarea value={newHomeFeature.description} onChange={(e) => setNewHomeFeature({ ...newHomeFeature, description: e.target.value })} placeholder="Provide key highlights..." className="bg-slate-950 border-slate-800 text-xs h-16" />
+                    </div>
+                    <Button onClick={addHomeFeature} className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs w-full">Add Feature Card</Button>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Why Choose Us Reasons List Editor */}
+              <div className="space-y-4 border-t border-slate-800 pt-6">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-sm font-bold text-slate-200">Why Choose Us Reasons List</h3>
+                  <span className="text-[10px] text-slate-500 font-medium">Re-order blocks to set position in live site</span>
+                </div>
+
+                {editingHomeReason && (
+                  <Card className="bg-slate-900 border-sky-950 p-4 space-y-4">
+                    <h4 className="text-xs font-bold text-sky-400">Editing Reason: {editingHomeReason.title}</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Title</label>
+                        <Input value={editingHomeReason.title} onChange={(e) => setEditingHomeReason({ ...editingHomeReason, title: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Icon Component Name</label>
+                        <select value={editingHomeReason.iconName} onChange={(e) => setEditingHomeReason({ ...editingHomeReason, iconName: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-9 w-full rounded-md px-3 text-white border">
+                          {AVAILABLE_ICONS.map(i => <option key={i} value={i}>{i}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] uppercase font-bold text-slate-400">Description</label>
+                      <Textarea value={editingHomeReason.description} onChange={(e) => setEditingHomeReason({ ...editingHomeReason, description: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-16" />
+                    </div>
+                    <div className="flex justify-end gap-2">
+                      <Button onClick={() => setEditingHomeReason(null)} variant="ghost" className="text-xs text-slate-400">Cancel</Button>
+                      <Button onClick={saveHomeReasonEdit} className="bg-sky-600 hover:bg-sky-500 text-white text-xs">Save Changes</Button>
+                    </div>
+                  </Card>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {(webContent.homeReasons || []).map((reason, index) => (
+                    <Card key={index} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
+                      <CardHeader className="pb-2">
+                        <div className="flex justify-between items-start">
+                          <CardTitle className="text-sm font-bold text-white flex items-center gap-2">
+                            <span className="w-5 h-5 rounded-md bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-xs">#{index+1}</span>
+                            {reason.title}
+                          </CardTitle>
+                          <div className="flex items-center gap-1">
+                            <Button onClick={() => moveHomeReason(index, 'up')} disabled={index === 0} size="icon" variant="ghost" className="h-6.5 w-6.5 text-slate-400 hover:text-white disabled:opacity-30">▲</Button>
+                            <Button onClick={() => moveHomeReason(index, 'down')} disabled={index === (webContent.homeReasons?.length || 0) - 1} size="icon" variant="ghost" className="h-6.5 w-6.5 text-slate-400 hover:text-white disabled:opacity-30">▼</Button>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-3 flex-1 flex flex-col justify-between">
+                        <p className="text-xs text-slate-400 leading-relaxed">{reason.description}</p>
+                        <div className="text-[10px] text-slate-500 font-medium">Icon: {reason.iconName}</div>
+                        <div className="flex justify-end gap-2 pt-4 border-t border-slate-800/55 mt-4">
+                          <Button onClick={() => setEditingHomeReason({ ...reason, _index: index })} variant="ghost" className="h-8 text-[11px] text-sky-400 hover:text-white flex gap-1">
+                            <Edit className="w-3.5 h-3.5" /> Edit
+                          </Button>
+                          <Button onClick={() => deleteHomeReason(index)} variant="ghost" className="h-8 text-[11px] text-red-400 hover:text-white flex gap-1">
+                            <Trash2 className="w-3.5 h-3.5" /> Delete
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <Card className="bg-slate-900/40 border-slate-800 border-dashed">
+                  <CardHeader>
+                    <CardTitle className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                      <Plus className="w-4 h-4 text-emerald-400" /> Add New Reason Card
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Title</label>
+                        <Input value={newHomeReason.title} onChange={(e) => setNewHomeReason({ ...newHomeReason, title: e.target.value })} placeholder="e.g. SLA-backed Delivery" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Icon Component</label>
+                        <select value={newHomeReason.iconName} onChange={(e) => setNewHomeReason({ ...newHomeReason, iconName: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-9 w-full rounded-md px-3 text-white border">
+                          {AVAILABLE_ICONS.map(i => <option key={i} value={i}>{i}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] uppercase font-bold text-slate-400">Description</label>
+                      <Textarea value={newHomeReason.description} onChange={(e) => setNewHomeReason({ ...newHomeReason, description: e.target.value })} placeholder="Provide highlights..." className="bg-slate-950 border-slate-800 text-xs h-16" />
+                    </div>
+                    <Button onClick={addHomeReason} className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs w-full">Add Reason Card</Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            {/* Products Page Config Tab */}
+            <TabsContent value="page-products" className="space-y-6 mt-0">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4">
+                <div>
+                  <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-sky-400" />
+                    Manage Products Page
+                  </h2>
+                  <p className="text-xs text-slate-400">Configure page headers and CRUD list of SAP product solutions offerings</p>
+                </div>
+              </div>
+
+              {/* Products Page Header Settings Card */}
+              {(() => {
+                const productsTexts = webContent.pageTexts?.productsPage || {};
+                return (
+                  <Card className="bg-slate-900 border-slate-800">
+                    <CardHeader className="cursor-pointer select-none pb-3 flex flex-row items-center justify-between" onClick={() => setShowProductsTexts(!showProductsTexts)}>
+                      <div>
+                        <CardTitle className="text-sm font-bold text-sky-400 flex items-center gap-2">
+                          <Sliders className="w-4 h-4" />
+                          Products Page Hero & CTA Settings
+                        </CardTitle>
+                        <CardDescription className="text-xs text-slate-400">Manage titles, subtitles, labels, and CTA buttons on the Products Page</CardDescription>
+                      </div>
+                      <Button variant="ghost" size="sm" className="text-slate-400 text-xs">
+                        {showProductsTexts ? "Hide" : "Show"}
+                      </Button>
+                    </CardHeader>
+                    {showProductsTexts && (
+                      <CardContent className="space-y-4 pt-3 border-t border-slate-800/60">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Hero Label</label>
+                            <Input value={productsTexts.heroLabel || ""} onChange={(e) => handleUpdatePageTexts("productsPage", { heroLabel: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5 md:col-span-2">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Hero Title</label>
+                            <Input value={productsTexts.heroTitle || ""} onChange={(e) => handleUpdatePageTexts("productsPage", { heroTitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] uppercase font-bold text-slate-400">Hero Description</label>
+                          <Textarea value={productsTexts.heroDescription || ""} onChange={(e) => handleUpdatePageTexts("productsPage", { heroDescription: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white h-20" />
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-slate-800/40 pt-4">
+                          <div className="space-y-1.5 md:col-span-2">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">CTA Title</label>
+                            <Input value={productsTexts.ctaTitle || ""} onChange={(e) => handleUpdatePageTexts("productsPage", { ctaTitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">CTA Button Text</label>
+                            <Input value={productsTexts.ctaButtonText || ""} onChange={(e) => handleUpdatePageTexts("productsPage", { ctaButtonText: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5 col-span-3">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">CTA Description</label>
+                            <Textarea value={productsTexts.ctaDescription || ""} onChange={(e) => handleUpdatePageTexts("productsPage", { ctaDescription: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white h-16" />
+                          </div>
+                        </div>
+                      </CardContent>
+                    )}
+                  </Card>
+                );
+              })()}
+
+              {/* Products Editor list */}
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-sm font-bold text-slate-200">SAP Product Offerings List</h3>
+                  <span className="text-[10px] text-slate-500 font-medium">Re-order blocks to set position in live site</span>
+                </div>
+
+                {editingProduct && (
+                  <Card className="bg-slate-900 border-sky-950 p-4 space-y-4">
+                    <h4 className="text-xs font-bold text-sky-400">Editing Product Offering: {editingProduct.title}</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Title</label>
+                        <Input value={editingProduct.title} onChange={(e) => setEditingProduct({ ...editingProduct, title: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Subtitle</label>
+                        <Input value={editingProduct.subtitle} onChange={(e) => setEditingProduct({ ...editingProduct, subtitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Icon Component</label>
+                        <select value={editingProduct.iconName} onChange={(e) => setEditingProduct({ ...editingProduct, iconName: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-9 w-full rounded-md px-3 text-white border">
+                          {AVAILABLE_ICONS.map(i => <option key={i} value={i}>{i}</option>)}
+                        </select>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Feature Tags (comma separated)</label>
+                        <Input value={(editingProduct.features || []).join(", ")} onChange={(e) => setEditingProduct({ ...editingProduct, features: e.target.value.split(",").map((x: string) => x.trim()).filter(Boolean) })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Image Asset URL</label>
+                        <Input value={editingProduct.image} onChange={(e) => setEditingProduct({ ...editingProduct, image: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Page Navigation Link</label>
+                        <Input value={editingProduct.link} onChange={(e) => setEditingProduct({ ...editingProduct, link: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] uppercase font-bold text-slate-400">Description</label>
+                      <Textarea value={editingProduct.description} onChange={(e) => setEditingProduct({ ...editingProduct, description: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-20" />
+                    </div>
+                    <div className="flex justify-end gap-2">
+                      <Button onClick={() => setEditingProduct(null)} variant="ghost" className="text-xs text-slate-400">Cancel</Button>
+                      <Button onClick={saveProductEdit} className="bg-sky-600 hover:bg-sky-500 text-white text-xs">Save Changes</Button>
+                    </div>
+                  </Card>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {(webContent.products || []).map((prod, index) => (
+                    <Card key={prod.id} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
+                      <CardHeader className="pb-2">
+                        <div className="flex justify-between items-start">
+                          <CardTitle className="text-sm font-bold text-white flex flex-col gap-0.5">
+                            <span className="text-[10px] text-sky-400 font-semibold uppercase tracking-wider">{prod.subtitle}</span>
+                            <span>{prod.title}</span>
+                          </CardTitle>
+                          <div className="flex items-center gap-1">
+                            <Button onClick={() => moveProduct(index, 'up')} disabled={index === 0} size="icon" variant="ghost" className="h-6.5 w-6.5 text-slate-400 hover:text-white disabled:opacity-30">▲</Button>
+                            <Button onClick={() => moveProduct(index, 'down')} disabled={index === (webContent.products?.length || 0) - 1} size="icon" variant="ghost" className="h-6.5 w-6.5 text-slate-400 hover:text-white disabled:opacity-30">▼</Button>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-3 flex-1 flex flex-col justify-between">
+                        <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed">{prod.description}</p>
+                        <div className="flex flex-wrap gap-1">
+                          {(prod.features || []).map((f: string, i: number) => (
+                            <Badge key={i} className="bg-slate-950 border-slate-800 text-slate-400 text-[9px] hover:bg-slate-950 font-normal">{f}</Badge>
+                          ))}
+                        </div>
+                        <div className="flex justify-end gap-2 pt-4 border-t border-slate-800/55 mt-4">
+                          <Button onClick={() => setEditingProduct(prod)} variant="ghost" className="h-8 text-[11px] text-sky-400 hover:text-white flex gap-1">
+                            <Edit className="w-3.5 h-3.5" /> Edit
+                          </Button>
+                          <Button onClick={() => deleteProduct(prod.id)} variant="ghost" className="h-8 text-[11px] text-red-400 hover:text-white flex gap-1">
+                            <Trash2 className="w-3.5 h-3.5" /> Delete
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <Card className="bg-slate-900/40 border-slate-800 border-dashed">
+                  <CardHeader>
+                    <CardTitle className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                      <Plus className="w-4 h-4 text-emerald-400" /> Add New SAP Product Suite
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Title</label>
+                        <Input value={newProduct.title} onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })} placeholder="e.g. SAP Fiori UI5" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Subtitle</label>
+                        <Input value={newProduct.subtitle} onChange={(e) => setNewProduct({ ...newProduct, subtitle: e.target.value })} placeholder="e.g. Responsive User Experience" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Icon Component</label>
+                        <select value={newProduct.iconName} onChange={(e) => setNewProduct({ ...newProduct, iconName: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-9 w-full rounded-md px-3 text-white border">
+                          {AVAILABLE_ICONS.map(i => <option key={i} value={i}>{i}</option>)}
+                        </select>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Feature Tags (comma separated)</label>
+                        <Input value={(newProduct.features || []).join(", ")} onChange={(e) => setNewProduct({ ...newProduct, features: e.target.value.split(",").map((x: string) => x.trim()).filter(Boolean) })} placeholder="e.g. Responsive design, Custom UI5 app" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Image Asset URL</label>
+                        <Input value={newProduct.image} onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })} placeholder="e.g. /sap-fiori.webp" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Link URL</label>
+                        <Input value={newProduct.link} onChange={(e) => setNewProduct({ ...newProduct, link: e.target.value })} placeholder="e.g. /solutions" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] uppercase font-bold text-slate-400">Description</label>
+                      <Textarea value={newProduct.description} onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })} placeholder="SAP Fiori app configuration, custom theme designs..." className="bg-slate-950 border-slate-800 text-xs h-16" />
+                    </div>
+                    <Button onClick={addProduct} className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs w-full">Add SAP Product</Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            {/* Contact Page Config Tab */}
+            <TabsContent value="page-contact" className="space-y-6 mt-0">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4">
+                <div>
+                  <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                    <Phone className="w-5 h-5 text-sky-400" />
+                    Manage Contact Page Content
+                  </h2>
+                  <p className="text-xs text-slate-400">Configure corporate addresses, get directions maps links, and contact methods cards</p>
+                </div>
+              </div>
+
+              {/* Contact Texts Configuration */}
+              {(() => {
+                const contactTexts = webContent.pageTexts?.contact || {};
+                return (
+                  <Card className="bg-slate-900 border-slate-800">
+                    <CardHeader className="cursor-pointer select-none pb-3 flex flex-row items-center justify-between" onClick={() => setShowContactTexts(!showContactTexts)}>
+                      <div>
+                        <CardTitle className="text-sm font-bold text-sky-400 flex items-center gap-2">
+                          <Sliders className="w-4 h-4" />
+                          Contact Page Copywriting & Address Config
+                        </CardTitle>
+                        <CardDescription className="text-xs text-slate-400">Manage hero headings, form description, and corporate address texts</CardDescription>
+                      </div>
+                      <Button variant="ghost" size="sm" className="text-slate-400 text-xs">
+                        {showContactTexts ? "Hide" : "Show"}
+                      </Button>
+                    </CardHeader>
+                    {showContactTexts && (
+                      <CardContent className="space-y-4 pt-3 border-t border-slate-800/60">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Hero Label</label>
+                            <Input value={contactTexts.heroLabel || ""} onChange={(e) => handleUpdatePageTexts("contact", { heroLabel: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5 md:col-span-2">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Hero Title</label>
+                            <Input value={contactTexts.heroTitle || ""} onChange={(e) => handleUpdatePageTexts("contact", { heroTitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] uppercase font-bold text-slate-400">Hero Description</label>
+                          <Textarea value={contactTexts.heroDescription || ""} onChange={(e) => handleUpdatePageTexts("contact", { heroDescription: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white h-20" />
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-slate-800/40 pt-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Form Title</label>
+                            <Input value={contactTexts.sectionTitle || ""} onChange={(e) => handleUpdatePageTexts("contact", { sectionTitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5 md:col-span-2">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Form Subtitle/Description</label>
+                            <Input value={contactTexts.sectionDescription || ""} onChange={(e) => handleUpdatePageTexts("contact", { sectionDescription: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-slate-800/40 pt-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Corporate Address Title</label>
+                            <Input value={contactTexts.ctaTitle || ""} onChange={(e) => handleUpdatePageTexts("contact", { ctaTitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                          <div className="space-y-1.5 md:col-span-2">
+                            <label className="text-[10px] uppercase font-bold text-slate-400">Corporate Address Description (Use commas for new line)</label>
+                            <Input value={contactTexts.ctaDescription || ""} onChange={(e) => handleUpdatePageTexts("contact", { ctaDescription: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                          </div>
+                        </div>
+                      </CardContent>
+                    )}
+                  </Card>
+                );
+              })()}
+
+              {/* Contact Methods list */}
+              <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-sm font-bold text-slate-200">Contact Methods Cards</h3>
+                  <span className="text-[10px] text-slate-500 font-medium">Re-order blocks to set position in live site</span>
+                </div>
+
+                {editingContactMethod && (
+                  <Card className="bg-slate-900 border-sky-950 p-4 space-y-4">
+                    <h4 className="text-xs font-bold text-sky-400">Editing Contact Card: {editingContactMethod.title}</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Title</label>
+                        <Input value={editingContactMethod.title} onChange={(e) => setEditingContactMethod({ ...editingContactMethod, title: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Contact Detail (Email/Phone)</label>
+                        <Input value={editingContactMethod.contact} onChange={(e) => setEditingContactMethod({ ...editingContactMethod, contact: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Icon Component</label>
+                        <select value={editingContactMethod.iconName} onChange={(e) => setEditingContactMethod({ ...editingContactMethod, iconName: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-9 w-full rounded-md px-3 text-white border">
+                          {AVAILABLE_ICONS.map(i => <option key={i} value={i}>{i}</option>)}
+                        </select>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Action Link (tel:, mailto:, url)</label>
+                        <Input value={editingContactMethod.link} onChange={(e) => setEditingContactMethod({ ...editingContactMethod, link: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Action Button Text</label>
+                        <Input value={editingContactMethod.action} onChange={(e) => setEditingContactMethod({ ...editingContactMethod, action: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Color Hex / Theme</label>
+                        <Input value={editingContactMethod.color} onChange={(e) => setEditingContactMethod({ ...editingContactMethod, color: e.target.value })} className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] uppercase font-bold text-slate-400">Short Sub-text Description</label>
+                      <Textarea value={editingContactMethod.description} onChange={(e) => setEditingContactMethod({ ...editingContactMethod, description: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-16" />
+                    </div>
+                    <div className="flex justify-end gap-2">
+                      <Button onClick={() => setEditingContactMethod(null)} variant="ghost" className="text-xs text-slate-400">Cancel</Button>
+                      <Button onClick={saveContactMethodEdit} className="bg-sky-600 hover:bg-sky-500 text-white text-xs">Save Changes</Button>
+                    </div>
+                  </Card>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {(webContent.contactMethods || []).map((method, index) => (
+                    <Card key={index} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
+                      <CardHeader className="pb-2">
+                        <div className="flex justify-between items-start">
+                          <CardTitle className="text-sm font-bold text-white flex flex-col gap-0.5">
+                            <span className="text-[10px] text-sky-400 font-semibold uppercase tracking-wider">Icon: {method.iconName}</span>
+                            <span>{method.title}</span>
+                          </CardTitle>
+                          <div className="flex items-center gap-1">
+                            <Button onClick={() => moveContactMethod(index, 'up')} disabled={index === 0} size="icon" variant="ghost" className="h-6.5 w-6.5 text-slate-400 hover:text-white disabled:opacity-30">▲</Button>
+                            <Button onClick={() => moveContactMethod(index, 'down')} disabled={index === (webContent.contactMethods?.length || 0) - 1} size="icon" variant="ghost" className="h-6.5 w-6.5 text-slate-400 hover:text-white disabled:opacity-30">▼</Button>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-3 flex-1 flex flex-col justify-between">
+                        <p className="text-xs text-slate-400 leading-relaxed">{method.description}</p>
+                        <p className="font-semibold text-xs text-white">{method.contact}</p>
+                        <div className="flex justify-end gap-2 pt-4 border-t border-slate-800/55 mt-4">
+                          <Button onClick={() => setEditingContactMethod({ ...method, _index: index })} variant="ghost" className="h-8 text-[11px] text-sky-400 hover:text-white flex gap-1">
+                            <Edit className="w-3.5 h-3.5" /> Edit
+                          </Button>
+                          <Button onClick={() => deleteContactMethod(index)} variant="ghost" className="h-8 text-[11px] text-red-400 hover:text-white flex gap-1">
+                            <Trash2 className="w-3.5 h-3.5" /> Delete
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                <Card className="bg-slate-900/40 border-slate-800 border-dashed">
+                  <CardHeader>
+                    <CardTitle className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                      <Plus className="w-4 h-4 text-emerald-400" /> Add New Contact Card Option
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Title</label>
+                        <Input value={newContactMethod.title} onChange={(e) => setNewContactMethod({ ...newContactMethod, title: e.target.value })} placeholder="e.g. Sales Desk" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Contact Detail</label>
+                        <Input value={newContactMethod.contact} onChange={(e) => setNewContactMethod({ ...newContactMethod, contact: e.target.value })} placeholder="e.g. sales@sangronyx.com" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Icon Component</label>
+                        <select value={newContactMethod.iconName} onChange={(e) => setNewContactMethod({ ...newContactMethod, iconName: e.target.value })} className="bg-slate-950 border-slate-800 text-xs h-9 w-full rounded-md px-3 text-white border">
+                          {AVAILABLE_ICONS.map(i => <option key={i} value={i}>{i}</option>)}
+                        </select>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Action Link</label>
+                        <Input value={newContactMethod.link} onChange={(e) => setNewContactMethod({ ...newContactMethod, link: e.target.value })} placeholder="e.g. mailto:sales@sangronyx.com" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Action Text</label>
+                        <Input value={newContactMethod.action} onChange={(e) => setNewContactMethod({ ...newContactMethod, action: e.target.value })} placeholder="e.g. Email Sales" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Color Hex / Theme</label>
+                        <Input value={newContactMethod.color} onChange={(e) => setNewContactMethod({ ...newContactMethod, color: e.target.value })} placeholder="e.g. #007DB8" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] uppercase font-bold text-slate-400">Description</label>
+                      <Textarea value={newContactMethod.description} onChange={(e) => setNewContactMethod({ ...newContactMethod, description: e.target.value })} placeholder="Write a short description..." className="bg-slate-950 border-slate-800 text-xs h-16" />
+                    </div>
+                    <Button onClick={addContactMethod} className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs w-full">Add Contact Method</Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            {/* Custom Pages Builder Tab */}
+            <TabsContent value="custom-pages" className="space-y-6 mt-0">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4">
+                <div>
+                  <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-emerald-400" />
+                    Custom Pages Builder
+                  </h2>
+                  <p className="text-xs text-slate-400">Dynamically add new web pages with custom URLs, routing, and flexible layout sections</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Left Side: Create & List Pages */}
+                <div className="space-y-6 lg:col-span-1">
+                  <Card className="bg-slate-900 border-slate-800">
+                    <CardHeader>
+                      <CardTitle className="text-xs uppercase tracking-wider text-slate-400">Create Custom Page</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Page Title</label>
+                        <Input value={newCustomPage.title} onChange={(e) => setNewCustomPage({ ...newCustomPage, title: e.target.value })} placeholder="e.g. CSR Activities" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">URL Slug (e.g. /p/csr-activities)</label>
+                        <Input value={newCustomPage.slug} onChange={(e) => setNewCustomPage({ ...newCustomPage, slug: e.target.value })} placeholder="e.g. csr-activities" className="bg-slate-950 border-slate-800 text-xs" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Short Description</label>
+                        <Textarea value={newCustomPage.description} onChange={(e) => setNewCustomPage({ ...newCustomPage, description: e.target.value })} placeholder="Meta SEO description..." className="bg-slate-950 border-slate-800 text-xs h-14" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] uppercase font-bold text-slate-400">Design Template</label>
+                        <select
+                          value={newCustomPage.template || "blank"}
+                          onChange={(e) => setNewCustomPage({ ...newCustomPage, template: e.target.value })}
+                          className="w-full bg-slate-950 border border-slate-800 text-xs text-white rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                        >
+                          <option value="blank">Blank (Hero Section only)</option>
+                          <option value="service">Service Detail / Solution Page</option>
+                          <option value="product">Product Launch / Feature Showcase</option>
+                          <option value="about">About / Company Profile Page</option>
+                        </select>
+                      </div>
+                      <Button onClick={addCustomPage} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs">Create Page</Button>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-slate-900 border-slate-800">
+                    <CardHeader>
+                      <CardTitle className="text-xs uppercase tracking-wider text-slate-400">Existing Custom Pages</CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      <div className="divide-y divide-slate-800 max-h-[300px] overflow-y-auto">
+                        {(webContent.customPages || []).length === 0 ? (
+                          <div className="p-4 text-center text-xs text-slate-500">No custom pages created yet.</div>
+                        ) : (
+                          (webContent.customPages || []).map((cp: any) => (
+                            <div key={cp.slug} className={`p-3 flex justify-between items-center transition-colors cursor-pointer ${selectedCustomPageSlug === cp.slug ? "bg-slate-800" : "hover:bg-slate-800/40"}`} onClick={() => setSelectedCustomPageSlug(cp.slug)}>
+                              <div className="min-w-0 flex-1">
+                                <p className="text-xs font-bold text-white truncate">{cp.title}</p>
+                                <p className="text-[10px] text-sky-400 font-mono truncate">/p/{cp.slug}</p>
+                              </div>
+                              <div className="flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
+                                <a href={`/p/${cp.slug}`} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white p-1">
+                                  <ExternalLink className="w-3.5 h-3.5" />
+                                </a>
+                                <Button onClick={() => deleteCustomPage(cp.slug)} variant="ghost" size="icon" className="h-7 w-7 text-red-400 hover:text-red-300">
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </Button>
+                              </div>
+                            </div>
+                          ))
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Right Side: Section Layout Builder */}
+                <div className="space-y-6 lg:col-span-2">
+                  {!selectedCustomPageSlug ? (
+                    <Card className="bg-slate-900/40 border-slate-800 border-dashed h-[450px] flex flex-col justify-center items-center text-center p-6">
+                      <FileText className="w-12 h-12 text-slate-600 mb-3" />
+                      <h4 className="text-sm font-bold text-slate-400">No Page Selected</h4>
+                      <p className="text-xs text-slate-500 max-w-sm mt-1">Select an existing custom page from the left list or create a brand-new page to start editing sections and content blocks</p>
+                    </Card>
+                  ) : (
+                    (() => {
+                      const currentPage = (webContent.customPages || []).find((p: any) => p.slug === selectedCustomPageSlug);
+                      if (!currentPage) return null;
+
+                      return (
+                        <div className="space-y-6">
+                          <div className="flex justify-between items-center gap-4 bg-slate-900 border border-slate-800 p-4 rounded-lg">
+                            <div>
+                              <h3 className="text-sm font-bold text-white">Designing: {currentPage.title}</h3>
+                              <p className="text-[10px] text-sky-400 font-mono">Route: /p/{currentPage.slug}</p>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <select value={newSectionType} onChange={(e) => setNewSectionType(e.target.value)} className="bg-slate-950 border-slate-800 text-xs h-9 rounded-md px-3 text-white border">
+                                <option value="hero">Hero Section</option>
+                                <option value="text">Text / Details</option>
+                                <option value="features">Features Cards</option>
+                                <option value="stats">Stats Counter</option>
+                                <option value="cta">CTA Block</option>
+                              </select>
+                              <Button onClick={() => addSectionToCustomPage(currentPage.slug)} size="sm" className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs flex gap-1 items-center">
+                                <Plus className="w-3.5 h-3.5" /> Add Section
+                              </Button>
+                            </div>
+                          </div>
+
+                          <div className="space-y-4">
+                            <h4 className="text-xs uppercase font-bold tracking-wider text-slate-400">Page Layout & Section Content</h4>
+
+                            {(currentPage.sections || []).length === 0 ? (
+                              <div className="bg-slate-900 border border-slate-800 p-8 text-center rounded-lg text-xs text-slate-500">
+                                This page is empty. Add a section using the dropdown above.
+                              </div>
+                            ) : (
+                              (currentPage.sections || []).map((section: any, sIdx: number) => (
+                                <Card key={section.id || sIdx} className="bg-slate-900 border-slate-800">
+                                  <CardHeader className="pb-3 border-b border-slate-800/50 flex flex-row justify-between items-center bg-slate-950/20">
+                                    <div className="flex items-center gap-2">
+                                      <Badge className="bg-sky-600/10 text-sky-400 border-sky-600/20 font-bold text-[10px] uppercase">{section.type}</Badge>
+                                      <span className="text-xs font-bold text-white">Section {sIdx+1}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                      <Button onClick={() => moveCustomSection(currentPage.slug, sIdx, 'up')} disabled={sIdx === 0} size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-white disabled:opacity-30">▲</Button>
+                                      <Button onClick={() => moveCustomSection(currentPage.slug, sIdx, 'down')} disabled={sIdx === (currentPage.sections?.length || 0) - 1} size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-white disabled:opacity-30">▼</Button>
+                                      <Button onClick={() => deleteSectionFromCustomPage(currentPage.slug, section.id)} size="icon" variant="ghost" className="h-7 w-7 text-red-400 hover:text-red-300">
+                                        <Trash2 className="w-3.5 h-3.5" />
+                                      </Button>
+                                    </div>
+                                  </CardHeader>
+                                  <CardContent className="pt-4 space-y-4">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                      <div className="space-y-1.5">
+                                        <label className="text-[10px] uppercase font-bold text-slate-400">Section Title</label>
+                                        <Input value={section.title || ""} onChange={(e) => updateCustomSectionFields(currentPage.slug, section.id, { title: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                                      </div>
+                                      <div className="space-y-1.5">
+                                        <label className="text-[10px] uppercase font-bold text-slate-400">Section Subtitle / Label</label>
+                                        <Input value={section.subtitle || ""} onChange={(e) => updateCustomSectionFields(currentPage.slug, section.id, { subtitle: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white" />
+                                      </div>
+                                    </div>
+
+                                    {section.type === "text" && (
+                                      <div className="space-y-1.5">
+                                        <label className="text-[10px] uppercase font-bold text-slate-400">Rich Text Content</label>
+                                        <Textarea value={section.content || ""} onChange={(e) => updateCustomSectionFields(currentPage.slug, section.id, { content: e.target.value })} className="bg-slate-950 border-slate-800 text-xs text-white h-24" />
+                                      </div>
+                                    )}
+
+                                    {(section.type === "features" || section.type === "stats") && (
+                                      <div className="space-y-3 pt-2 border-t border-slate-800/40">
+                                        <div className="flex justify-between items-center">
+                                          <label className="text-[10px] uppercase font-bold text-slate-400">Cards / Items List</label>
+                                          <Button 
+                                            onClick={() => {
+                                              const items = [...(section.items || [])];
+                                              items.push({
+                                                title: "New Card Item",
+                                                description: "Item description goes here",
+                                                iconName: "CheckCircle"
+                                              });
+                                              updateCustomSectionFields(currentPage.slug, section.id, { items });
+                                            }}
+                                            size="sm" 
+                                            className="h-7 bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-600/20 text-[10px] px-2 py-0.5"
+                                          >
+                                            + Add Card
+                                          </Button>
+                                        </div>
+                                        <div className="space-y-2">
+                                          {(section.items || []).map((item: any, itemIdx: number) => (
+                                            <div key={itemIdx} className="bg-slate-950/40 border border-slate-800/80 rounded p-2 flex gap-3 items-center">
+                                              <span className="text-[10px] text-slate-500 font-bold shrink-0">#{itemIdx+1}</span>
+                                              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 flex-1 min-w-0">
+                                                <Input value={item.title || ""} onChange={(e) => {
+                                                  const items = [...section.items];
+                                                  items[itemIdx].title = e.target.value;
+                                                  updateCustomSectionFields(currentPage.slug, section.id, { items });
+                                                }} placeholder="Card Title" className="bg-slate-950 border-slate-800/80 text-[11px] h-7" />
+                                                
+                                                <Input value={item.description || ""} onChange={(e) => {
+                                                  const items = [...section.items];
+                                                  items[itemIdx].description = e.target.value;
+                                                  updateCustomSectionFields(currentPage.slug, section.id, { items });
+                                                }} placeholder="Card Description" className="bg-slate-950 border-slate-800/80 text-[11px] h-7" />
+
+                                                <select value={item.iconName || "CheckCircle"} onChange={(e) => {
+                                                  const items = [...section.items];
+                                                  items[itemIdx].iconName = e.target.value;
+                                                  updateCustomSectionFields(currentPage.slug, section.id, { items });
+                                                }} className="bg-slate-950 border-slate-800/80 text-[11px] h-7 rounded px-1.5 text-white border">
+                                                  {AVAILABLE_ICONS.map(i => <option key={i} value={i}>{i}</option>)}
+                                                </select>
+                                              </div>
+                                              <Button 
+                                                onClick={() => {
+                                                  const items = (section.items || []).filter((_: any, idx: number) => idx !== itemIdx);
+                                                  updateCustomSectionFields(currentPage.slug, section.id, { items });
+                                                }}
+                                                variant="ghost" 
+                                                size="icon" 
+                                                className="h-7 w-7 text-red-400 hover:text-red-300"
+                                              >
+                                                <Trash2 className="w-3.5 h-3.5" />
+                                              </Button>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    )}
+
+                                  </CardContent>
+                                </Card>
+                              ))
+                            )}
+
+                            <Button onClick={() => handleSaveContentChange(webContent)} className="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs h-10 mt-6 flex gap-1.5 items-center justify-center">
+                              <Save className="w-4 h-4" /> Save Custom Page Content to Database
+                            </Button>
+                          </div>
+                        </div>
+                      );
+                    })()
+                  )}
+                </div>
               </div>
             </TabsContent>
 

@@ -6,8 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { CookieConsent } from "./components/CookieConsent";
+import { DataProvider } from "./context/DataContext";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
+import DynamicPage from "./pages/DynamicPage";
 // Product Pages
 import SapEcc from "./pages/products/SapEcc";
 import SapFiori from "./pages/products/SapFiori";
@@ -55,37 +57,26 @@ import Careers from "./pages/Careers";
 import WhoWeAre from "./pages/WhoWeAre";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
-import SapS4HanaImplementation from "./pages/services/SapS4HanaImplementation";
-import SapEccMigration from "./pages/services/SapEccMigration";
-import SapLicensing from "./pages/services/SapLicensing";
-import SapModuleImplementations from "./pages/services/SapModuleImplementations";
-import SapCustomDevelopment from "./pages/services/SapCustomDevelopment";
-import SapSupportMaintenance from "./pages/services/SapSupportMaintenance";
-import SapIntegrationServices from "./pages/services/SapIntegrationServices";
-import SapCorporateTraining from "./pages/services/SapCorporateTraining";
-// Industry Pages
-import Manufacturing from "./pages/industries/Manufacturing";
-import Retail from "./pages/industries/Retail";
-import Pharma from "./pages/industries/Pharma";
-import Logistics from "./pages/industries/Logistics";
-import Education from "./pages/industries/Education";
-import Finance from "./pages/industries/Finance";
-import SmallBusiness from "./pages/industries/SmallBusiness";
 // Legal Pages
 import Privacy from "./pages/legal/Privacy";
 import Legal from "./pages/legal/Legal";
 import Cookies from "./pages/legal/Cookies";
 import Terms from "./pages/legal/Terms";
 
+// Dynamic Detail Renderers
+import DynamicService from "./pages/services/DynamicService";
+import DynamicIndustry from "./pages/industries/DynamicIndustry";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+      <DataProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
           <ScrollToTop />
           <Routes>
           <Route path="/" element={<Index />} />
@@ -96,13 +87,6 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/solutions" element={<Services />} />
           <Route path="/industries" element={<Industries />} />
-          <Route path="/industries/manufacturing" element={<Manufacturing />} />
-          <Route path="/industries/retail" element={<Retail />} />
-          <Route path="/industries/pharma" element={<Pharma />} />
-          <Route path="/industries/logistics" element={<Logistics />} />
-          <Route path="/industries/education" element={<Education />} />
-          <Route path="/industries/finance" element={<Finance />} />
-          <Route path="/industries/small-business" element={<SmallBusiness />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/documentation" element={<Documentation />} />
           <Route path="/resources/video-tutorials" element={<VideoTutorials />} />
@@ -137,14 +121,8 @@ const App = () => (
           {/* Training & Placements */}
           <Route path="/resources/placements" element={<Placements />} />
           
-          <Route path="/services/sap-s4hana-implementation" element={<SapS4HanaImplementation />} />
-          <Route path="/services/sap-ecc-migration" element={<SapEccMigration />} />
-          <Route path="/services/sap-licensing" element={<SapLicensing />} />
-          <Route path="/services/sap-module-implementations" element={<SapModuleImplementations />} />
-          <Route path="/services/sap-custom-development" element={<SapCustomDevelopment />} />
-          <Route path="/services/sap-support-maintenance" element={<SapSupportMaintenance />} />
-          <Route path="/services/sap-integration-services" element={<SapIntegrationServices />} />
-          <Route path="/services/sap-corporate-training" element={<SapCorporateTraining />} />
+          <Route path="/services/:slug" element={<DynamicService />} />
+          <Route path="/industries/:slug" element={<DynamicIndustry />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Careers />} />
@@ -156,12 +134,14 @@ const App = () => (
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/terms" element={<Terms />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/p/:slug" element={<DynamicPage />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <CookieConsent />
       </BrowserRouter>
     </TooltipProvider>
+   </DataProvider>
   </QueryClientProvider>
   </HelmetProvider>
 );

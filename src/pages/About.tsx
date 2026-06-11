@@ -7,8 +7,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Target, Users, Lightbulb, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
-
-import { getWebsiteContent } from "@/data/pageContentData";
+import { useData } from "@/context/DataContext";
 
 const values = [
   { icon: Target, title: "Excellence", description: "We strive for excellence in every project we deliver." },
@@ -27,7 +26,8 @@ const milestones = [
 
 const About = () => {
   const seo = useSEO();
-  const { pageTexts } = getWebsiteContent();
+  const { content } = useData();
+  const pageTexts = content.pageTexts;
   const textContent = pageTexts?.whoWeAre || {
     heroTitle: "Who We Are",
     heroDescription: "Sangronyx is a leading provider of IT services and SAP solutions, helping businesses transform and grow.",
@@ -46,204 +46,137 @@ const About = () => {
   };
   
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white font-sans antialiased text-neutral-900 selection:bg-[#0067b8] selection:text-white">
       <SEO {...seo} />
       <Navbar />
       
+      {/* Dell-inspired Page Hero Section */}
       <PageHero 
         title={textContent.heroTitle}
         description={textContent.heroDescription}
-        label={textContent.heroLabel || "ABOUT US"}
-        breadcrumbs={[{ label: "Company" }]}
+        label={textContent.heroLabel}
+        breadcrumbs={[
+          { label: "About" }
+        ]}
         backgroundImage="/hero-background.jpg"
       />
 
-      {/* Mission */}
-      <section className="py-16 md:py-24 lg:py-32 bg-background">
-        <div className="container mx-auto px-4 lg:px-8">
+      {/* Mission Section */}
+      <section className="py-16 md:py-20 lg:py-24 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
+            <div className="space-y-6">
               {textContent.sectionTag && (
-                <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
+                <span className="text-xs font-bold tracking-wider text-[#0076d6] uppercase block">
                   {textContent.sectionTag}
                 </span>
               )}
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+              <h2 className="text-2xl md:text-3xl font-light text-neutral-900 tracking-tight">
                 {textContent.storyTitle}
               </h2>
-              {(textContent.storyParagraphs || []).map((para, idx) => (
-                <p key={idx} className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                  {para}
-                </p>
-              ))}
-            </motion.div>
+              <div className="space-y-4 text-neutral-600 text-xs md:text-sm leading-relaxed">
+                {(textContent.storyParagraphs || []).map((para, idx) => (
+                  <p key={idx}>{para}</p>
+                ))}
+              </div>
+            </div>
             
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative">
+              <div className="border border-neutral-300 bg-neutral-250 p-2 overflow-hidden shadow-sm rounded-none">
                 <img 
                   src="/why-choose-us.avif" 
                   alt="About Sangronyx" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover rounded-none"
                 />
               </div>
               {textContent.stats && textContent.stats.length > 0 && (
-                <div className="absolute -bottom-6 -right-6 bg-primary rounded-xl p-6 shadow-xl">
-                  <div className="text-center text-primary-foreground">
-                    <div className="text-3xl md:text-4xl font-bold">{textContent.stats[0].value}</div>
-                    <div className="text-sm">{textContent.stats[0].label}</div>
-                  </div>
+                <div className="absolute -bottom-4 -right-4 bg-[#0076d6] p-4 text-white rounded-none">
+                  <div className="text-2xl font-bold">{textContent.stats[0].value}</div>
+                  <div className="text-xs text-neutral-100 font-medium">{textContent.stats[0].label}</div>
                 </div>
               )}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
-        {/* Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#005a8a] via-[#0077b3] to-[#0096d6] z-0" />
-        
-        {/* Decorative Blur Circles */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2 }}
-            className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-white/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2 }}
-            className="absolute bottom-0 left-0 w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-white/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, delay: 0.4 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] md:w-[300px] md:h-[300px] bg-white/5 rounded-full blur-3xl"
-          />
-        </div>
-        
-        {/* Subtle Grid Pattern */}
-        <div 
-          className="absolute inset-0 z-0 opacity-10"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-        
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-8 md:mb-10"
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+      {/* Values Section */}
+      <section className="py-16 md:py-20 bg-neutral-50 border-t border-b border-neutral-200">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="text-center mb-12 max-w-2xl mx-auto space-y-3">
+            <h2 className="text-2xl md:text-3xl font-light text-neutral-900 tracking-tight">
               {textContent.sectionTitle}
             </h2>
-            <p className="text-lg text-white/90 max-w-2xl mx-auto">
+            <p className="text-xs md:text-sm text-neutral-600 leading-relaxed">
               {textContent.sectionDescription}
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <motion.div
+              <div
                 key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/20 text-center hover:bg-white/20 hover:border-white/30 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="p-6 border border-neutral-200 bg-white hover:border-neutral-300 transition-colors rounded-none"
               >
-                <div className="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm mx-auto mb-4 flex items-center justify-center border border-white/30">
-                  <value.icon className="w-7 h-7 text-white" />
+                <div className="w-10 h-10 bg-neutral-100 flex items-center justify-center text-[#0076d6] mb-4 rounded-none">
+                  <value.icon className="w-5 h-5" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{value.title}</h3>
-                <p className="text-white/90">{value.description}</p>
-              </motion.div>
+                <h3 className="text-sm font-semibold text-neutral-900 mb-2">{value.title}</h3>
+                <p className="text-xs md:text-sm text-neutral-600 leading-relaxed">{value.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services Timeline */}
-      <section className="py-16 md:py-24 lg:py-32 bg-background">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12 md:mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+      {/* Services/Timeline Section */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-light text-neutral-900 tracking-tight">
               Our SAP Services
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-xs md:text-sm text-neutral-600 mt-1">
               Complete SAP solutions for business transformation
             </p>
-          </motion.div>
+          </div>
 
           <div className="max-w-3xl mx-auto space-y-6">
             {milestones.map((milestone, index) => (
-              <motion.div
+              <div
                 key={milestone.year}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
                 className="flex items-start gap-4"
               >
-                <div className="w-4 h-4 rounded-full bg-accent flex-shrink-0 mt-2" />
-                <div className="bg-card rounded-xl p-6 border border-border flex-1 hover:shadow-lg hover:border-accent/30 transition-all duration-300">
-                  <div className="text-xl font-bold text-accent mb-2">{milestone.year}</div>
-                  <div className="text-muted-foreground">{milestone.event}</div>
+                {/* Dell-inspired square bullet */}
+                <div className="w-3 h-3 bg-[#0076d6] shrink-0 mt-2 rounded-none" />
+                <div className="p-6 border border-neutral-200 bg-white flex-1 hover:border-neutral-300 transition-colors rounded-none">
+                  <div className="text-sm font-semibold text-[#0076d6] mb-2">{milestone.year}</div>
+                  <div className="text-xs md:text-sm text-neutral-600 leading-relaxed">{milestone.event}</div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 md:py-24 bg-primary">
-        <div className="container mx-auto px-4 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
+      {/* Corporate CTA */}
+      <section className="py-16 md:py-20 bg-[#f5f5f5] border-t border-neutral-200">
+        <div className="container mx-auto px-4 lg:px-8 text-center max-w-3xl">
+          <div className="space-y-4">
+            <h2 className="text-2xl md:text-3xl font-light text-neutral-900 tracking-tight">
               Ready to Transform Your Business?
             </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/70 mb-8 max-w-2xl mx-auto">
+            <p className="text-xs md:text-sm text-neutral-600 leading-relaxed max-w-2xl mx-auto">
               Let's discuss how our SAP solutions can help you achieve your business goals.
             </p>
-            <Link to="/contact">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 px-8 py-6 h-auto text-base font-semibold group">
-                Contact Us Today
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </motion.div>
+            <div className="pt-4">
+              <Link to="/contact">
+                <Button className="bg-[#1d1d1d] text-white hover:bg-[#333333] px-6 py-3 h-auto text-xs font-semibold rounded-none uppercase tracking-wider">
+                  Contact Us Today
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -19,6 +19,7 @@ export interface IndustryItem {
   color: string;
   slug: string;
   image: string;
+  features?: string[];
 }
 
 export interface ResourceItem {
@@ -79,6 +80,62 @@ export interface WebsiteContent {
   benefits: BenefitItem[];
   partnerBenefits: PartnerBenefitItem[];
   leadership: LeadershipItem[];
+  products?: {
+    id: string;
+    iconName: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    features: string[];
+    color: string;
+    image: string;
+    link: string;
+  }[];
+  homeFeatures?: {
+    id: string;
+    iconName: string;
+    title: string;
+    description: string;
+    link: string;
+    linkText: string;
+    underlineColor: string;
+  }[];
+  homeReasons?: {
+    id: string;
+    iconName: string;
+    title: string;
+    description: string;
+  }[];
+  servicesWhyChoose?: {
+    id: string;
+    iconName: string;
+    title: string;
+    description: string;
+  }[];
+  contactMethods?: {
+    id: string;
+    iconName: string;
+    title: string;
+    description: string;
+    contact: string;
+    action: string;
+    link: string;
+    color: string;
+  }[];
+  customPages?: {
+    id?: string;
+    slug: string;
+    title: string;
+    description: string;
+    sections: {
+      id?: string;
+      type: string;
+      title?: string;
+      subtitle?: string;
+      content?: string;
+      items?: { title: string; description: string; iconName?: string; link?: string }[];
+    }[];
+  }[];
   pageTexts: {
     services: PageTextConfig;
     industries: PageTextConfig;
@@ -86,139 +143,262 @@ export interface WebsiteContent {
     careers: PageTextConfig;
     partners: PageTextConfig;
     whoWeAre: PageTextConfig;
+    home?: {
+      heroLabel?: string;
+      heroTitle?: string;
+      heroDescription?: string;
+      sectionTitle?: string;
+      whyChooseTitle?: string;
+      whyChooseDescription?: string;
+      ctaTitle?: string;
+      ctaDescription?: string;
+      ctaButtonText?: string;
+    };
+    productsPage?: {
+      heroLabel?: string;
+      heroTitle?: string;
+      heroDescription?: string;
+      ctaTitle?: string;
+      ctaDescription?: string;
+      ctaButtonText?: string;
+    };
+    contact?: {
+      heroLabel?: string;
+      heroTitle?: string;
+      heroDescription?: string;
+      sectionTitle?: string;
+      sectionDescription?: string;
+      ctaTitle?: string;
+      ctaDescription?: string;
+    };
   };
 }
 
 export const initialServices: ServiceItem[] = [
   {
-    id: "serv-1",
-    iconName: "Cloud",
+    id: "ser-1",
+    iconName: "Award",
     title: "SAP S/4HANA Implementation",
-    description: "Complete implementation services for SAP S/4HANA with cloud, on-premises, or hybrid deployment options.",
-    features: ["Cloud / On-prem / Hybrid setup", "Business process mapping", "Module configuration", "UAT & go-live support"],
-    image: "/sap-s4hana-implementation.webp",
-    href: "/services/sap-s4hana-implementation",
+    description: "Implement SAP S/4HANA with confidence through our proven methodology. Accelerate business transformation.",
+    features: [
+      "Greenfield Implementation",
+      "Brownfield Conversion",
+      "Hybrid Implementation",
+      "Process Reengineering",
+      "User Training",
+      "Go-Live Support"
+    ],
+    image: "/sap-cloud-solutions.webp",
+    href: "/services/sap-s4hana-implementation"
   },
   {
-    id: "serv-2",
+    id: "ser-2",
     iconName: "Database",
-    title: "SAP ECC to S/4HANA Migration",
-    description: "Seamless migration from ECC to S/4HANA with minimal downtime and comprehensive data integrity.",
-    features: ["Readiness check & assessment", "Database migration", "Custom code adaptation", "End-user training"],
+    title: "ECC to SAP S/4HANA Migration",
+    description: "Move beyond SAP ECC and unlock next-generation capabilities with SAP S/4HANA. Future-proof your ERP landscape.",
+    features: [
+      "Readiness Assessment",
+      "Landscape Analysis",
+      "Data Cleansing",
+      "Conversion Execution",
+      "Hypercare Support"
+    ],
     image: "/SAP ECC TO S4 HANA MIGRANATION.png",
-    href: "/services/sap-ecc-migration",
+    href: "/services/sap-ecc-migration"
   },
   {
-    id: "serv-3",
+    id: "ser-3",
     iconName: "Settings",
-    title: "SAP Licensing & Software",
-    description: "Comprehensive SAP licensing solutions optimized for your business needs and budget.",
-    features: ["SAP S/4HANA subscription", "Module-based licensing", "Cost optimisation guidance"],
-    image: "/SAP LISENCING & SOFTWARE.jpg",
-    href: "/services/sap-licensing",
+    title: "SAP BTP Services",
+    description: "SAP BTP enables organizations to extend, integrate, and innovate across business applications. Innovate faster with SAP Business Technology Platform.",
+    features: [
+      "SAP Integration Suite",
+      "SAP Build",
+      "HANA Cloud",
+      "Event Mesh",
+      "AI Services",
+      "Process Automation"
+    ],
+    image: "/SAP INTEGRATION SERVICES.png",
+    href: "/services/sap-btp-services"
   },
   {
-    id: "serv-4",
-    iconName: "Settings",
-    title: "SAP Module Implementations",
-    description: "Expert implementation of all major SAP functional and technical modules.",
-    features: ["Functional: PP, MM, SD, FI, CO, QM, PM", "Technical: ABAP, BASIS, HANA, Fiori"],
-    image: "/SAP MODULE IMPLEMENTATION.png",
-    href: "/services/sap-module-implementations",
-  },
-  {
-    id: "serv-5",
+    id: "ser-4",
     iconName: "Code",
-    title: "SAP Custom Development",
-    description: "Tailored SAP development and enhancements to meet your unique business requirements.",
-    features: ["ABAP reports & enhancements", "SmartForms / Adobe Forms", "Fiori UI apps"],
+    title: "SAP RAP Development",
+    description: "Leverage SAP RAP to create modern, cloud-ready applications with clean architecture and future-proof development standards. Build intelligent enterprise applications.",
+    features: [
+      "Business Objects",
+      "OData Services",
+      "Fiori Elements",
+      "RAP APIs",
+      "Custom Extensions"
+    ],
     image: "/SAP CUSTOM DEVELOPMENT.jpg",
-    href: "/services/sap-custom-development",
+    href: "/services/sap-rap-development"
   },
   {
-    id: "serv-6",
-    iconName: "Wrench",
-    title: "SAP Support & Maintenance",
-    description: "24/7 ongoing SAP support and maintenance for uninterrupted business operations.",
-    features: ["Functional & technical support", "Performance tuning", "Monthly health checks"],
+    id: "ser-5",
+    iconName: "Cloud",
+    title: "SAP CAP Development",
+    description: "Develop scalable applications using SAP CAP and deploy seamlessly on SAP BTP. Cloud-native enterprise applications.",
+    features: [
+      "CAP Node.js",
+      "CAP Java",
+      "SAP HANA Cloud",
+      "Cloud Foundry",
+      "REST APIs"
+    ],
+    image: "/sap-cloud-solutions.webp",
+    href: "/services/sap-cap-development"
+  },
+  {
+    id: "ser-6",
+    iconName: "Layers",
+    title: "SAP Fiori Development",
+    description: "Transform traditional SAP screens into intuitive, role-based user experiences. Modern SAP user experience.",
+    features: [
+      "Fiori App Development",
+      "Launchpad Design",
+      "Workflow Applications",
+      "Mobile Enablement"
+    ],
+    image: "/sap-cloud-solutions.webp",
+    href: "/services/sap-fiori-development"
+  },
+  {
+    id: "ser-7",
+    iconName: "Layout",
+    title: "SAP UI5 Development",
+    description: "Create responsive applications using SAP UI5 framework. Enterprise-grade front-end solutions.",
+    features: [
+      "Custom UI5 Apps",
+      "Dashboard Development",
+      "SAP Integration",
+      "Responsive Design"
+    ],
+    image: "/sap-cloud-solutions.webp",
+    href: "/services/sap-ui5-development"
+  },
+  {
+    id: "ser-8",
+    iconName: "Sparkles",
+    title: "SAP Joule & AI",
+    description: "SAP Joule helps organizations unlock productivity using embedded AI capabilities. Bring AI into everyday business processes.",
+    features: [
+      "AI Chat Assistants",
+      "Predictive Analytics",
+      "Process Automation",
+      "Intelligent Recommendations"
+    ],
+    image: "/sap-cloud-solutions.webp",
+    href: "/services/sap-joule-ai"
+  },
+  {
+    id: "ser-9",
+    iconName: "Shield",
+    title: "SAP Application Support",
+    description: "Ensure business continuity with our managed SAP support services. Reliable SAP AMS Services.",
+    features: [
+      "Incident Management",
+      "Problem Management",
+      "Enhancement Requests",
+      "Monitoring Services",
+      "SLA-Based Support"
+    ],
     image: "/services hero background.jpg",
-    href: "/services/sap-support-maintenance",
+    href: "/services/sap-support-maintenance"
   },
   {
-    id: "serv-7",
+    id: "ser-10",
+    iconName: "Globe",
+    title: "SAP Rollout Services",
+    description: "Deploy global templates efficiently across countries and locations. Expand SAP across business units.",
+    features: [
+      "Localization",
+      "Master Data Migration",
+      "Training",
+      "Deployment Support"
+    ],
+    image: "/sap-cloud-solutions.webp",
+    href: "/services/sap-rollout-services"
+  },
+  {
+    id: "ser-11",
+    iconName: "Terminal",
+    title: "SAP ABAP Development",
+    description: "Extend SAP capabilities through high-quality ABAP development. Custom SAP development services.",
+    features: [
+      "Reports",
+      "Interfaces",
+      "Enhancements",
+      "Forms",
+      "Workflow Development"
+    ],
+    image: "/sap-cloud-solutions.webp",
+    href: "/services/sap-abap-development"
+  },
+  {
+    id: "ser-12",
     iconName: "Link2",
     title: "SAP Integration Services",
-    description: "Seamless SAP integration with your existing enterprise systems and applications.",
-    features: ["SAP ↔ ERP integration", "API / Middleware integrations", "Third-party app connections"],
+    description: "Integrate SAP with third-party systems, cloud platforms, and enterprise applications. Connect your enterprise ecosystem.",
+    features: [
+      "SAP CPI",
+      "APIs",
+      "EDI",
+      "Web Services",
+      "Middleware Solutions"
+    ],
     image: "/SAP INTEGRATION SERVICES.png",
-    href: "/services/sap-integration-services",
-  },
+    href: "/services/sap-integration-services"
+  }
 ];
 
 export const initialIndustries: IndustryItem[] = [
   {
     id: "ind-1",
+    title: "Manufacturing Solutions",
+    description: "Optimize production planning, scheduling, inventory, and shop floor operations. Smart manufacturing with SAP.",
     iconName: "Factory",
-    title: "Manufacturing",
-    description: "SAP solutions for manufacturing to optimize production, quality, and supply chain operations.",
     color: "bg-accent",
     slug: "manufacturing",
     image: "/manufacturing hero section background.jpg",
+    features: [
+      "SAP PP (Production Planning)",
+      "SAP QM (Quality Management)",
+      "SAP PM (Plant Maintenance)",
+      "SAP EWM (Extended Warehouse Management)"
+    ]
   },
   {
     id: "ind-2",
-    iconName: "ShoppingCart",
-    title: "Retail & FMCG",
-    description: "SAP solutions for retail and FMCG to deliver seamless experiences and optimize inventory.",
-    color: "bg-sprinklr-green",
-    slug: "retail",
-    image: "/Retail and FMCG hero section background.jpg",
+    title: "Automotive Solutions",
+    description: "Enable digital supply chains, production excellence, and quality management. Accelerating automotive innovation.",
+    iconName: "Car",
+    color: "bg-sprinklr-purple",
+    slug: "automotive",
+    image: "/sap-cloud-solutions.webp",
+    features: [
+      "Supplier Collaboration",
+      "Production Optimization",
+      "Inventory Visibility"
+    ]
   },
   {
     id: "ind-3",
+    title: "Pharmaceutical Solutions",
+    description: "Support highly regulated environments with SAP-powered quality and compliance processes. Compliance-driven SAP solutions.",
     iconName: "Heart",
-    title: "Pharma",
-    description: "SAP solutions for pharmaceutical companies to ensure compliance and streamline operations.",
-    color: "bg-sprinklr-purple",
+    color: "bg-sprinklr-green",
     slug: "pharma",
     image: "/PHARMA hero section background.jpg",
-  },
-  {
-    id: "ind-4",
-    iconName: "Truck",
-    title: "Logistics & Supply Chain",
-    description: "SAP solutions for logistics to build resilient supply chains with end-to-end visibility.",
-    color: "bg-accent",
-    slug: "logistics",
-    image: "/logistics and supply chain hero section background.jpg",
-  },
-  {
-    id: "ind-5",
-    iconName: "GraduationCap",
-    title: "Education",
-    description: "SAP solutions for educational institutions to transform operations and student experiences.",
-    color: "bg-sprinklr-green",
-    slug: "education",
-    image: "/EDUCATION hero section background.jpg",
-  },
-  {
-    id: "ind-6",
-    iconName: "Banknote",
-    title: "Finance",
-    description: "SAP solutions for finance to modernize operations with real-time insights and compliance.",
-    color: "bg-sprinklr-purple",
-    slug: "finance",
-    image: "/FINANCE hero section background.jpg",
-  },
-  {
-    id: "ind-7",
-    iconName: "Building2",
-    title: "Small & Mid Businesses",
-    description: "Tailored SAP solutions for small and mid-sized businesses to drive growth and efficiency.",
-    color: "bg-accent",
-    slug: "small-business",
-    image: "/SMALL & MID BUSINESS.jpg",
-  },
+    features: [
+      "Batch Traceability",
+      "GMP Compliance",
+      "Quality Management"
+    ]
+  }
 ];
 
 export const initialResources: ResourceItem[] = [
@@ -291,27 +471,21 @@ export const initialResources: ResourceItem[] = [
 export const initialBenefits: BenefitItem[] = [
   {
     id: "ben-1",
-    iconName: "Zap",
-    title: "Innovation First",
-    description: "Work with cutting-edge SAP technologies and shape the future of enterprise solutions.",
+    iconName: "GraduationCap",
+    title: "Learning Culture",
+    description: "Continuous skill acquisition and certified training programs across advanced SAP technologies.",
   },
   {
     id: "ben-2",
-    iconName: "Users",
-    title: "Collaborative Culture",
-    description: "Join a team of passionate experts who support and learn from each other.",
+    iconName: "Globe",
+    title: "Global Projects",
+    description: "Work on enterprise-level global deployments across multiple industries and regions.",
   },
   {
     id: "ben-3",
-    iconName: "GraduationCap",
-    title: "Continuous Learning",
-    description: "Access to SAP certifications, training programs, and professional development.",
-  },
-  {
-    id: "ben-4",
-    iconName: "Heart",
-    title: "Work-Life Balance",
-    description: "Flexible work arrangements and comprehensive wellness programs.",
+    iconName: "TrendingUp",
+    title: "Career Growth",
+    description: "Structured development tracks to fast-track your path to senior consulting roles.",
   },
 ];
 
@@ -319,64 +493,42 @@ export const initialPartnerBenefits: PartnerBenefitItem[] = [
   {
     id: "pb-1",
     iconName: "Handshake",
-    title: "Partnership Opportunities",
-    description: "Join our partner network and grow your business with Sangronyx.",
+    title: "Co-Marketing Programs",
+    description: "Generate demand and expand market reach with joint campaigns, case studies, and corporate events sponsorships.",
     color: "bg-blue-500",
-    link: "/contact",
+    link: "/contact"
   },
   {
     id: "pb-2",
-    iconName: "Users",
-    title: "Collaborative Approach",
-    description: "Work together to deliver exceptional solutions to clients.",
+    iconName: "GraduationCap",
+    title: "Technical Training Support",
+    description: "Equip team members with direct access to training modules, preview environments, and certified courses.",
     color: "bg-orange-500",
-    link: "/contact",
+    link: "/services"
   },
   {
     id: "pb-3",
-    iconName: "Award",
-    title: "Certified Partners",
-    description: "Become a certified partner and gain access to exclusive resources.",
+    iconName: "Zap",
+    title: "Joint Delivery Models",
+    description: "Leverage our pool of certified SAP consultants to co-deliver complex system conversions and migrations.",
     color: "bg-green-500",
-    link: "/contact",
-  },
-  {
-    id: "pb-4",
-    iconName: "TrendingUp",
-    title: "Business Growth",
-    description: "Expand your business with our comprehensive partner program.",
-    color: "bg-purple-500",
-    link: "/contact",
-  },
-  {
-    id: "pb-5",
-    iconName: "Shield",
-    title: "Support & Training",
-    description: "Receive ongoing support and training to help you succeed.",
-    color: "bg-red-500",
-    link: "/contact",
-  },
+    link: "/services"
+  }
 ];
 
 export const initialLeadership: LeadershipItem[] = [
   {
     id: "lead-1",
-    name: "Leadership Excellence",
-    role: "Strategic Vision",
-    description: "Our leadership team brings decades of combined experience in enterprise software and SAP implementations.",
+    name: "Prasad Rao",
+    role: "Founder & Managing Director",
+    description: "Over 20 years of ERP implementation and advisory experience, guiding global brands through complex digital landscapes."
   },
   {
     id: "lead-2",
-    name: "Technical Expertise",
-    role: "Innovation Hub",
-    description: "A dedicated team of certified SAP consultants and developers driving technical excellence.",
-  },
-  {
-    id: "lead-3",
-    name: "Client Success",
-    role: "Partnership Focus",
-    description: "Dedicated client success managers ensuring every engagement exceeds expectations.",
-  },
+    name: "Srinivas Goud",
+    role: "Director - SAP Practice",
+    description: "Certified S/4HANA architect specializing in enterprise application integration, system migrations, and Basis administration."
+  }
 ];
 
 export const initialPageTexts: {
@@ -386,6 +538,34 @@ export const initialPageTexts: {
   careers: PageTextConfig;
   partners: PageTextConfig;
   whoWeAre: PageTextConfig;
+  home?: {
+    heroLabel?: string;
+    heroTitle?: string;
+    heroDescription?: string;
+    sectionTitle?: string;
+    whyChooseTitle?: string;
+    whyChooseDescription?: string;
+    ctaTitle?: string;
+    ctaDescription?: string;
+    ctaButtonText?: string;
+  };
+  productsPage?: {
+    heroLabel?: string;
+    heroTitle?: string;
+    heroDescription?: string;
+    ctaTitle?: string;
+    ctaDescription?: string;
+    ctaButtonText?: string;
+  };
+  contact?: {
+    heroLabel?: string;
+    heroTitle?: string;
+    heroDescription?: string;
+    sectionTitle?: string;
+    sectionDescription?: string;
+    ctaTitle?: string;
+    ctaDescription?: string;
+  };
 } = {
   services: {
     heroTitle: "SAP Solutions Designed for Real Business Outcomes",
@@ -404,7 +584,7 @@ export const initialPageTexts: {
     heroTitle: "Industry-Focused SAP Solutions That Deliver Business Value",
     heroDescription: "We design and deliver SAP solutions tailored to the unique processes and challenges of different industries.",
     sectionTag: "Industries We Serve",
-    sectionTitle: "Seven Industry Verticals. One Unified SAP Platform."
+    sectionTitle: "Three Industry Verticals. One Unified SAP Platform."
   },
   resources: {
     heroTitle: "Resources",
@@ -416,16 +596,16 @@ export const initialPageTexts: {
     ctaDescription: "Can't find what you're looking for? Contact our team for personalized assistance."
   },
   careers: {
-    heroTitle: "Join Our Team",
-    heroDescription: "Build your career with Sangronyx and help transform businesses through innovative SAP solutions. We're looking for talented individuals who share our passion for excellence.",
+    heroTitle: "Join Sangronyx",
+    heroDescription: "Become part of a team shaping the future of enterprise technology.",
     heroLabel: "CAREERS",
-    sectionTag: "Why Join Us",
+    sectionTag: "Why Sangronyx?",
     sectionTitle: "Why Work at Sangronyx?",
-    sectionDescription: "We offer more than just a job – we offer a career path filled with growth opportunities, meaningful work, and a supportive environment.",
-    cultureTitle: "Our Culture",
-    cultureDescription: "Step into a workplace defined by warmth, positivity, and collaboration. At Sangronyx, we balance focused work with moments to connect whether it's over a cup of coffee, a team activity, or shared successes. Our open-door and inclusive culture encourages ideas, teamwork, and continuous growth.",
-    principlesTitle: "Our Principles",
-    principlesDescription: "Sangronyx Technologies is proud to be an equal employment opportunity employer. We provide fair and equal opportunities to all individuals, regardless of race, religion, gender, age, national origin, disability, marital status, or any other characteristic protected by law."
+    sectionDescription: "Learning Culture | Global Projects | Career Growth",
+    cultureTitle: "Open Opportunities",
+    cultureDescription: "We are seeking skilled candidates for the following positions: SAP Consultants, BTP Developers, RAP Developers, Fiori Developers, and Project Managers.",
+    principlesTitle: "Learning & Culture",
+    principlesDescription: "At Sangronyx, we foster a learning-driven culture where you can work on complex international projects, grow your career path organically, and enjoy excellent work-life balance."
   },
   partners: {
     heroTitle: "Partners",
@@ -438,20 +618,48 @@ export const initialPageTexts: {
   },
   whoWeAre: {
     heroTitle: "Who We Are",
-    heroDescription: "A team of passionate professionals dedicated to transforming enterprises through innovative SAP solutions and exceptional service.",
-    heroLabel: "About Sangronyx",
-    sectionTag: "Our Story",
-    storyTitle: "Building the Future of Enterprise Solutions",
+    heroDescription: "Sangronyx Technologies is a global SAP consulting and technology partner focused on helping organizations unlock business value through digital transformation.",
+    heroLabel: "ABOUT US",
+    sectionTag: "About Sangronyx",
+    storyTitle: "Our Mission & Vision",
     storyParagraphs: [
-      "Sangronyx Technologies was founded with a clear vision: to help businesses simplify complexity and unlock real value from their SAP investments.",
-      "What began as a focused initiative by SAP professionals with hands-on enterprise experience has grown into a trusted SAP services partner for organizations seeking reliable implementation, migration, and support services. We identified a common challenge across businesses: powerful SAP systems were often underutilized due to lack of clarity, alignment, and ongoing support. Sangronyx was created to change that.",
-      "From SAP S/4HANA implementations and migrations to AMS and Hypercare support, we deliver solutions that are practical, scalable, and aligned with real business needs. Our approach combines deep SAP expertise, structured delivery, and an unwavering commitment to client success."
+      "Sangronyx Technologies is a global SAP consulting and technology partner focused on helping organizations unlock business value through digital transformation. Our consultants combine deep SAP expertise with industry knowledge to deliver measurable business outcomes.",
+      "Our Mission: Empower enterprises with innovative SAP solutions.",
+      "Our Vision: Become the most trusted SAP transformation partner worldwide."
     ],
-    sectionTitle: "Powered by Expertise",
-    sectionDescription: "Our diverse team of experts brings together deep industry knowledge and technical excellence.",
+    sectionTitle: "Our Values",
+    sectionDescription: "The principles that guide everything we do",
     stats: [
       { value: "10+", label: "Years of Excellence" }
     ]
+  },
+  home: {
+    heroLabel: "SAP Solutions Partner",
+    heroTitle: "Transforming Businesses Through SAP Innovation",
+    heroDescription: "Sangronyx Technologies Pvt Ltd helps organizations modernize their enterprise landscape through SAP S/4HANA, SAP BTP, SAP Fiori, SAP RAP, SAP CAP, SAP Joule, Implementation, Migration, Rollout, and Application Support Services.",
+    sectionTitle: "We deliver intelligent, scalable, and future-ready SAP solutions that drive operational excellence, innovation, and business growth.",
+    whyChooseTitle: "Your Trusted Partner for SAP Excellence",
+    whyChooseDescription: "We combine deep SAP expertise, structured delivery, and a business-first mindset to help organizations implement, migrate, and support SAP systems with confidence.",
+    ctaTitle: "Ready to transform your business?",
+    ctaDescription: "Connect with Sangronyx to discover how our SAP services can help you achieve your business goals and drive digital transformation.",
+    ctaButtonText: "Contact Us Now"
+  },
+  productsPage: {
+    heroLabel: "SAP SERVICES",
+    heroTitle: "Our SAP Services",
+    heroDescription: "Complete SAP solutions for implementation, migration, training, support, and custom development.",
+    ctaTitle: "Ready to Get Started?",
+    ctaDescription: "Contact our SAP experts to discuss your requirements and get a personalized solution.",
+    ctaButtonText: "Contact SAP Experts"
+  },
+  contact: {
+    heroLabel: "GET IN TOUCH",
+    heroTitle: "Let's Build the Intelligent Enterprise Together",
+    heroDescription: "Whether you're planning an SAP implementation, migration, support engagement, or digital transformation initiative, Sangronyx is ready to help.",
+    sectionTitle: "Get Started Today",
+    sectionDescription: "Schedule a free consultation with our SAP experts and discover how Sangronyx can accelerate your transformation journey.",
+    ctaTitle: "Contact Information",
+    ctaDescription: "Sangronyx Technologies Pvt Ltd, Hyderabad, Telangana, India, info@sangronyx.com, www.sangronyx.com"
   }
 };
 
