@@ -317,7 +317,12 @@
       "title": "SAP S/4HANA Private Cloud",
       "subtitle": "NEXT-GEN ERP",
       "description": "Scale your business with the ultimate cloud ERP solution, designed to run mission-critical processes in a secure, dedicated environment.",
-      "features": ["Custom extensions allowed", "Dedicated infrastructure", "Flexible upgrade schedule", "Premium SAP support"],
+      "features": [
+        "Custom extensions allowed",
+        "Dedicated infrastructure",
+        "Flexible upgrade schedule",
+        "Premium SAP support"
+      ],
       "color": "bg-accent",
       "image": "/sap-cloud-solutions.webp",
       "link": "/products/sap-s4hana"
@@ -328,7 +333,12 @@
       "title": "SAP ECC Business Suite",
       "subtitle": "STABLE CORE SYSTEMS",
       "description": "Maintain and optimize your existing SAP ECC ERP system with our functional support and development solutions.",
-      "features": ["Full lifecycle maintenance", "Performance optimization", "Custom enhancements", "Global support desk"],
+      "features": [
+        "Full lifecycle maintenance",
+        "Performance optimization",
+        "Custom enhancements",
+        "Global support desk"
+      ],
       "color": "bg-sprinklr-purple",
       "image": "/SAP ECC TO S4 HANA MIGRANATION.png",
       "link": "/products/sap-ecc"
@@ -339,7 +349,12 @@
       "title": "SAP Business Technology Platform",
       "subtitle": "INTEGRATION & EXTENSION",
       "description": "Build, integrate, and extend business processes on SAP BTP. Connect your systems seamlessly and develop custom Fiori apps.",
-      "features": ["Enterprise integrations", "Fiori development environment", "Real-time analytics", "Secure cloud connectivity"],
+      "features": [
+        "Enterprise integrations",
+        "Fiori development environment",
+        "Real-time analytics",
+        "Secure cloud connectivity"
+      ],
       "color": "bg-sprinklr-green",
       "image": "/SAP INTEGRATION SERVICES.png",
       "link": "/products/sap-btp"
@@ -353,7 +368,8 @@
       "description": "Accelerate Business Transformation. Implement SAP S/4HANA with confidence through our proven methodology. Greenfield, Brownfield, or Hybrid conversion.",
       "link": "/services/sap-s4hana-implementation",
       "linkText": "Explore S/4HANA",
-      "underlineColor": "bg-sprinklr-blue"
+      "underlineColor": "bg-sprinklr-blue",
+      "_index": 0
     },
     {
       "id": "hf-2",
@@ -487,7 +503,10 @@
       "sectionTitle": "Our Values",
       "sectionDescription": "The principles that guide everything we do",
       "stats": [
-        { "value": "10+", "label": "Years of Excellence" }
+        {
+          "value": "10+",
+          "label": "Years of Excellence"
+        }
       ]
     },
     "services": {
@@ -497,10 +516,22 @@
       "sectionTitle": "Comprehensive SAP Solutions",
       "sectionDescription": "From implementation to support, we provide complete SAP services to drive your digital transformation.",
       "stats": [
-        { "value": "45+", "label": "SAP Projects" },
-        { "value": "10+", "label": "Years of experience" },
-        { "value": "30+", "label": "SAP Consultants" },
-        { "value": "98%", "label": "Client satisfaction" }
+        {
+          "value": "45+",
+          "label": "SAP Projects"
+        },
+        {
+          "value": "10+",
+          "label": "Years of experience"
+        },
+        {
+          "value": "30+",
+          "label": "SAP Consultants"
+        },
+        {
+          "value": "98%",
+          "label": "Client satisfaction"
+        }
       ]
     },
     "industries": {
@@ -539,5 +570,97 @@
       "ctaButtonText": "Contact SAP Experts"
     }
   },
-  "customPages": []
+  "customPages": [
+    {
+      "title": "title",
+      "slug": "test",
+      "description": "hello",
+      "sections": [
+        {
+          "id": "sec-1781168095638-1",
+          "type": "hero",
+          "title": "title",
+          "subtitle": "hello"
+        },
+        {
+          "id": "sec-1781168095638-2",
+          "type": "features",
+          "title": "Key Capabilities",
+          "subtitle": "Everything you need to succeed",
+          "items": [
+            {
+              "title": "Real-time Monitoring",
+              "description": "Keep track of active workloads and metrics in real-time.",
+              "iconName": "Activity"
+            },
+            {
+              "title": "Enterprise Security",
+              "description": "Hardened cloud hosting and full encryption protocols.",
+              "iconName": "Shield"
+            },
+            {
+              "title": "Seamless Integration",
+              "description": "Connect with existing SAP ecosystems instantly.",
+              "iconName": "Zap"
+            }
+          ]
+        },
+        {
+          "id": "sec-1781168095638-3",
+          "type": "stats",
+          "title": "Proven Performance Milestones",
+          "items": [
+            {
+              "title": "99.99%",
+              "description": "Guaranteed Uptime SLA"
+            },
+            {
+              "title": "50+",
+              "description": "Active Enterprise Integrations"
+            },
+            {
+              "title": "2.4x",
+              "description": "Faster Data Migration Speed"
+            },
+            {
+              "title": "100%",
+              "description": "GDPR & SOC2 Compliance"
+            }
+          ]
+        },
+        {
+          "id": "sec-1781168095638-4",
+          "type": "cta",
+          "title": "Elevate Your Enterprise Architecture Today",
+          "subtitle": "Speak with our leading SAP architects to schedule a custom system assessment."
+        }
+      ]
+    },
+    {
+      "title": "new",
+      "slug": "new",
+      "description": "new",
+      "sections": [
+        {
+          "id": "sec-1781168192018",
+          "type": "hero",
+          "title": "new",
+          "subtitle": "new"
+        }
+      ]
+    },
+    {
+      "title": "Test Page",
+      "slug": "test-delete",
+      "description": "",
+      "sections": [
+        {
+          "id": "sec-1781184038220",
+          "type": "hero",
+          "title": "Test Page",
+          "subtitle": "Welcome to our custom page"
+        }
+      ]
+    }
+  ]
 }

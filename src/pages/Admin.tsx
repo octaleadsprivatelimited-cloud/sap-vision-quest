@@ -600,6 +600,7 @@ export default function AdminPanel() {
     title: "", slug: "", description: "", template: "blank"
   });
   const [newSectionType, setNewSectionType] = useState<string>("hero");
+  const [confirmDeleteSlug, setConfirmDeleteSlug] = useState<string | null>(null);
 
   // Handlers
   const handleSaveContentChange = async (updatedContent: WebsiteContent) => {
@@ -911,18 +912,7 @@ export default function AdminPanel() {
   };
 
   const deleteCustomPage = (slug: string) => {
-    if (confirm("Delete this custom page entirely?")) {
-      const pages = webContent.customPages || [];
-      const updated = pages.filter((p: any) => p.slug !== slug);
-      handleSaveContentChange({
-        ...webContent,
-        customPages: updated
-      });
-      if (selectedCustomPageSlug === slug) {
-        setSelectedCustomPageSlug("");
-      }
-      toast.success("Custom page deleted");
-    }
+    setConfirmDeleteSlug(slug);
   };
 
   const addSectionToCustomPage = (slug: string) => {
@@ -4714,6 +4704,50 @@ export default function AdminPanel() {
                   )}
                 </div>
               </div>
+
+              {/* Custom Page Delete Confirmation Dialog */}
+              <Dialog open={!!confirmDeleteSlug} onOpenChange={(open) => !open && setConfirmDeleteSlug(null)}>
+                <DialogContent className="bg-slate-900 border-slate-800 text-white max-w-sm">
+                  <DialogHeader>
+                    <DialogTitle className="text-white text-base font-bold flex items-center gap-2">
+                      <Trash2 className="w-5 h-5 text-red-500" />
+                      Confirm Page Deletion
+                    </DialogTitle>
+                    <DialogDescription className="text-slate-400">
+                      Are you sure you want to delete the custom page <code className="text-sky-400 font-mono">/p/{confirmDeleteSlug}</code>? This action is permanent and cannot be undone.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex justify-end gap-3 pt-4 border-t border-slate-800 mt-2">
+                    <Button 
+                      variant="ghost" 
+                      onClick={() => setConfirmDeleteSlug(null)} 
+                      className="text-xs bg-slate-800 border-slate-700 text-slate-200"
+                    >
+                      Cancel
+                    </Button>
+                    <Button 
+                      onClick={() => {
+                        if (confirmDeleteSlug) {
+                          const pages = webContent.customPages || [];
+                          const updated = pages.filter((p: any) => p.slug !== confirmDeleteSlug);
+                          handleSaveContentChange({
+                            ...webContent,
+                            customPages: updated
+                          });
+                          if (selectedCustomPageSlug === confirmDeleteSlug) {
+                            setSelectedCustomPageSlug("");
+                          }
+                          setConfirmDeleteSlug(null);
+                        }
+                      }} 
+                      className="text-xs bg-red-600 hover:bg-red-500 text-white"
+                    >
+                      Delete Page
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
             </TabsContent>
 
           </main>
