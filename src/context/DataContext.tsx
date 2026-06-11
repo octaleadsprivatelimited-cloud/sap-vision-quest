@@ -185,7 +185,8 @@ export const defaultFallbackContent: WebsiteContent = {
   ],
   pageTexts: initialPageTexts,
   customPages: [],
-  seoData: initialSeoData
+  seoData: initialSeoData,
+  formspreeId: "maqwrdrv"
 };
 
 interface DataContextType {

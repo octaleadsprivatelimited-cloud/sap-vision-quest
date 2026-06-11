@@ -80,6 +80,7 @@ export interface WebsiteContent {
   benefits: BenefitItem[];
   partnerBenefits: PartnerBenefitItem[];
   leadership: LeadershipItem[];
+  formspreeId?: string;
   seoData?: Record<string, { title: string; description: string; keywords: string; canonical?: string; structuredData?: object }>;
   products?: {
     id: string;
@@ -677,15 +678,24 @@ export const getWebsiteContent = (): WebsiteContent => {
         benefits: initialBenefits,
         partnerBenefits: initialPartnerBenefits,
         leadership: initialLeadership,
-        pageTexts: initialPageTexts
+        pageTexts: initialPageTexts,
+        formspreeId: "maqwrdrv"
       };
       localStorage.setItem(CONTENT_STORAGE_KEY, JSON.stringify(defaultContent));
       return defaultContent;
     }
     const parsed = JSON.parse(raw);
+    let dirty = false;
     // Backward compatibility merge for pageTexts
     if (!parsed.pageTexts) {
       parsed.pageTexts = initialPageTexts;
+      dirty = true;
+    }
+    if (!parsed.formspreeId) {
+      parsed.formspreeId = "maqwrdrv";
+      dirty = true;
+    }
+    if (dirty) {
       localStorage.setItem(CONTENT_STORAGE_KEY, JSON.stringify(parsed));
     }
     return parsed;

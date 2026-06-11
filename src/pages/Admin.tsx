@@ -508,7 +508,16 @@ export default function AdminPanel() {
   };
 
   const handleSaveSettings = () => {
-    toast.success("System Settings saved successfully!");
+    updateContent({
+      ...webContent,
+      formspreeId: formspreeId
+    }).then(success => {
+      if (success) {
+        toast.success("System Settings saved successfully!");
+      } else {
+        toast.error("Failed to save settings");
+      }
+    });
   };
 
   // Page Content Management States
@@ -520,6 +529,9 @@ export default function AdminPanel() {
       setWebContent(content);
       if (content.seoData) {
         setSeoList(content.seoData);
+      }
+      if (content.formspreeId) {
+        setFormspreeId(content.formspreeId);
       }
     }
   }, [content]);
@@ -1227,7 +1239,7 @@ export default function AdminPanel() {
             <h1 className="text-base font-bold tracking-tight text-white flex items-center gap-2">
               Sangronyx Admin Panel <Badge variant="outline" className="text-emerald-400 border-emerald-500/30 bg-emerald-500/5 text-[9px] px-1.5 py-0 h-4">System Console</Badge>
             </h1>
-            <p className="text-[10px] text-slate-400">Manage, Audit & Monitor content for sangronyx.com</p>
+            <p className="text-[10px] text-white">Manage, Audit & Monitor content for sangronyx.com</p>
           </div>
         </div>
 
@@ -1272,13 +1284,7 @@ export default function AdminPanel() {
                 <LayoutDashboard className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Dashboard Overview</span>
               </TabsTrigger>
-              <TabsTrigger
-                value="seo-auditor"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Activity className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">SEO Audit Run</span>
-              </TabsTrigger>
+
               <TabsTrigger
                 value="settings"
                 className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
@@ -1570,6 +1576,26 @@ export default function AdminPanel() {
                       </div>
                     </div>
 
+                    <div className="pt-2 border-t border-slate-800 space-y-2 text-xs">
+                      <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Technical Info</div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Node:</span>
+                        <span className="text-slate-200 font-mono">v20.11.0</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">React:</span>
+                        <span className="text-slate-200 font-mono">v18.3.1</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Vite:</span>
+                        <span className="text-slate-200 font-mono">v5.4.19</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-400">Build Status:</span>
+                        <Badge className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] py-0.5 px-2 h-auto rounded">Success</Badge>
+                      </div>
+                    </div>
+
                     <div className="pt-2">
                       <Button size="sm" onClick={handleClearCache} className="w-full bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700 flex items-center justify-center gap-2">
                         <RefreshCw className="w-3.5 h-3.5" />
@@ -1624,6 +1650,17 @@ export default function AdminPanel() {
                     <div className="flex justify-between items-center py-1.5 border-b border-slate-800">
                       <span className="text-slate-400">Endpoint URL:</span>
                       <span className="font-mono text-slate-200">https://formspree.io/f/{formspreeId}</span>
+                    </div>
+                    <div className="flex justify-between items-center py-1.5 border-b border-slate-800">
+                      <span className="text-slate-400">Formspree Dashboard:</span>
+                      <a 
+                        href={`https://formspree.io/forms/${formspreeId}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-sky-400 hover:text-sky-300 hover:underline flex items-center gap-1 text-[11px]"
+                      >
+                        Open Dashboard <ExternalLink className="w-3 h-3" />
+                      </a>
                     </div>
                     <div className="flex justify-between items-center py-1.5 border-b border-slate-800">
                       <span className="text-slate-400">Target Forms:</span>

@@ -46,6 +46,10 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const formspreeId = content?.formspreeId || "maqwrdrv";
+    let savedLocally = false;
+
+    // 1. Submit to local Express backend for Admin Panel visibility
     try {
       const response = await fetch("/api/leads", {
         method: "POST",
@@ -60,8 +64,33 @@ const Contact = () => {
           message: `${formData.message}\nJob Title: ${formData.jobTitle || 'N/A'}\nCountry: ${formData.country || 'N/A'}\nInterest: ${formData.interest || 'N/A'}`
         }),
       });
-
       if (response.ok) {
+        savedLocally = true;
+      }
+    } catch (error) {
+      console.warn("Failed to save lead in local backend database:", error);
+    }
+
+    // 2. Submit to Formspree for email forwarding
+    try {
+      const fsResponse = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _subject: "Contact Form Submission - Sangronyx",
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          jobTitle: formData.jobTitle,
+          country: formData.country,
+          interest: formData.interest,
+          message: formData.message,
+        }),
+      });
+
+      if (fsResponse.ok || savedLocally) {
         toast({
           title: "Message Sent",
           description: "Thank you for contacting us. We'll get back to you within 24 hours.",
@@ -76,40 +105,7 @@ const Contact = () => {
           message: "",
         });
       } else {
-        // Fallback to Formspree if Express backend is down
-        const fsResponse = await fetch("https://formspree.io/f/maqwrdrv", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            _subject: "Contact Form Submission - Sangronyx (Fallback)",
-            name: formData.name,
-            email: formData.email,
-            company: formData.company,
-            jobTitle: formData.jobTitle,
-            country: formData.country,
-            interest: formData.interest,
-            message: formData.message,
-          }),
-        });
-        if (fsResponse.ok) {
-          toast({
-            title: "Message Sent (Formspree)",
-            description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-          });
-          setFormData({
-            name: "",
-            email: "",
-            company: "",
-            jobTitle: "",
-            country: "",
-            interest: "",
-            message: "",
-          });
-        } else {
-          throw new Error("Form submission failed");
-        }
+        throw new Error("Form submission failed");
       }
     } catch (error) {
       toast({
@@ -195,7 +191,7 @@ const Contact = () => {
               
               <form
                 onSubmit={handleSubmit}
-                action="https://formspree.io/f/maqwrdrv"
+                action={`https://formspree.io/f/${content?.formspreeId || "maqwrdrv"}`}
                 method="POST"
                 className="bg-white border border-neutral-200 p-6 md:p-8 space-y-6 shadow-sm rounded-none"
               >

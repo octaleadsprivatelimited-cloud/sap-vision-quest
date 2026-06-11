@@ -14,10 +14,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import * as LucideIcons from "lucide-react";
 import { useData } from "@/context/DataContext";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Careers = () => {
   const seo = useSEO();
   const { content } = useData();
+  const { toast } = useToast();
   const benefits = content.benefits || [];
   const pageTexts = content.pageTexts;
   const textContent = pageTexts?.careers || {
@@ -57,6 +59,32 @@ const Careers = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    const formspreeId = content?.formspreeId || "maqwrdrv";
+    let savedLocally = false;
+
+    // 1. Submit to local Express backend for Admin Panel visibility
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.location ? `Location: ${formData.location}` : "N/A",
+          source: "Careers Form",
+          message: `Phone: ${formData.phone || 'N/A'}\nRegion: ${formData.region || 'N/A'}\nResume File: ${formData.resume ? formData.resume.name : 'N/A'}`
+        }),
+      });
+      if (response.ok) {
+        savedLocally = true;
+      }
+    } catch (error) {
+      console.warn("Failed to save lead in local backend database:", error);
+    }
+
+    // 2. Submit to Formspree for email forwarding
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("_subject", "Job Application - Sangronyx");
@@ -69,12 +97,17 @@ const Careers = () => {
         formDataToSend.append("resume", formData.resume);
       }
 
-      const response = await fetch("https://formspree.io/f/maqwrdrv", {
+      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
         method: "POST",
         body: formDataToSend,
       });
 
-      if (response.ok) {
+      if (response.ok || savedLocally) {
+        toast({
+          title: "Application Submitted",
+          description: "Thank you for applying. We will review your application and get back to you soon.",
+        });
+        
         // Reset form
         setFormData({
           name: "",
@@ -90,6 +123,11 @@ const Careers = () => {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "Failed to submit application. Please try again or contact us directly.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -221,7 +259,7 @@ const Careers = () => {
               SUBMIT RESUME
             </DialogTitle>
           </DialogHeader>
-          <form onSubmit={handleSubmit} action="https://formspree.io/f/maqwrdrv" method="POST" encType="multipart/form-data" className="mt-6 space-y-6 text-left">
+          <form onSubmit={handleSubmit} action={`https://formspree.io/f/${content?.formspreeId || "maqwrdrv"}`} method="POST" encType="multipart/form-data" className="mt-6 space-y-6 text-left">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <Label htmlFor="name" className="text-xs font-semibold text-[#555555]">
