@@ -74,7 +74,7 @@ const resourceCategories = [
 const locations = [
   {
     city: "Hyderabad, India",
-    address: "7-1-619/A/37, 101, Revathi Apartments, Srinivas nagar, Ameerpet, Hyderabad, Telangana-500038",
+    address: "7-1-619/A/37, 101\nRevathi Apartments, Srinivas nagar\nAmeerpet, Hyderabad, Telangana\n500038",
     phone: "+91-7981999562",
     email: "info@sangronyx.com"
   },
@@ -219,7 +219,7 @@ export const Navbar = () => {
                               <MapPin className="w-4 h-4 text-[#0076d6] mt-1 flex-shrink-0" />
                               <div className="flex-1 text-left">
                                 <h4 className="text-xs font-semibold text-[#1d1d1d] mb-1">{loc.city}</h4>
-                                <p className="text-[11px] text-[#555555] leading-relaxed mb-2">{loc.address}</p>
+                                <p className="text-[11px] text-[#555555] leading-relaxed mb-2 whitespace-pre-line">{loc.address}</p>
                                 <div className="space-y-0.5 text-[11px]">
                                   <a href={`tel:${loc.phone}`} className="flex items-center gap-1.5 text-[#0076d6] hover:underline">
                                     <Phone className="w-3 h-3" />

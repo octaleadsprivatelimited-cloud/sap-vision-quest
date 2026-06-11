@@ -31,7 +31,7 @@ const Contact = () => {
   const sectionDescription = contactText.sectionDescription || "Fill out the form below and we'll get back to you within 24 hours.";
   
   const addressTitle = contactText.ctaTitle || "Where to find us";
-  const addressDescription = contactText.ctaDescription || "7-1-619/A/37, 101, Revathi Apartments, Srinivas nagar, Ameerpet, Hyderabad, Telangana-500038";
+  const addressDescription = contactText.ctaDescription || "7-1-619/A/37, 101\nRevathi Apartments, Srinivas nagar\nAmeerpet, Hyderabad, Telangana\n500038";
 
   const [formData, setFormData] = useState({
     name: "",
@@ -327,7 +327,7 @@ const Contact = () => {
                   <h4 className="text-xs font-semibold text-neutral-800">Corporate headquarters</h4>
                   <p className="text-xs text-neutral-900 font-bold">Sangronyx Technologies</p>
                   <address className="not-italic text-xs text-neutral-600 leading-relaxed space-y-1">
-                    {addressDescription.split(",").map((line, lidx) => (
+                    {addressDescription.split("\n").map((line, lidx) => (
                       <span key={lidx} className="block">{line.trim()}</span>
                     ))}
                   </address>

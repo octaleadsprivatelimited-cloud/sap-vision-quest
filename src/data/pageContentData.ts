@@ -660,7 +660,7 @@ export const initialPageTexts: {
     sectionTitle: "Get Started Today",
     sectionDescription: "Schedule a free consultation with our SAP experts and discover how Sangronyx can accelerate your transformation journey.",
     ctaTitle: "Contact Information",
-    ctaDescription: "7-1-619/A/37, 101, Revathi Apartments, Srinivas nagar, Ameerpet, Hyderabad, Telangana-500038"
+    ctaDescription: "7-1-619/A/37, 101\nRevathi Apartments, Srinivas nagar\nAmeerpet, Hyderabad, Telangana\n500038"
   }
 };
 
