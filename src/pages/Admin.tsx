@@ -427,7 +427,7 @@ export default function AdminPanel() {
 
   const handleSaveSeo = (e: React.FormEvent) => {
     e.preventDefault();
-    setSeoList({
+    const updatedSeo = {
       ...seoList,
       [editingPath]: {
         title: editTitle,
@@ -435,9 +435,15 @@ export default function AdminPanel() {
         keywords: editKeywords,
         canonical: editCanonical
       }
-    });
+    };
+    setSeoList(updatedSeo);
     setIsEditSeoOpen(false);
-    toast.success(`SEO Metadata for ${editingPath} updated (Local State)`);
+    
+    // Persist in backend database
+    handleSaveContentChange({
+      ...webContent,
+      seoData: updatedSeo
+    });
   };
 
   // Run mock live audit
@@ -512,6 +518,9 @@ export default function AdminPanel() {
   useEffect(() => {
     if (content) {
       setWebContent(content);
+      if (content.seoData) {
+        setSeoList(content.seoData);
+      }
     }
   }, [content]);
 
