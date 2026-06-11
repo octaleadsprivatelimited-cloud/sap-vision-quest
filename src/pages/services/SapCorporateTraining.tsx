@@ -72,7 +72,7 @@ const SapCorporateTraining = () => {
               className="relative"
             >
               <img 
-                src="/sap-corporate-training.avif" 
+                src="/sangronyx-sap.jpg" 
                 alt="SAP Corporate Workshop"
                 className="rounded-2xl shadow-2xl w-full"
               />

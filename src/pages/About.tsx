@@ -82,11 +82,11 @@ const About = () => {
             </div>
             
             <div className="relative">
-              <div className="border border-neutral-300 bg-neutral-250 p-2 overflow-hidden shadow-sm rounded-none">
+              <div className="border border-neutral-300 bg-white p-8 flex items-center justify-center shadow-sm rounded-none aspect-[4/3]">
                 <img 
-                  src="/why-choose-us.avif" 
+                  src="/logo.png" 
                   alt="About Sangronyx" 
-                  className="w-full h-auto object-cover rounded-none"
+                  className="max-w-[80%] max-h-[80%] object-contain"
                 />
               </div>
               {textContent.stats && textContent.stats.length > 0 && (
