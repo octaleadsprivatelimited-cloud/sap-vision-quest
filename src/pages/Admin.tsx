@@ -1139,7 +1139,7 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#f3f2f1] text-[#323130] flex flex-col font-sans fluent-admin-theme">
       <Helmet>
         <title>Sangronyx System Administrator | Central Website Operations</title>
         <meta name="robots" content="noindex, nofollow" />
