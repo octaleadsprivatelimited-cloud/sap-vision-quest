@@ -525,13 +525,12 @@ export default function AdminPanel() {
   const [showProductsTexts, setShowProductsTexts] = useState(false);
   const [showContactTexts, setShowContactTexts] = useState(false);
 
-  // Selection list for icons and colors
   const AVAILABLE_ICONS = [
     "Cloud", "Database", "Settings", "Code", "Wrench", "Link2", "Users", "Star",
     "Headphones", "CheckCircle2", "Factory", "ShoppingCart", "Building2", "Heart",
     "Truck", "Leaf", "Banknote", "GraduationCap", "Book", "Video", "FileText",
     "Download", "HelpCircle", "Zap", "Handshake", "Award", "TrendingUp", "Shield",
-    "Phone", "Mail", "ExternalLink", "MapPin"
+    "Phone", "Mail", "ExternalLink", "MapPin", "Layout", "Car"
   ];
 
   const AVAILABLE_COLORS = [
