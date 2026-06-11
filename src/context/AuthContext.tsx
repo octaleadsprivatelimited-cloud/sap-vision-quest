@@ -69,7 +69,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           uid: "mock-admin-uid-12345",
           displayName: "Sangronyx Administrator",
           email: "admin@sangronyx.com",
-          photoURL: "https://api.dicebear.com/7.x/bottts/svg?seed=admin"
+          photoURL: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
         };
         
         localStorage.setItem("sangronyx_admin_user", JSON.stringify(mockAdmin));

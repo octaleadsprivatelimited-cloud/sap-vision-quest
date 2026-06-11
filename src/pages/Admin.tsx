@@ -1302,72 +1302,49 @@ export default function AdminPanel() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f3f2f1] text-[#323130] flex flex-col font-sans fluent-admin-theme">
+    <div className="min-h-screen bg-[#f3f4f6] text-[#1f2937] flex flex-col font-sans modern-admin-theme">
       <Helmet>
         <title>Sangronyx System Administrator | Central Website Operations</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
       {/* Admin Top Header */}
-      <header className="border-b border-slate-800 bg-slate-900/60 backdrop-blur px-4 py-2.5 flex items-center justify-between sticky top-0 z-30">
-        <div className="flex items-center gap-2.5">
-          <div className="bg-sky-600 text-white p-1.5 rounded-md shadow-glow shadow-sky-500/20">
-            <Sliders className="w-5 h-5 animate-pulse" />
-          </div>
-          <div>
-            <h1 className="text-base font-bold tracking-tight text-white flex items-center gap-2">
-              Sangronyx Admin Panel <Badge variant="outline" className="text-emerald-400 border-emerald-500/30 bg-emerald-500/5 text-[9px] px-1.5 py-0 h-4">System Console</Badge>
-            </h1>
-            <p className="text-[10px] text-white">Manage, Audit & Monitor content for sangronyx.com</p>
+      <header className="border-b border-slate-200 bg-white px-6 py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-sm">
+        <div className="flex items-center gap-4 flex-1 max-w-md">
+          <div className="relative w-full">
+            <Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+            <input 
+              type="text" 
+              placeholder="Search anything..." 
+              className="w-full bg-slate-100/80 border-0 rounded-lg pl-9 pr-4 py-2 text-xs text-slate-700 placeholder-slate-400 focus:bg-white focus:ring-1 focus:ring-emerald-500 transition-all outline-none"
+            />
           </div>
         </div>
 
         {/* Real-time server stats & clock */}
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-3 text-[10px] text-slate-400 border-r border-slate-800 pr-4">
-            <div className="flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-3 text-[11px] text-slate-500 border-r border-slate-200 pr-4">
+            <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-              <span>Dev Server: <strong className="text-slate-200">Online</strong></span>
+              <span>Dev Server: <strong className="text-slate-800 font-semibold">Online</strong></span>
             </div>
-            <div className="flex items-center gap-1">
-              <Database className="w-3 h-3 text-sky-400" />
-              <span>Formspree ID: <strong className="text-slate-200">{formspreeId}</strong></span>
+            <div className="flex items-center gap-1.5">
+              <Database className="w-3.5 h-3.5 text-slate-400" />
+              <span>Formspree ID: <strong className="text-slate-800 font-semibold">{formspreeId}</strong></span>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 bg-slate-950/40 border border-slate-800 px-2 py-1 rounded-md text-[10px] text-slate-300">
+          <div className="flex items-center gap-1.5 bg-slate-100 px-2.5 py-1.5 rounded-lg text-xs text-slate-600 font-medium">
             <Clock className="w-3.5 h-3.5 text-slate-400" />
             <span className="font-mono">{currentTime}</span>
           </div>
 
-          {user && (
-            <div className="flex items-center gap-2 border border-slate-800 bg-slate-950/20 px-2.5 py-1 rounded-md">
-              {user.photoURL ? (
-                <img src={user.photoURL} alt={user.displayName || "User"} className="w-4.5 h-4.5 rounded-full" />
-              ) : (
-                <div className="w-4.5 h-4.5 bg-sky-600 text-white rounded-full flex items-center justify-center text-[9px] font-bold">
-                  {user.displayName?.charAt(0) || "A"}
-                </div>
-              )}
-              <span className="text-[10px] font-medium text-slate-300 hidden sm:inline">{user.displayName || user.email}</span>
-            </div>
-          )}
-
           <Link to="/">
-            <Button size="xs" variant="ghost" className="text-slate-300 hover:text-white border border-slate-800 hover:bg-slate-800 text-[10px] h-7 px-2.5">
+            <Button size="sm" variant="outline" className="bg-white border-slate-200 text-slate-700 hover:bg-slate-50 text-xs shadow-sm flex items-center gap-1.5 rounded-lg h-9 px-3">
               Go to Website
-              <ExternalLink className="w-3 h-3 ml-1" />
+              <ExternalLink className="w-3.5 h-3.5" />
             </Button>
           </Link>
-
-          <Button 
-            size="xs" 
-            variant="ghost" 
-            onClick={logout}
-            className="text-red-400 hover:text-red-300 border border-slate-800 hover:bg-slate-800 text-[10px] h-7 px-2.5"
-          >
-            Log Out
-          </Button>
         </div>
       </header>
 
@@ -1376,185 +1353,212 @@ export default function AdminPanel() {
         <Tabs defaultValue="dashboard" className="flex-1 flex flex-col md:flex-row">
 
           {/* Left Vertical Navigation Menu */}
-          <div className="w-full md:w-52 border-b md:border-b-0 md:border-r border-slate-800 bg-slate-900/20 p-2 shrink-0">
-            <TabsList className="flex flex-row md:flex-col items-stretch justify-start bg-transparent p-0 gap-0.5 space-y-0 md:space-y-0.5 w-full overflow-x-auto md:overflow-x-visible h-auto">
-              <div className="hidden md:block text-[9px] font-bold bg-white text-black border border-[#d5dbdb] uppercase tracking-wider px-2.5 py-1.5 text-left my-1 rounded-sm">Portal Operations</div>
-              <TabsTrigger
-                value="dashboard"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <LayoutDashboard className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Dashboard Overview</span>
-              </TabsTrigger>
-
-              <TabsTrigger
-                value="settings"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Settings className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">System Settings</span>
-              </TabsTrigger>
- 
-              <div className="hidden md:block text-[9px] font-bold bg-white text-black border border-[#d5dbdb] uppercase tracking-wider px-2.5 py-1.5 text-left my-1 rounded-sm">Content Management</div>
-              <TabsTrigger
-                value="page-home"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Globe className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Home Page Editor</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="page-products"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Sparkles className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Products Offerings</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="page-services"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Briefcase className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Services page</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="page-industries"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Building2 className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Industries Verticals</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="page-resources"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <BookOpen className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Resource Center</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="page-careers"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Zap className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Careers Benefits</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="page-partners"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Handshake className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Partners Program</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="page-leadership"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Users className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Who We Are</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="page-contact"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Phone className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Contact Config</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="custom-pages"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <FileText className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Custom Pages Builder</span>
-              </TabsTrigger>
- 
-              <div className="hidden md:block text-[9px] font-bold bg-white text-black border border-[#d5dbdb] uppercase tracking-wider px-2.5 py-1.5 text-left my-1 rounded-sm">SEO & Leads Inbox</div>
-              <TabsTrigger
-                value="pages"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Sliders className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">SEO Metadata</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="leads"
-                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
-              >
-                <Mail className="w-4 h-4 shrink-0" />
-                <span className="hidden md:inline">Form Leads Inbox</span>
-                {leads.filter(l => l.status === "New").length > 0 && (
-                  <Badge className="ml-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-1.5 py-0.5 text-[9px] h-4 flex items-center">
-                    {leads.filter(l => l.status === "New").length}
-                  </Badge>
-                )}
-              </TabsTrigger>
-            </TabsList>
- 
-            <div className="mt-4 pt-4 border-t border-slate-900 hidden md:block">
-              <h4 className="text-[9px] font-bold text-slate-500 uppercase tracking-widest px-2 mb-1.5">Technical Info</h4>
-              <div className="space-y-1 text-[10px] px-2 text-slate-400">
-                <p>Node: v20.11.0</p>
-                <p>React: v18.3.1</p>
-                <p>Vite: v5.4.19</p>
-                <p>Build Status: <span className="text-emerald-400">Success</span></p>
+          <div className="w-full md:w-60 bg-slate-900 text-slate-400 p-4 shrink-0 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-800">
+            <div>
+              {/* Logo block */}
+              <div className="flex items-center gap-2 mb-6 px-3 py-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+                  <Sliders className="w-4 h-4" />
+                </div>
+                <span className="font-bold text-lg text-white tracking-tight">sangronyx</span>
               </div>
+
+              <TabsList className="flex flex-row md:flex-col items-stretch justify-start bg-transparent p-0 gap-1 w-full overflow-x-auto md:overflow-x-visible h-auto">
+                <div className="hidden md:block text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3.5 py-1.5 text-left my-1">Portal Operations</div>
+                
+                <TabsTrigger value="dashboard" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <LayoutDashboard className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Dashboard Overview</span>
+                </TabsTrigger>
+
+                <TabsTrigger value="settings" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Settings className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">System Settings</span>
+                </TabsTrigger>
+
+                <div className="hidden md:block text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3.5 py-1.5 text-left my-1">Content Management</div>
+                
+                <TabsTrigger value="page-home" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Globe className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Home Page Editor</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="page-products" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Sparkles className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Products Offerings</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="page-services" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Briefcase className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Services page</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="page-industries" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Building2 className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Industries Verticals</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="page-resources" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <BookOpen className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Resource Center</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="page-careers" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Zap className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Careers Benefits</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="page-partners" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Handshake className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Partners Program</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="page-leadership" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Users className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Who We Are</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="page-contact" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Phone className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Contact Config</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="custom-pages" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <FileText className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Custom Pages Builder</span>
+                </TabsTrigger>
+
+                <div className="hidden md:block text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3.5 py-1.5 text-left my-1">SEO & Leads Inbox</div>
+                
+                <TabsTrigger value="pages" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Sliders className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">SEO Metadata</span>
+                </TabsTrigger>
+                
+                <TabsTrigger value="leads" className="justify-start gap-3 w-full px-4 py-2.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-white transition-all text-xs font-semibold border-0">
+                  <Mail className="w-4 h-4 shrink-0" />
+                  <span className="hidden md:inline">Form Leads Inbox</span>
+                  {leads.filter(l => l.status === "New").length > 0 && (
+                    <Badge className="ml-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-1.5 py-0.5 text-[9px] h-4 flex items-center">
+                      {leads.filter(l => l.status === "New").length}
+                    </Badge>
+                  )}
+                </TabsTrigger>
+              </TabsList>
+            </div>
+
+            {/* Sidebar Bottom Profile/Logout */}
+            <div className="hidden md:flex flex-col gap-2 pt-4 border-t border-slate-800 mt-4">
+              <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-slate-800/40 border border-slate-800">
+                {user?.photoURL ? (
+                  <img src={user.photoURL} alt={user.displayName || "User"} className="w-8 h-8 rounded-full object-cover" />
+                ) : (
+                  <div className="w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                    {user?.displayName?.charAt(0) || "A"}
+                  </div>
+                )}
+                <div className="overflow-hidden">
+                  <p className="text-xs font-semibold text-white truncate">{user?.displayName || "Admin User"}</p>
+                  <p className="text-[10px] text-slate-500 truncate">{user?.email || "admin@sangronyx.com"}</p>
+                </div>
+              </div>
+              <Button 
+                variant="ghost" 
+                onClick={logout}
+                className="justify-start gap-3 w-full px-3 py-2.5 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-lg transition-all text-xs font-semibold"
+              >
+                <ExternalLink className="w-4 h-4 shrink-0 rotate-180" />
+                <span>Logout</span>
+              </Button>
             </div>
           </div>
- 
+
           {/* Right Main Content Panel */}
-          <main className="flex-1 p-4 overflow-y-auto">
+          <main className="flex-1 p-6 overflow-y-auto bg-slate-50 text-slate-900">
 
             {/* Tab 1: Dashboard Overview */}
             <TabsContent value="dashboard" className="space-y-6 mt-0">
 
+              {/* Welcome Banner */}
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Welcome Back, {user?.displayName?.split(' ')[0] || "Admin"}!</h2>
+                  <p className="text-xs text-slate-500">Here's what happening with your website today</p>
+                </div>
+              </div>
+
               {/* Stats Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
 
-                <Card className="bg-slate-900 border-slate-800 shadow-card">
+                {/* Metric 1: Peach */}
+                <Card className="bg-orange-50/60 border-orange-100/80 text-orange-950 shadow-sm rounded-xl transition-all hover:shadow-md">
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-semibold text-slate-300">Monitored Pages</CardTitle>
-                    <Globe className="w-4 h-4 text-sky-400" />
+                    <CardTitle className="text-xs font-semibold text-orange-850 uppercase tracking-wider">Total Inquiries</CardTitle>
+                    <Mail className="w-4 h-4 text-orange-500" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-black text-white">52 Routes</div>
-                    <p className="text-xs text-emerald-400 flex items-center gap-1 mt-1">
-                      <CheckCircle className="w-3.5 h-3.5" /> 100% active and crawled
+                    <div className="text-2xl font-bold tracking-tight">{leads.length}</div>
+                    <p className="text-[10px] font-semibold text-emerald-600 flex items-center gap-0.5 mt-1">
+                      <span>▲ 14.9%</span>
+                      <span className="text-orange-600/65 font-normal ml-1">vs last week</span>
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-slate-900 border-slate-800 shadow-card">
+                {/* Metric 2: Light Green */}
+                <Card className="bg-emerald-50/60 border-emerald-100/80 text-emerald-950 shadow-sm rounded-xl transition-all hover:shadow-md">
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-semibold text-slate-300">Total Leads</CardTitle>
-                    <Mail className="w-4 h-4 text-amber-400" />
+                    <CardTitle className="text-xs font-semibold text-emerald-850 uppercase tracking-wider">SEO Compliance</CardTitle>
+                    <Sparkles className="w-4 h-4 text-emerald-500" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-black text-white">{leads.length} Contacts</div>
-                    <p className="text-xs text-amber-400 flex items-center gap-1 mt-1">
-                      <AlertCircle className="w-3.5 h-3.5" /> {leads.filter(l => l.status === "New").length} new inquiries pending
+                    <div className="text-2xl font-bold tracking-tight">{seoScore}/100</div>
+                    <p className="text-[10px] font-semibold text-emerald-600 flex items-center gap-0.5 mt-1">
+                      <span>▲ 25.4%</span>
+                      <span className="text-emerald-600/65 font-normal ml-1">Optimized</span>
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-slate-900 border-slate-800 shadow-card">
+                {/* Metric 3: Light Blue */}
+                <Card className="bg-sky-50/60 border-sky-100/80 text-sky-950 shadow-sm rounded-xl transition-all hover:shadow-md">
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-semibold text-slate-300">SEO Health Index</CardTitle>
-                    <Sparkles className="w-4 h-4 text-purple-400" />
+                    <CardTitle className="text-xs font-semibold text-sky-850 uppercase tracking-wider">Performance (Avg)</CardTitle>
+                    <Activity className="w-4 h-4 text-sky-500" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-black text-white">{seoScore}/100</div>
-                    <Progress value={seoScore} className="h-1.5 mt-2 bg-slate-800" />
+                    <div className="text-2xl font-bold tracking-tight">{metrics.avgLoadTime}</div>
+                    <p className="text-[10px] font-semibold text-emerald-600 flex items-center gap-0.5 mt-1">
+                      <span>▲ 35.2%</span>
+                      <span className="text-sky-600/65 font-normal ml-1">Fast (SPA)</span>
+                    </p>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-slate-900 border-slate-800 shadow-card">
+                {/* Metric 4: Light Grey/Slate */}
+                <Card className="bg-slate-100/60 border-slate-200/80 text-slate-950 shadow-sm rounded-xl transition-all hover:shadow-md">
                   <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                    <CardTitle className="text-sm font-semibold text-slate-300">Performance (Avg)</CardTitle>
-                    <Activity className="w-4 h-4 text-emerald-400" />
+                    <CardTitle className="text-xs font-semibold text-slate-700 uppercase tracking-wider">Custom Pages</CardTitle>
+                    <Globe className="w-4 h-4 text-slate-500" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-black text-white">{metrics.avgLoadTime}</div>
-                    <p className="text-xs text-emerald-400 flex items-center gap-1 mt-1">
-                      <ShieldCheck className="w-3.5 h-3.5" /> Fast (Vite Hydrated SPA)
+                    <div className="text-2xl font-bold tracking-tight">{webContent.customPages?.length || 0}</div>
+                    <p className="text-[10px] font-medium text-slate-500 flex items-center gap-0.5 mt-1">
+                      <span>Active custom routes</span>
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* Metric 5: Light Pink */}
+                <Card className="bg-rose-50/60 border-rose-100/80 text-rose-950 shadow-sm rounded-xl transition-all hover:shadow-md">
+                  <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                    <CardTitle className="text-xs font-semibold text-rose-800 uppercase tracking-wider">Formspree</CardTitle>
+                    <Database className="w-4 h-4 text-rose-500" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold tracking-tight text-rose-900">Online</div>
+                    <p className="text-[10px] font-semibold text-emerald-600 flex items-center gap-0.5 mt-1">
+                      <span>▲ Connected</span>
                     </p>
                   </CardContent>
                 </Card>
@@ -1564,13 +1568,13 @@ export default function AdminPanel() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                 {/* Visual Chart Card */}
-                <Card className="bg-slate-900 border-slate-800 lg:col-span-2 shadow-card">
+                <Card className="bg-white border-slate-200 lg:col-span-2 shadow-sm rounded-xl">
                   <CardHeader>
-                    <CardTitle className="text-base font-bold text-white flex items-center gap-2">
-                      <TrendingUp className="w-4.5 h-4.5 text-sky-400" />
+                    <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
+                      <TrendingUp className="w-4.5 h-4.5 text-emerald-500" />
                       Weekly Lead Acquisition Trend
                     </CardTitle>
-                    <CardDescription className="text-slate-400">Total inquiries gathered across contact, careers, and corporate popups</CardDescription>
+                    <CardDescription className="text-slate-500">Total inquiries gathered across contact, careers, and corporate popups</CardDescription>
                   </CardHeader>
                   <CardContent className="h-64 flex flex-col justify-end">
 
@@ -1578,129 +1582,129 @@ export default function AdminPanel() {
                     <div className="relative w-full h-40 mt-4 flex items-end">
 
                       {/* Grid Lines */}
-                      <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-10">
-                        <div className="border-t border-slate-100 w-full h-0"></div>
-                        <div className="border-t border-slate-100 w-full h-0"></div>
-                        <div className="border-t border-slate-100 w-full h-0"></div>
-                        <div className="border-t border-slate-100 w-full h-0"></div>
+                      <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-5">
+                        <div className="border-t border-slate-800 w-full h-0"></div>
+                        <div className="border-t border-slate-800 w-full h-0"></div>
+                        <div className="border-t border-slate-800 w-full h-0"></div>
+                        <div className="border-t border-slate-800 w-full h-0"></div>
                       </div>
 
                       {/* Bar 1 */}
                       <div className="flex-1 flex flex-col items-center justify-end gap-2 z-10 h-full">
-                        <span className="text-[10px] font-mono text-slate-400">3 leads</span>
-                        <div className="w-8 bg-sky-600/40 hover:bg-sky-500 rounded-t h-8 transition-all"></div>
+                        <span className="text-[10px] font-mono text-slate-500">3 leads</span>
+                        <div className="w-8 bg-emerald-500/20 hover:bg-emerald-500 rounded-t h-8 transition-all"></div>
                         <span className="text-xs font-semibold text-slate-500">Mon</span>
                       </div>
 
                       {/* Bar 2 */}
                       <div className="flex-1 flex flex-col items-center justify-end gap-2 z-10 h-full">
-                        <span className="text-[10px] font-mono text-slate-400">5 leads</span>
-                        <div className="w-8 bg-sky-600/40 hover:bg-sky-500 rounded-t h-14 transition-all"></div>
+                        <span className="text-[10px] font-mono text-slate-500">5 leads</span>
+                        <div className="w-8 bg-emerald-500/40 hover:bg-emerald-500 rounded-t h-14 transition-all"></div>
                         <span className="text-xs font-semibold text-slate-500">Tue</span>
                       </div>
 
                       {/* Bar 3 */}
                       <div className="flex-1 flex flex-col items-center justify-end gap-2 z-10 h-full">
-                        <span className="text-[10px] font-mono text-slate-400">8 leads</span>
-                        <div className="w-8 bg-sky-600/60 hover:bg-sky-500 rounded-t h-20 transition-all"></div>
+                        <span className="text-[10px] font-mono text-slate-500">8 leads</span>
+                        <div className="w-8 bg-emerald-500/60 hover:bg-emerald-500 rounded-t h-20 transition-all"></div>
                         <span className="text-xs font-semibold text-slate-500">Wed</span>
                       </div>
 
                       {/* Bar 4 */}
                       <div className="flex-1 flex flex-col items-center justify-end gap-2 z-10 h-full">
-                        <span className="text-[10px] font-mono text-slate-400">12 leads</span>
-                        <div className="w-8 bg-sky-600/80 hover:bg-sky-500 rounded-t h-32 transition-all"></div>
+                        <span className="text-[10px] font-mono text-slate-500">12 leads</span>
+                        <div className="w-8 bg-emerald-500/80 hover:bg-emerald-500 rounded-t h-32 transition-all"></div>
                         <span className="text-xs font-semibold text-slate-500">Thu</span>
                       </div>
 
                       {/* Bar 5 */}
                       <div className="flex-1 flex flex-col items-center justify-end gap-2 z-10 h-full">
-                        <span className="text-[10px] font-mono text-slate-400">6 leads</span>
-                        <div className="w-8 bg-sky-600/40 hover:bg-sky-500 rounded-t h-16 transition-all"></div>
+                        <span className="text-[10px] font-mono text-slate-500">6 leads</span>
+                        <div className="w-8 bg-emerald-500/30 hover:bg-emerald-500 rounded-t h-16 transition-all"></div>
                         <span className="text-xs font-semibold text-slate-500">Fri</span>
                       </div>
 
                       {/* Bar 6 */}
                       <div className="flex-1 flex flex-col items-center justify-end gap-2 z-10 h-full">
-                        <span className="text-[10px] font-mono text-slate-400">4 leads</span>
-                        <div className="w-8 bg-sky-600/30 hover:bg-sky-500 rounded-t h-10 transition-all"></div>
+                        <span className="text-[10px] font-mono text-slate-500">4 leads</span>
+                        <div className="w-8 bg-emerald-500/20 hover:bg-emerald-500 rounded-t h-10 transition-all"></div>
                         <span className="text-xs font-semibold text-slate-500">Sat</span>
                       </div>
 
                       {/* Bar 7 */}
                       <div className="flex-1 flex flex-col items-center justify-end gap-2 z-10 h-full">
-                        <span className="text-[10px] font-mono text-sky-400">15 leads</span>
-                        <div className="w-8 bg-gradient-to-t from-sky-600 to-indigo-500 rounded-t h-36 shadow-glow shadow-sky-500/10 transition-all"></div>
-                        <span className="text-xs font-bold text-sky-400">Today</span>
+                        <span className="text-[10px] font-mono text-emerald-600 font-bold">15 leads</span>
+                        <div className="w-8 bg-gradient-to-t from-emerald-500 to-teal-400 rounded-t h-36 shadow-sm transition-all"></div>
+                        <span className="text-xs font-bold text-emerald-600">Today</span>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
                 {/* System Health / Resources Monitoring Dashboard */}
-                <Card className="bg-slate-900 border-slate-800 shadow-card">
+                <Card className="bg-white border-slate-200 shadow-sm rounded-xl">
                   <CardHeader>
-                    <CardTitle className="text-base font-bold text-white flex items-center gap-2">
-                      <Activity className="w-4.5 h-4.5 text-emerald-400" />
+                    <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
+                      <Activity className="w-4.5 h-4.5 text-emerald-500" />
                       Server Performance
                     </CardTitle>
-                    <CardDescription className="text-slate-400">Local node host metrics and analytics</CardDescription>
+                    <CardDescription className="text-slate-500">Local node host metrics and analytics</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <div className="flex justify-between text-xs font-medium text-slate-300">
+                      <div className="flex justify-between text-xs font-medium text-slate-700">
                         <span>CPU Usage</span>
-                        <span className="font-mono text-slate-400">{metrics.cpuUsage}</span>
+                        <span className="font-mono text-slate-900">{metrics.cpuUsage}</span>
                       </div>
-                      <Progress value={12} className="h-1 bg-slate-800" />
+                      <Progress value={12} className="h-1.5 bg-slate-100" />
                     </div>
 
                     <div className="space-y-2">
-                      <div className="flex justify-between text-xs font-medium text-slate-300">
+                      <div className="flex justify-between text-xs font-medium text-slate-700">
                         <span>Memory Load</span>
-                        <span className="font-mono text-slate-400">{metrics.memoryUsage}</span>
+                        <span className="font-mono text-slate-900">{metrics.memoryUsage}</span>
                       </div>
-                      <Progress value={9} className="h-1 bg-slate-800" />
+                      <Progress value={9} className="h-1.5 bg-slate-100" />
                     </div>
 
-                    <div className="pt-2 border-t border-slate-800 space-y-2 text-xs">
+                    <div className="pt-2 border-t border-slate-100 space-y-2 text-xs">
                       <div className="flex justify-between">
-                        <span className="text-slate-400">System Uptime:</span>
-                        <span className="text-slate-200 font-mono">{metrics.uptime}</span>
+                        <span className="text-slate-500">System Uptime:</span>
+                        <span className="text-slate-900 font-mono">{metrics.uptime}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">HTTP Port:</span>
-                        <span className="text-slate-200 font-mono">127.0.0.1:8080</span>
+                        <span className="text-slate-500">HTTP Port:</span>
+                        <span className="text-slate-900 font-mono">127.0.0.1:8080</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Sessions Today:</span>
-                        <span className="text-sky-400 font-bold font-mono">{metrics.trafficToday} clicks</span>
+                        <span className="text-slate-500">Sessions Today:</span>
+                        <span className="text-emerald-600 font-bold font-mono">{metrics.trafficToday} clicks</span>
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-slate-800 space-y-2 text-xs">
-                      <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Technical Info</div>
+                    <div className="pt-2 border-t border-slate-100 space-y-2 text-xs">
+                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Technical Info</div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Node:</span>
-                        <span className="text-slate-200 font-mono">v20.11.0</span>
+                        <span className="text-slate-500">Node:</span>
+                        <span className="text-slate-900 font-mono">v20.11.0</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">React:</span>
-                        <span className="text-slate-200 font-mono">v18.3.1</span>
+                        <span className="text-slate-500">React:</span>
+                        <span className="text-slate-900 font-mono">v18.3.1</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Vite:</span>
-                        <span className="text-slate-200 font-mono">v5.4.19</span>
+                        <span className="text-slate-500">Vite:</span>
+                        <span className="text-slate-900 font-mono">v5.4.19</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-slate-400">Build Status:</span>
-                        <Badge className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] py-0.5 px-2 h-auto rounded">Success</Badge>
+                        <span className="text-slate-500">Build Status:</span>
+                        <Badge className="bg-emerald-100 text-emerald-800 border border-emerald-200 text-[10px] py-0.5 px-2 h-auto rounded-lg">Success</Badge>
                       </div>
                     </div>
 
                     <div className="pt-2">
-                      <Button size="sm" onClick={handleClearCache} className="w-full bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700 flex items-center justify-center gap-2">
-                        <RefreshCw className="w-3.5 h-3.5" />
+                      <Button size="sm" onClick={handleClearCache} className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 flex items-center justify-center gap-2 h-9 rounded-lg">
+                        <RefreshCw className="w-3.5 h-3.5 text-slate-400" />
                         Flush CDN & Edge Cache
                       </Button>
                     </div>
@@ -1712,102 +1716,26 @@ export default function AdminPanel() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 {/* SEO Checklist Summary */}
-                <Card className="bg-slate-900 border-slate-800 shadow-card">
+                <Card className="bg-white border-slate-200 shadow-sm rounded-xl">
                   <CardHeader>
-                    <CardTitle className="text-base font-bold text-white flex items-center gap-2">
-                      <ShieldAlert className="w-4.5 h-4.5 text-amber-500" />
-                      Pending SEO Tasks
+                    <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
+                      <Sliders className="w-4.5 h-4.5 text-emerald-500" />
+                      Content Management Database
                     </CardTitle>
-                    <CardDescription className="text-slate-400">Tasks extracted from SEO Audit Report requiring action</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div className="flex items-start gap-3 p-2.5 rounded-lg bg-amber-500/5 border border-amber-500/20 text-xs">
-                      <AlertCircle className="w-4.5 h-4.5 text-amber-500 shrink-0 mt-0.5" />
-                      <div>
-                        <h5 className="font-bold text-amber-400">Thin Content Warning</h5>
-                        <p className="text-slate-300 mt-1">/resources/capital and /resources/employees have less than 300 words. Expand these to improve ranking authority.</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 p-2.5 rounded-lg bg-amber-500/5 border border-amber-500/20 text-xs">
-                      <AlertCircle className="w-4.5 h-4.5 text-amber-500 shrink-0 mt-0.5" />
-                      <div>
-                        <h5 className="font-bold text-amber-400">H1 Header Verification</h5>
-                        <p className="text-slate-300 mt-1">Verify that every page has exactly one visible, keyword-optimized H1 heading element.</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Formspree Health status */}
-                <Card className="bg-slate-900 border-slate-800 shadow-card">
-                  <CardHeader>
-                    <CardTitle className="text-base font-bold text-white flex items-center gap-2">
-                      <Database className="w-4.5 h-4.5 text-sky-400" />
-                      Formspree Integration Status
-                    </CardTitle>
-                    <CardDescription className="text-slate-400">Active mail forwarding gateway check</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4 text-xs">
-                    <div className="flex justify-between items-center py-1.5 border-b border-slate-800">
-                      <span className="text-slate-400">Endpoint URL:</span>
-                      <span className="font-mono text-slate-200">https://formspree.io/f/{formspreeId}</span>
-                    </div>
-                    <div className="flex justify-between items-center py-1.5 border-b border-slate-800">
-                      <span className="text-slate-400">Formspree Dashboard:</span>
-                      <a 
-                        href={`https://formspree.io/forms/${formspreeId}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="text-sky-400 hover:text-sky-300 hover:underline flex items-center gap-1 text-[11px]"
-                      >
-                        Open Dashboard <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </div>
-                    <div className="flex justify-between items-center py-1.5 border-b border-slate-800">
-                      <span className="text-slate-400">Target Forms:</span>
-                      <span className="text-slate-200">Contact, Careers, Training Popup</span>
-                    </div>
-                    <div className="flex justify-between items-center py-1.5">
-                      <span className="text-slate-400">Security / CORS:</span>
-                      <Badge className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Auto-Allowed</Badge>
-                    </div>
-
-                    <div className="bg-slate-950 p-2.5 rounded-lg font-mono text-[10px] text-slate-400 border border-slate-800">
-                      <p className="text-slate-200 font-semibold mb-1">// Endpoint test query</p>
-                      <p>POST https://formspree.io/f/{formspreeId}</p>
-                      <p className="text-emerald-400">{"{\"ok\": true, \"message\": \"Form registered\"}"}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Row 3: Database & Terminal Console */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-                
-                {/* Database Manager */}
-                <Card className="bg-slate-900 border-slate-800 shadow-card">
-                  <CardHeader>
-                    <CardTitle className="text-base font-bold text-white flex items-center gap-2">
-                      <Database className="w-4.5 h-4.5 text-sky-400" />
-                      Database Backup & Diagnostics
-                    </CardTitle>
-                    <CardDescription className="text-slate-400 font-sans">
-                      Export active content profiles or restore website config states from a local JSON backup file.
-                    </CardDescription>
+                    <CardDescription className="text-slate-500">Import/Export primary JSON configurations dynamically</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-3 gap-2 text-center">
-                      <div className="bg-slate-950/40 p-2 border border-slate-800/60 rounded">
-                        <div className="text-sm font-bold text-white">{webContent.services?.length || 0}</div>
+                      <div className="bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                        <div className="text-sm font-bold text-slate-900">{webContent.services?.length || 0}</div>
                         <div className="text-[9px] text-slate-500 uppercase font-semibold">Services</div>
                       </div>
-                      <div className="bg-slate-950/40 p-2 border border-slate-800/60 rounded">
-                        <div className="text-sm font-bold text-white">{webContent.industries?.length || 0}</div>
+                      <div className="bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                        <div className="text-sm font-bold text-slate-900">{webContent.industries?.length || 0}</div>
                         <div className="text-[9px] text-slate-500 uppercase font-semibold">Industries</div>
                       </div>
-                      <div className="bg-slate-950/40 p-2 border border-slate-800/60 rounded">
-                        <div className="text-sm font-bold text-white">{webContent.customPages?.length || 0}</div>
+                      <div className="bg-slate-50 p-2 border border-slate-200 rounded-lg">
+                        <div className="text-sm font-bold text-slate-900">{webContent.customPages?.length || 0}</div>
                         <div className="text-[9px] text-slate-500 uppercase font-semibold">Custom Pages</div>
                       </div>
                     </div>
@@ -1816,7 +1744,7 @@ export default function AdminPanel() {
                       <Button 
                         size="sm" 
                         onClick={handleExportDatabase} 
-                        className="flex-1 bg-sky-600 hover:bg-sky-500 text-white flex items-center justify-center gap-2"
+                        className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center gap-2 h-9 rounded-lg"
                       >
                         <Download className="w-3.5 h-3.5" />
                         Export Database
@@ -1832,43 +1760,43 @@ export default function AdminPanel() {
                         />
                         <Button
                           size="sm"
-                          variant="ghost"
+                          variant="outline"
                           onClick={() => document.getElementById("database-restore-input")?.click()}
-                          className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center justify-center gap-2"
+                          className="w-full bg-white hover:bg-slate-50 border-slate-200 text-slate-700 flex items-center justify-center gap-2 h-9 rounded-lg"
                         >
-                          <Upload className="w-3.5 h-3.5" />
+                          <Upload className="w-3.5 h-3.5 text-slate-400" />
                           Import Backup
                         </Button>
                       </div>
                     </div>
 
-                    <div className="text-[10px] text-slate-500 border-t border-slate-800/60 pt-3">
-                      <span className="font-semibold text-slate-400">Notice:</span> Importing a database backup will instantly overwrite current text configurations, custom routes, resources, and services metadata.
+                    <div className="text-[10px] text-slate-500 border-t border-slate-100 pt-3">
+                      <span className="font-semibold text-slate-700">Notice:</span> Importing a database backup will instantly overwrite current text configurations, custom routes, resources, and services metadata.
                     </div>
                   </CardContent>
                 </Card>
 
                 {/* Operations Console Log */}
-                <Card className="bg-slate-900 border-slate-800 shadow-card">
+                <Card className="bg-white border-slate-200 shadow-sm rounded-xl">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <div>
-                      <CardTitle className="text-base font-bold text-white flex items-center gap-2">
-                        <Terminal className="w-4.5 h-4.5 text-emerald-400" />
+                      <CardTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
+                        <Terminal className="w-4.5 h-4.5 text-emerald-500" />
                         Operations Log Stream
                       </CardTitle>
-                      <CardDescription className="text-slate-400 font-sans">
+                      <CardDescription className="text-slate-500">
                         Monitors real-time client HTTP routes and worker jobs.
                       </CardDescription>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className={`w-2.5 h-2.5 rounded-full ${logsPaused ? 'bg-amber-400' : 'bg-emerald-500 animate-pulse'}`} />
-                      <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
-                        {logsPaused ? 'Paused' : 'Streaming'}
+                    <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-2 py-1 rounded-lg">
+                      <span className={`w-2 h-2 rounded-full ${logsPaused ? 'bg-amber-500' : 'bg-emerald-500 animate-ping'}`} />
+                      <span className="text-[9px] font-bold uppercase tracking-wider text-slate-600">
+                        {logsPaused ? 'Paused' : 'Live'}
                       </span>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <div className="bg-slate-950 p-3 rounded border border-slate-800 font-mono text-[11px] text-slate-300 h-36 overflow-y-auto space-y-1 select-text scrollbar-thin">
+                    <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 font-mono text-[11px] text-slate-300 h-36 overflow-y-auto space-y-1 select-text scrollbar-thin">
                       {systemLogs.length === 0 ? (
                         <div className="text-slate-500 italic">No operations recorded.</div>
                       ) : (
@@ -1883,27 +1811,27 @@ export default function AdminPanel() {
                     <div className="flex gap-2 justify-end">
                       <Button
                         size="sm"
-                        variant="ghost"
+                        variant="outline"
                         onClick={() => setLogsPaused(!logsPaused)}
-                        className="bg-slate-800 hover:bg-slate-700 text-xs px-2.5 py-1.5 text-slate-300 border border-slate-700 flex items-center gap-1.5"
+                        className="bg-white hover:bg-slate-50 border-slate-200 text-xs px-2.5 py-1.5 text-slate-700 flex items-center gap-1.5 h-9 rounded-lg"
                       >
                         {logsPaused ? (
                           <>
-                            <Play className="w-3 h-3" /> Resume Feed
+                            <Play className="w-3 h-3 text-slate-400" /> Resume Feed
                           </>
                         ) : (
                           <>
-                            <Pause className="w-3 h-3" /> Pause Feed
+                            <Pause className="w-3 h-3 text-slate-400" /> Pause Feed
                           </>
                         )}
                       </Button>
                       <Button
                         size="sm"
-                        variant="ghost"
+                        variant="outline"
                         onClick={() => setSystemLogs([])}
-                        className="bg-slate-800 hover:bg-slate-700 text-xs px-2.5 py-1.5 text-slate-300 border border-slate-700 flex items-center gap-1.5"
+                        className="bg-white hover:bg-slate-50 border-slate-200 text-xs px-2.5 py-1.5 text-slate-700 flex items-center gap-1.5 h-9 rounded-lg"
                       >
-                        <Trash2 className="w-3 h-3" /> Clear Console
+                        <Trash2 className="w-3 h-3 text-slate-400" /> Clear Console
                       </Button>
                     </div>
                   </CardContent>
