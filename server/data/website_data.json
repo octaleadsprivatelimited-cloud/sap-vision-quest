@@ -397,6 +397,15 @@
       "link": "/services/sap-support-maintenance",
       "linkText": "Explore Support",
       "underlineColor": "bg-accent"
+    },
+    {
+      "id": "hf-5",
+      "iconName": "Layout",
+      "title": "SAP Fiori & UX Development",
+      "description": "Deliver Intuitive User Experiences. Modernize your SAP UI landscape with custom SAP Fiori and UI5 applications built for all devices.",
+      "link": "/services/sap-fiori-development",
+      "linkText": "Explore UX",
+      "underlineColor": "bg-[#0076d6]"
     }
   ],
   "homeReasons": [
@@ -479,7 +488,7 @@
   ],
   "pageTexts": {
     "home": {
-      "heroLabel": "SAP Solutions Partner",
+      "heroLabel": "",
       "heroTitle": "Intelligent SAP Solutions",
       "heroDescription": "Sangronyx Technologies Pvt Ltd helps organizations modernize their enterprise landscape through SAP S/4HANA, SAP BTP, SAP Fiori, SAP RAP, SAP CAP, SAP Joule, Implementation, Migration, Rollout, and Application Support Services.",
       "sectionTitle": "We deliver intelligent, scalable, and future-ready SAP solutions that drive operational excellence, innovation, and business growth.",
@@ -570,19 +579,5 @@
       "ctaButtonText": "Contact SAP Experts"
     }
   },
-  "customPages": [
-    {
-      "title": "test",
-      "slug": "test",
-      "description": "This is a test page",
-      "sections": [
-        {
-          "id": "sec-1781186404418",
-          "type": "hero",
-          "title": "test",
-          "subtitle": "This is a test page"
-        }
-      ]
-    }
-  ]
+  "customPages": []
 }

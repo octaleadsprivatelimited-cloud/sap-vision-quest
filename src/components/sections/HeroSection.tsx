@@ -13,16 +13,18 @@ export const HeroSection = () => {
   const heroDescription = homeTexts.heroDescription || "Unlock the full potential of your organization. Sangronyx provides industry-leading SAP consulting, S/4HANA migration, custom integrations, and rollout support designed to deliver measurable results.";
 
   return (
-    <section className="relative bg-white pt-[75px] md:pt-[127px] pb-12 font-sans antialiased text-[#1d1d1d]">
+    <section className="relative bg-white pt-[75px] md:pt-[127px] pb-2 font-sans antialiased text-[#1d1d1d]">
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         {/* Promo Banner Split Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 border border-[#e5e5e5] rounded-none overflow-hidden min-h-[440px]">
           {/* Left Side: Light Gray Promo Information */}
           <div className="lg:col-span-5 bg-[#f4f6f8] p-8 md:p-12 flex flex-col justify-center text-left space-y-6">
-            <span className="text-[11px] font-bold tracking-widest text-[#0076d6] uppercase flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
-              {heroLabel}
-            </span>
+            {heroLabel && (
+              <span className="text-[11px] font-bold tracking-widest text-[#0076d6] uppercase flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                {heroLabel}
+              </span>
+            )}
             
             <h2 className="text-3xl md:text-4xl font-light tracking-tight text-[#1d1d1d] leading-tight">
               {heroTitle}

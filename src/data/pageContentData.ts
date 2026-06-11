@@ -634,7 +634,7 @@ export const initialPageTexts: {
     ]
   },
   home: {
-    heroLabel: "SAP Solutions Partner",
+    heroLabel: "",
     heroTitle: "Transforming Businesses Through SAP Innovation",
     heroDescription: "Sangronyx Technologies Pvt Ltd helps organizations modernize their enterprise landscape through SAP S/4HANA, SAP BTP, SAP Fiori, SAP RAP, SAP CAP, SAP Joule, Implementation, Migration, Rollout, and Application Support Services.",
     sectionTitle: "We deliver intelligent, scalable, and future-ready SAP solutions that drive operational excellence, innovation, and business growth.",

@@ -93,6 +93,15 @@ export const defaultFallbackContent: WebsiteContent = {
       link: "/services/sap-support-maintenance",
       linkText: "Explore Support",
       underlineColor: "bg-accent"
+    },
+    {
+      id: "hf-5",
+      iconName: "Layout",
+      title: "SAP Fiori & UX Development",
+      description: "Deliver Intuitive User Experiences. Modernize your SAP UI landscape with custom SAP Fiori and UI5 applications built for all devices.",
+      link: "/services/sap-fiori-development",
+      linkText: "Explore UX",
+      underlineColor: "bg-[#0076d6]"
     }
   ],
   homeReasons: [
