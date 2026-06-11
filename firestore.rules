@@ -1,0 +1,20 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Rules for public content configurations (e.g., website_data)
+    match /content/{document} {
+      // Allow read access to anyone so the public website loads properly
+      allow read: if true;
+      
+      // Allow write access only to authenticated admin users
+      allow write: if request.auth != null;
+    }
+    
+    // Safe default: deny all other collections unless explicitly allowed
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
