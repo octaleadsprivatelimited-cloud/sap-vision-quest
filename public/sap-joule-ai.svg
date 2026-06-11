@@ -1,20 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
   <defs>
-    <linearGradient id="bg-JOULE-AI" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bg-JOULE-amp-AI" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0f172a" />
       <stop offset="100%" stop-color="#020617" />
     </linearGradient>
-    <linearGradient id="node-grad-JOULE-AI" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="node-grad-JOULE-amp-AI" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#10b981" />
       <stop offset="100%" stop-color="#ffffff" />
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
+    <radialGradient id="ambient-glow-JOULE-amp-AI" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </radialGradient>
   </defs>
 
-  <rect width="100%" height="100%" fill="url(#bg-JOULE-AI)" />
+  <rect width="100%" height="100%" fill="url(#bg-JOULE-amp-AI)" />
+  
+  <!-- Ambient background glow behind text -->
+  <ellipse cx="200" cy="70" rx="160" ry="50" fill="url(#ambient-glow-JOULE-amp-AI)" />
 
   <path d="M 0,25 L 400,25 M 0,50 L 400,50 M 0,75 L 400,75 M 0,100 L 400,100 M 0,125 L 400,125 M 0,150 L 400,150 M 0,175 L 400,175 M 0,200 L 400,200 M 0,225 L 400,225" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
   <path d="M 25,0 L 25,250 M 50,0 L 50,250 M 75,0 L 75,250 M 100,0 L 100,250 M 125,0 L 125,250 M 150,0 L 150,250 M 175,0 L 175,250 M 200,0 L 200,250 M 225,0 L 225,250 M 250,0 L 250,250 M 275,0 L 275,250 M 300,0 L 300,250 M 325,0 L 325,250 M 350,0 L 350,250 M 375,0 L 375,250" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
@@ -39,11 +42,12 @@
       <text x="270" y="163" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">4</text>
       <text x="270" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle" font-weight="500">LLM</text>
     
-      <circle cx="340" cy="160" r="14" fill="url(#node-grad-JOULE-AI)" stroke="#ffffff" stroke-width="2" />
+      <circle cx="340" cy="160" r="14" fill="url(#node-grad-JOULE-amp-AI)" stroke="#ffffff" stroke-width="2" />
       <text x="340" y="163" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">5</text>
       <text x="340" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle" font-weight="500">Insight</text>
     
 
-  <text x="200" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" fill="#ffffff" font-weight="800" letter-spacing="1" text-anchor="middle" filter="url(#glow)">JOULE &amp; AI</text>
+  <!-- Sharp, high-contrast text overlay without blur filters -->
+  <text x="200" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" fill="#ffffff" font-weight="800" letter-spacing="1" text-anchor="middle">JOULE &amp; AI</text>
   <text x="200" y="94" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#10b981" font-weight="bold" letter-spacing="2" text-anchor="middle">INTELLIGENT COPILOT WORKFLOW</text>
 </svg>
