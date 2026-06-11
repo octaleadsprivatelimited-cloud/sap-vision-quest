@@ -31,7 +31,7 @@ const Contact = () => {
   const sectionDescription = contactText.sectionDescription || "Fill out the form below and we'll get back to you within 24 hours.";
   
   const addressTitle = contactText.ctaTitle || "Where to find us";
-  const addressDescription = contactText.ctaDescription || "7-1-619/A/37, 101, Revathi Apartments, Beside Maitrivanam outgate, opp Annapurna block gate no-2, Kumar Basti, Srinivas nagar, Ameerpet, Hyderabad, Telangana 500038";
+  const addressDescription = contactText.ctaDescription || "7-1-619/A/37, 101, Revathi Apartments, Srinivas nagar, Ameerpet, Hyderabad, Telangana-500038";
 
   const [formData, setFormData] = useState({
     name: "",

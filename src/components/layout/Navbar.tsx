@@ -74,7 +74,7 @@ const resourceCategories = [
 const locations = [
   {
     city: "Hyderabad, India",
-    address: "7-1-619/A/37, 101, Revathi Apartments, Beside Maitrivanam outgate, opp Annapurna block gate no-2, Kumar Basti, Srinivas nagar, Ameerpet, Hyd, Telangana-500038",
+    address: "7-1-619/A/37, 101, Revathi Apartments, Srinivas nagar, Ameerpet, Hyderabad, Telangana-500038",
     phone: "+91-7981999562",
     email: "info@sangronyx.com"
   },
