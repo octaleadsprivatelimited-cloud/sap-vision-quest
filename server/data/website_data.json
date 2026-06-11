@@ -13,7 +13,7 @@
         "User Training",
         "Go-Live Support"
       ],
-      "image": "/sap-s4hana-implementation.webp",
+      "image": "/sap-s4hana-implementation.png",
       "href": "/services/sap-s4hana-implementation"
     },
     {
@@ -28,7 +28,7 @@
         "Conversion Execution",
         "Hypercare Support"
       ],
-      "image": "/SAP ECC TO S4 HANA MIGRANATION.png",
+      "image": "/sap-ecc-migration.png",
       "href": "/services/sap-ecc-migration"
     },
     {
@@ -44,7 +44,7 @@
         "AI Services",
         "Process Automation"
       ],
-      "image": "/SAP INTEGRATION SERVICES.png",
+      "image": "/sap-btp-services.png",
       "href": "/services/sap-btp-services"
     },
     {
@@ -59,7 +59,7 @@
         "RAP APIs",
         "Custom Extensions"
       ],
-      "image": "/SAP CUSTOM DEVELOPMENT.jpg",
+      "image": "/sap-rap-development.png",
       "href": "/services/sap-rap-development"
     },
     {
@@ -74,7 +74,7 @@
         "Cloud Foundry",
         "REST APIs"
       ],
-      "image": "/SAP CUSTOM DEVELOPMENT.jpg",
+      "image": "/sap-cap-development.png",
       "href": "/services/sap-cap-development"
     },
     {
@@ -88,7 +88,7 @@
         "Workflow Applications",
         "Mobile Enablement"
       ],
-      "image": "/SAP CUSTOM DEVELOPMENT.jpg",
+      "image": "/sap-fiori-development.png",
       "href": "/services/sap-fiori-development"
     },
     {
@@ -102,7 +102,7 @@
         "SAP Integration",
         "Responsive Design"
       ],
-      "image": "/SAP CUSTOM DEVELOPMENT.jpg",
+      "image": "/sap-ui5-development.png",
       "href": "/services/sap-ui5-development"
     },
     {
@@ -116,7 +116,7 @@
         "Process Automation",
         "Intelligent Recommendations"
       ],
-      "image": "/sap-excellence-background.jpg",
+      "image": "/sap-joule-ai.png",
       "href": "/services/sap-joule-ai"
     },
     {
@@ -131,7 +131,7 @@
         "Monitoring Services",
         "SLA-Based Support"
       ],
-      "image": "/services hero background.jpg",
+      "image": "/sap-application-support.png",
       "href": "/services/sap-support-maintenance"
     },
     {
@@ -145,7 +145,7 @@
         "Training",
         "Deployment Support"
       ],
-      "image": "/SAP MODULE IMPLEMENTATION.png",
+      "image": "/sap-rollout-services.png",
       "href": "/services/sap-rollout-services"
     },
     {
@@ -160,7 +160,7 @@
         "Forms",
         "Workflow Development"
       ],
-      "image": "/SAP CUSTOM DEVELOPMENT.jpg",
+      "image": "/sap-abap-development.png",
       "href": "/services/sap-abap-development"
     },
     {
@@ -175,7 +175,7 @@
         "Web Services",
         "Middleware Solutions"
       ],
-      "image": "/SAP INTEGRATION SERVICES.png",
+      "image": "/sap-integration-services.png",
       "href": "/services/sap-integration-services"
     }
   ],

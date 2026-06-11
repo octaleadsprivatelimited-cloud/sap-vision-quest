@@ -188,7 +188,7 @@ export const initialServices: ServiceItem[] = [
       "User Training",
       "Go-Live Support"
     ],
-    image: "/sap-s4hana-implementation.webp",
+    image: "/sap-s4hana-implementation.png",
     href: "/services/sap-s4hana-implementation"
   },
   {
@@ -203,7 +203,7 @@ export const initialServices: ServiceItem[] = [
       "Conversion Execution",
       "Hypercare Support"
     ],
-    image: "/SAP ECC TO S4 HANA MIGRANATION.png",
+    image: "/sap-ecc-migration.png",
     href: "/services/sap-ecc-migration"
   },
   {
@@ -219,7 +219,7 @@ export const initialServices: ServiceItem[] = [
       "AI Services",
       "Process Automation"
     ],
-    image: "/SAP INTEGRATION SERVICES.png",
+    image: "/sap-btp-services.png",
     href: "/services/sap-btp-services"
   },
   {
@@ -234,7 +234,7 @@ export const initialServices: ServiceItem[] = [
       "RAP APIs",
       "Custom Extensions"
     ],
-    image: "/SAP CUSTOM DEVELOPMENT.jpg",
+    image: "/sap-rap-development.png",
     href: "/services/sap-rap-development"
   },
   {
@@ -249,7 +249,7 @@ export const initialServices: ServiceItem[] = [
       "Cloud Foundry",
       "REST APIs"
     ],
-    image: "/SAP CUSTOM DEVELOPMENT.jpg",
+    image: "/sap-cap-development.png",
     href: "/services/sap-cap-development"
   },
   {
@@ -263,7 +263,7 @@ export const initialServices: ServiceItem[] = [
       "Workflow Applications",
       "Mobile Enablement"
     ],
-    image: "/SAP CUSTOM DEVELOPMENT.jpg",
+    image: "/sap-fiori-development.png",
     href: "/services/sap-fiori-development"
   },
   {
@@ -277,7 +277,7 @@ export const initialServices: ServiceItem[] = [
       "SAP Integration",
       "Responsive Design"
     ],
-    image: "/SAP CUSTOM DEVELOPMENT.jpg",
+    image: "/sap-ui5-development.png",
     href: "/services/sap-ui5-development"
   },
   {
@@ -291,7 +291,7 @@ export const initialServices: ServiceItem[] = [
       "Process Automation",
       "Intelligent Recommendations"
     ],
-    image: "/sap-excellence-background.jpg",
+    image: "/sap-joule-ai.png",
     href: "/services/sap-joule-ai"
   },
   {
@@ -306,7 +306,7 @@ export const initialServices: ServiceItem[] = [
       "Monitoring Services",
       "SLA-Based Support"
     ],
-    image: "/services hero background.jpg",
+    image: "/sap-application-support.png",
     href: "/services/sap-support-maintenance"
   },
   {
@@ -320,7 +320,7 @@ export const initialServices: ServiceItem[] = [
       "Training",
       "Deployment Support"
     ],
-    image: "/SAP MODULE IMPLEMENTATION.png",
+    image: "/sap-rollout-services.png",
     href: "/services/sap-rollout-services"
   },
   {
@@ -335,7 +335,7 @@ export const initialServices: ServiceItem[] = [
       "Forms",
       "Workflow Development"
     ],
-    image: "/SAP CUSTOM DEVELOPMENT.jpg",
+    image: "/sap-abap-development.png",
     href: "/services/sap-abap-development"
   },
   {
@@ -350,7 +350,7 @@ export const initialServices: ServiceItem[] = [
       "Web Services",
       "Middleware Solutions"
     ],
-    image: "/SAP INTEGRATION SERVICES.png",
+    image: "/sap-integration-services.png",
     href: "/services/sap-integration-services"
   }
 ];
