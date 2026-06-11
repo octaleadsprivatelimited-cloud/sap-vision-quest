@@ -287,12 +287,15 @@
 }
 
 /* Sidebar navigation */
+.fluent-admin-theme .md\:w-52,
 .fluent-admin-theme .md\:w-64 {
   background-color: #232f3e !important;
   border-right: 1px solid #19222d !important;
   border-bottom: none !important;
 }
 
+.fluent-admin-theme .md\:w-52 button,
+.fluent-admin-theme .md\:w-52 [role="tab"],
 .fluent-admin-theme .md\:w-64 button,
 .fluent-admin-theme .md\:w-64 [role="tab"] {
   background-color: transparent !important;
@@ -302,17 +305,21 @@
   font-weight: 500 !important;
 }
 
+.fluent-admin-theme .md\:w-52 button:hover,
+.fluent-admin-theme .md\:w-52 [role="tab"]:hover,
 .fluent-admin-theme .md\:w-64 button:hover,
 .fluent-admin-theme .md\:w-64 [role="tab"]:hover {
   background-color: #19222d !important;
   color: #ffffff !important;
 }
 
+.fluent-admin-theme .md\:w-52 [data-state="active"],
+.fluent-admin-theme .md\:w-52 button[data-state="active"],
 .fluent-admin-theme .md\:w-64 [data-state="active"],
 .fluent-admin-theme .md\:w-64 button[data-state="active"] {
-  background-color: #19222d !important;
-  color: #ff9900 !important;
-  border-left: 4px solid #ff9900 !important;
+  background-color: #ff9900 !important;
+  color: #ffffff !important;
+  border-left: 4px solid #111111 !important;
   font-weight: 700 !important;
 }
 

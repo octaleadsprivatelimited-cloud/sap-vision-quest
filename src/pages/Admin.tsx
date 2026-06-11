@@ -1264,7 +1264,7 @@ export default function AdminPanel() {
           {/* Left Vertical Navigation Menu */}
           <div className="w-full md:w-52 border-b md:border-b-0 md:border-r border-slate-800 bg-slate-900/20 p-2 shrink-0">
             <TabsList className="flex flex-row md:flex-col items-stretch justify-start bg-transparent p-0 gap-0.5 space-y-0 md:space-y-0.5 w-full overflow-x-auto md:overflow-x-visible h-auto">
-              <div className="hidden md:block text-[9px] font-bold bg-[#0076d6] text-black uppercase tracking-wider px-2.5 py-1.5 text-left my-1 rounded-sm">Portal Operations</div>
+              <div className="hidden md:block text-[9px] font-bold bg-white text-black border border-[#d5dbdb] uppercase tracking-wider px-2.5 py-1.5 text-left my-1 rounded-sm">Portal Operations</div>
               <TabsTrigger
                 value="dashboard"
                 className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
@@ -1287,7 +1287,7 @@ export default function AdminPanel() {
                 <span className="hidden md:inline">System Settings</span>
               </TabsTrigger>
  
-              <div className="hidden md:block text-[9px] font-bold bg-[#0076d6] text-black uppercase tracking-wider px-2.5 py-1.5 text-left my-1 rounded-sm">Content Management</div>
+              <div className="hidden md:block text-[9px] font-bold bg-white text-black border border-[#d5dbdb] uppercase tracking-wider px-2.5 py-1.5 text-left my-1 rounded-sm">Content Management</div>
               <TabsTrigger
                 value="page-home"
                 className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
@@ -1359,7 +1359,7 @@ export default function AdminPanel() {
                 <span className="hidden md:inline">Custom Pages Builder</span>
               </TabsTrigger>
  
-              <div className="hidden md:block text-[9px] font-bold bg-[#0076d6] text-black uppercase tracking-wider px-2.5 py-1.5 text-left my-1 rounded-sm">SEO & Leads Inbox</div>
+              <div className="hidden md:block text-[9px] font-bold bg-white text-black border border-[#d5dbdb] uppercase tracking-wider px-2.5 py-1.5 text-left my-1 rounded-sm">SEO & Leads Inbox</div>
               <TabsTrigger
                 value="pages"
                 className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
