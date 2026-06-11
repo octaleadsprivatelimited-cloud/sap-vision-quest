@@ -39,6 +39,7 @@ const Products = () => {
           { label: "Products" }
         ]}
         backgroundImage="/hero-sap-background.jpg"
+        blueBackground={true}
       />
 
       {/* Products Grid */}

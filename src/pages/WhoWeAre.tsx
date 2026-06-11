@@ -45,6 +45,7 @@ const WhoWeAre = () => {
           { label: "Who We Are" }
         ]}
         backgroundImage="/hero-slide-2.jpg"
+        blueBackground={true}
       />
 
       {/* Our Story Section */}

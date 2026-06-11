@@ -141,22 +141,22 @@ export const Navbar = () => {
   const currentCategory = resourceCategories.find((cat) => cat.id === activeCategory);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#e5e5e5] font-sans antialiased">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0076d6] border-b border-[#005ba3] font-sans antialiased text-black">
       {/* Top Tier: Logo, Search, Utilities */}
       <div className={cn(
         "container mx-auto px-4 lg:px-8 transition-all duration-300",
         isScrolled ? "md:h-0 md:opacity-0 md:pointer-events-none overflow-hidden" : "h-14 md:h-16 opacity-100"
       )}>
         <div className={cn(
-          "flex items-center justify-between border-b border-[#f5f5f5] transition-all duration-300",
+          "flex items-center justify-between border-b border-sky-500/20 transition-all duration-300",
           isScrolled ? "h-14 md:h-0 border-transparent overflow-hidden" : "h-14 md:h-16"
         )}>
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 flex-shrink-0 z-10">
+          <Link to="/" className="flex items-center gap-2 flex-shrink-0 z-10 bg-white/95 rounded-none px-2 py-1 shadow-sm">
             <img 
               src="/logo.png" 
               alt="Sangronyx Logo" 
-              className="h-[52px] md:h-[78px] w-auto transition-all duration-300"
+              className="h-[44px] md:h-[64px] w-auto transition-all duration-300"
             />
           </Link>
 
@@ -168,24 +168,24 @@ export const Navbar = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search Sangronyx"
-                className="w-full bg-[#f4f6f8] border border-gray-300 rounded-full py-1.5 pl-4 pr-10 text-xs text-[#1d1d1d] focus:outline-none focus:border-[#0076d6] focus:bg-white transition-all"
+                className="w-full bg-white/90 border border-sky-750 rounded-full py-1.5 pl-4 pr-10 text-xs text-black placeholder-neutral-700 focus:outline-none focus:border-black focus:bg-white transition-all"
               />
-              <button type="submit" className="absolute right-3 top-2 text-gray-500 hover:text-[#0076d6]">
+              <button type="submit" className="absolute right-3 top-2 text-neutral-650 hover:text-black">
                 <Search className="w-4 h-4" />
               </button>
             </div>
           </form>
 
           {/* Utilities links */}
-          <div className="flex items-center gap-2 md:gap-4 text-xs font-normal text-[#555555]">
+          <div className="flex items-center gap-2 md:gap-4 text-xs font-semibold text-black">
 
             
-            <Link to="/admin" className="hidden md:flex items-center gap-1.5 hover:text-[#0076d6] transition-colors py-2">
+            <Link to="/admin" className="hidden md:flex items-center gap-1.5 hover:text-black/80 transition-colors py-2">
               <User className="w-4 h-4" />
               <span>Sign In</span>
             </Link>
 
-            <a href="mailto:info@sangronyx.com" className="hidden sm:flex items-center gap-1.5 hover:text-[#0076d6] transition-colors py-2">
+            <a href="mailto:info@sangronyx.com" className="hidden sm:flex items-center gap-1.5 hover:text-black/80 transition-colors py-2">
               <Mail className="w-4 h-4" />
               <span>info@sangronyx.com</span>
             </a>
@@ -195,7 +195,7 @@ export const Navbar = () => {
               onMouseEnter={() => setIsLocationsOpen(true)}
               onMouseLeave={() => setIsLocationsOpen(false)}
             >
-              <button className="flex items-center gap-1 hover:text-[#0076d6] transition-colors py-2">
+              <button className="flex items-center gap-1 hover:text-black/80 transition-colors py-2">
                 <Globe className="w-4 h-4" />
                 <span>US/EN</span>
                 <ChevronDown className="w-3 h-3" />
@@ -246,7 +246,7 @@ export const Navbar = () => {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-1.5 text-[#1d1d1d] hover:text-[#0076d6] focus:outline-none"
+              className="md:hidden p-1.5 text-black hover:text-black/80 focus:outline-none"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -255,7 +255,7 @@ export const Navbar = () => {
       </div>
 
       {/* Bottom Tier: Main Nav Categories (Desktop only) */}
-      <div className="hidden md:block bg-white border-b border-[#e5e5e5]">
+      <div className="hidden md:block bg-[#0076d6] border-b border-[#005ba3]">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-11">
             <div className="flex items-center">
@@ -266,13 +266,13 @@ export const Navbar = () => {
                     animate={{ opacity: 1, width: "auto" }}
                     exit={{ opacity: 0, width: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="flex items-center mr-4 shrink-0"
+                    className="flex items-center mr-4 shrink-0 bg-white/95 px-2 py-0.5 shadow-sm"
                   >
                     <Link to="/" className="flex items-center z-10">
                       <img 
                         src="/logo.png" 
                         alt="Sangronyx Logo" 
-                        className="h-16 w-auto"
+                        className="h-10 w-auto"
                       />
                     </Link>
                   </motion.div>
@@ -291,10 +291,10 @@ export const Navbar = () => {
                         >
                           <button
                             className={cn(
-                              "flex items-center gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-colors rounded-none",
+                              "flex items-center gap-1 px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors rounded-none",
                               isCustomPagesOpen
-                                ? "text-[#0076d6]"
-                                : "text-[#1d1d1d] hover:text-[#0076d6]"
+                                ? "text-black underline decoration-2 underline-offset-4"
+                                : "text-black hover:text-black/80"
                             )}
                           >
                             {item.label}
@@ -341,10 +341,10 @@ export const Navbar = () => {
                       >
                         <button
                           className={cn(
-                            "flex items-center gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-colors rounded-none",
+                            "flex items-center gap-1 px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors rounded-none",
                             isActive(item.href) || isResourcesOpen
-                              ? "text-[#0076d6]"
-                              : "text-[#1d1d1d] hover:text-[#0076d6]"
+                              ? "text-black underline decoration-2 underline-offset-4"
+                              : "text-black hover:text-black/80"
                           )}
                         >
                           {item.label}
@@ -411,10 +411,10 @@ export const Navbar = () => {
                       key={item.label}
                       to={item.href}
                       className={cn(
-                        "px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-colors rounded-none",
+                        "px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors rounded-none",
                         isActive(item.href)
-                          ? "text-[#0076d6]"
-                          : "text-[#1d1d1d] hover:text-[#0076d6]"
+                          ? "text-black underline decoration-2 underline-offset-4"
+                          : "text-black hover:text-black/80"
                       )}
                     >
                       {item.label}
@@ -427,7 +427,7 @@ export const Navbar = () => {
             {/* Right side promo button */}
             <div className="flex items-center">
               <Link to="/contact">
-                <span className="text-xs font-semibold text-[#0076d6] hover:text-[#005ba3] hover:underline cursor-pointer transition-colors uppercase tracking-wider">
+                <span className="text-xs font-bold text-black hover:text-black/80 hover:underline cursor-pointer transition-colors uppercase tracking-wider">
                   Reach Us
                 </span>
               </Link>
@@ -443,7 +443,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-[#e5e5e5] shadow-2xl overflow-y-auto max-h-[85vh] text-left"
+            className="md:hidden absolute top-full left-0 right-0 bg-[#0076d6] border-t border-[#005ba3] shadow-2xl overflow-y-auto max-h-[85vh] text-left text-black"
           >
             {/* Search bar inside mobile drawer */}
             <div className="p-4 border-b border-[#e5e5e5]">
@@ -466,10 +466,10 @@ export const Navbar = () => {
                 if (item.hasDropdown) {
                   if ((item as any).isCustomPages) {
                     return (
-                      <div key={item.label} className="border-b border-[#f5f5f5] pb-2">
+                      <div key={item.label} className="border-b border-sky-500/20 pb-2">
                         <button
                           onClick={() => setMobileCustomPagesOpen(!mobileCustomPagesOpen)}
-                          className="flex items-center justify-between w-full py-2.5 text-xs font-bold uppercase tracking-wider text-[#1d1d1d]"
+                          className="flex items-center justify-between w-full py-2.5 text-xs font-bold uppercase tracking-wider text-black"
                         >
                           {item.label}
                           <ChevronDown className={cn("w-4 h-4 transition-transform", mobileCustomPagesOpen && "rotate-180")} />
@@ -480,14 +480,14 @@ export const Navbar = () => {
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="pl-3 py-1 space-y-2.5 border-l border-[#e5e5e5]"
+                              className="pl-3 py-1 space-y-2.5 border-l border-sky-500/20"
                             >
                               {customPages.map((page) => (
                                 <Link
                                   key={page.slug}
                                   to={`/p/${page.slug}`}
                                   onClick={() => setIsMobileMenuOpen(false)}
-                                  className="block text-xs text-[#555555] hover:text-[#0076d6] py-1"
+                                  className="block text-xs text-black/90 hover:text-black hover:underline py-1"
                                 >
                                   {page.title}
                                 </Link>
@@ -500,10 +500,10 @@ export const Navbar = () => {
                   }
 
                   return (
-                    <div key={item.label} className="border-b border-[#f5f5f5] pb-2">
+                    <div key={item.label} className="border-b border-sky-500/20 pb-2">
                       <button
                         onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
-                        className="flex items-center justify-between w-full py-2.5 text-xs font-bold uppercase tracking-wider text-[#1d1d1d]"
+                        className="flex items-center justify-between w-full py-2.5 text-xs font-bold uppercase tracking-wider text-black"
                       >
                         {item.label}
                         <ChevronDown className={cn("w-4 h-4 transition-transform", mobileResourcesOpen && "rotate-180")} />
@@ -520,20 +520,20 @@ export const Navbar = () => {
                               <div key={cat.id} className="space-y-1.5">
                                 <button
                                   onClick={() => setMobileExpandedCategory(mobileExpandedCategory === cat.id ? null : cat.id)}
-                                  className="flex items-center justify-between w-full text-[11px] font-semibold text-[#555555] py-1"
+                                  className="flex items-center justify-between w-full text-[11px] font-bold text-black/90 py-1"
                                 >
                                   {cat.label}
                                   <ChevronRight className={cn("w-3.5 h-3.5 transition-transform", mobileExpandedCategory === cat.id && "rotate-90")} />
                                 </button>
                                 
                                 {mobileExpandedCategory === cat.id && (
-                                  <div className="pl-3 space-y-2 border-l border-[#e5e5e5]">
+                                  <div className="pl-3 space-y-2 border-l border-sky-500/20">
                                     {cat.items.map((subItem) => (
                                       <Link
                                         key={subItem.label}
                                         to={subItem.href}
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className="block text-[11px] text-[#777777] hover:text-[#0076d6]"
+                                        className="block text-[11px] text-black/80 hover:text-black hover:underline"
                                       >
                                         {subItem.label}
                                       </Link>
@@ -554,7 +554,7 @@ export const Navbar = () => {
                     key={item.label}
                     to={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block py-2.5 text-xs font-bold uppercase tracking-wider text-[#1d1d1d] border-b border-[#f5f5f5]"
+                    className="block py-2.5 text-xs font-bold uppercase tracking-wider text-black border-b border-sky-500/20"
                   >
                     {item.label}
                   </Link>
@@ -562,7 +562,7 @@ export const Navbar = () => {
               })}
 
               {/* Utility shortcuts in mobile menu */}
-              <div className="pt-4 space-y-3 text-xs text-[#555555]">
+              <div className="pt-4 space-y-3 text-xs text-black font-semibold">
 
                 <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
                   <User className="w-4 h-4" />
