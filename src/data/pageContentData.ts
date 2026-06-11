@@ -660,7 +660,7 @@ export const initialPageTexts: {
     sectionTitle: "Get Started Today",
     sectionDescription: "Schedule a free consultation with our SAP experts and discover how Sangronyx can accelerate your transformation journey.",
     ctaTitle: "Contact Information",
-    ctaDescription: "Sangronyx Technologies Pvt Ltd, Hyderabad, Telangana, India, info@sangronyx.com, www.sangronyx.com"
+    ctaDescription: "7-1-619/A/37, 101, Revathi Apartments, Srinivas nagar, Ameerpet, Hyderabad, Telangana-500038"
   }
 };
 
