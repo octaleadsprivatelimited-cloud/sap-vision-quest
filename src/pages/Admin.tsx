@@ -1209,40 +1209,40 @@ export default function AdminPanel() {
       </Helmet>
 
       {/* Admin Top Header */}
-      <header className="border-b border-slate-800 bg-slate-900/60 backdrop-blur px-6 py-4 flex items-center justify-between sticky top-0 z-30">
-        <div className="flex items-center gap-3">
-          <div className="bg-sky-600 text-white p-2 rounded-lg shadow-glow shadow-sky-500/20">
-            <Sliders className="w-6 h-6 animate-pulse" />
+      <header className="border-b border-slate-800 bg-slate-900/60 backdrop-blur px-4 py-2.5 flex items-center justify-between sticky top-0 z-30">
+        <div className="flex items-center gap-2.5">
+          <div className="bg-sky-600 text-white p-1.5 rounded-md shadow-glow shadow-sky-500/20">
+            <Sliders className="w-5 h-5 animate-pulse" />
           </div>
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-              Sangronyx Admin Panel <Badge variant="outline" className="text-emerald-400 border-emerald-500/30 bg-emerald-500/5">System Console</Badge>
+            <h1 className="text-base font-bold tracking-tight text-white flex items-center gap-2">
+              Sangronyx Admin Panel <Badge variant="outline" className="text-emerald-400 border-emerald-500/30 bg-emerald-500/5 text-[9px] px-1.5 py-0 h-4">System Console</Badge>
             </h1>
-            <p className="text-xs text-slate-400">Manage, Audit & Monitor content for sangronyx.com</p>
+            <p className="text-[10px] text-slate-400">Manage, Audit & Monitor content for sangronyx.com</p>
           </div>
         </div>
 
         {/* Real-time server stats & clock */}
-        <div className="flex items-center gap-6">
-          <div className="hidden md:flex items-center gap-4 text-xs text-slate-400 border-r border-slate-800 pr-6">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3 text-[10px] text-slate-400 border-r border-slate-800 pr-4">
+            <div className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
               <span>Dev Server: <strong className="text-slate-200">Online</strong></span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Database className="w-3.5 h-3.5 text-sky-400" />
+            <div className="flex items-center gap-1">
+              <Database className="w-3 h-3 text-sky-400" />
               <span>Formspree ID: <strong className="text-slate-200">{formspreeId}</strong></span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 bg-slate-950/40 border border-slate-800 px-3 py-1.5 rounded-md text-xs text-slate-300">
-            <Clock className="w-4 h-4 text-slate-400" />
+          <div className="flex items-center gap-1.5 bg-slate-950/40 border border-slate-800 px-2 py-1 rounded-md text-[10px] text-slate-300">
+            <Clock className="w-3.5 h-3.5 text-slate-400" />
             <span className="font-mono">{currentTime}</span>
           </div>
           <Link to="/">
-            <Button size="sm" variant="ghost" className="text-slate-300 hover:text-white border border-slate-800 hover:bg-slate-800">
+            <Button size="xs" variant="ghost" className="text-slate-300 hover:text-white border border-slate-800 hover:bg-slate-800 text-[10px] h-7 px-2.5">
               Go to Website
-              <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+              <ExternalLink className="w-3 h-3 ml-1" />
             </Button>
           </Link>
         </div>
@@ -1253,138 +1253,138 @@ export default function AdminPanel() {
         <Tabs defaultValue="dashboard" className="flex-1 flex flex-col md:flex-row">
 
           {/* Left Vertical Navigation Menu */}
-          <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-slate-800 bg-slate-900/20 p-4 shrink-0">
-            <TabsList className="flex flex-row md:flex-col items-stretch justify-start bg-transparent p-0 gap-1 space-y-0 md:space-y-1 w-full overflow-x-auto md:overflow-x-visible h-auto">
-              <div className="hidden md:block text-[9px] font-bold text-slate-500 uppercase tracking-wider px-3 pt-2 pb-1 text-left">Portal Operations</div>
+          <div className="w-full md:w-52 border-b md:border-b-0 md:border-r border-slate-800 bg-slate-900/20 p-2 shrink-0">
+            <TabsList className="flex flex-row md:flex-col items-stretch justify-start bg-transparent p-0 gap-0.5 space-y-0 md:space-y-0.5 w-full overflow-x-auto md:overflow-x-visible h-auto">
+              <div className="hidden md:block text-[8px] font-bold text-slate-500 uppercase tracking-wider px-2 pt-2 pb-0.5 text-left">Portal Operations</div>
               <TabsTrigger
                 value="dashboard"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <LayoutDashboard className="w-4.5 h-4.5 shrink-0" />
+                <LayoutDashboard className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Dashboard Overview</span>
               </TabsTrigger>
               <TabsTrigger
                 value="seo-auditor"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Activity className="w-4.5 h-4.5 shrink-0" />
+                <Activity className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">SEO Audit Run</span>
               </TabsTrigger>
               <TabsTrigger
                 value="settings"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Settings className="w-4.5 h-4.5 shrink-0" />
+                <Settings className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">System Settings</span>
               </TabsTrigger>
-
-              <div className="hidden md:block text-[9px] font-bold text-slate-500 uppercase tracking-wider px-3 pt-4 pb-1 text-left">Content Management</div>
+ 
+              <div className="hidden md:block text-[8px] font-bold text-slate-500 uppercase tracking-wider px-2 pt-3 pb-0.5 text-left">Content Management</div>
               <TabsTrigger
                 value="page-home"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Globe className="w-4.5 h-4.5 shrink-0" />
+                <Globe className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Home Page Editor</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-products"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Sparkles className="w-4.5 h-4.5 shrink-0" />
+                <Sparkles className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Products Offerings</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-services"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Briefcase className="w-4.5 h-4.5 shrink-0" />
+                <Briefcase className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Services page</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-industries"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Building2 className="w-4.5 h-4.5 shrink-0" />
+                <Building2 className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Industries Verticals</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-resources"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <BookOpen className="w-4.5 h-4.5 shrink-0" />
+                <BookOpen className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Resource Center</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-careers"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Zap className="w-4.5 h-4.5 shrink-0" />
+                <Zap className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Careers Benefits</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-partners"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Handshake className="w-4.5 h-4.5 shrink-0" />
+                <Handshake className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Partners Program</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-leadership"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Users className="w-4.5 h-4.5 shrink-0" />
+                <Users className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Who We Are</span>
               </TabsTrigger>
               <TabsTrigger
                 value="page-contact"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Phone className="w-4.5 h-4.5 shrink-0" />
+                <Phone className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Contact Config</span>
               </TabsTrigger>
               <TabsTrigger
                 value="custom-pages"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <FileText className="w-4.5 h-4.5 shrink-0" />
+                <FileText className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Custom Pages Builder</span>
               </TabsTrigger>
-
-              <div className="hidden md:block text-[9px] font-bold text-slate-500 uppercase tracking-wider px-3 pt-4 pb-1 text-left">SEO & Leads Inbox</div>
+ 
+              <div className="hidden md:block text-[8px] font-bold text-slate-500 uppercase tracking-wider px-2 pt-3 pb-0.5 text-left">SEO & Leads Inbox</div>
               <TabsTrigger
                 value="pages"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Sliders className="w-4.5 h-4.5 shrink-0" />
+                <Sliders className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">SEO Metadata</span>
               </TabsTrigger>
               <TabsTrigger
                 value="leads"
-                className="justify-start gap-2.5 px-3 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-sm font-medium"
+                className="justify-start gap-2 px-2.5 py-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-900/50 rounded-md data-[state=active]:bg-sky-600 data-[state=active]:text-white transition-all text-xs font-medium"
               >
-                <Mail className="w-4.5 h-4.5 shrink-0" />
+                <Mail className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">Form Leads Inbox</span>
                 {leads.filter(l => l.status === "New").length > 0 && (
-                  <Badge className="ml-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-1.5 py-0.5 text-[10px]">
+                  <Badge className="ml-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-1.5 py-0.5 text-[9px] h-4 flex items-center">
                     {leads.filter(l => l.status === "New").length}
                   </Badge>
                 )}
               </TabsTrigger>
             </TabsList>
-
-            <div className="mt-8 pt-6 border-t border-slate-900 hidden md:block">
-              <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-2 mb-2">Technical Info</h4>
-              <div className="space-y-2 text-xs px-2 text-slate-400">
-                <p>Node version: v20.11.0</p>
+ 
+            <div className="mt-4 pt-4 border-t border-slate-900 hidden md:block">
+              <h4 className="text-[9px] font-bold text-slate-500 uppercase tracking-widest px-2 mb-1.5">Technical Info</h4>
+              <div className="space-y-1 text-[10px] px-2 text-slate-400">
+                <p>Node: v20.11.0</p>
                 <p>React: v18.3.1</p>
                 <p>Vite: v5.4.19</p>
                 <p>Build Status: <span className="text-emerald-400">Success</span></p>
               </div>
             </div>
           </div>
-
+ 
           {/* Right Main Content Panel */}
-          <main className="flex-1 p-6 overflow-y-auto">
+          <main className="flex-1 p-4 overflow-y-auto">
 
             {/* Tab 1: Dashboard Overview */}
             <TabsContent value="dashboard" className="space-y-6 mt-0">
