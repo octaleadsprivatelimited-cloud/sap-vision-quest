@@ -54,7 +54,7 @@ export const defaultFallbackContent: WebsiteContent = {
       description: "Build, integrate, and extend business processes on SAP BTP. Connect your systems seamlessly and develop custom Fiori apps.",
       features: ["Enterprise integrations", "Fiori development environment", "Real-time analytics", "Secure cloud connectivity"],
       color: "bg-sprinklr-green",
-      image: "/SAP INTEGRATION SERVICES.png",
+      image: "/sap-btp-services.svg",
       link: "/products/sap-btp"
     }
   ],

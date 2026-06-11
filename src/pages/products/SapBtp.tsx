@@ -74,27 +74,14 @@ const SapBtp = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="grid grid-cols-2 gap-6"
+              className="relative"
             >
-              <div className="bg-card rounded-xl p-6 border border-border">
-                <Cloud className="w-10 h-10 text-accent mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">Cloud Platform</h3>
-                <p className="text-sm text-muted-foreground">Scalable cloud infrastructure</p>
-              </div>
-              <div className="bg-card rounded-xl p-6 border border-border">
-                <Code className="w-10 h-10 text-accent mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">Development</h3>
-                <p className="text-sm text-muted-foreground">Build custom applications</p>
-              </div>
-              <div className="bg-card rounded-xl p-6 border border-border">
-                <Database className="w-10 h-10 text-accent mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">Analytics</h3>
-                <p className="text-sm text-muted-foreground">Data & analytics services</p>
-              </div>
-              <div className="bg-card rounded-xl p-6 border border-border">
-                <Lock className="w-10 h-10 text-accent mb-4" />
-                <h3 className="font-semibold text-foreground mb-2">Security</h3>
-                <p className="text-sm text-muted-foreground">Enterprise security</p>
+              <div className="border border-neutral-350 bg-white p-8 flex items-center justify-center shadow-md rounded-none aspect-[16/10] md:aspect-[4/3] w-full">
+                <img 
+                  src="/sap-btp-services.svg" 
+                  alt="SAP Business Technology Platform" 
+                  className="max-w-[90%] max-h-[90%] object-contain"
+                />
               </div>
             </motion.div>
           </div>
