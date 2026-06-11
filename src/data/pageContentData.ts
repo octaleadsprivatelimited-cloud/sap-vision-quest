@@ -363,7 +363,7 @@ export const initialIndustries: IndustryItem[] = [
     iconName: "Factory",
     color: "bg-accent",
     slug: "manufacturing",
-    image: "/manufacturing hero section background.jpg",
+    image: "/sap-industry-manufacturing.svg",
     features: [
       "SAP PP (Production Planning)",
       "SAP QM (Quality Management)",
@@ -378,7 +378,7 @@ export const initialIndustries: IndustryItem[] = [
     iconName: "Car",
     color: "bg-sprinklr-purple",
     slug: "automotive",
-    image: "/sap-excellence-background.jpg",
+    image: "/sap-industry-automotive.svg",
     features: [
       "Supplier Collaboration",
       "Production Optimization",
@@ -392,7 +392,7 @@ export const initialIndustries: IndustryItem[] = [
     iconName: "Heart",
     color: "bg-sprinklr-green",
     slug: "pharma",
-    image: "/PHARMA hero section background.jpg",
+    image: "/sap-industry-pharma.svg",
     features: [
       "Batch Traceability",
       "GMP Compliance",
