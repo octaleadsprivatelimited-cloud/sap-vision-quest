@@ -9,7 +9,8 @@ import {
   initialBenefits,
   initialPartnerBenefits,
   initialLeadership,
-  initialPageTexts
+  initialPageTexts,
+  initialProducts
 } from "@/data/pageContentData";
 import { seoData as initialSeoData } from "@/data/seoData";
 import { db, isFirebaseConfigured } from "@/lib/firebase";
@@ -23,41 +24,7 @@ export const defaultFallbackContent: WebsiteContent = {
   benefits: initialBenefits,
   partnerBenefits: initialPartnerBenefits,
   leadership: initialLeadership,
-  products: [
-    {
-      id: "prod-1",
-      iconName: "Cloud",
-      title: "SAP S/4HANA Private Cloud",
-      subtitle: "NEXT-GEN ERP",
-      description: "Scale your business with the ultimate cloud ERP solution, designed to run mission-critical processes in a secure, dedicated environment.",
-      features: ["Custom extensions allowed", "Dedicated infrastructure", "Flexible upgrade schedule", "Premium SAP support"],
-      color: "bg-accent",
-      image: "/sap-s4hana-implementation.webp",
-      link: "/services/sap-s4hana-implementation"
-    },
-    {
-      id: "prod-2",
-      iconName: "Database",
-      title: "SAP ECC Business Suite",
-      subtitle: "STABLE CORE SYSTEMS",
-      description: "Maintain and optimize your existing SAP ECC ERP system with our functional support and development solutions.",
-      features: ["Full lifecycle maintenance", "Performance optimization", "Custom enhancements", "Global support desk"],
-      color: "bg-sprinklr-purple",
-      image: "/SAP ECC TO S4 HANA MIGRANATION.png",
-      link: "/products/sap-ecc"
-    },
-    {
-      id: "prod-3",
-      iconName: "Settings",
-      title: "SAP Business Technology Platform",
-      subtitle: "INTEGRATION & EXTENSION",
-      description: "Build, integrate, and extend business processes on SAP BTP. Connect your systems seamlessly and develop custom Fiori apps.",
-      features: ["Enterprise integrations", "Fiori development environment", "Real-time analytics", "Secure cloud connectivity"],
-      color: "bg-sprinklr-green",
-      image: "/sap-btp-services.svg",
-      link: "/products/sap-btp"
-    }
-  ],
+  products: initialProducts,
   homeFeatures: [
     {
       id: "hf-1",
@@ -219,6 +186,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             if (!merged.industries || merged.industries.length < defaultFallbackContent.industries.length) {
               merged.industries = defaultFallbackContent.industries;
             }
+            if (!merged.products || merged.products.length < defaultFallbackContent.products.length) {
+              merged.products = defaultFallbackContent.products;
+            }
             if (merged.pageTexts?.industries && merged.pageTexts.industries.sectionTitle === "Three Industry Verticals. One Unified SAP Platform.") {
               merged.pageTexts.industries.sectionTitle = "Eight Industry Verticals. One Unified SAP Platform.";
             }
@@ -239,6 +209,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           if (docSnap.exists()) {
             const data = docSnap.data() as WebsiteContent;
             const merged = { ...defaultFallbackContent, ...data };
+            if (!merged.products || merged.products.length < defaultFallbackContent.products.length) {
+              merged.products = defaultFallbackContent.products;
+            }
             setContent(merged);
           } else {
             await setDoc(docRef, defaultFallbackContent);
@@ -255,6 +228,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
               ...(localData?.pageTexts || {})
             }
           };
+          if (!merged.products || merged.products.length < defaultFallbackContent.products.length) {
+            merged.products = defaultFallbackContent.products;
+          }
           setContent(merged);
         }
       } catch (err: any) {

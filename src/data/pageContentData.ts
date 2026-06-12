@@ -608,6 +608,86 @@ export const initialLeadership: LeadershipItem[] = [
   }
 ];
 
+export const initialProducts = [
+  {
+    id: "prod-1",
+    iconName: "Cloud",
+    title: "SAP S/4HANA Private Cloud",
+    subtitle: "NEXT-GEN ERP",
+    description: "Scale your business with the ultimate cloud ERP solution, designed to run mission-critical processes in a secure, dedicated environment.",
+    features: ["Custom extensions allowed", "Dedicated infrastructure", "Flexible upgrade schedule", "Premium SAP support"],
+    color: "bg-accent",
+    image: "/sap-s4hana-implementation.webp",
+    link: "/services/sap-s4hana-implementation"
+  },
+  {
+    id: "prod-2",
+    iconName: "Database",
+    title: "SAP ECC Business Suite",
+    subtitle: "STABLE CORE SYSTEMS",
+    description: "Maintain and optimize your existing SAP ECC ERP system with our functional support and development solutions.",
+    features: ["Full lifecycle maintenance", "Performance optimization", "Custom enhancements", "Global support desk"],
+    color: "bg-sprinklr-purple",
+    image: "/SAP ECC TO S4 HANA MIGRANATION.png",
+    link: "/products/sap-ecc"
+  },
+  {
+    id: "prod-3",
+    iconName: "Settings",
+    title: "SAP Business Technology Platform",
+    subtitle: "INTEGRATION & EXTENSION",
+    description: "Build, integrate, and extend business processes on SAP BTP. Connect your systems seamlessly and develop custom Fiori apps.",
+    features: ["Enterprise integrations", "Fiori development environment", "Real-time analytics", "Secure cloud connectivity"],
+    color: "bg-sprinklr-green",
+    image: "/sap-btp-services.svg",
+    link: "/products/sap-btp"
+  },
+  {
+    id: "prod-4",
+    iconName: "Layout",
+    title: "SAP Fiori & UX Platform",
+    subtitle: "USER EXPERIENCE",
+    description: "Modern, intuitive user experience platform for SAP applications with responsive design and mobile-first approach.",
+    features: ["Responsive UI5 design", "Mobile-first approach", "Role-based applications", "Custom Fiori Launchpad"],
+    color: "bg-accent",
+    image: "/sap-fiori-development.svg",
+    link: "/products/sap-fiori"
+  },
+  {
+    id: "prod-5",
+    iconName: "BarChart3",
+    title: "SAP Analytics Cloud",
+    subtitle: "ENTERPRISE BUSINESS INTELLIGENCE",
+    description: "Gain real-time business insights with SAP Analytics Cloud, bringing together business intelligence, planning, and predictive analytics.",
+    features: ["Real-time BI dashboards", "Enterprise planning tools", "Predictive machine learning", "Live data connectivity"],
+    color: "bg-sprinklr-purple",
+    image: "/sap-joule-ai.svg",
+    link: "/services/sap-support-maintenance"
+  },
+  {
+    id: "prod-6",
+    iconName: "Users",
+    title: "SAP SuccessFactors",
+    subtitle: "HUMAN EXPERIENCE MANAGEMENT",
+    description: "Optimize HR processes and elevate employee experiences with cloud-based human resource management software.",
+    features: ["Talent acquisition & core HR", "Performance & goals tracking", "Learning management system", "Workforce analytics"],
+    color: "bg-sprinklr-green",
+    image: "/sap-corporate-training.webp",
+    link: "/services/sap-corporate-training"
+  },
+  {
+    id: "prod-7",
+    iconName: "ShoppingCart",
+    title: "SAP Ariba",
+    subtitle: "PROCUREMENT & SUPPLY CHAIN",
+    description: "Simplify and automate procurement processes, supplier collaboration, and spend analysis with the world's leading business network.",
+    features: ["Strategic sourcing solutions", "Supplier lifecycle management", "Contract & spend management", "Supplier network collaboration"],
+    color: "bg-accent",
+    image: "/sap-integration-services.svg",
+    link: "/services/sap-integration-services"
+  }
+];
+
 export const initialPageTexts: {
   services: PageTextConfig;
   industries: PageTextConfig;
@@ -753,6 +833,7 @@ export const getWebsiteContent = (): WebsiteContent => {
         benefits: initialBenefits,
         partnerBenefits: initialPartnerBenefits,
         leadership: initialLeadership,
+        products: initialProducts,
         pageTexts: initialPageTexts,
         formspreeId: "maqwrdrv"
       };
@@ -768,6 +849,10 @@ export const getWebsiteContent = (): WebsiteContent => {
     }
     if (!parsed.industries || parsed.industries.length < initialIndustries.length) {
       parsed.industries = initialIndustries;
+      dirty = true;
+    }
+    if (!parsed.products || parsed.products.length < initialProducts.length) {
+      parsed.products = initialProducts;
       dirty = true;
     }
     if (parsed.pageTexts?.industries && parsed.pageTexts.industries.sectionTitle === "Three Industry Verticals. One Unified SAP Platform.") {
