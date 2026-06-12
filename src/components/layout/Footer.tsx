@@ -12,10 +12,8 @@ interface FooterLink {
 
 const footerLinks: {
   Products: FooterLink[];
-  Solutions: {
-    main: FooterLink[];
-    Services: FooterLink[];
-  };
+  Services: FooterLink[];
+  Industries: FooterLink[];
   Company: FooterLink[];
   Resources: FooterLink[];
 } = {
@@ -28,19 +26,25 @@ const footerLinks: {
     { label: "SAP SuccessFactors", href: "/services/sap-corporate-training" },
     { label: "SAP Ariba", href: "/services/sap-integration-services" },
   ],
-  Solutions: {
-    main: [
-      { label: "Implementation", href: "/services/sap-s4hana-implementation" },
-      { label: "Migration", href: "/services/sap-ecc-migration" },
-      { label: "Custom Development", href: "/services/sap-abap-development" },
-    ],
-    Services: [
-      { label: "Support", href: "/services/sap-support-maintenance" },
-      { label: "Consulting", href: "/services" },
-      { label: "Rollout", href: "/services/sap-rollout-services" },
-      { label: "Hypercare Support", href: "/services/sap-support-maintenance" },
-    ],
-  },
+  Services: [
+    { label: "SAP S/4HANA Implementation", href: "/services/sap-s4hana-implementation" },
+    { label: "ECC to SAP S/4HANA Migration", href: "/services/sap-ecc-migration" },
+    { label: "SAP BTP Services", href: "/services/sap-btp-services" },
+    { label: "SAP RAP Development", href: "/services/sap-rap-development" },
+    { label: "SAP CAP Development", href: "/services/sap-cap-development" },
+    { label: "SAP Fiori Development", href: "/services/sap-fiori-development" },
+    { label: "SAP UI5 Development", href: "/services/sap-ui5-development" },
+    { label: "SAP Joule & AI", href: "/services/sap-joule-ai" },
+    { label: "SAP Application Support", href: "/services/sap-support-maintenance" },
+    { label: "SAP Rollout Services", href: "/services/sap-rollout-services" },
+    { label: "SAP ABAP Development", href: "/services/sap-abap-development" },
+    { label: "SAP Integration Services", href: "/services/sap-integration-services" },
+  ],
+  Industries: [
+    { label: "Manufacturing Solutions", href: "/industries/manufacturing" },
+    { label: "Automotive Solutions", href: "/industries/automotive" },
+    { label: "Pharmaceutical Solutions", href: "/industries/pharma" },
+  ],
   Company: [
     { label: "Who We Are", href: "/who-we-are" },
     { label: "Our Story", href: "/about" },
@@ -99,11 +103,11 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Solutions Column */}
+          {/* Services Column */}
           <div>
-            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Solutions</h4>
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Services</h4>
             <ul className="space-y-2.5">
-              {footerLinks.Solutions.main.map((link) => (
+              {footerLinks.Services.map((link) => (
                 <li key={link.label}>
                   <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}
@@ -113,11 +117,11 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Services Column */}
+          {/* Industries Column */}
           <div>
-            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Services</h4>
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Industries</h4>
             <ul className="space-y-2.5">
-              {footerLinks.Solutions.Services.map((link) => (
+              {footerLinks.Industries.map((link) => (
                 <li key={link.label}>
                   <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}
