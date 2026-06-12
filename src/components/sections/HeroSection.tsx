@@ -36,12 +36,12 @@ export const HeroSection = () => {
             
             <div className="flex flex-wrap gap-3 pt-4">
               <Link to="/products">
-                <button className="bg-[#1d1d1d] hover:bg-[#333333] text-white text-xs font-semibold uppercase tracking-wider py-3.5 px-6 rounded-none transition-colors">
+                <button className="bg-yellow-400 hover:bg-yellow-500 text-black border border-yellow-400 text-xs font-semibold uppercase tracking-wider py-3.5 px-6 rounded-none transition-colors">
                   Explore Products
                 </button>
               </Link>
               <Link to="/contact">
-                <button className="bg-transparent hover:bg-black/5 text-[#1d1d1d] border border-[#1d1d1d] text-xs font-semibold uppercase tracking-wider py-3.5 px-6 rounded-none transition-colors">
+                <button className="bg-[#0076d6] hover:bg-[#005ba3] text-white border border-[#0076d6] text-xs font-semibold uppercase tracking-wider py-3.5 px-6 rounded-none transition-colors">
                   Book Consultation
                 </button>
               </Link>
