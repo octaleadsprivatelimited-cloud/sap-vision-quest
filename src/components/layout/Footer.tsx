@@ -20,22 +20,22 @@ const footerLinks: {
   Resources: FooterLink[];
 } = {
   Products: [
-    { label: "SAP S/4HANA", href: "/products" },
+    { label: "SAP S/4HANA", href: "/services/sap-s4hana-implementation" },
     { label: "SAP ECC", href: "/products/sap-ecc" },
     { label: "SAP FIORI", href: "/products/sap-fiori" },
     { label: "SAP BTP", href: "/products/sap-btp" },
   ],
   Solutions: {
     main: [
-      { label: "Implementation", href: "/solutions" },
-      { label: "Migration", href: "/solutions" },
-      { label: "Custom Development", href: "/solutions" },
+      { label: "Implementation", href: "/services/sap-s4hana-implementation" },
+      { label: "Migration", href: "/services/sap-ecc-migration" },
+      { label: "Custom Development", href: "/services/sap-abap-development" },
     ],
     Services: [
-      { label: "Support", href: "/services" },
+      { label: "Support", href: "/services/sap-support-maintenance" },
       { label: "Consulting", href: "/services" },
-      { label: "Rollout", href: "/services" },
-      { label: "Hypercare Support", href: "/services" },
+      { label: "Rollout", href: "/services/sap-rollout-services" },
+      { label: "Hypercare Support", href: "/services/sap-support-maintenance" },
     ],
   },
   Company: [
@@ -81,7 +81,7 @@ export const Footer = () => {
     <footer className="relative bg-[#f5f5f5] text-[#1d1d1d] font-sans antialiased border-t border-[#d2d2d2] text-xs">
       <div className="container mx-auto px-4 lg:px-8 py-12">
         {/* Main Footer Directory */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
           {/* Products Column */}
           <div>
             <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Products</h4>
@@ -129,6 +129,20 @@ export const Footer = () => {
             <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Company</h4>
             <ul className="space-y-2.5">
               {companyLinks.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources Column */}
+          <div>
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Resources</h4>
+            <ul className="space-y-2.5">
+              {footerLinks.Resources.map((link) => (
                 <li key={link.label}>
                   <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}

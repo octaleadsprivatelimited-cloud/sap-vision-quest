@@ -68,6 +68,15 @@ import Terms from "./pages/legal/Terms";
 import DynamicService from "./pages/services/DynamicService";
 import DynamicIndustry from "./pages/industries/DynamicIndustry";
 
+// Industry Pages
+import Education from "./pages/industries/Education";
+import Finance from "./pages/industries/Finance";
+import Logistics from "./pages/industries/Logistics";
+import Manufacturing from "./pages/industries/Manufacturing";
+import Pharma from "./pages/industries/Pharma";
+import Retail from "./pages/industries/Retail";
+import SmallBusiness from "./pages/industries/SmallBusiness";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -124,6 +133,16 @@ const App = () => (
           <Route path="/resources/placements" element={<Placements />} />
           
           <Route path="/services/:slug" element={<DynamicService />} />
+          
+          {/* Static Industry Routes */}
+          <Route path="/industries/education" element={<Education />} />
+          <Route path="/industries/finance" element={<Finance />} />
+          <Route path="/industries/logistics" element={<Logistics />} />
+          <Route path="/industries/manufacturing" element={<Manufacturing />} />
+          <Route path="/industries/pharma" element={<Pharma />} />
+          <Route path="/industries/retail" element={<Retail />} />
+          <Route path="/industries/small-business" element={<SmallBusiness />} />
+          
           <Route path="/industries/:slug" element={<DynamicIndustry />} />
           <Route path="/partners" element={<Partners />} />
           <Route path="/about" element={<About />} />

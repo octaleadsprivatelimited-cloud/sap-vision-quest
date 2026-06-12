@@ -400,6 +400,81 @@ export const initialIndustries: IndustryItem[] = [
       "GMP Compliance",
       "Quality Management"
     ]
+  },
+  {
+    id: "ind-4",
+    title: "Finance Solutions",
+    description: "Modernize your financial operations with SAP solutions that deliver real-time insights, ensure compliance, and drive strategic decisions.",
+    iconName: "Banknote",
+    color: "bg-emerald-600",
+    slug: "finance",
+    image: "/sap-industry-finance.svg",
+    features: [
+      "Financial Accounting (FI)",
+      "Management Accounting (CO)",
+      "Regulatory Compliance",
+      "Treasury Management"
+    ]
+  },
+  {
+    id: "ind-5",
+    title: "Education Solutions",
+    description: "Transform educational institutions with SAP solutions that enhance student experiences and streamline administrative operations.",
+    iconName: "GraduationCap",
+    color: "bg-sky-600",
+    slug: "education",
+    image: "/sap-industry-education.svg",
+    features: [
+      "Student Lifecycle Management",
+      "Academic Management",
+      "Financial Management",
+      "Campus Management"
+    ]
+  },
+  {
+    id: "ind-6",
+    title: "Logistics & Supply Chain Solutions",
+    description: "Build resilient, agile supply chains with SAP solutions that provide end-to-end visibility and operational excellence.",
+    iconName: "Truck",
+    color: "bg-orange-600",
+    slug: "logistics",
+    image: "/sap-industry-logistics.svg",
+    features: [
+      "Warehouse Management",
+      "Transportation Management",
+      "Track & Trace",
+      "Extended Warehouse (EWM)"
+    ]
+  },
+  {
+    id: "ind-7",
+    title: "Retail & FMCG Solutions",
+    description: "Deliver exceptional customer experiences and optimize operations with SAP solutions designed for retail and consumer goods.",
+    iconName: "ShoppingCart",
+    color: "bg-pink-600",
+    slug: "retail",
+    image: "/sap-industry-retail.svg",
+    features: [
+      "SAP Retail (IS-Retail)",
+      "Inventory Management",
+      "Customer Experience",
+      "Point of Sale (POS)"
+    ]
+  },
+  {
+    id: "ind-8",
+    title: "Small & Mid Business Solutions",
+    description: "Enterprise-grade SAP solutions tailored for small and mid-sized businesses to drive growth, efficiency, and competitiveness.",
+    iconName: "Building2",
+    color: "bg-indigo-600",
+    slug: "small-business",
+    image: "/sap-industry-smallbusiness.svg",
+    features: [
+      "SAP Business One",
+      "Inventory Management",
+      "Financial Management",
+      "Customer Management"
+    ]
   }
 ];
 
@@ -586,7 +661,7 @@ export const initialPageTexts: {
     heroTitle: "Industry-Focused SAP Solutions That Deliver Business Value",
     heroDescription: "We design and deliver SAP solutions tailored to the unique processes and challenges of different industries.",
     sectionTag: "Industries We Serve",
-    sectionTitle: "Three Industry Verticals. One Unified SAP Platform."
+    sectionTitle: "Eight Industry Verticals. One Unified SAP Platform."
   },
   resources: {
     heroTitle: "Resources",
@@ -689,6 +764,14 @@ export const getWebsiteContent = (): WebsiteContent => {
     // Backward compatibility merge for pageTexts
     if (!parsed.pageTexts) {
       parsed.pageTexts = initialPageTexts;
+      dirty = true;
+    }
+    if (!parsed.industries || parsed.industries.length < initialIndustries.length) {
+      parsed.industries = initialIndustries;
+      dirty = true;
+    }
+    if (parsed.pageTexts?.industries && parsed.pageTexts.industries.sectionTitle === "Three Industry Verticals. One Unified SAP Platform.") {
+      parsed.pageTexts.industries.sectionTitle = "Eight Industry Verticals. One Unified SAP Platform.";
       dirty = true;
     }
     if (!parsed.formspreeId) {

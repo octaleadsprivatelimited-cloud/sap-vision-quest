@@ -33,7 +33,7 @@ export const defaultFallbackContent: WebsiteContent = {
       features: ["Custom extensions allowed", "Dedicated infrastructure", "Flexible upgrade schedule", "Premium SAP support"],
       color: "bg-accent",
       image: "/sap-s4hana-implementation.webp",
-      link: "/products/sap-s4hana"
+      link: "/services/sap-s4hana-implementation"
     },
     {
       id: "prod-2",
@@ -214,6 +214,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           if (apiRes.ok) {
             const apiData = await apiRes.json();
             const merged = { ...defaultFallbackContent, ...apiData };
+            
+            // Sync industries and section title if API returns fewer than 8 industries
+            if (!merged.industries || merged.industries.length < defaultFallbackContent.industries.length) {
+              merged.industries = defaultFallbackContent.industries;
+            }
+            if (merged.pageTexts?.industries && merged.pageTexts.industries.sectionTitle === "Three Industry Verticals. One Unified SAP Platform.") {
+              merged.pageTexts.industries.sectionTitle = "Eight Industry Verticals. One Unified SAP Platform.";
+            }
+            
             setContent(merged);
             setLoading(false);
             console.log("Website content loaded successfully from Express Backend API.");
