@@ -114,7 +114,7 @@ const DynamicService = () => {
                   </p>
                   <div>
                     <Link to="/contact">
-                      <button className="w-full bg-[#1d1d1d] hover:bg-[#333333] text-white text-xs font-bold uppercase tracking-wider py-3.5 px-6 rounded-none transition-colors">
+                      <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black text-xs font-bold uppercase tracking-wider py-3.5 px-6 rounded-none transition-colors">
                         Schedule Free Consultation
                       </button>
                     </Link>
