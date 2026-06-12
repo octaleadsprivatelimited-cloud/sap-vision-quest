@@ -175,7 +175,7 @@ const SapEccMigration = () => {
                 </Button>
               </Link>
               <Link to="/services">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                <Button size="lg" variant="hero-outline" className="border-white text-white hover:bg-white/10">
                   View All Solutions
                 </Button>
               </Link>
