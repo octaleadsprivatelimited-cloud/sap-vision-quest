@@ -68,6 +68,16 @@ import Terms from "./pages/legal/Terms";
 import DynamicService from "./pages/services/DynamicService";
 import DynamicIndustry from "./pages/industries/DynamicIndustry";
 
+// Service Pages
+import SapCorporateTraining from "./pages/services/SapCorporateTraining";
+import SapCustomDevelopment from "./pages/services/SapCustomDevelopment";
+import SapEccMigration from "./pages/services/SapEccMigration";
+import SapIntegrationServices from "./pages/services/SapIntegrationServices";
+import SapLicensing from "./pages/services/SapLicensing";
+import SapModuleImplementations from "./pages/services/SapModuleImplementations";
+import SapS4HanaImplementation from "./pages/services/SapS4HanaImplementation";
+import SapSupportMaintenance from "./pages/services/SapSupportMaintenance";
+
 // Industry Pages
 import Education from "./pages/industries/Education";
 import Finance from "./pages/industries/Finance";
@@ -131,6 +141,17 @@ const App = () => (
           <Route path="/resources/quality-control" element={<QualityControl />} />
           {/* Training & Placements */}
           <Route path="/resources/placements" element={<Placements />} />
+          
+          {/* Static Service Routes */}
+          <Route path="/services/sap-corporate-training" element={<SapCorporateTraining />} />
+          <Route path="/services/sap-custom-development" element={<SapCustomDevelopment />} />
+          <Route path="/services/sap-abap-development" element={<SapCustomDevelopment />} />
+          <Route path="/services/sap-ecc-migration" element={<SapEccMigration />} />
+          <Route path="/services/sap-integration-services" element={<SapIntegrationServices />} />
+          <Route path="/services/sap-licensing" element={<SapLicensing />} />
+          <Route path="/services/sap-module-implementations" element={<SapModuleImplementations />} />
+          <Route path="/services/sap-s4hana-implementation" element={<SapS4HanaImplementation />} />
+          <Route path="/services/sap-support-maintenance" element={<SapSupportMaintenance />} />
           
           <Route path="/services/:slug" element={<DynamicService />} />
           
