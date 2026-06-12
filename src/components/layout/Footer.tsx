@@ -20,10 +20,13 @@ const footerLinks: {
   Resources: FooterLink[];
 } = {
   Products: [
-    { label: "SAP S/4HANA", href: "/services/sap-s4hana-implementation" },
-    { label: "SAP ECC", href: "/products/sap-ecc" },
-    { label: "SAP FIORI", href: "/products/sap-fiori" },
-    { label: "SAP BTP", href: "/products/sap-btp" },
+    { label: "SAP S/4HANA Private Cloud", href: "/services/sap-s4hana-implementation" },
+    { label: "SAP ECC Business Suite", href: "/products/sap-ecc" },
+    { label: "SAP Business Technology Platform", href: "/products/sap-btp" },
+    { label: "SAP Fiori & UX Platform", href: "/products/sap-fiori" },
+    { label: "SAP Analytics Cloud", href: "/services/sap-support-maintenance" },
+    { label: "SAP SuccessFactors", href: "/services/sap-corporate-training" },
+    { label: "SAP Ariba", href: "/services/sap-integration-services" },
   ],
   Solutions: {
     main: [
