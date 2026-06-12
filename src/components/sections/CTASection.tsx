@@ -41,7 +41,7 @@ export const CTASection = () => {
             <div className="flex flex-wrap gap-4 pt-2">
               <Link to="/contact">
                 <Button
-                  className="bg-[#1d1d1d] text-white hover:bg-[#333333] px-6 py-5 h-auto text-xs font-bold uppercase tracking-wider rounded-none transition-all"
+                  className="bg-yellow-400 text-black hover:bg-yellow-500 hover:text-black px-6 py-5 h-auto text-xs font-bold uppercase tracking-wider rounded-none transition-all"
                 >
                   <span>{ctaButtonText}</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
