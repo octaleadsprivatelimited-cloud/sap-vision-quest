@@ -198,7 +198,6 @@ export const Footer = () => {
           <div className="flex flex-col lg:flex-row justify-between items-center gap-4 text-[11px] text-[#666666]">
             {/* Left copyright info */}
             <div className="flex flex-wrap items-center gap-1 md:gap-2 justify-center lg:justify-start">
-              <span className="font-bold text-[#1d1d1d] uppercase tracking-wider mr-2 text-[12px]">Sangronyx</span>
               <span>© 2026 Sangronyx Technologies. All rights reserved.</span>
               <span className="hidden md:inline text-[#d2d2d2]">|</span>
               <a 
