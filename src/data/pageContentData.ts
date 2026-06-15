@@ -672,7 +672,7 @@ export const initialProducts = [
     description: "Optimize HR processes and elevate employee experiences with cloud-based human resource management software.",
     features: ["Talent acquisition & core HR", "Performance & goals tracking", "Learning management system", "Workforce analytics"],
     color: "bg-sprinklr-green",
-    image: "/sap-corporate-training.webp",
+    image: "/sap-corporate-training.png",
     link: "/services/sap-corporate-training"
   },
   {
