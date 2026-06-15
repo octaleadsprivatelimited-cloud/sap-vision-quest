@@ -118,7 +118,7 @@ const Products = () => {
             </p>
             <div className="pt-4">
               <Link to="/contact">
-                <Button className="bg-[#1d1d1d] text-white hover:bg-[#333333] px-6 py-3 h-auto text-xs font-semibold rounded-none uppercase tracking-wider">
+                <Button className="bg-yellow-400 text-black hover:bg-yellow-500 px-6 py-3 h-auto text-xs font-semibold rounded-none uppercase tracking-wider border border-yellow-500 shadow-md">
                   {ctaButtonText}
                 </Button>
               </Link>

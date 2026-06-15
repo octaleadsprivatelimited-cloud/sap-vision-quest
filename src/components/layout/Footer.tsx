@@ -42,8 +42,12 @@ const footerLinks: {
   ],
   Industries: [
     { label: "Manufacturing Solutions", href: "/industries/manufacturing" },
-    { label: "Automotive Solutions", href: "/industries/automotive" },
+    { label: "Retail Solutions", href: "/industries/retail" },
     { label: "Pharmaceutical Solutions", href: "/industries/pharma" },
+    { label: "Education Solutions", href: "/industries/education" },
+    { label: "Finance Solutions", href: "/industries/finance" },
+    { label: "Logistics Solutions", href: "/industries/logistics" },
+    { label: "Small Business Solutions", href: "/industries/small-business" },
   ],
   Company: [
     { label: "Who We Are", href: "/who-we-are" },
