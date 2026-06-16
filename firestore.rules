@@ -3,15 +3,20 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     
-    // Rules for public content configurations (e.g., website_data)
+    // ─── Website Content (single document: content/website_data) ───
+    // This stores ALL admin panel data: services, industries, products,
+    // resources, benefits, partnerBenefits, leadership, homeFeatures,
+    // homeReasons, contactMethods, servicesWhyChoose, pageTexts,
+    // customPages, seoData, and formspreeId.
+    // 
+    // Public read: website loads content for all visitors.
+    // Admin write: only the designated admin can update via admin panel.
     match /content/{document} {
-      // Allow read access to anyone so the public website loads properly
       allow read: if true;
-      
-      // Allow write access only to the designated administrator
-      allow write: if request.auth != null && request.auth.token.email == 'anitha.gunthala1999@gmail.com';
+      allow write: if request.auth != null 
+                   && request.auth.token.email == 'anitha.gunthala1999@gmail.com';
     }
-    
+
     // Safe default: deny all other collections unless explicitly allowed
     match /{document=**} {
       allow read, write: if false;
