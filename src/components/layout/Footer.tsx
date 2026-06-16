@@ -187,12 +187,6 @@ export const Footer = () => {
                   </a>
                 ))}
               </div>
-
-              <div>
-                <Link to="/admin" className="text-[#777777] hover:text-[#0076d6] hover:underline font-semibold block text-[11px]">
-                  System Administrator Panel
-                </Link>
-              </div>
             </div>
           </div>
         </div>
