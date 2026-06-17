@@ -2,26 +2,53 @@ import { Link } from "react-router-dom";
 import { Youtube, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const footerLinks = {
+import { useData } from "@/context/DataContext";
+
+interface FooterLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+const footerLinks: {
+  Products: FooterLink[];
+  Services: FooterLink[];
+  Industries: FooterLink[];
+  Company: FooterLink[];
+  Resources: FooterLink[];
+} = {
   Products: [
-    { label: "SAP S/4HANA", href: "/products" },
-    { label: "SAP ECC", href: "/products/sap-ecc" },
-    { label: "SAP FIORI", href: "/products/sap-fiori" },
-    { label: "SAP BTP", href: "/products/sap-btp" },
+    { label: "SAP S/4HANA Private Cloud", href: "/services/sap-s4hana-implementation" },
+    { label: "SAP ECC Business Suite", href: "/products/sap-ecc" },
+    { label: "SAP Business Technology Platform", href: "/products/sap-btp" },
+    { label: "SAP Fiori & UX Platform", href: "/products/sap-fiori" },
+    { label: "SAP Analytics Cloud", href: "/services/sap-support-maintenance" },
+    { label: "SAP SuccessFactors", href: "/services/sap-corporate-training" },
+    { label: "SAP Ariba", href: "/services/sap-integration-services" },
   ],
-  Solutions: {
-    main: [
-      { label: "Implementation", href: "/solutions" },
-      { label: "Migration", href: "/solutions" },
-      { label: "Custom Development", href: "/solutions" },
-    ],
-    Services: [
-      { label: "Support", href: "/services" },
-      { label: "Consulting", href: "/services" },
-      { label: "Rollout", href: "/services" },
-      { label: "Hypercare support", href: "/services" },
-    ],
-  },
+  Services: [
+    { label: "SAP S/4HANA Implementation", href: "/services/sap-s4hana-implementation" },
+    { label: "ECC to SAP S/4HANA Migration", href: "/services/sap-ecc-migration" },
+    { label: "SAP BTP Services", href: "/services/sap-btp-services" },
+    { label: "SAP RAP Development", href: "/services/sap-rap-development" },
+    { label: "SAP CAP Development", href: "/services/sap-cap-development" },
+    { label: "SAP Fiori Development", href: "/services/sap-fiori-development" },
+    { label: "SAP UI5 Development", href: "/services/sap-ui5-development" },
+    { label: "SAP Joule & AI", href: "/services/sap-joule-ai" },
+    { label: "SAP Application Support", href: "/services/sap-support-maintenance" },
+    { label: "SAP Rollout Services", href: "/services/sap-rollout-services" },
+    { label: "SAP ABAP Development", href: "/services/sap-abap-development" },
+    { label: "SAP Integration Services", href: "/services/sap-integration-services" },
+  ],
+  Industries: [
+    { label: "Manufacturing Solutions", href: "/industries/manufacturing" },
+    { label: "Retail Solutions", href: "/industries/retail" },
+    { label: "Pharmaceutical Solutions", href: "/industries/pharma" },
+    { label: "Education Solutions", href: "/industries/education" },
+    { label: "Finance Solutions", href: "/industries/finance" },
+    { label: "Logistics Solutions", href: "/industries/logistics" },
+    { label: "Small Business Solutions", href: "/industries/small-business" },
+  ],
   Company: [
     { label: "Who We Are", href: "/who-we-are" },
     { label: "Our Story", href: "/about" },
@@ -44,68 +71,35 @@ const socialLinks = [
 ];
 
 const legalLinks = [
-  { label: "Privacy", href: "/privacy" },
-  { label: "Legal", href: "/legal" },
-  { label: "Cookies", href: "/cookies" },
-  { label: "Terms", href: "/terms" },
+  { label: "Privacy Statement", href: "/privacy" },
+  { label: "Legal & Regulatory", href: "/legal" },
+  { label: "Cookie Consent", href: "/cookies" },
+  { label: "Terms of Sale", href: "/terms" },
 ];
 
 export const Footer = () => {
+  const { content } = useData();
+  const customPages = content?.customPages || [];
+
+  const companyLinks = [
+    ...footerLinks.Company,
+    ...customPages.map((page) => ({
+      label: page.title,
+      href: `/p/${page.slug}`,
+    })),
+  ];
   return (
-    <footer 
-      className="relative text-white font-['Inter',sans-serif]"
-      style={{
-        backgroundImage: 'url(/footer-bg.jpeg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      {/* Background overlay for text readability */}
-      <div className="absolute inset-0 bg-[#0a1628]/40"></div>
-
-      <div className="container mx-auto px-4 lg:px-8 py-10 md:py-14 relative z-10">
-        {/* Main footer content */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-5 mb-10">
-          {/* Contact CTA Column */}
-          <div className="col-span-2 md:col-span-1">
-            <h4 className="text-white text-[13px] font-medium mb-3 tracking-wide">How can we help you?</h4>
-            <Link to="/contact">
-              <Button className="bg-[#0099cc] hover:bg-[#00b3e6] text-white text-[13px] font-medium rounded-full px-5 py-2 h-auto mb-5">
-                Contact Us
-              </Button>
-            </Link>
-            
-            {/* Divider */}
-            <div className="border-t border-white/20 my-5 w-28"></div>
-            
-            {/* Social Icons */}
-            <div className="flex flex-wrap gap-2">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center hover:bg-white/10 transition-colors"
-                >
-                  <social.icon className="w-[14px] h-[14px]" />
-                </a>
-              ))}
-            </div>
-          </div>
-
+    <footer className="relative bg-[#f5f5f5] text-[#1d1d1d] font-sans antialiased border-t border-[#d2d2d2] text-xs">
+      <div className="container mx-auto px-4 lg:px-8 py-12">
+        {/* Main Footer Directory */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
           {/* Products Column */}
           <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Products</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Products</h4>
+            <ul className="space-y-2.5">
               {footerLinks.Products.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                  >
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -113,30 +107,27 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Services Column with subheaders */}
+          {/* Services Column */}
           <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Services</h4>
-            <ul className="space-y-2 mb-4">
-              {footerLinks.Solutions.main.map((link) => (
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Services</h4>
+            <ul className="space-y-2.5">
+              {footerLinks.Services.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                  >
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            
-            <h5 className="text-[11px] font-semibold mb-2 text-[#00b3e6] uppercase tracking-wider">Services</h5>
-            <ul className="space-y-2">
-              {footerLinks.Solutions.Services.map((link) => (
+          </div>
+
+          {/* Industries Column */}
+          <div>
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Industries</h4>
+            <ul className="space-y-2.5">
+              {footerLinks.Industries.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                  >
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -146,107 +137,89 @@ export const Footer = () => {
 
           {/* Company Column */}
           <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Company</h4>
-            <ul className="space-y-2">
-              {footerLinks.Company.map((link) => (
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Company</h4>
+            <ul className="space-y-2.5">
+              {companyLinks.map((link) => (
                 <li key={link.label}>
-                  {link.external ? (
-                    <a
-                      href={link.href}
-                      className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <Link
-                      to={link.href}
-                      className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed"
-                    >
-                      {link.label}
-                    </Link>
-                  )}
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Support Column */}
+          {/* Resources Column */}
           <div>
-            <h4 className="text-[13px] font-semibold mb-3 text-white tracking-wide">Support</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/contact" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <a href="mailto:info@sangronyx.com" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
-                  Email Support
-                </a>
-              </li>
-              <li>
-                <Link to="/resources/developer-resources" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
-                  Developer Portal
-                </Link>
-              </li>
-              <li>
-                <Link to="/resources/faq" className="text-white/50 text-[12px] hover:text-white transition-colors leading-relaxed">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin" className="text-white/30 text-[12px] hover:text-white transition-colors leading-relaxed font-semibold">
-                  Admin Panel
-                </Link>
-              </li>
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">Resources</h4>
+            <ul className="space-y-2.5">
+              {footerLinks.Resources.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.href} className="text-[#555555] hover:text-[#0076d6] hover:underline transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
+          </div>
+
+          {/* Contact & Social Column */}
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="font-bold text-[#1d1d1d] mb-4 uppercase tracking-wider text-[11px]">How can we help?</h4>
+            <div className="space-y-4">
+              <Link to="/contact">
+                <Button className="w-full bg-[#0076d6] hover:bg-[#005ba3] text-white font-bold rounded-none px-4 py-2.5 h-auto text-xs uppercase tracking-wider">
+                  Contact Us
+                </Button>
+              </Link>
+              
+              <div className="flex items-center gap-3 pt-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="w-8 h-8 border border-[#d2d2d2] flex items-center justify-center hover:bg-white transition-colors"
+                  >
+                    <social.icon className="w-4 h-4 text-[#555555] hover:text-[#0076d6]" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/10 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-3">
-            {/* Logo and copyright */}
-            <div className="flex flex-col md:flex-row items-center gap-3">
+        {/* Bottom copyright & legal bar */}
+        <div className="border-t border-[#d2d2d2] pt-8 mt-8">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-4 text-[11px] text-[#666666]">
+            {/* Left copyright info */}
+            <div className="flex flex-wrap items-center gap-2 md:gap-3 justify-center lg:justify-start">
               <Link to="/">
-                <img 
-                  src="/logo.png" 
-                  alt="Sangronyx Logo" 
-                  className="h-12 w-auto brightness-0 invert"
-                />
+                <img src="/logo.png" alt="Sangronyx Logo" className="h-6 w-auto" />
               </Link>
-              <div className="flex flex-col md:flex-row items-center gap-1 md:gap-0">
-                <p className="text-white/40 text-[11px]">
-                  © 2025 Sangronyx. All rights reserved.
-                </p>
-                <a 
-                  href="https://octaleads.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white/40 text-[11px] hover:text-white/70 transition-colors md:ml-1"
-                >
-                  Developed by Octaleads Pvt Ltd.
-                </a>
-              </div>
+              <span>© 2026 Sangronyx Technologies. All rights reserved.</span>
+              <span className="hidden md:inline text-[#d2d2d2]">|</span>
+              <a 
+                href="https://octaleads.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-[#0076d6] hover:underline"
+              >
+                Developed by Octaleads Pvt Ltd
+              </a>
             </div>
             
-            {/* Legal links with separators */}
-            <div className="flex items-center gap-0 text-[11px]">
+            {/* Right legal links */}
+            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1.5">
               {legalLinks.map((link, index) => (
-                <span key={link.label} className="flex items-center">
-                  <Link 
-                    to={link.href} 
-                    className="text-white/40 hover:text-white/70 transition-colors px-2"
-                  >
+                <span key={link.label} className="flex items-center gap-3">
+                  <Link to={link.href} className="hover:text-[#0076d6] hover:underline">
                     {link.label}
                   </Link>
                   {index < legalLinks.length - 1 && (
-                    <span className="text-white/25">|</span>
+                    <span className="text-[#d2d2d2]">|</span>
                   )}
                 </span>
               ))}

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, ChevronRight, Globe, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, Globe, Phone, Mail, MapPin, MessageCircle, User, Sparkles, Briefcase, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useData } from "@/context/DataContext";
 
 const navItems = [
   { label: "Services", href: "/services", hasDropdown: false },
@@ -12,6 +13,7 @@ const navItems = [
   { label: "Careers", href: "/careers", hasDropdown: false },
   { label: "Partners", href: "/partners", hasDropdown: false },
   { label: "Who We Are", href: "/who-we-are", hasDropdown: false },
+  { label: "Products", href: "/products", hasDropdown: false },
 ];
 
 const resourceCategories = [
@@ -72,7 +74,7 @@ const resourceCategories = [
 const locations = [
   {
     city: "Hyderabad, India",
-    address: "7-1-619/A/37, 101, Revathi Apartments, Beside Maitrivanam outgate, opp Annapurna block gate no-2, Kumar Basti, Srinivas nagar, Ameerpet, Hyd, Telangana-500038",
+    address: "7-1-619/A/37, 101\nRevathi Apartments, Srinivas nagar\nAmeerpet, Hyderabad, Telangana\n500038",
     phone: "+91-7981999562",
     email: "info@sangronyx.com"
   },
@@ -85,19 +87,40 @@ const locations = [
 ];
 
 export const Navbar = () => {
+  const { content } = useData();
+  const customPages = content?.customPages || [];
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isCustomPagesOpen, setIsCustomPagesOpen] = useState(false);
   const [isLocationsOpen, setIsLocationsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("human");
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
+  const [mobileCustomPagesOpen, setMobileCustomPagesOpen] = useState(false);
   const [mobileExpandedCategory, setMobileExpandedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
+  const dynamicNavItems = [
+    { label: "Services", href: "/services", hasDropdown: false },
+    { label: "Industries", href: "/industries", hasDropdown: false },
+    { label: "Resources", href: "/resources", hasDropdown: true },
+    ...(customPages.length > 0 ? [{ label: "Custom Pages", href: "#", hasDropdown: true, isCustomPages: true }] : []),
+    { label: "Careers", href: "/careers", hasDropdown: false },
+    { label: "Partners", href: "/partners", hasDropdown: false },
+    { label: "Who We Are", href: "/who-we-are", hasDropdown: false },
+    { label: "Products", href: "/products", hasDropdown: false },
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (window.scrollY > 40) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -108,408 +131,366 @@ export const Navbar = () => {
     return location.pathname === href;
   };
 
-  const isHomePage = location.pathname === "/";
-  const isPartnersPage = location.pathname === "/partners";
-  
-  // Pages with background images that need white text
-  const pagesWithBackground = [
-    "/",
-    "/partners",
-    "/careers",
-    "/services",
-    "/about",
-    "/contact",
-    "/who-we-are",
-    "/resources",
-    "/industries",
-    "/industries/manufacturing",
-    "/industries/retail",
-    "/industries/pharma",
-    "/industries/logistics",
-    "/industries/education",
-    "/industries/finance",
-    "/industries/small-business",
-    "/services/sap-ecc-migration",
-    "/services/sap-custom-development",
-    "/services/sap-licensing",
-    "/services/sap-module-implementations",
-    "/services/sap-integration-services",
-    "/services/sap-s4hana-implementation",
-    "/services/sap-support-maintenance",
-    "/services/sap-corporate-training",
-    "/resources/placements",
-    "/resources/processes",
-    "/resources/trademarks",
-    "/resources/training-materials",
-    "/resources/video-tutorials",
-    "/resources/whitepapers",
-    "/resources/training-classes",
-    "/resources/supply-chain",
-    "/resources/skills",
-    "/resources/software",
-    "/resources/quality-control",
-    "/resources/research",
-    "/resources/revenue",
-    "/resources/patents",
-    "/resources/leadership",
-    "/resources/facilities",
-    "/resources/equipment",
-    "/resources/employees",
-    "/resources/faq",
-    "/resources/downloads",
-    "/resources/documentation",
-    "/resources/distribution",
-    "/resources/developer-resources",
-    "/resources/capital",
-    "/resources/brand",
-    "/privacy",
-    "/legal",
-    "/cookies",
-    "/terms",
-  ];
-  
-  const hasBackgroundImage = pagesWithBackground.includes(location.pathname);
-  const shouldShowWhiteText = (isHomePage || hasBackgroundImage) && !isScrolled;
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/resources?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   const currentCategory = resourceCategories.find((cat) => cat.id === activeCategory);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <nav className={cn(
-        "transition-all duration-300",
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-sm" 
-          : shouldShowWhiteText
-            ? "bg-transparent"
-            : "bg-background/95 backdrop-blur-md shadow-sm"
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#e5e5e5] font-sans antialiased text-black">
+      {/* Top Tier: Logo, Search, Utilities */}
+      <div className={cn(
+        "container mx-auto px-4 lg:px-8 transition-all duration-300",
+        isScrolled ? "md:h-0 md:opacity-0 md:pointer-events-none overflow-hidden" : "h-14 md:h-16 opacity-100"
       )}>
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <img 
-                src="/logo.png" 
-                alt="Sangronyx Logo" 
-                className={cn(
-                  "h-16 lg:h-20 w-auto transition-all",
-                  shouldShowWhiteText ? "brightness-0 invert" : ""
-                )}
+        <div className={cn(
+          "flex items-center justify-between border-b border-[#f5f5f5] transition-all duration-300",
+          isScrolled ? "h-14 md:h-0 border-transparent overflow-hidden" : "h-14 md:h-16"
+        )}>
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 flex-shrink-0 z-10">
+            <img 
+              src="/logo.png" 
+              alt="Sangronyx Logo" 
+              className="h-[52px] md:h-[78px] w-auto transition-all duration-300"
+            />
+          </Link>
+
+          {/* Search bar */}
+          <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center flex-1 max-w-md mx-6">
+            <div className="relative w-full">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search Sangronyx"
+                className="w-full bg-[#f4f6f8] border border-gray-300 rounded-full py-1.5 pl-4 pr-10 text-xs text-[#1d1d1d] focus:outline-none focus:border-[#0076d6] focus:bg-white transition-all"
               />
+              <button type="submit" className="absolute right-3 top-2 text-gray-500 hover:text-[#0076d6]">
+                <Search className="w-4 h-4" />
+              </button>
+            </div>
+          </form>
+
+          {/* Utilities links */}
+          <div className="flex items-center gap-2 md:gap-4 text-xs font-normal text-black">
+
+            
+            <Link to="/admin" className="hidden md:flex items-center gap-1.5 hover:text-[#0076d6] transition-colors py-2">
+              <User className="w-4 h-4" />
+              <span>Sign In</span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => {
-                if (item.hasDropdown) {
-                  return (
-                    <div
-                      key={item.label}
-                      className="relative"
-                      onMouseEnter={() => setIsResourcesOpen(true)}
-                      onMouseLeave={() => setIsResourcesOpen(false)}
-                    >
-                      <button
-                        className={cn(
-                          "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                          isActive(item.href) || isResourcesOpen
-                            ? shouldShowWhiteText
-                              ? "text-white bg-white/10"
-                              : "text-[#0096d6] bg-[#0096d6]/10"
-                            : shouldShowWhiteText
-                              ? "text-white hover:text-white/80"
-                              : "text-gray-700 hover:text-[#0096d6] hover:bg-[#0096d6]/5"
-                        )}
-                      >
-                        {item.label}
-                        <ChevronDown className={cn(
-                          "w-4 h-4 transition-transform duration-200",
-                          isResourcesOpen && "rotate-180"
-                        )} />
-                      </button>
-                    </div>
-                  );
-                }
-                return (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className={cn(
-                      "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
-                      isActive(item.href)
-                        ? shouldShowWhiteText
-                          ? "text-white bg-white/10"
-                          : "text-primary bg-primary/5"
-                        : shouldShowWhiteText
-                          ? "text-white hover:text-white/80"
-                          : "text-gray-700 hover:text-primary hover:bg-primary/5"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </div>
+            <a href="mailto:info@sangronyx.com" className="hidden sm:flex items-center gap-1.5 hover:text-[#0076d6] transition-colors py-2">
+              <Mail className="w-4 h-4" />
+              <span>info@sangronyx.com</span>
+            </a>
 
-            {/* Desktop Actions */}
-            <div className="hidden lg:flex items-center gap-3">
-              <div
-                className="relative"
-                onMouseEnter={() => setIsLocationsOpen(true)}
-                onMouseLeave={() => setIsLocationsOpen(false)}
-              >
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className={cn(
-                    shouldShowWhiteText
-                      ? "text-white hover:text-white/80"
-                      : "text-gray-700 hover:text-primary"
-                  )}
-                >
-                  <Globe className="w-5 h-5" />
-                </Button>
-                
-                {/* Locations Dropdown */}
-                <AnimatePresence>
-                  {isLocationsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute right-0 top-full mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-50"
-                      onMouseEnter={() => setIsLocationsOpen(true)}
-                      onMouseLeave={() => setIsLocationsOpen(false)}
-                    >
-                      <div className="p-4">
-                        <h3 className="text-sm font-semibold text-gray-900 mb-3">Our Locations</h3>
-                        <div className="space-y-4">
-                          {locations.map((loc, index) => (
-                            <div key={index} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
-                              <div className="flex items-start gap-3">
-                                <MapPin className="w-4 h-4 text-[#0096d6] mt-1 flex-shrink-0" />
-                                <div className="flex-1">
-                                  <h4 className="text-sm font-semibold text-gray-900 mb-1">{loc.city}</h4>
-                                  <p className="text-xs text-gray-600 leading-relaxed mb-2">{loc.address}</p>
-                                  <div className="space-y-1">
-                                    <a 
-                                      href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}
-                                      className="flex items-center gap-2 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
-                                    >
-                                      <Phone className="w-3 h-3" />
-                                      {loc.phone}
-                                    </a>
-                                    <a 
-                                      href={`mailto:${loc.email}`}
-                                      className="flex items-center gap-2 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
-                                    >
-                                      <Mail className="w-3 h-3" />
-                                      {loc.email}
-                                    </a>
-                                  </div>
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsLocationsOpen(true)}
+              onMouseLeave={() => setIsLocationsOpen(false)}
+            >
+              <button className="flex items-center gap-1 hover:text-[#0076d6] transition-colors py-2">
+                <Globe className="w-4 h-4" />
+                <span>US/EN</span>
+                <ChevronDown className="w-3 h-3" />
+              </button>
+
+              <AnimatePresence>
+                {isLocationsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full w-80 bg-white rounded-none shadow-xl border border-[#d2d2d2] overflow-hidden z-50"
+                  >
+                    <div className="p-4">
+                      <h3 className="text-sm font-semibold text-[#1d1d1d] mb-3">Our Locations</h3>
+                      <div className="space-y-4">
+                        {locations.map((loc, index) => (
+                          <div key={index} className="border-b border-[#e5e5e5] last:border-0 pb-3 last:pb-0">
+                            <div className="flex items-start gap-3">
+                              <MapPin className="w-4 h-4 text-[#0076d6] mt-1 flex-shrink-0" />
+                              <div className="flex-1 text-left">
+                                <h4 className="text-xs font-semibold text-[#1d1d1d] mb-1">{loc.city}</h4>
+                                <p className="text-[11px] text-[#555555] leading-relaxed mb-2 whitespace-pre-line">{loc.address}</p>
+                                <div className="space-y-0.5 text-[11px]">
+                                  <a href={`tel:${loc.phone}`} className="flex items-center gap-1.5 text-[#0076d6] hover:underline">
+                                    <Phone className="w-3 h-3" />
+                                    {loc.phone}
+                                  </a>
+                                  <a href={`mailto:${loc.email}`} className="flex items-center gap-1.5 text-[#0076d6] hover:underline">
+                                    <Mail className="w-3 h-3" />
+                                    {loc.email}
+                                  </a>
                                 </div>
                               </div>
                             </div>
-                          ))}
-                        </div>
+                          </div>
+                        ))}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-              <Link to="/contact">
-                <Button 
-                  size="sm"
-                  className={cn(
-                    "font-semibold",
-                    shouldShowWhiteText
-                      ? "bg-white text-[#0096d6] hover:bg-white/90"
-                      : "bg-[#0096d6] text-white hover:bg-[#0077b3]"
-                  )}
-                >
-                  Contact Us
-                </Button>
-              </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "lg:hidden",
-                shouldShowWhiteText ? "text-white" : "text-gray-700"
-              )}
+
+
+            {/* Mobile Menu Toggle */}
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-1.5 text-black hover:text-[#0076d6] focus:outline-none"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </Button>
+            </button>
           </div>
         </div>
+      </div>
 
-        {/* Resources Mega Menu */}
-        <AnimatePresence>
-          {isResourcesOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="absolute left-0 right-0 top-full bg-white shadow-xl border-t border-gray-100 hidden lg:block"
-              onMouseEnter={() => setIsResourcesOpen(true)}
-              onMouseLeave={() => setIsResourcesOpen(false)}
-            >
-              <div className="container mx-auto px-4 lg:px-8">
-                <div className="grid grid-cols-12 gap-0 py-8">
-                  {/* Left Categories */}
-                  <div className="col-span-2 border-r border-gray-100 pr-6">
-                    <nav className="space-y-1">
-                      {resourceCategories.map((category) => (
-                        <button
-                          key={category.id}
-                          onMouseEnter={() => setActiveCategory(category.id)}
-                          className={cn(
-                            "w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium transition-all rounded-r-md",
-                            activeCategory === category.id
-                              ? "text-gray-900 bg-gray-50 border-l-4 border-[#0096d6]"
-                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-50 border-l-4 border-transparent"
-                          )}
-                        >
-                          {category.label}
-                          <ChevronRight className="w-4 h-4" />
-                        </button>
-                      ))}
-                    </nav>
-                  </div>
-
-                  {/* Middle Links */}
-                  <div className="col-span-10 px-8">
-                    <div className="grid grid-cols-3 gap-x-8 gap-y-4">
-                      {currentCategory?.items.map((item) => (
-                        <Link
-                          key={item.label}
-                          to={item.href}
-                          onClick={() => setIsResourcesOpen(false)}
-                          className="text-sm text-gray-700 hover:text-[#0096d6] transition-colors py-2"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="lg:hidden fixed inset-0 bg-white z-[100] overflow-y-auto"
-              style={{ height: '100vh', top: 0 }}
-            >
-              {/* Mobile Menu Header with Logo */}
-              <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between shadow-sm">
-                <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
-                  <img 
-                    src="/logo.png" 
-                    alt="Sangronyx Logo" 
-                    className="h-16 w-auto"
-                  />
-                </Link>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-gray-700"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <X className="w-6 h-6" />
-                </Button>
-              </div>
-
-              <div className="px-4 py-4 space-y-1">
-                {navItems.map((item) => {
+      {/* Bottom Tier: Main Nav Categories (Desktop only) */}
+      <div className="hidden md:block bg-white border-b border-[#e5e5e5]">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="flex items-center justify-between h-11">
+            <div className="flex items-center">
+              <AnimatePresence>
+                {isScrolled && (
+                  <motion.div
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: "auto" }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center mr-4 shrink-0"
+                  >
+                    <Link to="/" className="flex items-center z-10">
+                      <img 
+                        src="/logo.png" 
+                        alt="Sangronyx Logo" 
+                        className="h-16 w-auto"
+                      />
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <nav className="flex items-center gap-1">
+                {dynamicNavItems.map((item) => {
                   if (item.hasDropdown) {
+                    if ((item as any).isCustomPages) {
+                      return (
+                        <div
+                          key={item.label}
+                          className="relative"
+                          onMouseEnter={() => setIsCustomPagesOpen(true)}
+                          onMouseLeave={() => setIsCustomPagesOpen(false)}
+                        >
+                          <button
+                            className={cn(
+                              "flex items-center gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-colors rounded-none",
+                              isCustomPagesOpen
+                                ? "text-[#0076d6]"
+                                : "text-black hover:text-[#0076d6]"
+                            )}
+                          >
+                            {item.label}
+                            <ChevronDown className="w-3 h-3" />
+                          </button>
+
+                          <AnimatePresence>
+                            {isCustomPagesOpen && (
+                              <motion.div
+                                initial={{ opacity: 0, y: -5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -5 }}
+                                transition={{ duration: 0.15 }}
+                                className="absolute left-0 top-full w-56 bg-white shadow-2xl border border-[#d2d2d2] z-50 rounded-none p-4 text-left"
+                              >
+                                <h4 className="text-xs font-bold uppercase tracking-wider text-[#1d1d1d] mb-3 pb-2 border-b border-[#f5f5f5]">
+                                  Custom Pages
+                                </h4>
+                                <div className="flex flex-col gap-2.5">
+                                  {customPages.map((page) => (
+                                    <Link
+                                      key={page.slug}
+                                      to={`/p/${page.slug}`}
+                                      onClick={() => setIsCustomPagesOpen(false)}
+                                      className="text-xs text-[#555555] hover:text-[#0076d6] hover:underline transition-colors"
+                                    >
+                                      {page.title}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      );
+                    }
+
                     return (
-                      <div key={item.label}>
+                      <div
+                        key={item.label}
+                        className="relative"
+                        onMouseEnter={() => setIsResourcesOpen(true)}
+                        onMouseLeave={() => setIsResourcesOpen(false)}
+                      >
                         <button
-                          onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
                           className={cn(
-                            "flex items-center justify-between w-full px-4 py-3 text-left rounded-md transition-colors",
-                            mobileResourcesOpen
-                              ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
-                              : "text-gray-900 hover:bg-gray-50"
+                            "flex items-center gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-colors rounded-none",
+                            isActive(item.href) || isResourcesOpen
+                              ? "text-[#0076d6]"
+                              : "text-black hover:text-[#0076d6]"
                           )}
                         >
                           {item.label}
-                          <ChevronDown className={cn(
-                            "w-4 h-4 transition-transform",
-                            mobileResourcesOpen && "rotate-180"
-                          )} />
+                          <ChevronDown className="w-3 h-3" />
+                        </button>
+
+                        {/* Mega Menu Dropdown */}
+                        <AnimatePresence>
+                          {isResourcesOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -5 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -5 }}
+                              transition={{ duration: 0.15 }}
+                              className="absolute left-0 top-full w-[640px] bg-white shadow-2xl border border-[#d2d2d2] z-50 rounded-none"
+                            >
+                              <div className="grid grid-cols-12 gap-0">
+                                {/* Left category list */}
+                                <div className="col-span-4 border-r border-[#e5e5e5] bg-[#f8f9fa] py-4">
+                                  {resourceCategories.map((category) => (
+                                    <button
+                                      key={category.id}
+                                      onMouseEnter={() => setActiveCategory(category.id)}
+                                      className={cn(
+                                        "w-full flex items-center justify-between px-4 py-2.5 text-left text-xs font-semibold transition-all rounded-none border-l-2",
+                                        activeCategory === category.id
+                                          ? "text-[#0076d6] bg-white border-l-[#0076d6]"
+                                          : "text-[#555555] hover:text-[#1d1d1d] border-l-transparent"
+                                      )}
+                                    >
+                                      {category.label}
+                                      <ChevronRight className="w-3 h-3" />
+                                    </button>
+                                  ))}
+                                </div>
+                                {/* Right items */}
+                                <div className="col-span-8 p-6 text-left">
+                                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#1d1d1d] mb-4 pb-2 border-b border-[#f5f5f5]">
+                                    {resourceCategories.find(c => c.id === activeCategory)?.label}
+                                  </h4>
+                                  <div className="grid grid-cols-1 gap-y-3">
+                                    {currentCategory?.items.map((subItem) => (
+                                      <Link
+                                        key={subItem.label}
+                                        to={subItem.href}
+                                        onClick={() => setIsResourcesOpen(false)}
+                                        className="text-xs text-[#555555] hover:text-[#0076d6] hover:underline transition-colors"
+                                      >
+                                        {subItem.label}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <Link
+                      key={item.label}
+                      to={item.href}
+                      className={cn(
+                        "px-3 py-2 text-xs font-semibold uppercase tracking-wider transition-colors rounded-none",
+                        isActive(item.href)
+                          ? "text-[#0076d6]"
+                          : "text-black hover:text-[#0076d6]"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
+
+            {/* Right side promo button */}
+            <div className="flex items-center">
+              <Link to="/contact">
+                <span className="text-xs font-semibold text-[#0076d6] hover:text-[#005ba3] hover:underline cursor-pointer transition-colors uppercase tracking-wider">
+                  Reach Us
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-[#e5e5e5] shadow-2xl overflow-y-auto max-h-[85vh] text-left"
+          >
+            {/* Search bar inside mobile drawer */}
+            <div className="p-4 border-b border-[#e5e5e5]">
+              <form onSubmit={handleSearchSubmit} className="relative">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search Sangronyx"
+                  className="w-full bg-[#f4f6f8] border border-gray-300 rounded-none py-2 pl-4 pr-10 text-xs text-[#1d1d1d] focus:outline-none"
+                />
+                <button type="submit" className="absolute right-3 top-2.5 text-gray-500">
+                  <Search className="w-4 h-4" />
+                </button>
+              </form>
+            </div>
+
+            <div className="p-4 space-y-2">
+              {dynamicNavItems.map((item) => {
+                if (item.hasDropdown) {
+                  if ((item as any).isCustomPages) {
+                    return (
+                      <div key={item.label} className="border-b border-[#f5f5f5] pb-2">
+                        <button
+                          onClick={() => setMobileCustomPagesOpen(!mobileCustomPagesOpen)}
+                          className="flex items-center justify-between w-full py-2.5 text-xs font-bold uppercase tracking-wider text-black"
+                        >
+                          {item.label}
+                          <ChevronDown className={cn("w-4 h-4 transition-transform", mobileCustomPagesOpen && "rotate-180")} />
                         </button>
                         <AnimatePresence>
-                          {mobileResourcesOpen && (
+                          {mobileCustomPagesOpen && (
                             <motion.div
                               initial={{ opacity: 0, height: 0 }}
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
-                              className="pl-4 space-y-1"
+                              className="pl-3 py-1 space-y-2.5 border-l border-[#e5e5e5]"
                             >
-                              {resourceCategories.map((category) => (
-                                <div key={category.id}>
-                                  <button
-                                    onClick={() => setMobileExpandedCategory(
-                                      mobileExpandedCategory === category.id ? null : category.id
-                                    )}
-                                    className={cn(
-                                      "flex items-center justify-between w-full px-4 py-2 text-left text-sm rounded-md transition-colors",
-                                      mobileExpandedCategory === category.id
-                                        ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
-                                        : "text-gray-700 hover:bg-gray-50"
-                                    )}
-                                  >
-                                    {category.label}
-                                    <ChevronRight className={cn(
-                                      "w-4 h-4 transition-transform",
-                                      mobileExpandedCategory === category.id && "rotate-90"
-                                    )} />
-                                  </button>
-                                  <AnimatePresence>
-                                    {mobileExpandedCategory === category.id && (
-                                      <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: "auto" }}
-                                        exit={{ opacity: 0, height: 0 }}
-                                        className="pl-4 space-y-1"
-                                      >
-                                        {category.items.map((menuItem) => (
-                                          <Link
-                                            key={menuItem.label}
-                                            to={menuItem.href}
-                                            onClick={() => {
-                                              setIsMobileMenuOpen(false);
-                                              setMobileResourcesOpen(false);
-                                              setMobileExpandedCategory(null);
-                                            }}
-                                            className={cn(
-                                              "block w-full px-4 py-2 text-left rounded-md transition-colors text-sm",
-                                              isActive(menuItem.href)
-                                                ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
-                                                : "text-gray-600 hover:bg-gray-50"
-                                            )}
-                                          >
-                                            {menuItem.label}
-                                          </Link>
-                                        ))}
-                                      </motion.div>
-                                    )}
-                                  </AnimatePresence>
-                                </div>
+                              {customPages.map((page) => (
+                                <Link
+                                  key={page.slug}
+                                  to={`/p/${page.slug}`}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="block text-xs text-[#555555] hover:text-[#0076d6] py-1"
+                                >
+                                  {page.title}
+                                </Link>
                               ))}
                             </motion.div>
                           )}
@@ -517,128 +498,85 @@ export const Navbar = () => {
                       </div>
                     );
                   }
-                  return (
-                    <Link
-                      key={item.label}
-                      to={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={cn(
-                        "block w-full px-4 py-3 text-left rounded-md transition-colors",
-                        isActive(item.href)
-                          ? "text-[#0096d6] bg-[#0096d6]/5 font-medium"
-                          : "text-gray-900 hover:bg-gray-50"
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
-                
-                {/* Locations Section - Hidden on mobile */}
-                <div className="hidden mt-6 p-4 bg-white rounded-xl border border-gray-200">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Globe className="w-5 h-5 text-[#0096d6]" />
-                    <h3 className="text-sm font-semibold text-gray-900">Our Locations</h3>
-                  </div>
-                  <div className="space-y-4">
-                    {locations.map((loc, index) => (
-                      <div key={index} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
-                        <div className="flex items-start gap-3">
-                          <MapPin className="w-4 h-4 text-[#0096d6] mt-1 flex-shrink-0" />
-                          <div className="flex-1">
-                            <h4 className="text-sm font-semibold text-gray-900 mb-1">{loc.city}</h4>
-                            <p className="text-xs text-gray-600 leading-relaxed mb-2">{loc.address}</p>
-                            <div className="space-y-1">
-                              <a 
-                                href={`tel:${loc.phone.replace(/[^0-9]/g, '')}`}
-                                className="flex items-center gap-2 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
-                              >
-                                <Phone className="w-3 h-3" />
-                                {loc.phone}
-                              </a>
-                              <a 
-                                href={`mailto:${loc.email}`}
-                                className="flex items-center gap-2 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
-                              >
-                                <Mail className="w-3 h-3" />
-                                {loc.email}
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Contact Info Box */}
-                <div className="mt-6 p-4 bg-gradient-to-br from-[#0096d6]/10 to-[#0096d6]/5 rounded-xl border border-[#0096d6]/20">
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Get in Touch</h3>
-                  <div className="space-y-3">
-                    <a 
-                      href="tel:+917981999562" 
-                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#0096d6] transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-full bg-[#0096d6]/10 flex items-center justify-center">
-                        <Phone className="w-4 h-4 text-[#0096d6]" />
-                      </div>
-                      <span>+91-7981999562</span>
-                    </a>
-                    <a 
-                      href="tel:+917675070977" 
-                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#0096d6] transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-full bg-[#0096d6]/10 flex items-center justify-center">
-                        <Phone className="w-4 h-4 text-[#0096d6]" />
-                      </div>
-                      <span>+91-7675070977</span>
-                    </a>
-                    <a 
-                      href="mailto:info@sangronyx.com" 
-                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#0096d6] transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-full bg-[#0096d6]/10 flex items-center justify-center">
-                        <Mail className="w-4 h-4 text-[#0096d6]" />
-                      </div>
-                      <span>info@sangronyx.com</span>
-                    </a>
-                    <a 
-                      href="https://maps.google.com/?q=Sangronyx+Technologies" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-start gap-3 text-xs text-gray-600 hover:text-[#0096d6] transition-colors"
-                    >
-                      <div className="w-7 h-7 rounded-full bg-[#0096d6]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <MapPin className="w-3.5 h-3.5 text-[#0096d6]" />
-                      </div>
-                      <span className="leading-relaxed">Sangronyx Technologies, Business Park, Hyderabad, India · <span className="text-[#0096d6] font-medium">Maps</span></span>
-                    </a>
-                    <a 
-                      href="https://wa.me/917981999562" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-sm text-gray-700 hover:text-[#25D366] transition-colors"
-                    >
-                      <div className="w-8 h-8 rounded-full bg-[#25D366]/10 flex items-center justify-center">
-                        <MessageCircle className="w-4 h-4 text-[#25D366]" />
-                      </div>
-                      <span>Chat on WhatsApp</span>
-                    </a>
-                  </div>
-                </div>
 
-                <div className="pt-4 space-y-2">
-                  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button className="w-full bg-[#0096d6] text-white hover:bg-[#0077b3]">
-                      Contact Us
-                    </Button>
+                  return (
+                    <div key={item.label} className="border-b border-[#f5f5f5] pb-2">
+                      <button
+                        onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
+                        className="flex items-center justify-between w-full py-2.5 text-xs font-bold uppercase tracking-wider text-black"
+                      >
+                        {item.label}
+                        <ChevronDown className={cn("w-4 h-4 transition-transform", mobileResourcesOpen && "rotate-180")} />
+                      </button>
+                      <AnimatePresence>
+                        {mobileResourcesOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="pl-3 py-1 space-y-3"
+                          >
+                            {resourceCategories.map((cat) => (
+                              <div key={cat.id} className="space-y-1.5">
+                                <button
+                                  onClick={() => setMobileExpandedCategory(mobileExpandedCategory === cat.id ? null : cat.id)}
+                                  className="flex items-center justify-between w-full text-[11px] font-semibold text-[#555555] py-1"
+                                >
+                                  {cat.label}
+                                  <ChevronRight className={cn("w-3.5 h-3.5 transition-transform", mobileExpandedCategory === cat.id && "rotate-90")} />
+                                </button>
+                                
+                                {mobileExpandedCategory === cat.id && (
+                                  <div className="pl-3 space-y-2 border-l border-[#e5e5e5]">
+                                    {cat.items.map((subItem) => (
+                                      <Link
+                                        key={subItem.label}
+                                        to={subItem.href}
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="block text-[11px] text-[#555555] hover:text-[#0076d6]"
+                                      >
+                                        {subItem.label}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-2.5 text-xs font-bold uppercase tracking-wider text-black border-b border-[#f5f5f5]"
+                  >
+                    {item.label}
                   </Link>
-                </div>
+                );
+              })}
+
+              {/* Utility shortcuts in mobile menu */}
+              <div className="pt-4 space-y-3 text-xs text-[#555555]">
+
+                <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  <span>Sign In / Admin Panel</span>
+                </Link>
+                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  <span>+91-7981999562 (Contact Us)</span>
+                </Link>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

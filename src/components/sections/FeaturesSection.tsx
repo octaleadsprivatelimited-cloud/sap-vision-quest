@@ -1,167 +1,76 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Award, Shield, BarChart3, Headphones, Database } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import * as Icons from "lucide-react";
 import { Link } from "react-router-dom";
-
-const features = [
-  {
-    icon: Award,
-    title: "SAP Expertise",
-    description: "Leverage our certified SAP consultants with extensive industry knowledge to build great solutions, drive efficiency, and deliver extraordinary business outcomes.",
-    link: "/services",
-    linkText: "Explore Expertise",
-    underlineColor: "bg-sprinklr-blue",
-  },
-  {
-    icon: BarChart3,
-    title: "S4 HANA IMPLEMENTATION",
-    description: "SAP S/4HANA implementation enables organizations to modernize their ERP landscape with real-time data processing, simplified architecture, and intelligent business insights. At Sangronyx Technologies, we deliver end-to-end S/4HANA implementations aligned with your business goals and industry best practices.",
-    link: "/services/sap-s4hana-implementation",
-    linkText: "Explore Implementation",
-    underlineColor: "bg-sprinklr-green",
-  },
-  {
-    icon: Shield,
-    title: "AMS Projects",
-    description: "Reliable L1/L2/L3 support, system monitoring, issue resolution, enhancements, change request, service request, custom reports and continuous improvements.",
-    link: "/services/sap-support-maintenance",
-    linkText: "Explore AMS",
-    underlineColor: "bg-sprinklr-purple",
-  },
-  {
-    icon: Headphones,
-    title: "HYPERCARE SUPPORT",
-    description: "SAP Hypercare Support is a critical post-implementation phase where we provide intensive, dedicated support immediately after system go-live. At Sangronyx Technologies, our hypercare services ensure business continuity, user confidence, and system stability during this crucial transition period.",
-    link: "/services/sap-support-maintenance",
-    linkText: "Explore Hypercare",
-    underlineColor: "bg-accent",
-  },
-  {
-    icon: Database,
-    title: "S4 HANA MIGRATION PROJECTS",
-    description: "SAP S/4HANA migration enables organizations to move from legacy SAP ECC systems to a modern, real-time digital core. At Sangronyx Technologies, we deliver secure, structured, and business-focused S/4HANA migration services with minimal disruption and maximum value.",
-    link: "/services/sap-ecc-migration",
-    linkText: "Explore Migration",
-    underlineColor: "bg-sprinklr-blue",
-  },
-];
+import { useData } from "@/context/DataContext";
 
 export const FeaturesSection = () => {
+  const { content } = useData();
+  
+  const sectionTitle = content.pageTexts?.home?.sectionTitle || "Delivering SAP Excellence Across the Enterprise.";
+  const featuresList = content.homeFeatures || [];
+
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src="/sap-excellence-background.png"
-          alt=""
-          className="w-full h-full object-cover"
-        />
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/40"></div>
-      </div>
-
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+    <section className="relative py-16 md:py-24 bg-[#08121d] text-white font-sans antialiased">
+      <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-16 lg:mb-20"
-        >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
-            Delivering SAP Excellence Across the Enterprise.
+        <div className="mb-12 text-left border-b border-white/10 pb-6">
+          <span className="text-[11px] font-semibold text-[#0076d6] uppercase tracking-widest block mb-2">
+            Sangronyx Showcase
+          </span>
+          <h2 className="text-2xl md:text-3xl font-light tracking-tight text-white leading-tight">
+            {sectionTitle}
           </h2>
-        </motion.div>
+        </div>
 
-        {/* Features Grid - 3 columns, 2 rows layout */}
-        <div className="max-w-6xl mx-auto">
-          {/* First 3 cards in a 3-column grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8 lg:mb-12">
-            {features.slice(0, 3).map((feature, index) => (
+        {/* Features Showcase Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {featuresList.map((feature, index) => {
+            const IconComponent = (Icons as any)[feature.iconName] || Icons.Award;
+            return (
               <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
+                key={feature.id || feature.title}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group"
+                transition={{ delay: index * 0.08, duration: 0.5 }}
+                className="group relative flex flex-col justify-between bg-[#e3e8ed] text-[#1d1d1d] rounded-none p-6 pt-12 min-h-[260px] border border-[#d2d2d2] hover:shadow-xl transition-all"
               >
-                {/* Card Container */}
-                <div className="h-full bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300">
+                {/* Dell-inspired Top-Left Tag Label */}
+                <div className="absolute top-0 left-0 bg-[#1d1d1d] text-white text-[10px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-none z-10">
+                  {feature.title.split(" ")[0]}
+                </div>
+
+                <div className="space-y-4">
                   {/* Icon */}
-                  <div className="mb-4">
-                    <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
+                  <div className="w-10 h-10 bg-white/60 border border-[#d2d2d2] flex items-center justify-center rounded-none mb-2">
+                    <IconComponent className="w-5 h-5 text-[#0076d6]" strokeWidth={1.5} />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-tight">
+                  <h3 className="text-base font-bold text-[#1d1d1d]">
                     {feature.title}
                   </h3>
 
-                  {/* Colored underline */}
-                  <div className={`w-10 h-0.5 ${feature.underlineColor} mb-4`}></div>
-
                   {/* Description */}
-                  <p className="text-white/90 text-sm leading-relaxed mb-5 min-h-[80px]">
+                  <p className="text-xs md:text-sm text-[#555555] leading-relaxed">
                     {feature.description}
                   </p>
+                </div>
 
-                  {/* Explore link */}
+                {/* Explore link */}
+                <div className="pt-4 border-t border-gray-300 mt-4">
                   <Link
                     to={feature.link}
-                    className="inline-flex items-center text-white font-medium text-sm hover:text-accent transition-colors group/link"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0076d6] hover:text-[#005ba3] hover:underline uppercase tracking-wider"
                   >
-                    <ArrowRight className="w-4 h-4 mr-2 group-hover/link:translate-x-1 transition-transform" />
-                    {feature.linkText}
+                    <span>{feature.linkText}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </motion.div>
-            ))}
-          </div>
-
-          {/* Last 2 cards centered */}
-          <div className="flex flex-col md:flex-row lg:justify-center gap-6 lg:gap-8">
-            {features.slice(3).map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: (index + 3) * 0.1, duration: 0.5 }}
-                className="group w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-21.33px)] max-w-md mx-auto lg:mx-0"
-              >
-                {/* Card Container */}
-                <div className="h-full bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300">
-                  {/* Icon */}
-                  <div className="mb-4">
-                    <feature.icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={1.5} />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-tight">
-                    {feature.title}
-                  </h3>
-
-                  {/* Colored underline */}
-                  <div className={`w-10 h-0.5 ${feature.underlineColor} mb-4`}></div>
-
-                  {/* Description */}
-                  <p className="text-white/90 text-sm leading-relaxed mb-5 min-h-[80px]">
-                    {feature.description}
-                  </p>
-
-                  {/* Explore link */}
-                  <Link
-                    to={feature.link}
-                    className="inline-flex items-center text-white font-medium text-sm hover:text-accent transition-colors group/link"
-                  >
-                    <ArrowRight className="w-4 h-4 mr-2 group-hover/link:translate-x-1 transition-transform" />
-                    {feature.linkText}
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

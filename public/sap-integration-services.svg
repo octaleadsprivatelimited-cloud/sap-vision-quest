@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-SAP-INTEGRATION" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0a09" />
+      <stop offset="100%" stop-color="#1c1917" />
+    </linearGradient>
+    <linearGradient id="node-grad-SAP-INTEGRATION" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e76f51" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+    <radialGradient id="ambient-glow-SAP-INTEGRATION" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#e76f51" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#e76f51" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#bg-SAP-INTEGRATION)" />
+  
+  <!-- Ambient background glow behind text -->
+  <ellipse cx="200" cy="70" rx="160" ry="50" fill="url(#ambient-glow-SAP-INTEGRATION)" />
+
+  <path d="M 0,25 L 400,25 M 0,50 L 400,50 M 0,75 L 400,75 M 0,100 L 400,100 M 0,125 L 400,125 M 0,150 L 400,150 M 0,175 L 400,175 M 0,200 L 400,200 M 0,225 L 400,225" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+  <path d="M 25,0 L 25,250 M 50,0 L 50,250 M 75,0 L 75,250 M 100,0 L 100,250 M 125,0 L 125,250 M 150,0 L 150,250 M 175,0 L 175,250 M 200,0 L 200,250 M 225,0 L 225,250 M 250,0 L 250,250 M 275,0 L 275,250 M 300,0 L 300,250 M 325,0 L 325,250 M 350,0 L 350,250 M 375,0 L 375,250" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+
+  <path d="M 60,160 Q 130,125 200,160 T 340,160" fill="none" stroke="#e76f51" stroke-width="2" stroke-dasharray="4 4" opacity="0.4" />
+  <path d="M 60,160 L 340,160" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+
+  
+      <circle cx="60" cy="160" r="14" fill="#0d1527" stroke="#e76f51" stroke-width="2" />
+      <text x="60" y="163" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">1</text>
+      <text x="60" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle" font-weight="500">Source</text>
+    
+      <circle cx="130" cy="160" r="14" fill="#0d1527" stroke="#e76f51" stroke-width="2" />
+      <text x="130" y="163" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">2</text>
+      <text x="130" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle" font-weight="500">Map</text>
+    
+      <circle cx="200" cy="160" r="14" fill="#0d1527" stroke="#e76f51" stroke-width="2" />
+      <text x="200" y="163" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">3</text>
+      <text x="200" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle" font-weight="500">Routing</text>
+    
+      <circle cx="270" cy="160" r="14" fill="#0d1527" stroke="#e76f51" stroke-width="2" />
+      <text x="270" y="163" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">4</text>
+      <text x="270" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle" font-weight="500">Transform</text>
+    
+      <circle cx="340" cy="160" r="14" fill="url(#node-grad-SAP-INTEGRATION)" stroke="#ffffff" stroke-width="2" />
+      <text x="340" y="163" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">5</text>
+      <text x="340" y="188" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#94a3b8" text-anchor="middle" font-weight="500">Target</text>
+    
+
+  <!-- Sharp, high-contrast text overlay without blur filters -->
+  <text x="200" y="70" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" fill="#ffffff" font-weight="800" letter-spacing="1" text-anchor="middle">SAP INTEGRATION</text>
+  <text x="200" y="94" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8" fill="#e76f51" font-weight="bold" letter-spacing="2" text-anchor="middle">CPI PIPELINE WORKFLOW</text>
+</svg>

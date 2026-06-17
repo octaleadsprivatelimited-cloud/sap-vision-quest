@@ -15,7 +15,7 @@ const logos = [
 export const TrustedBySection = () => {
 
   return (
-    <section className="py-4 md:py-6 bg-white overflow-hidden">
+    <section className="py-4 md:py-6 bg-white overflow-hidden border-b border-[#e5e5e5]">
       <div className="relative">
         {/* Left gradient fade */}
         <div className="absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />

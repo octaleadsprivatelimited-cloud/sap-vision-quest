@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { GraduationCap } from "lucide-react";
+import { useData } from "@/context/DataContext";
 
 interface TrainingContactPopupProps {
   open: boolean;
@@ -11,6 +12,7 @@ interface TrainingContactPopupProps {
 }
 
 export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopupProps) => {
+  const { content } = useData();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [nameError, setNameError] = useState("");
@@ -69,8 +71,34 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
 
     setIsSubmitting(true);
     
+    const formspreeId = content?.formspreeId || "maqwrdrv";
+    let savedLocally = false;
+
+    // 1. Submit to local Express backend for Admin Panel visibility
     try {
-      const response = await fetch("https://formspree.io/f/maqwrdrv", {
+      const localResponse = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: "training-inquiry@sangronyx.com",
+          company: `Phone: +91${phone}`,
+          source: "Training Popup",
+          message: "Inquiry for corporate training workshop details."
+        }),
+      });
+      if (localResponse.ok) {
+        savedLocally = true;
+      }
+    } catch (err) {
+      console.warn("Failed to save lead in local backend database:", err);
+    }
+
+    // 2. Submit to Formspree for email forwarding
+    try {
+      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +110,7 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
         }),
       });
 
-      if (response.ok) {
+      if (response.ok || savedLocally) {
         setIsSubmitting(false);
         setIsSubmitted(true);
         setTimeout(() => {
@@ -99,7 +127,6 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
       }
     } catch (error) {
       setIsSubmitting(false);
-      // You can add error handling here if needed
       console.error("Error submitting form:", error);
     }
   };
@@ -141,7 +168,7 @@ export const TrainingContactPopup = ({ open, onOpenChange }: TrainingContactPopu
             <p className="text-muted-foreground">We'll contact you shortly with workshop details.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} action="https://formspree.io/f/maqwrdrv" method="POST" className="space-y-4 mt-4">
+          <form onSubmit={handleSubmit} action={`https://formspree.io/f/${content?.formspreeId || "maqwrdrv"}`} method="POST" className="space-y-4 mt-4">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium">
                 Name <span className="text-red-500">*</span>

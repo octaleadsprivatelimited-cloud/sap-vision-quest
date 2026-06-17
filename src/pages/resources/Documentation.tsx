@@ -160,7 +160,7 @@ const Documentation = () => {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/contact">
-                <Button variant="cta" size="lg" className="group">
+                <Button size="lg" className="group bg-yellow-400 hover:bg-yellow-500 text-black font-semibold border border-yellow-500 shadow-md">
                   Contact Support
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>

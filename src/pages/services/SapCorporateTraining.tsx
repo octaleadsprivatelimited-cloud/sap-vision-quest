@@ -72,7 +72,7 @@ const SapCorporateTraining = () => {
               className="relative"
             >
               <img 
-                src="/sap-corporate-training.avif" 
+                src="/sangronyx-sap.jpg" 
                 alt="SAP Corporate Workshop"
                 className="rounded-2xl shadow-2xl w-full"
               />
@@ -171,7 +171,7 @@ const SapCorporateTraining = () => {
                 </Button>
               </Link>
               <Link to="/services">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                <Button size="lg" className="bg-yellow-400 text-black hover:bg-yellow-500 hover:text-black border border-yellow-400 rounded-none font-bold">
                   View All Solutions
                 </Button>
               </Link>

@@ -7,11 +7,13 @@ import { motion } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { getWebsiteContent } from "@/data/pageContentData";
+import { useData } from "@/context/DataContext";
 
 const Industries = () => {
   const seo = useSEO();
-  const { industries, pageTexts } = getWebsiteContent();
+  const { content } = useData();
+  const industries = content.industries || [];
+  const pageTexts = content.pageTexts;
   const textContent = pageTexts?.industries || {
     heroTitle: "Industry-Focused SAP Solutions That Deliver Business Value",
     heroDescription: "We design and deliver SAP solutions tailored to the unique processes and challenges of different industries.",
@@ -20,133 +22,73 @@ const Industries = () => {
   };
   
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white font-sans antialiased text-[#1d1d1d] selection:bg-[#0067b8] selection:text-white">
       <SEO {...seo} />
       <Navbar />
-      
+
+      {/* Dell-inspired Page Hero Section */}
       <PageHero 
         title={textContent.heroTitle}
         description={textContent.heroDescription}
-        label={textContent.heroLabel || ""}
-        breadcrumbs={[{ label: "Industries" }]}
+        label={textContent.sectionTag}
+        breadcrumbs={[
+          { label: "Industries" }
+        ]}
         backgroundImage="/industries hero section background.png"
+        industryBackground={true}
       />
 
-      {/* Industries Grid */}
-      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
-        {/* Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0096d6]/5 via-white to-[#0077b3]/5 z-0" />
-        
-        {/* Decorative Blur Circles */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2 }}
-            className="absolute -top-20 -right-20 md:top-10 md:right-10 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#0096d6]/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: 0.2 }}
-            className="absolute -bottom-20 -left-20 md:bottom-10 md:left-10 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#0077b3]/10 rounded-full blur-3xl"
-          />
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, delay: 0.4 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[350px] md:h-[350px] bg-[#0096d6]/5 rounded-full blur-3xl"
-          />
-        </div>
-        
-        {/* Subtle Grid Pattern */}
-        <div 
-          className="absolute inset-0 z-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, #0096d6 1px, transparent 1px),
-              linear-gradient(to bottom, #0096d6 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-        
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 md:mb-16"
-          >
-            {textContent.sectionTag && (
-              <span className="inline-block text-sm font-semibold text-[#0096d6] uppercase tracking-wider mb-4">
-                {textContent.sectionTag}
-              </span>
-            )}
-            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900">
+      {/* Industries Grid Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
+          {/* Grid Title */}
+          <div className="mb-12 border-b border-neutral-200 pb-4 text-left">
+            <h2 className="text-xl md:text-2xl font-light text-neutral-950">
               {textContent.sectionTitle}
             </h2>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
-            {industries.map((industry, index) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-left">
+            {industries.map((industry) => {
               const Icon = (LucideIcons as any)[industry.iconName] || LucideIcons.Building2;
               return (
-                <motion.div
+                <div 
                   key={industry.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05, duration: 0.5 }}
-                  className="group"
+                  className="group border border-neutral-200 bg-white flex flex-col justify-between rounded-none hover:border-neutral-350 hover:shadow-md transition-all"
                 >
-                  <Link to={`/industries/${industry.slug}`} className="block h-full">
-                    <div className="h-full bg-card rounded-lg overflow-hidden border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 group-hover:-translate-y-1">
-                      {/* Image */}
-                      <div className="relative h-48 overflow-hidden">
-                        <img 
-                          src={industry.image} 
-                          alt={industry.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                        {/* Icon overlay */}
-                        <div className="absolute top-4 left-4">
-                          <div className="w-12 h-12 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                            <Icon className="w-6 h-6 text-white" strokeWidth={1.5} />
+                  <Link to={`/industries/${industry.slug}`} className="flex flex-col h-full">
+                    {/* Image */}
+                    <div className="relative aspect-[16/10] overflow-hidden border-b border-neutral-200 bg-neutral-100 rounded-none">
+                      <img 
+                        src={industry.image} 
+                        alt={industry.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02] rounded-none"
+                      />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="p-5 flex-grow flex flex-col justify-between space-y-4">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <div className="text-[#0076d6] bg-neutral-100 p-1.5 flex items-center justify-center shrink-0 rounded-none">
+                            <Icon className="w-4 h-4" strokeWidth={1.5} />
                           </div>
-                        </div>
-                      </div>
-                      
-                      {/* Content */}
-                      <div className="p-6">
-                        {/* Title with colored underline */}
-                        <div className="mb-4">
-                          <h3 className="text-lg font-bold text-foreground mb-2">
+                          <h3 className="text-sm font-semibold text-neutral-900 leading-tight">
                             {industry.title}
                           </h3>
-                          <div className={`w-12 h-1 rounded-full ${industry.color}`}></div>
                         </div>
-                        
-                        {/* Description */}
-                        <p className="text-muted-foreground text-sm leading-relaxed mb-4 min-h-[60px]">
+                        <p className="text-xs text-neutral-600 leading-relaxed line-clamp-3">
                           {industry.description}
                         </p>
-                        
-                        {/* Explore Link */}
-                        <div className="inline-flex items-center gap-2 text-foreground font-semibold text-sm group-hover:gap-3 transition-all duration-300">
-                          <ArrowRight className="w-4 h-4" />
-                          <span>Explore {industry.title}</span>
-                        </div>
+                      </div>
+                      
+                      <div className="pt-2 flex items-center gap-1 text-xs font-bold text-[#0076d6] group-hover:underline uppercase tracking-wider">
+                        <span>Explore {industry.title.toLowerCase()}</span>
+                        <span>→</span>
                       </div>
                     </div>
                   </Link>
-                </motion.div>
+                </div>
               );
             })}
           </div>
